@@ -1,0 +1,985 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Gitlab," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="目前最为主流的在线Git版本控制系统可以说是非GitHub莫属，对于个人开发者和开源项目可以直接选择GitHub作为Git版本控制系统即可，但是，对于企业内部开发管理的Git版本控制系统，在对保密性有高要求时GitHub就不合适了，这时GitLab作为一个可以完全搭建在企业内部的Git版本控制系统，而且基本囊括了GitHub的所有功能。 目前GitLab已经整合的功能 Repository acc">
+<meta name="keywords" content="Gitlab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HowTo Install GitLab">
+<meta property="og:url" content="https://samzong.me/2017/04/13/howto-install-gitlab/index.html">
+<meta property="og:site_name" content="SAMZONG">
+<meta property="og:description" content="目前最为主流的在线Git版本控制系统可以说是非GitHub莫属，对于个人开发者和开源项目可以直接选择GitHub作为Git版本控制系统即可，但是，对于企业内部开发管理的Git版本控制系统，在对保密性有高要求时GitHub就不合适了，这时GitLab作为一个可以完全搭建在企业内部的Git版本控制系统，而且基本囊括了GitHub的所有功能。 目前GitLab已经整合的功能 Repository acc">
+<meta property="og:updated_time" content="2017-04-21T05:12:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HowTo Install GitLab">
+<meta name="twitter:description" content="目前最为主流的在线Git版本控制系统可以说是非GitHub莫属，对于个人开发者和开源项目可以直接选择GitHub作为Git版本控制系统即可，但是，对于企业内部开发管理的Git版本控制系统，在对保密性有高要求时GitHub就不合适了，这时GitLab作为一个可以完全搭建在企业内部的Git版本控制系统，而且基本囊括了GitHub的所有功能。 目前GitLab已经整合的功能 Repository acc">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://samzong.me/2017/04/13/howto-install-gitlab/"/>
+
+
+
+
+
+  <title>HowTo Install GitLab | SAMZONG</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SAMZONG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/link.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            友链
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'xsKwH5nbAYCU2-Vx-sCN','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://samzong.me/2017/04/13/howto-install-gitlab/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="SAMZONG">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/3-200.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SAMZONG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                HowTo Install GitLab
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-13T11:18:17+08:00">
+                2017-04-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-04-21T13:12:57+08:00">
+                2017-04-21
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/04/13/howto-install-gitlab/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/04/13/howto-install-gitlab/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2017/04/13/howto-install-gitlab/" class="leancloud_visitors" data-flag-title="HowTo Install GitLab">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>目前最为主流的在线Git版本控制系统可以说是非GitHub莫属，对于个人开发者和开源项目可以直接选择GitHub作为Git版本控制系统即可，但是，对于企业内部开发管理的Git版本控制系统，在对保密性有高要求时GitHub就不合适了，这时GitLab作为一个可以完全搭建在企业内部的Git版本控制系统，而且基本囊括了GitHub的所有功能。</p>
+<h4 id="目前GitLab已经整合的功能"><a href="#目前GitLab已经整合的功能" class="headerlink" title="目前GitLab已经整合的功能"></a>目前GitLab已经整合的功能</h4><ol>
+<li>Repository access</li>
+<li>Administration</li>
+<li>Issues</li>
+<li>Forks</li>
+<li>Code review</li>
+<li>Wiki</li>
+<li>Merge Requests</li>
+<li>Web Editor</li>
+</ol>
+<h4 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h4><ul>
+<li>2 core 4GB</li>
+<li>50GB HDD</li>
+<li>CentOS 6.8</li>
+<li>Gitlab</li>
+</ul>
+<h4 id="安装需求"><a href="#安装需求" class="headerlink" title="安装需求"></a>安装需求</h4><p>关于GitLab的安装需求，主要是针对用户量然后评估出服务器及相关资源的配置，<a href="https://docs.gitlab.com.cn/ce/install/requirements.html" target="_blank" rel="external">查看</a></p>
+<h3 id="GitLab-安装"><a href="#GitLab-安装" class="headerlink" title="GitLab 安装"></a><strong>GitLab 安装</strong></h3><h4 id="安装配置依赖项"><a href="#安装配置依赖项" class="headerlink" title="安装配置依赖项"></a>安装配置依赖项</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo yum install curl openssh-server openssh-clients postfix cronie</div><div class="line">sudo<span class="built_in"> service </span>postfix start</div><div class="line">sudo chkconfig postfix on</div><div class="line">sudo lokkit -s http -s ssh</div></pre></td></tr></table></figure>
+<h4 id="添加GitLab仓库-并安装到服务器上"><a href="#添加GitLab仓库-并安装到服务器上" class="headerlink" title="添加GitLab仓库,并安装到服务器上"></a>添加GitLab仓库,并安装到服务器上</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl -sS http://packages.gitlab.<span class="keyword">cc</span>/install/gitlab-<span class="keyword">ce</span>/script.rpm.<span class="keyword">sh</span> | sudo bash</div><div class="line">sudo yum install gitlab-<span class="keyword">ce</span></div></pre></td></tr></table></figure>
+<h4 id="启动GitLab并初始化"><a href="#启动GitLab并初始化" class="headerlink" title="启动GitLab并初始化"></a>启动GitLab并初始化</h4><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">sudo gitlab-ctl reconfigure</span></div></pre></td></tr></table></figure>
+<p>默认登录账号是：<strong>root</strong> ，你可以在首次打开时设置密码。</p>
+<h3 id="GitLab-初始化"><a href="#GitLab-初始化" class="headerlink" title="GitLab 初始化"></a><strong>GitLab 初始化</strong></h3><h4 id="开机自启动"><a href="#开机自启动" class="headerlink" title="开机自启动"></a>开机自启动</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vi <span class="regexp">/etc/</span>rc.local</div><div class="line"><span class="regexp">/opt/gi</span>tlab<span class="regexp">/bin/gi</span>tlab-ctl start</div></pre></td></tr></table></figure>
+<h4 id="GitLab-配置文件"><a href="#GitLab-配置文件" class="headerlink" title="GitLab 配置文件"></a>GitLab 配置文件</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/etc/gi</span>tlab<span class="regexp">/gitlab.rb</span></div></pre></td></tr></table></figure>
+<h4 id="SMTP-邮箱配置"><a href="#SMTP-邮箱配置" class="headerlink" title="SMTP 邮箱配置"></a>SMTP 邮箱配置</h4><p>如果想使用SMTP代替sendmail来发送邮件，应该在gitlab.rb中启用对应的配置，然后运行<code>gitlab-ctl reconfigure</code>使修改生效。</p>
+<h5 id="QQ企业邮箱配置示例"><a href="#QQ企业邮箱配置示例" class="headerlink" title="QQ企业邮箱配置示例"></a>QQ企业邮箱配置示例</h5><figure class="highlight prolog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">gitlab_rails[<span class="string">'smtp_enable'</span>] = true</div><div class="line">gitlab_rails[<span class="string">'smtp_address'</span>] = <span class="string">"smtp.exmail.qq.com"</span></div><div class="line">gitlab_rails[<span class="string">'smtp_port'</span>] = <span class="number">465</span></div><div class="line">gitlab_rails[<span class="string">'smtp_user_name'</span>] = <span class="string">"xxxx@xx.com"</span></div><div class="line">gitlab_rails[<span class="string">'smtp_password'</span>] = <span class="string">"password"</span></div><div class="line">gitlab_rails[<span class="string">'smtp_authentication'</span>] = <span class="string">"login"</span></div><div class="line">gitlab_rails[<span class="string">'smtp_enable_starttls_auto'</span>] = true</div><div class="line">gitlab_rails[<span class="string">'smtp_tls'</span>] = true</div><div class="line">gitlab_rails[<span class="string">'gitlab_email_from'</span>] = <span class="string">'xxxx@xx.com'</span></div></pre></td></tr></table></figure>
+<h5 id="Gmail邮箱配置示例"><a href="#Gmail邮箱配置示例" class="headerlink" title="Gmail邮箱配置示例"></a>Gmail邮箱配置示例</h5><figure class="highlight prolog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">gitlab_rails[<span class="string">'smtp_enable'</span>] = true</div><div class="line">gitlab_rails[<span class="string">'smtp_address'</span>] = <span class="string">"smtp.gmail.com"</span></div><div class="line">gitlab_rails[<span class="string">'smtp_port'</span>] = <span class="number">587</span></div><div class="line">gitlab_rails[<span class="string">'smtp_user_name'</span>] = <span class="string">"my.email@gmail.com"</span></div><div class="line">gitlab_rails[<span class="string">'smtp_password'</span>] = <span class="string">"my-gmail-password"</span></div><div class="line">gitlab_rails[<span class="string">'smtp_domain'</span>] = <span class="string">"smtp.gmail.com"</span></div><div class="line">gitlab_rails[<span class="string">'smtp_authentication'</span>] = <span class="string">"login"</span></div><div class="line">gitlab_rails[<span class="string">'smtp_enable_starttls_auto'</span>] = true</div><div class="line">gitlab_rails[<span class="string">'smtp_tls'</span>] = false</div><div class="line">gitlab_rails[<span class="string">'smtp_openssl_verify_mode'</span>] = <span class="string">'peer'</span></div></pre></td></tr></table></figure>
+<h5 id="Outlook邮箱配置示例"><a href="#Outlook邮箱配置示例" class="headerlink" title="Outlook邮箱配置示例"></a>Outlook邮箱配置示例</h5><figure class="highlight prolog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">gitlab_rails[<span class="string">'smtp_enable'</span>] = true</div><div class="line">gitlab_rails[<span class="string">'smtp_address'</span>] = <span class="string">"smtp-mail.outlook.com"</span></div><div class="line">gitlab_rails[<span class="string">'smtp_port'</span>] = <span class="number">587</span></div><div class="line">gitlab_rails[<span class="string">'smtp_user_name'</span>] = <span class="string">"username@outlook.com"</span></div><div class="line">gitlab_rails[<span class="string">'smtp_password'</span>] = <span class="string">"password"</span></div><div class="line">gitlab_rails[<span class="string">'smtp_domain'</span>] = <span class="string">"smtp-mail.outlook.com"</span></div><div class="line">gitlab_rails[<span class="string">'smtp_authentication'</span>] = <span class="string">"login"</span></div><div class="line">gitlab_rails[<span class="string">'smtp_enable_starttls_auto'</span>] = true</div><div class="line">gitlab_rails[<span class="string">'smtp_openssl_verify_mode'</span>] = <span class="string">'peer'</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>​:warning: ‘smtp_password’字段不应包含任何 Ruby或者YAML语法中的分隔符 (如<code>&#39;</code>),以避免处理配置文件的过程中发生不必要的意外。</p>
+</blockquote>
+<h4 id="GitLab-日常维护"><a href="#GitLab-日常维护" class="headerlink" title="GitLab 日常维护"></a>GitLab 日常维护</h4><h5 id="1-查看服务状态"><a href="#1-查看服务状态" class="headerlink" title="1. 查看服务状态"></a>1. 查看服务状态</h5><p>使用 gitlab-ctl status 查看服务状态</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">[root@<span class="number">6</span> ~]<span class="comment"># sudo gitlab-ctl status</span></div><div class="line"><span class="keyword">run</span><span class="bash">: gitaly: (pid 15055) 23089s; run: <span class="built_in">log</span>: (pid 3142) 55379s</span></div><div class="line"><span class="keyword">run</span><span class="bash">: gitlab-monitor: (pid 15060) 23088s; run: <span class="built_in">log</span>: (pid 3325) 55357s</span></div><div class="line"><span class="keyword">run</span><span class="bash">: gitlab-workhorse: (pid 15063) 23088s; run: <span class="built_in">log</span>: (pid 3156) 55377s</span></div><div class="line"><span class="keyword">run</span><span class="bash">: logrotate: (pid 17867) 1487s; run: <span class="built_in">log</span>: (pid 3197) 55369s</span></div><div class="line"><span class="keyword">run</span><span class="bash">: nginx: (pid 15077) 23087s; run: <span class="built_in">log</span>: (pid 3169) 55375s</span></div><div class="line"><span class="keyword">run</span><span class="bash">: node-exporter: (pid 15083) 23087s; run: <span class="built_in">log</span>: (pid 3247) 55366s</span></div><div class="line"><span class="keyword">run</span><span class="bash">: postgres-exporter: (pid 15088) 23086s; run: <span class="built_in">log</span>: (pid 3311) 55358s</span></div><div class="line"><span class="keyword">run</span><span class="bash">: postgresql: (pid 15093) 23086s; run: <span class="built_in">log</span>: (pid 2988) 55412s</span></div><div class="line"><span class="keyword">run</span><span class="bash">: prometheus: (pid 15101) 23085s; run: <span class="built_in">log</span>: (pid 3230) 55368s</span></div><div class="line"><span class="keyword">run</span><span class="bash">: redis: (pid 15109) 23085s; run: <span class="built_in">log</span>: (pid 2931) 55419s</span></div><div class="line"><span class="keyword">run</span><span class="bash">: redis-exporter: (pid 15113) 23085s; run: <span class="built_in">log</span>: (pid 3290) 55364s</span></div><div class="line"><span class="keyword">run</span><span class="bash">: sidekiq: (pid 17029) 22450s; run: <span class="built_in">log</span>: (pid 3131) 55380s</span></div><div class="line"><span class="keyword">run</span><span class="bash">: unicorn: (pid 17001) 22460s; run: <span class="built_in">log</span>: (pid 3100) 55386s</span></div></pre></td></tr></table></figure>
+<h5 id="2-启动、关闭、重启"><a href="#2-启动、关闭、重启" class="headerlink" title="2. 启动、关闭、重启"></a>2. 启动、关闭、重启</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> 启动Gitlab所有组件</span></div><div class="line">sudo gitlab-ctl start</div><div class="line"><span class="meta"></span></div><div class="line">#<span class="bash"> 停止Gitlab所有组件</span></div><div class="line">sudo gitlab-ctl stop</div><div class="line"><span class="meta"></span></div><div class="line">#<span class="bash"> 重启Gitlab所有组件</span></div><div class="line">sudo gitlab-ctl restart</div><div class="line"><span class="meta"></span></div><div class="line">#<span class="bash"> 重启单个组件</span></div><div class="line">sudo gitlab-ctl restart sidekiq</div></pre></td></tr></table></figure>
+<h5 id="3-控制台实时查看日志"><a href="#3-控制台实时查看日志" class="headerlink" title="3. 控制台实时查看日志"></a>3. 控制台实时查看日志</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> 查看所有的logs; 按 Ctrl-C 退出</span></div><div class="line">sudo gitlab-ctl tail</div><div class="line"><span class="meta"></span></div><div class="line">#<span class="bash"> 拉取/var/<span class="built_in">log</span>/gitlab下子目录的日志</span></div><div class="line">sudo gitlab-ctl tail gitlab-rails</div><div class="line"><span class="meta"></span></div><div class="line">#<span class="bash"> 拉取某个指定的日志文件</span></div><div class="line">sudo gitlab-ctl tail nginx/gitlab_error.log</div></pre></td></tr></table></figure>
+<h3 id="GitLab-安装后优化"><a href="#GitLab-安装后优化" class="headerlink" title="GitLab 安装后优化"></a><strong>GitLab 安装后优化</strong></h3><h4 id="启用HTTPS"><a href="#启用HTTPS" class="headerlink" title="启用HTTPS"></a>启用HTTPS</h4><p>首先，你需要提供一个有可信任CA证书，默认情况下GitLab是没有启用HTTPS的，如果要启用HTTPS时，首先要修改<code>/etc/gitlab/gitlab.rb</code>中的<code>external_url</code>:</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 修改为https</span></div><div class="line">external_url <span class="string">"https://git.ultraera.org"</span></div><div class="line"></div><div class="line"><span class="meta"># 设置默认将http重定向到https</span></div><div class="line">nginx[<span class="string">'redirect_http_to_https'</span>] = <span class="literal">true</span></div></pre></td></tr></table></figure>
+<p>如果你暂时没有https证书，那么你可以临时自己颁发一个证书，注意这个证书是不受信任的。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mkdir -<span class="selector-tag">p</span> /etc/nginx/ssl/</div><div class="line">cd /etc/nginx/ssl/</div><div class="line">sudo openssl req -newkey rsa:<span class="number">2048</span> -x509 -nodes -days <span class="number">3560</span> -out gitlab<span class="selector-class">.crt</span> -keyout gitlab<span class="selector-class">.key</span></div><div class="line">sudo chmod o-r gitlab<span class="selector-class">.key</span></div><div class="line">sudo mv gitlab<span class="selector-class">.key</span> gitlab<span class="selector-class">.crt</span> /etc/ssl/</div></pre></td></tr></table></figure>
+<p>另外，还需要在gitlab-shell中的config.yml中将self_signed_cert 修改为启用:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">self_signed_cert</span> = <span class="literal">true</span></div></pre></td></tr></table></figure>
+<h4 id="设置延迟启动"><a href="#设置延迟启动" class="headerlink" title="设置延迟启动"></a>设置延迟启动</h4><p>为保证服务质量，我们可以设置让omnibus-gitlab的服务(Nginx, Redis, Unicorn等) 在指定的文件系统挂载成功后再启动，在<code>/etc/gitlab/gitlab.rb</code> 文件中添加如下内容：</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 等待/var/opt/gitlab 先被挂载</span></div><div class="line">high_availability[<span class="string">'mountpoint'</span>] = <span class="string">'/var/opt/gitlab'</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意在修改配置之后，要使用重新reconfigure配置</p>
+</blockquote>
+<h4 id="Backups-备份还原"><a href="#Backups-备份还原" class="headerlink" title="Backups 备份还原"></a>Backups 备份还原</h4><h5 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h5><p>Gitlab的配置也非常简单,使用一条命令即可创建完整的Gitlab备份:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">gitlab-rake</span> <span class="selector-tag">gitlab</span><span class="selector-pseudo">:backup</span><span class="selector-pseudo">:create</span></div></pre></td></tr></table></figure>
+<p>该命令会在<code>/var/opt/gitlab/backups</code>目录下创建一个名称类似为<code>1491989249_2017_04_12_gitlab_backup.tar</code>的压缩包, 这个压缩包就是Gitlab整个的完整部分，其中开头的<code>1491989249_2017_04_12</code>是备份创建的日期，这也是我们等下恢复是要用的字段。</p>
+<h5 id="修改默认备份路径"><a href="#修改默认备份路径" class="headerlink" title="修改默认备份路径"></a>修改默认备份路径</h5><p>如果你像我一样，是使用yum安装的，那么GitLab默认的备份目录应该在<code>/var/opt/gitlab/backups</code>，我建议将备份目录修改为其他位置，并添加定时自动备份脚本，可以通过修改<code>/etc/gitlab/gitlab.rb</code>来修改默认位置：</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gitlab_rails[<span class="string">'backup_path'</span>] = <span class="string">'/mnt/backups'</span></div></pre></td></tr></table></figure>
+<h5 id="使用crontab-添加自动备份"><a href="#使用crontab-添加自动备份" class="headerlink" title="使用crontab 添加自动备份"></a>使用crontab 添加自动备份</h5><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 每天凌晨00:00 自动备份</span></div><div class="line"><span class="number">00</span> <span class="number">00</span> * * * <span class="regexp">/opt/gi</span>tlab<span class="regexp">/bin/gi</span>tlab-rake gitlab:backup:create</div></pre></td></tr></table></figure>
+<h5 id="备份恢复"><a href="#备份恢复" class="headerlink" title="备份恢复"></a>备份恢复</h5><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 停止相关数据连接服务</span></div><div class="line">gitlab-ctl <span class="literal">stop</span> unicorn</div><div class="line">gitlab-ctl <span class="literal">stop</span> sidekiq</div><div class="line"></div><div class="line"><span class="comment"># 从1491989249_2017_04_12编号备份中恢复</span></div><div class="line">gitlab-rake gitlab:backup:restore <span class="attr">BACKUP=</span><span class="number">1491989249</span>_2017_04_12</div><div class="line"></div><div class="line"><span class="comment"># 启动Gitlab</span></div><div class="line">sudo gitlab-ctl <span class="literal">start</span> unicorn</div><div class="line">sudo gitlab-ctl <span class="literal">start</span> sidekiq</div></pre></td></tr></table></figure>
+<h3 id="GitLab-迁移"><a href="#GitLab-迁移" class="headerlink" title="GitLab 迁移"></a><strong>GitLab 迁移</strong></h3><p>只需将原服务器<code>/var/opt/gitlab/backups</code>目录下的备份文件拷贝到新服务器上的<code>/var/opt/gitlab/backups</code>上即可(如果你没修改过默认备份目录的话)， 但是需要注意的是新服务器上的Gitlab的版本必须与创建备份时的Gitlab版本号相同， 比如新服务器安装的是最新的9.0.5版本的Gitlab, 那么迁移之前，最好将老服务器的Gitlab 升级为9.0.5在进行备份。</p>
+<p>/Users/Alex/Documents/Hexo/source/_posts/</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Gitlab/" rel="tag"># Gitlab</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/11/about-exam/" rel="next" title="关于考试">
+                <i class="fa fa-chevron-left"></i> 关于考试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/18/qvfwlg9yq/" rel="prev" title="CentOS增加新硬盘给根文件系统扩容">
+                CentOS增加新硬盘给根文件系统扩容 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://samzong.oss-cn-shenzhen.aliyuncs.com/3-200.jpg"
+               alt="SAMZONG" />
+          <p class="site-author-name" itemprop="name">SAMZONG</p>
+           
+              <p class="site-description motion-element" itemprop="description">面朝大海，春暖花开</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">106</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#目前GitLab已经整合的功能"><span class="nav-number">1.</span> <span class="nav-text">目前GitLab已经整合的功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试环境"><span class="nav-number">2.</span> <span class="nav-text">测试环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装需求"><span class="nav-number">3.</span> <span class="nav-text">安装需求</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitLab-安装"><span class="nav-number"></span> <span class="nav-text">GitLab 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装配置依赖项"><span class="nav-number">1.</span> <span class="nav-text">安装配置依赖项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加GitLab仓库-并安装到服务器上"><span class="nav-number">2.</span> <span class="nav-text">添加GitLab仓库,并安装到服务器上</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动GitLab并初始化"><span class="nav-number">3.</span> <span class="nav-text">启动GitLab并初始化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitLab-初始化"><span class="nav-number"></span> <span class="nav-text">GitLab 初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开机自启动"><span class="nav-number">1.</span> <span class="nav-text">开机自启动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GitLab-配置文件"><span class="nav-number">2.</span> <span class="nav-text">GitLab 配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SMTP-邮箱配置"><span class="nav-number">3.</span> <span class="nav-text">SMTP 邮箱配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#QQ企业邮箱配置示例"><span class="nav-number">3.1.</span> <span class="nav-text">QQ企业邮箱配置示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Gmail邮箱配置示例"><span class="nav-number">3.2.</span> <span class="nav-text">Gmail邮箱配置示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Outlook邮箱配置示例"><span class="nav-number">3.3.</span> <span class="nav-text">Outlook邮箱配置示例</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GitLab-日常维护"><span class="nav-number">4.</span> <span class="nav-text">GitLab 日常维护</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-查看服务状态"><span class="nav-number">4.1.</span> <span class="nav-text">1. 查看服务状态</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-启动、关闭、重启"><span class="nav-number">4.2.</span> <span class="nav-text">2. 启动、关闭、重启</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-控制台实时查看日志"><span class="nav-number">4.3.</span> <span class="nav-text">3. 控制台实时查看日志</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitLab-安装后优化"><span class="nav-number"></span> <span class="nav-text">GitLab 安装后优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#启用HTTPS"><span class="nav-number">1.</span> <span class="nav-text">启用HTTPS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置延迟启动"><span class="nav-number">2.</span> <span class="nav-text">设置延迟启动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Backups-备份还原"><span class="nav-number">3.</span> <span class="nav-text">Backups 备份还原</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#备份"><span class="nav-number">3.1.</span> <span class="nav-text">备份</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修改默认备份路径"><span class="nav-number">3.2.</span> <span class="nav-text">修改默认备份路径</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用crontab-添加自动备份"><span class="nav-number">3.3.</span> <span class="nav-text">使用crontab 添加自动备份</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#备份恢复"><span class="nav-number">3.4.</span> <span class="nav-text">备份恢复</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitLab-迁移"><span class="nav-number"></span> <span class="nav-text">GitLab 迁移</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  	<span class="author" itemprop="copyrightHolder">
+  		<a href="http://samzong.me">
+  			SAMZONG
+		</a>
+	</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyt1o1spk';
+      var conf = 'prod_5af118a1818cbadadd3298facadf1c48';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("zKBiHHclrnIqtewvTXUjqqTb-gzGzoHsz", "TtKGBrMabdSprnnhqaRatIbB");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
