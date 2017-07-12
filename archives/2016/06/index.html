@@ -14,6 +14,9 @@
 
 
 
+
+
+
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
@@ -149,10 +152,6 @@
 
 
   <title>归档 | SAMZONG</title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
@@ -177,6 +176,10 @@
 
 
 
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -264,7 +267,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
             
-            友链
+            menu.links
           </a>
         </li>
       
@@ -347,7 +350,7 @@
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
 
-      <h1 class="post-title">
+      <h2 class="post-title">
         
             <a class="post-title-link" href="/2016/06/16/mysql03/" itemprop="url">
               
@@ -355,7 +358,7 @@
               
             </a>
         
-      </h1>
+      </h2>
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
@@ -384,7 +387,7 @@
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
 
-      <h1 class="post-title">
+      <h2 class="post-title">
         
             <a class="post-title-link" href="/2016/06/16/apache-tomcat-you-hua-she-ding-yi/" itemprop="url">
               
@@ -392,7 +395,7 @@
               
             </a>
         
-      </h1>
+      </h2>
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
@@ -421,7 +424,7 @@
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
 
-      <h1 class="post-title">
+      <h2 class="post-title">
         
             <a class="post-title-link" href="/2016/06/16/shi-yong-moshdai-ti-sshlian-jie-fu-wu-qi/" itemprop="url">
               
@@ -429,7 +432,7 @@
               
             </a>
         
-      </h1>
+      </h2>
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
@@ -471,6 +474,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    <div id="sidebar-dimmer"></div>
     <div class="sidebar-inner">
 
       
@@ -560,13 +564,20 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  	<span class="author" itemprop="copyrightHolder">
-  		<a href="http://samzong.me">
-  			SAMZONG
-		</a>
-	</span>
+  <span class="author" itemprop="copyrightHolder">SAMZONG</span>
 </div>
 
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
 
 
         
@@ -680,12 +691,6 @@
 
 
 
-
-  
-
-
-
-
   
     <script type="text/javascript">
     (function(){
@@ -712,8 +717,8 @@
   
 
   
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-  <script>AV.initialize("zKBiHHclrnIqtewvTXUjqqTb-gzGzoHsz", "TtKGBrMabdSprnnhqaRatIbB");</script>
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("zKBiHHclrnIqtewvTXUjqqTb-gzGzoHsz", "TtKGBrMabdSprnnhqaRatIbB");AV.useAVCloudUS();</script>
   <script>
     function showTime(Counter) {
       var query = new AV.Query(Counter);
@@ -817,6 +822,8 @@
   </script>
 
 
+
+  
 
   
 
