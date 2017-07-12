@@ -1,0 +1,929 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="DenyHosts," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="查看当前服务器失败登录的统计：1cat /var/log/secure | awk &apos;/Failed/&amp;#123;print $(NF-3)&amp;#125;&apos; | sort | uniq -c | sort -n |  awk &apos;&amp;#123;print $2&quot; = &quot;$1&amp;#125;&apos; Install denyhosts123# 需要预先安装epel源sudo yum install -y epel-">
+<meta name="keywords" content="DenyHosts">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Denyhosts增加服务器SSH黑名单机制">
+<meta property="og:url" content="https://samzong.me/2016/11/23/denyhosts-linux/index.html">
+<meta property="og:site_name" content="SAMZONG">
+<meta property="og:description" content="查看当前服务器失败登录的统计：1cat /var/log/secure | awk &apos;/Failed/&amp;#123;print $(NF-3)&amp;#125;&apos; | sort | uniq -c | sort -n |  awk &apos;&amp;#123;print $2&quot; = &quot;$1&amp;#125;&apos; Install denyhosts123# 需要预先安装epel源sudo yum install -y epel-">
+<meta property="og:updated_time" content="2017-04-21T05:18:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Denyhosts增加服务器SSH黑名单机制">
+<meta name="twitter:description" content="查看当前服务器失败登录的统计：1cat /var/log/secure | awk &apos;/Failed/&amp;#123;print $(NF-3)&amp;#125;&apos; | sort | uniq -c | sort -n |  awk &apos;&amp;#123;print $2&quot; = &quot;$1&amp;#125;&apos; Install denyhosts123# 需要预先安装epel源sudo yum install -y epel-">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'BMU7LQK8AV',
+      apiKey: '39d2b07255732fc491f8ded4f47f4b04',
+      indexName: 'samzong',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://samzong.me/2016/11/23/denyhosts-linux/"/>
+
+
+
+
+
+  <title>Denyhosts增加服务器SSH黑名单机制 | SAMZONG</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a76f6cdf9fa01b6846463e3b570e0528";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SAMZONG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://samzong.me/2016/11/23/denyhosts-linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="SAMZONG">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/3-200.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SAMZONG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Denyhosts增加服务器SSH黑名单机制</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-23T16:24:40+08:00">
+                2016-11-23
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-04-21T13:18:14+08:00">
+                2017-04-21
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CentOS/" itemprop="url" rel="index">
+                    <span itemprop="name">CentOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2016/11/23/denyhosts-linux/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/11/23/denyhosts-linux/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2016/11/23/denyhosts-linux/" class="leancloud_visitors" data-flag-title="Denyhosts增加服务器SSH黑名单机制">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="查看当前服务器失败登录的统计："><a href="#查看当前服务器失败登录的统计：" class="headerlink" title="查看当前服务器失败登录的统计："></a>查看当前服务器失败登录的统计：</h5><figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">cat</span> /<span class="keyword">var</span>/<span class="keyword">log</span>/secure | awk '/Failed/&#123;<span class="keyword">print</span> $(NF-3)&#125;' | <span class="keyword">sort</span> | uniq -c | <span class="keyword">sort</span> -<span class="keyword">n</span> |  awk '&#123;<span class="keyword">print</span> <span class="variable">$2</span><span class="string">" = "</span><span class="variable">$1&#125;</span>'</div></pre></td></tr></table></figure>
+<h5 id="Install-denyhosts"><a href="#Install-denyhosts" class="headerlink" title="Install denyhosts"></a>Install denyhosts</h5><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 需要预先安装epel源</span></div><div class="line">sudo yum <span class="keyword">install</span> -y epel-release</div><div class="line">sudo yum <span class="keyword">install</span> -y denyhosts</div></pre></td></tr></table></figure>
+<h5 id="配置文件解析"><a href="#配置文件解析" class="headerlink" title="配置文件解析"></a>配置文件解析</h5><p>默认配置文件/etc/denyhosts。<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 查看的sshd日志文件</span></div><div class="line"><span class="attr">SECURE_LOG</span> = /var/log/secure</div><div class="line"></div><div class="line"><span class="comment"># 将阻止IP写入的配置文件</span></div><div class="line"><span class="attr">HOSTS_DENY</span> = /etc/hosts.deny</div><div class="line"></div><div class="line"><span class="comment"># 过多久之后清除，其中w代表周，d代表天，h代表小时，s代表秒，m代表分钟。</span></div><div class="line"><span class="attr">PURGE_DENY</span> = <span class="number">4</span>h</div><div class="line"></div><div class="line"><span class="comment"># 阻止的服务名称</span></div><div class="line"><span class="attr">BLOCK_SERVICE</span>  = sshd</div><div class="line"></div><div class="line"><span class="comment"># 允许无效用户（在/etc/passwd未列出）登录失败次数,允许无效用户登录失败的次数.</span></div><div class="line"><span class="attr">DENY_THRESHOLD_INVALID</span> = <span class="number">1</span></div><div class="line"></div><div class="line"><span class="comment"># 允许普通用户登录失败的次数</span></div><div class="line"><span class="attr">DENY_THRESHOLD_VALID</span> = <span class="number">5</span></div><div class="line"></div><div class="line"><span class="comment"># 允许root登录失败的次数</span></div><div class="line"><span class="attr">DENY_THRESHOLD_ROOT</span> = <span class="number">2</span></div><div class="line"><span class="attr">DENY_THRESHOLD_RESTRICTED</span> = <span class="number">1</span></div><div class="line"></div><div class="line"><span class="comment"># 设定 deny host 写入到该资料夹</span></div><div class="line"><span class="attr">WORK_DIR</span> = /var/lib/denyhosts</div><div class="line"></div><div class="line"><span class="comment"># 将deny的host或ip纪录到Work_dir中</span></div><div class="line"><span class="attr">SUSPICIOUS_LOGIN_REPORT_ALLOWED_HOSTS</span>=<span class="literal">YES</span></div><div class="line"></div><div class="line"><span class="comment"># 是否做域名反解</span></div><div class="line"><span class="attr">HOSTNAME_LOOKUP</span>=<span class="literal">YES</span></div><div class="line"></div><div class="line"><span class="comment"># 将DenyHOts启动的pid纪录到LOCK_FILE中，已确保服务正确启动，防止同时启动多个服务。</span></div><div class="line"><span class="attr">LOCK_FILE</span> = /var/lock/subsys/denyhosts</div><div class="line"></div><div class="line"><span class="comment"># 设置管理员邮件地址</span></div><div class="line"><span class="attr">ADMIN_EMAIL</span> = luchuanjia@msn.com</div><div class="line"><span class="attr">SMTP_HOST</span> = localhost</div><div class="line"><span class="attr">SMTP_PORT</span> = <span class="number">25</span></div><div class="line"><span class="attr">SMTP_FROM</span> = DenyHosts &lt;nobody@localhost&gt;</div><div class="line"><span class="attr">SMTP_SUBJECT</span> = DenyHosts Report from $[HOSTNAME]</div><div class="line"></div><div class="line"><span class="comment"># 有效用户登录失败计数归零的时间</span></div><div class="line"><span class="attr">AGE_RESET_VALID</span>=<span class="number">1</span>d</div><div class="line"></div><div class="line"><span class="comment"># root用户登录失败计数归零的时间</span></div><div class="line"><span class="attr">AGE_RESET_ROOT</span>=<span class="number">25</span>d</div><div class="line"></div><div class="line"><span class="comment"># 用户的失败登录计数重置为0的时间(/usr/share/denyhosts/data/restricted-usernames)</span></div><div class="line"><span class="attr">AGE_RESET_RESTRICTED</span>=<span class="number">25</span>d</div><div class="line"></div><div class="line"><span class="comment"># 无效用户登录失败计数归零的时间</span></div><div class="line"><span class="attr">AGE_RESET_INVALID</span>=<span class="number">10</span>d</div><div class="line"></div><div class="line"><span class="comment"># denyhosts的日志文件位置</span></div><div class="line"><span class="attr">DAEMON_LOG</span> = /var/log/denyhosts</div><div class="line"></div><div class="line"><span class="comment"># denyhosts的轮询时间</span></div><div class="line"><span class="attr">DAEMON_SLEEP</span> = <span class="number">30</span>s</div><div class="line"></div><div class="line"><span class="comment"># 该项与PURGE_DENY 设置一样，也是清除hosts.deny中 ssh用户的时间</span></div><div class="line"><span class="attr">DAEMON_PURGE</span> = <span class="number">1</span>h</div></pre></td></tr></table></figure></p>
+<h5 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h5><ol>
+<li>如果想删除一个已经禁止的主机IP，并加入到允许主机例表，只在 /etc/hosts.deny 删除是没用的,还需要以下：<figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">/var/<span class="class"><span class="keyword">lib</span>/<span class="title">denyhosts</span> 目录，进入以下操作：</span></div><div class="line"><span class="comment"># 停止denyhosts服务</span></div><div class="line">sudo service denyhosts stop</div><div class="line"></div><div class="line"><span class="comment"># 进入denyhosts的目录</span></div><div class="line">cd /var/<span class="class"><span class="keyword">lib</span>/<span class="title">denyhosts</span></span></div><div class="line"></div><div class="line"><span class="comment"># 查看哪些文件添加了ssh限制,将IP_addr替换成你的IP</span></div><div class="line">sudo grep IP_addr /usr/share/denyhosts/data/*</div><div class="line"></div><div class="line"><span class="comment"># 然后一个个删除文件中你想取消的主机IP所在的行:</span></div><div class="line">/usr/share/denyhosts/data/hosts</div><div class="line">/usr/share/denyhosts/data/hosts-restricted</div><div class="line">/usr/share/denyhosts/data/hosts-root</div><div class="line">/usr/share/denyhosts/data/hosts-valid</div><div class="line">/usr/share/denyhosts/data/users-hosts</div><div class="line"></div><div class="line"><span class="comment"># 添加你想允许的主机IP地址到allowed-hosts:</span></div><div class="line">sudo echo IP_addr &gt;&gt;<span class="regexp">/usr/share</span><span class="regexp">/denyhosts/data</span><span class="regexp">/allowed-hostsps</span></div><div class="line"></div><div class="line"># 启动 DenyHosts服务：</div><div class="line"> service denyhosts start</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h5 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h5><ul>
+<li>尽量是用key验证登录服务器</li>
+<li>尽量从固定IP点登录服务器，然后将该地址加入白名单</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DenyHosts/" rel="tag"># DenyHosts</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/18/ghostzeng-jia-ping-lun-mo-kuai/" rel="next" title="Ghost(2) 增加评论模块">
+                <i class="fa fa-chevron-left"></i> Ghost(2) 增加评论模块
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/27/sdfwsdserbnssd/" rel="prev" title="世界上最没用的东西">
+                世界上最没用的东西 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div id="sidebar-dimmer"></div>
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://samzong.oss-cn-shenzhen.aliyuncs.com/3-200.jpg"
+               alt="SAMZONG" />
+          <p class="site-author-name" itemprop="name">SAMZONG</p>
+           
+              <p class="site-description motion-element" itemprop="description">面朝大海，春暖花开</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">107</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SAMZONG" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:samzong.lu@gmail.com" target="_blank" title="Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  Mail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#查看当前服务器失败登录的统计："><span class="nav-number">1.</span> <span class="nav-text">查看当前服务器失败登录的统计：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Install-denyhosts"><span class="nav-number">2.</span> <span class="nav-text">Install denyhosts</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置文件解析"><span class="nav-number">3.</span> <span class="nav-text">配置文件解析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#FAQ"><span class="nav-number">4.</span> <span class="nav-text">FAQ</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Tips"><span class="nav-number">5.</span> <span class="nav-text">Tips</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">SAMZONG</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyt1o1spk';
+      var conf = 'prod_5af118a1818cbadadd3298facadf1c48';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("zKBiHHclrnIqtewvTXUjqqTb-gzGzoHsz", "TtKGBrMabdSprnnhqaRatIbB");AV.useAVCloudUS();</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.1"></script>
+
+
+  
+
+</body>
+</html>
