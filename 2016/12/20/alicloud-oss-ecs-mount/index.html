@@ -1,0 +1,965 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="AliCloud," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="From 阿里云官方Github Demo: CentOS 6.8 on ECS  ossfs 是通过磁盘挂载的形式，将oss存储挂载到linux、类unix等操作系统，而且不仅仅可以挂载阿里云内的ECS上，理论上所有网络能到达oss的都可以挂载，但还是要以实际问题为准。 1.Download &amp;amp; Install官方版本发布页面，请根据你的系统类型进行选择，我这演示的环境是CentOS">
+<meta name="keywords" content="AliCloud">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HowTo Mount OSS Bucket On ECS">
+<meta property="og:url" content="https://samzong.me/2016/12/20/alicloud-oss-ecs-mount/index.html">
+<meta property="og:site_name" content="SAMZONG">
+<meta property="og:description" content="From 阿里云官方Github Demo: CentOS 6.8 on ECS  ossfs 是通过磁盘挂载的形式，将oss存储挂载到linux、类unix等操作系统，而且不仅仅可以挂载阿里云内的ECS上，理论上所有网络能到达oss的都可以挂载，但还是要以实际问题为准。 1.Download &amp;amp; Install官方版本发布页面，请根据你的系统类型进行选择，我这演示的环境是CentOS">
+<meta property="og:image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/11/QQ20161111-0.jpg">
+<meta property="og:image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/11/0256A9CB-A0FA-43BC-82AF-4DE17D4852B6.png">
+<meta property="og:image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/11/QQ20161111-2.jpg">
+<meta property="og:image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/11/0B78E099-5488-4839-AE48-09A074E7415D.png">
+<meta property="og:updated_time" content="2017-04-21T05:20:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HowTo Mount OSS Bucket On ECS">
+<meta name="twitter:description" content="From 阿里云官方Github Demo: CentOS 6.8 on ECS  ossfs 是通过磁盘挂载的形式，将oss存储挂载到linux、类unix等操作系统，而且不仅仅可以挂载阿里云内的ECS上，理论上所有网络能到达oss的都可以挂载，但还是要以实际问题为准。 1.Download &amp;amp; Install官方版本发布页面，请根据你的系统类型进行选择，我这演示的环境是CentOS">
+<meta name="twitter:image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/11/QQ20161111-0.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'BMU7LQK8AV',
+      apiKey: '39d2b07255732fc491f8ded4f47f4b04',
+      indexName: 'samzong',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://samzong.me/2016/12/20/alicloud-oss-ecs-mount/"/>
+
+
+
+
+
+  <title>HowTo Mount OSS Bucket On ECS | SAMZONG</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a76f6cdf9fa01b6846463e3b570e0528";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SAMZONG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://samzong.me/2016/12/20/alicloud-oss-ecs-mount/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="SAMZONG">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/3-200.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SAMZONG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HowTo Mount OSS Bucket On ECS</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-20T06:17:08+08:00">
+                2016-12-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-04-21T13:20:50+08:00">
+                2017-04-21
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AliCloud/" itemprop="url" rel="index">
+                    <span itemprop="name">AliCloud</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2016/12/20/alicloud-oss-ecs-mount/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/12/20/alicloud-oss-ecs-mount/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2016/12/20/alicloud-oss-ecs-mount/" class="leancloud_visitors" data-flag-title="HowTo Mount OSS Bucket On ECS">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>From <a href="https://github.com/aliyun/ossfs" target="_blank" rel="external">阿里云官方Github</a></p>
+<p>Demo: CentOS 6.8 on ECS</p>
+</blockquote>
+<p>ossfs 是通过磁盘挂载的形式，将oss存储挂载到linux、类unix等操作系统，而且不仅仅可以挂载阿里云内的ECS上，理论上所有网络能到达oss的都可以挂载，但还是要以实际问题为准。</p>
+<h5 id="1-Download-amp-Install"><a href="#1-Download-amp-Install" class="headerlink" title="1.Download &amp; Install"></a>1.Download &amp; Install</h5><p><a href="https://github.com/aliyun/ossfs/releases" target="_blank" rel="external">官方版本发布页面</a>，请根据你的系统类型进行选择，我这演示的环境是CentOS 6.8；ossfs目前最新的版本是v1.79.9，您可以根据自己当时版本进行选择，建议选择最新版本。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 请先将包上传到服务器上</div><div class="line"> <span class="selector-tag">sudo</span> <span class="selector-tag">yum</span> <span class="selector-tag">localinstall</span> <span class="selector-tag">ossfs_1</span><span class="selector-class">.79</span><span class="selector-class">.9_centos6</span><span class="selector-class">.5_x86_64</span><span class="selector-class">.rpm</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意使用localinstall，因为在安装过程，yum 可以很好的解决依赖关系，会节省我们很多时间</p>
+</blockquote>
+<h5 id="2-OSS-amp-Bucket"><a href="#2-OSS-amp-Bucket" class="headerlink" title="2. OSS &amp; Bucket"></a>2. OSS &amp; Bucket</h5><p> 需要获取以下信息，在后面我们都会用到的：<br></p>
+<ol>
+<li>Bucket 名称<br><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/11/QQ20161111-0.jpg" alt=""><br><br></li>
+<li>Access Key ID</li>
+<li>Access Key Secret<br><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/11/0256A9CB-A0FA-43BC-82AF-4DE17D4852B6.png" alt=""></li>
+</ol>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/11/QQ20161111-2.jpg" alt=""><br><br></p>
+<ol>
+<li>Location，这需要注意点，不要加上Bucket的名字，区域对应表如下，注意你的Bucket所在区域:</li>
+</ol>
+<div style="overflow: auto;"><table><br><thead><br><tr><br><th style="color:green">Region中文名称</th><br><th style="text-align:left;color: green;">Region英文表示</th><br><th style="text-align:left;color: green;">外网Endpoint</th><br><th style="text-align:left;color: green;">ECS访问的内网Endpoint</th><br></tr><br></thead><br><tbody><br><tr><br><td>华东 1</td><br><td style="text-align:left">oss-cn-hangzhou</td><br><td style="text-align:left">oss-cn-hangzhou.aliyuncs.com</td><br><td style="text-align:left">oss-cn-hangzhou-internal.aliyuncs.com</td><br></tr><br><tr><br><td>华东 2</td><br><td style="text-align:left">oss-cn-shanghai</td><br><td style="text-align:left">oss-cn-shanghai.aliyuncs.com</td><br><td style="text-align:left">oss-cn-shanghai-internal.aliyuncs.com</td><br></tr><br><tr><br><td>华北 1</td><br><td style="text-align:left">oss-cn-qingdao</td><br><td style="text-align:left">oss-cn-qingdao.aliyuncs.com</td><br><td style="text-align:left">oss-cn-qingdao-internal.aliyuncs.com</td><br></tr><br><tr><br><td>华北 2</td><br><td style="text-align:left">oss-cn-beijing</td><br><td style="text-align:left">oss-cn-beijing.aliyuncs.com</td><br><td style="text-align:left">oss-cn-beijing-internal.aliyuncs.com</td><br></tr><br><tr><br><td>华南 1</td><br><td style="text-align:left">oss-cn-shenzhen</td><br><td style="text-align:left">oss-cn-shenzhen.aliyuncs.com</td><br><td style="text-align:left">oss-cn-shenzhen-internal.aliyuncs.com</td><br></tr><br><tr><br><td>香港数据中心</td><br><td style="text-align:left">oss-cn-hongkong</td><br><td style="text-align:left">oss-cn-hongkong.aliyuncs.com</td><br><td style="text-align:left">oss-cn-hongkong-internal.aliyuncs.com</td><br></tr><br><tr><br><td>美国硅谷数据中心</td><br><td style="text-align:left">oss-us-west-1</td><br><td style="text-align:left">oss-us-west-1.aliyuncs.com</td><br><td style="text-align:left">oss-us-west-1-internal.aliyuncs.com</td><br></tr><br><tr><br><td>美国弗吉尼亚数据中心</td><br><td style="text-align:left">oss-us-east-1</td><br><td style="text-align:left">oss-us-east-1.aliyuncs.com</td><br><td style="text-align:left">oss-us-east-1-internal.aliyuncs.com</td><br></tr><br><tr><br><td>亚太（新加坡）数据中心</td><br><td style="text-align:left">oss-ap-southeast-1</td><br><td style="text-align:left">oss-ap-southeast-1.aliyuncs.com</td><br><td style="text-align:left">oss-ap-southeast-1-internal.aliyuncs.com</td><br></tr><br><tr><br><td>亚太东北 1（日本）数据中心</td><br><td style="text-align:left">oss-ap-northeast-1</td><br><td style="text-align:left">oss-ap-northeast-1.aliyuncs.com</td><br><td style="text-align:left">oss-ap-northeast-1-internal.aliyuncs.com</td><br></tr><br></tbody><br></table></div>
+
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 设置bucket/access key/id的信息，将其存放在/etc/passwd-ossfs 文件中</span></div><div class="line"><span class="comment"># 注意这个文件的权限必须正确设置，建议设为640</span></div><div class="line">sudo echo <span class="keyword">my</span>-bucket:<span class="keyword">my</span>-access-key-<span class="built_in">id</span>:<span class="keyword">my</span>-access-key-secret &gt; /etc/passwd-ossfs</div><div class="line">sudo chmod <span class="number">640</span> /etc/passwd-ossfs</div></pre></td></tr></table></figure>
+<p><br></p>
+<h5 id="3-Mount-amp-Uasge"><a href="#3-Mount-amp-Uasge" class="headerlink" title="3. Mount &amp; Uasge"></a>3. Mount &amp; Uasge</h5><p>将oss bucket mount到指定目录:<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 我碰到安装后找不到ossfs命令，查看下因为ossfs没有x权限，目录路径为/usr/local/bin，如果您也碰到这个问题，可以增加x权限后再测试</span></div><div class="line">sudo ossfs my-bucket <span class="regexp">/mnt/</span>ossdir -ourl=http:<span class="regexp">//</span>oss-location.aliyuncs.com</div><div class="line"></div><div class="line"><span class="comment"># 如果使用ossfs的机器是阿里云ECS，可以使用内网域名来避免流量收费和 提高速度：</span></div><div class="line">sudo ossfs my-bucket <span class="regexp">/tmp/</span>ossfs -ourl=http:<span class="regexp">//</span>oss-location-internal.aliyuncs.com</div></pre></td></tr></table></figure></p>
+<p>磁盘空间达到上百T：<br><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/11/0B78E099-5488-4839-AE48-09A074E7415D.png" alt=""><br><br></p>
+<p> umount：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 注意用户身份</span></div><div class="line">umount /tmp/ossfs # root<span class="built_in"> user</span></div><div class="line">sudo fusermount -u /tmp/ossfs # non-root user</div></pre></td></tr></table></figure></p>
+<p><br></p>
+<h5 id="4-Debug-amp-FAQ"><a href="#4-Debug-amp-FAQ" class="headerlink" title="4. Debug &amp; FAQ"></a>4. Debug &amp; FAQ</h5><p>当遇到错误的时候，可以试着打开Debug日志信息，然后分析问题原因：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 使用 -o dbglevel=debug -f -d参数打印日志信息</span></div><div class="line">sudo ossfs my-bucket /tmp/ossfs <span class="attribute">-ourl</span>=http://oss-location-internal.aliyuncs.com -o <span class="attribute">dbglevel</span>=debug -f -d &gt; /mnt/ossfs.log 2&gt;&amp;1</div></pre></td></tr></table></figure></p>
+<p>更多的问题，请移步查看<a href="https://github.com/aliyun/ossfs/wiki/FAQ" target="_blank" rel="external">官方的FAQ文档</a>。</p>
+<p><br></p>
+<h5 id="5-About"><a href="#5-About" class="headerlink" title="5. About"></a>5. About</h5><p>ossfs提供的功能和性能和本地文件系统相比，具有一些局限性。具体包括：</p>
+<ul>
+<li>随机或者追加写文件会导致整个文件的重写。</li>
+<li>元数据操作，例如list directory，性能较差，因为需要远程访问oss  服务器。</li>
+<li>文件/文件夹的rename操作不是原子的。</li>
+<li>多个客户端挂载同一个oss bucket时，依赖用户自行协调各个客户端的行为。例如避免多个客户端写同一个文件等等。</li>
+<li>不支持hard link。</li>
+<li>不适合用在高并发读/写的场景，这样会让系统的load升高</li>
+</ul>
+<blockquote>
+<p>另外，ossfs的稳定性很大一部分依赖于网络环境，建议的使用场景更多是作为临时数据迁移或定期备份，虽然ossfs挂载到系统中会有着几百TB的空间，但是稳定性并不高。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AliCloud/" rel="tag"># AliCloud</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/17/shanghai-is-cold/" rel="next" title="上海天冷了">
+                <i class="fa fa-chevron-left"></i> 上海天冷了
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/07/docker-hub-guo-nei-jia-su/" rel="prev" title="Docker Hub 国内加速">
+                Docker Hub 国内加速 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div id="sidebar-dimmer"></div>
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://samzong.oss-cn-shenzhen.aliyuncs.com/3-200.jpg"
+               alt="SAMZONG" />
+          <p class="site-author-name" itemprop="name">SAMZONG</p>
+           
+              <p class="site-description motion-element" itemprop="description">面朝大海，春暖花开</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">106</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SAMZONG" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:samzong.lu@gmail.com" target="_blank" title="Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  Mail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-Download-amp-Install"><span class="nav-number">1.</span> <span class="nav-text">1.Download & Install</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-OSS-amp-Bucket"><span class="nav-number">2.</span> <span class="nav-text">2. OSS & Bucket</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-Mount-amp-Uasge"><span class="nav-number">3.</span> <span class="nav-text">3. Mount & Uasge</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-Debug-amp-FAQ"><span class="nav-number">4.</span> <span class="nav-text">4. Debug & FAQ</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-About"><span class="nav-number">5.</span> <span class="nav-text">5. About</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">SAMZONG</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyt1o1spk';
+      var conf = 'prod_5af118a1818cbadadd3298facadf1c48';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("zKBiHHclrnIqtewvTXUjqqTb-gzGzoHsz", "TtKGBrMabdSprnnhqaRatIbB");AV.useAVCloudUS();</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.1"></script>
+
+
+  
+
+</body>
+</html>

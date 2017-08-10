@@ -1,0 +1,925 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Docker," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1. 安装CentOS 7.x略。 2. 安装docker详见： How to Install Docker on CentOS 6.x 3. 基础docker命令1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950＃ 获取centos6 docker镜像[root@d">
+<meta name="keywords" content="Docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HowTo Use Docker create a Tomcat Project">
+<meta property="og:url" content="https://samzong.me/2016/08/02/docker01/index.html">
+<meta property="og:site_name" content="SAMZONG">
+<meta property="og:description" content="1. 安装CentOS 7.x略。 2. 安装docker详见： How to Install Docker on CentOS 6.x 3. 基础docker命令1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950＃ 获取centos6 docker镜像[root@d">
+<meta property="og:updated_time" content="2017-04-21T05:23:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HowTo Use Docker create a Tomcat Project">
+<meta name="twitter:description" content="1. 安装CentOS 7.x略。 2. 安装docker详见： How to Install Docker on CentOS 6.x 3. 基础docker命令1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950＃ 获取centos6 docker镜像[root@d">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'BMU7LQK8AV',
+      apiKey: '39d2b07255732fc491f8ded4f47f4b04',
+      indexName: 'samzong',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://samzong.me/2016/08/02/docker01/"/>
+
+
+
+
+
+  <title>HowTo Use Docker create a Tomcat Project | SAMZONG</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a76f6cdf9fa01b6846463e3b570e0528";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SAMZONG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://samzong.me/2016/08/02/docker01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="SAMZONG">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/3-200.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SAMZONG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HowTo Use Docker create a Tomcat Project</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-02T15:44:20+08:00">
+                2016-08-02
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-04-21T13:23:28+08:00">
+                2017-04-21
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2016/08/02/docker01/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/08/02/docker01/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2016/08/02/docker01/" class="leancloud_visitors" data-flag-title="HowTo Use Docker create a Tomcat Project">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="1-安装CentOS-7-x"><a href="#1-安装CentOS-7-x" class="headerlink" title="1. 安装CentOS 7.x"></a><strong>1. 安装CentOS 7.x</strong></h4><pre><code>略。
+</code></pre><h4 id="2-安装docker"><a href="#2-安装docker" class="headerlink" title="2. 安装docker"></a><strong>2. 安装docker</strong></h4><p>详见： <a href="http://samzong.me/2016/07/07/how-to-install-docker-on-centos-6-x-2/">How to Install Docker on CentOS 6.x</a></p>
+<h4 id="3-基础docker命令"><a href="#3-基础docker命令" class="headerlink" title="3. 基础docker命令"></a><strong>3. 基础docker命令</strong></h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">＃ 获取centos6 docker镜像</div><div class="line">[root@docker ~]# docker pull centos6</div><div class="line">Using default <span class="keyword">ta</span><span class="variable">g:</span> latest</div><div class="line">lates<span class="variable">t:</span> Pulling from library/cento<span class="variable">s:centos6</span></div><div class="line"></div><div class="line"><span class="number">43</span>db9dbdcb30: Downloading <span class="number">41.14</span> MB/<span class="number">49.33</span> MB</div><div class="line"><span class="number">43</span>db9dbdcb30: Pull <span class="built_in">complete</span></div><div class="line"><span class="number">2</span>dc64e8f8d4f: Pull <span class="built_in">complete</span></div><div class="line"><span class="number">670</span>a583e1b50: Pull <span class="built_in">complete</span></div><div class="line"><span class="number">183</span>b0bfcd10e: Pull <span class="built_in">complete</span></div><div class="line">Diges<span class="variable">t:</span> <span class="built_in">sha256</span>:c6674c44c6439673bf56536c1a15916639c47ea04c3d6296c5df938add67b54b</div><div class="line">Statu<span class="variable">s:</span> Downloaded newer image <span class="keyword">for</span> centso:centos6</div><div class="line"></div><div class="line">＃ 查看当前服务器上的docker镜像</div><div class="line">[root@docker ~]# docker images</div><div class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</div><div class="line">centos6-visionet    latest              aeed37612ecb        <span class="number">6</span> hours ago         <span class="number">1.916</span> GB</div><div class="line">centos              centos6             a3c09d36ab4a        <span class="number">2</span> days ago          <span class="number">194.6</span> MB</div><div class="line">registry            latest              c6c14b3960bd        <span class="number">3</span> days ago          <span class="number">33.28</span> MB</div><div class="line">＃ 查找docker镜像</div><div class="line">[root@docker ~]# docker <span class="built_in">search</span> cento<span class="variable">s:centos6</span></div><div class="line">NAME                                     DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</div><div class="line">imagine10255/centos6-lnmp-php56          centos6-lnmp-php56                              <span class="number">10</span>                   [OK]</div><div class="line">lemonbar/centos6-ssh                     Installed openssh-server <span class="keyword">on</span> centos6, defau...   <span class="number">7</span>                    [OK]</div><div class="line">sergeyzh/centos6-nginx                                                                   <span class="number">2</span>                    [OK]</div><div class="line">guyton/centos6                           From official centos6 container with full ...   <span class="number">2</span>                    [OK]</div><div class="line">paijp/centos6-apache-php-sqlite2         php5.<span class="number">3.3</span> with sqlite2 <span class="built_in">and</span> apache <span class="keyword">on</span> CentOS...   <span class="number">1</span>                    [OK]</div><div class="line">edrans/centos6                                                                           <span class="number">1</span>                    [OK]</div><div class="line">mohri1219/centos6.<span class="number">7</span>-ruby2.<span class="number">2.2</span>-mysql5.<span class="number">6</span>   centos6.<span class="number">7</span>-ruby2.<span class="number">2.2</span>-mysql5.<span class="number">6</span>                    <span class="number">1</span>                    [OK]</div><div class="line">...</div><div class="line">...</div><div class="line"></div><div class="line">＃ 删除 centos6 docker镜像</div><div class="line">[root@docker ~]# docker rmi IMAGES_NAME</div><div class="line">[root@docker ~]# docker rmi cento<span class="variable">s:centos6</span></div><div class="line"># 报错无法删除</div><div class="line">Error response from daemon: conflic<span class="variable">t:</span> unable <span class="keyword">to</span> <span class="built_in">remove</span> repository reference <span class="string">"centos"</span> (must force) - container <span class="number">705</span>a30cbc002 <span class="keyword">is</span> using its referenced image <span class="number">42118</span>e3df429</div><div class="line"># 这是因为之间的运行的进程没有清楚导致该images正在使用中，使用一下命令查看占有的进程</div><div class="line">[root@docker ~]# docker <span class="keyword">ps</span> -<span class="keyword">a</span> ＃ 查看所有的docker进程</div><div class="line">CONTAINER ID        IMAGE               COMMAND               CREATED             STATUS                     PORTS               NAMES</div><div class="line"><span class="number">705</span>a30cbc002        cento<span class="variable">s:centos6</span>              <span class="string">"/bin/bash"</span>           <span class="number">6</span> minutes ago       Exited (<span class="number">0</span>) <span class="number">6</span> minutes ago                       centos6</div><div class="line">[root@docker ~]# docker rm <span class="number">705</span>a30cbc002</div><div class="line"><span class="number">705</span>a30cbc002</div><div class="line">[root@docker ~]# docker rmi cento<span class="variable">s:centos6</span></div><div class="line">Untagged: cento<span class="variable">s:centos6</span></div><div class="line">Deleted: <span class="built_in">sha256</span>:<span class="number">42118</span>e3df429f09ca581a9deb3df274601930e428e452f7e4e9f1833c56a100a</div><div class="line">Deleted: <span class="built_in">sha256</span>:d72d0199021776e77ac14a764a3decd156e9f6f18b37e25b867b0f1ca42fb3d9</div><div class="line">Deleted: <span class="built_in">sha256</span>:fb178c6cea1453d089ce033b96eba0efdb42274138e042517ea2d5ea7bb51665</div><div class="line">Deleted: <span class="built_in">sha256</span>:<span class="number">8945</span>af30572845a904adce2aeaf73402c842d86e99e8f10688b25cb27834110b</div><div class="line">Deleted: <span class="built_in">sha256</span>:ea9f151abb7e06353e73172dad421235611d4f6d0560ec95db26e0dc240642c1</div></pre></td></tr></table></figure>
+<h4 id="4-运行一个docker镜像"><a href="#4-运行一个docker镜像" class="headerlink" title="4. 运行一个docker镜像"></a><strong>4. 运行一个docker镜像</strong></h4><h4 id="进入交互式程序"><a href="#进入交互式程序" class="headerlink" title="进入交互式程序"></a>进入交互式程序</h4><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">[root<span class="variable">@docker</span> ~]<span class="comment"># docker run  -it centos:centos6 /bin/bash</span></div><div class="line">[root<span class="variable">@c1d190f95562</span> /]<span class="comment"># cat /etc/redhat-release</span></div><div class="line">CentOS release <span class="number">6.8</span> (Final)</div><div class="line"><span class="comment"># Install openssh-server and httpd</span></div><div class="line">root<span class="variable">@d8c122dbe09d</span><span class="symbol">:/</span><span class="comment"># yum install -y openssh-sever httpd</span></div><div class="line">root<span class="variable">@d8c122dbe09d</span><span class="symbol">:/</span><span class="comment"># exit</span></div><div class="line"></div><div class="line"><span class="comment"># 注意当你执行exit，从容器之中退出时，容器也会随着关闭，这时如果还继续执行上条命令</span></div><div class="line"><span class="comment"># 你会发现之前所有的操作都被还原，因为相对于docker，又是新开了一个进程</span></div><div class="line"><span class="comment"># 在exit退出之后，使用一下命令查看上次提交，然后commit修改，便可保存之前的修改</span></div><div class="line"></div><div class="line">[root<span class="variable">@docker</span> ~]<span class="comment"># docker ps -l</span></div><div class="line">[root<span class="variable">@docker</span> ~]<span class="comment"># docker commit c1d190f95562 centos:centos6-httpd</span></div><div class="line"><span class="symbol">sha256:</span><span class="number">77</span>eb12e36c7bbe9ef874555b1873019022b5258740aa731627e2cd6fa749c325</div><div class="line">[root<span class="variable">@docker</span> ~]<span class="comment"># docker images</span></div><div class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</div><div class="line">centos              centos6-httpd       <span class="number">77</span>eb12e36c7b        <span class="number">3</span> seconds ago       <span class="number">290.3</span> MB</div><div class="line">centos6-visionet    latest              aeed37612ecb        <span class="number">6</span> hours ago         <span class="number">1.916</span> GB</div><div class="line">centos              centos6             a3c09d36ab4a        <span class="number">2</span> days ago          <span class="number">194.6</span> MB</div><div class="line">registry            latest              c6c14b3960bd        <span class="number">3</span> days ago          <span class="number">33.28</span> MB</div></pre></td></tr></table></figure>
+<h4 id="5-编辑Dockerfile"><a href="#5-编辑Dockerfile" class="headerlink" title="5. 编辑Dockerfile"></a><strong>5. 编辑Dockerfile</strong></h4><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># dockfile的第一行一定是FROM，指定了父镜像</span></div><div class="line"><span class="keyword">FROM</span> centos:centos6</div><div class="line"></div><div class="line"><span class="comment"># RUN 指的是运行的命令</span></div><div class="line"><span class="keyword">RUN</span><span class="bash"> yum install -y epel-release</span></div><div class="line"><span class="keyword">RUN</span><span class="bash"> yum install -y bash-completion</span></div><div class="line"><span class="keyword">RUN</span><span class="bash"> yum install -y openssh-server openssh-client sudo</span></div><div class="line"><span class="keyword">RUN</span><span class="bash"> sed -i <span class="string">'s/UsePAM yes/UsePAM no/g'</span> /etc/ssh/sshd_config</span></div><div class="line"><span class="keyword">RUN</span><span class="bash"> cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span></div><div class="line"></div><div class="line"><span class="comment"># 增加一个用户，并赋予sudo权限</span></div><div class="line"><span class="keyword">RUN</span><span class="bash"> useradd visionet</span></div><div class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"visionet:visionet"</span> | chpasswd</span></div><div class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"visionet   ALL=(ALL)       ALL"</span> &gt;&gt; /etc/sudoers</span></div><div class="line"></div><div class="line">＃ 注意，如果没有执行一下两个命令，sshd是无法远程登陆的</div><div class="line"><span class="keyword">RUN</span><span class="bash"> ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key</span></div><div class="line"><span class="keyword">RUN</span><span class="bash"> ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key</span></div><div class="line"></div><div class="line">＃ <span class="keyword">EXPOSE</span> <span class="number">22</span>， 将<span class="number">22</span>端口暴露出来，方便ssh远程连接</div><div class="line"><span class="keyword">RUN</span><span class="bash"> mkdir /var/run/sshd</span></div><div class="line"><span class="keyword">EXPOSE</span> <span class="number">22</span></div><div class="line">＃ <span class="keyword">CMD</span><span class="bash"> 为系统内部执行命令</span></div><div class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">"/usr/sbin/sshd"</span>, <span class="string">"-D"</span>]</span></div></pre></td></tr></table></figure>
+<h4 id="6-生成自定义docker镜像"><a href="#6-生成自定义docker镜像" class="headerlink" title="6. 生成自定义docker镜像"></a><strong>6. 生成自定义docker镜像</strong></h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> build 编译镜像</span></div><div class="line">[root@docker ~]# docker build -f dockerfile3 -t centos:centos6-ssh .</div><div class="line">Sending build context to Docker daemon 44.54 kB</div><div class="line">Step 1 : FROM centos:centos6</div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> a3c09d36ab4a</span></div><div class="line">Step 2 : RUN yum install -y epel-release</div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> Using cache</span></div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> 04d81f280a63</span></div><div class="line">Step 3 : RUN yum install -y bash-completion</div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> Using cache</span></div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> 5ca26894dc9d</span></div><div class="line">Step 4 : RUN yum install -y openssh-server openssh-client sudo</div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> Using cache</span></div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> 42278450311e</span></div><div class="line">Step 5 : RUN sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config</div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> Using cache</span></div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> db35bef562a2</span></div><div class="line">Step 6 : RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> Using cache</span></div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> dc9f2b82e198</span></div><div class="line">Step 7 : RUN useradd visionet</div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> Using cache</span></div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> 06c574a51755</span></div><div class="line">Step 8 : RUN echo "visionet:visionet" | chpasswd</div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> Using cache</span></div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> 03412f053d04</span></div><div class="line">Step 9 : RUN echo "visionet   ALL=(ALL)       ALL" &gt;&gt; /etc/sudoers</div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> Using cache</span></div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> bf8476812a62</span></div><div class="line">Step 10 : RUN ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key</div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> Using cache</span></div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> 2314cce75171</span></div><div class="line">Step 11 : RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key</div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> Using cache</span></div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> 99304cd9ac15</span></div><div class="line">Step 12 : RUN mkdir /var/run/sshd</div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> Using cache</span></div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> f87283751553</span></div><div class="line">Step 13 : EXPOSE 22</div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> Using cache</span></div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> 56c41202dcb9</span></div><div class="line">Step 14 : CMD /usr/sbin/sshd -D</div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> Using cache</span></div><div class="line"><span class="meta"> ---&gt;</span><span class="bash"> d6dccb483fa6</span></div><div class="line">Successfully built d6dccb483fa6</div><div class="line">[root@docker ~]# docker images</div><div class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</div><div class="line">centos              centos6-ssh         d6dccb483fa6        2 minutes ago         363 MB</div><div class="line">centos              centos6-httpd       77eb12e36c7b        6 minutes ago       290.3 MB</div><div class="line">centos6-visionet    latest              aeed37612ecb        6 hours ago         1.916 GB</div><div class="line">centos              centos6             a3c09d36ab4a        2 days ago          194.6 MB</div><div class="line">registry            latest              c6c14b3960bd        3 days ago          33.28 MB</div><div class="line"><span class="meta"></span></div><div class="line">#<span class="bash"> 后台运行docker容器，并指定nat端口转发</span></div><div class="line">[root@docker ~]# docker run -d -p 2222:22 -P --name=sshd centos:centos6-ssh</div><div class="line">b4211f7a304d9e34b72b510230be2c7a76b276886b488f08f3e12896a4d3c172</div></pre></td></tr></table></figure>
+<h4 id="7-ssh登陆到docker容器内，部署项目环境"><a href="#7-ssh登陆到docker容器内，部署项目环境" class="headerlink" title="7. ssh登陆到docker容器内，部署项目环境"></a><strong>7. ssh登陆到docker容器内，部署项目环境</strong></h4><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># inspect 查看docker 容器IP地址</span></div><div class="line">[root<span class="meta">@docker</span> ~]<span class="comment"># docker inspect sshd | grep IPAddress</span></div><div class="line">[root<span class="meta">@docker</span> ~]<span class="comment"># ssh visionet@172.17.0.2</span></div><div class="line">visionet<span class="meta">@172.17.0.2's</span> password:</div><div class="line">[visionet<span class="meta">@b4211f7a304d</span> ~]$</div><div class="line"></div><div class="line"><span class="comment"># Install mysql</span></div><div class="line"><span class="comment"># Install tomcat server</span></div><div class="line"></div><div class="line">[visionet<span class="meta">@b4211f7a304d</span> ~]$ exit</div><div class="line">[root<span class="meta">@docker</span> ~]<span class="comment"># docker stop sshd</span></div><div class="line">sshd</div><div class="line">[root<span class="meta">@docker</span> ~]<span class="comment"># docker ps -l</span></div><div class="line">CONTAINER ID        IMAGE                COMMAND               CREATED             STATUS                       PORTS               NAMES</div><div class="line">b4211f7a304d        centos:centos6-ssh   <span class="string">"/usr/sbin/sshd -D"</span>   6 minutes ago       Exited (255) 3 seconds ago                       sshd</div><div class="line">[root<span class="meta">@docker</span> ~]<span class="comment"># docker commit b4211f7a304d centos:centos6-tomcat</span></div><div class="line">sha256:b4f114d5484822d9a3ddf1100b76b460985ba5e5d31e936570e8d7dbd8df282c</div><div class="line">[root<span class="meta">@docker</span> ~]<span class="comment"># docker images</span></div><div class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</div><div class="line">centos              centos6-tomcat      b4f114d54848        4 seconds ago       363.1 MB</div><div class="line">centos              centos6-httpd       77eb12e36c7b        15 minutes ago      290.3 MB</div><div class="line">centos6-visionet    latest              aeed37612ecb        7 hours ago         1.916 GB</div><div class="line">centos              centos6-ssh         d6dccb483fa6        9 hours ago         363 MB</div><div class="line">centos              centos6             a3c09d36ab4a        2 days ago          194.6 MB</div><div class="line">registry            latest              c6c14b3960bd        3 days ago          33.28 MB</div></pre></td></tr></table></figure>
+<h4 id="8-推送centos-centos6-tomcat到私有docker仓库"><a href="#8-推送centos-centos6-tomcat到私有docker仓库" class="headerlink" title="8. 推送centos:centos6-tomcat到私有docker仓库"></a><strong>8. 推送centos:centos6-tomcat到私有docker仓库</strong></h4>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/01/hey-August/" rel="next" title="你好，八月">
+                <i class="fa fa-chevron-left"></i> 你好，八月
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/02/install-openfire/" rel="prev" title="HowTo Install Openfire  on CentOS">
+                HowTo Install Openfire  on CentOS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div id="sidebar-dimmer"></div>
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://samzong.oss-cn-shenzhen.aliyuncs.com/3-200.jpg"
+               alt="SAMZONG" />
+          <p class="site-author-name" itemprop="name">SAMZONG</p>
+           
+              <p class="site-description motion-element" itemprop="description">面朝大海，春暖花开</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">106</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SAMZONG" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:samzong.lu@gmail.com" target="_blank" title="Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  Mail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-安装CentOS-7-x"><span class="nav-number">1.</span> <span class="nav-text">1. 安装CentOS 7.x</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-安装docker"><span class="nav-number">2.</span> <span class="nav-text">2. 安装docker</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-基础docker命令"><span class="nav-number">3.</span> <span class="nav-text">3. 基础docker命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-运行一个docker镜像"><span class="nav-number">4.</span> <span class="nav-text">4. 运行一个docker镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进入交互式程序"><span class="nav-number">5.</span> <span class="nav-text">进入交互式程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-编辑Dockerfile"><span class="nav-number">6.</span> <span class="nav-text">5. 编辑Dockerfile</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-生成自定义docker镜像"><span class="nav-number">7.</span> <span class="nav-text">6. 生成自定义docker镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-ssh登陆到docker容器内，部署项目环境"><span class="nav-number">8.</span> <span class="nav-text">7. ssh登陆到docker容器内，部署项目环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-推送centos-centos6-tomcat到私有docker仓库"><span class="nav-number">9.</span> <span class="nav-text">8. 推送centos:centos6-tomcat到私有docker仓库</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">SAMZONG</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyt1o1spk';
+      var conf = 'prod_5af118a1818cbadadd3298facadf1c48';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("zKBiHHclrnIqtewvTXUjqqTb-gzGzoHsz", "TtKGBrMabdSprnnhqaRatIbB");AV.useAVCloudUS();</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.1"></script>
+
+
+  
+
+</body>
+</html>
