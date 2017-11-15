@@ -1,0 +1,987 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Shadowsocks," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="应邀制作一份关于Mac SSR的连接使用。 准备 SSR 服务提供商，SSGlobal ，你可以到Telegram加入我们。SSGlobal Group MacOS 版本 10.12.6，经过实测OS版本对实际使用影响并不大。 SSR Client， 下载  SSR服务如果你需要科学上网的话，非常愿意给你推荐我正在使用的SSR服务商，但是由于其官方网站和客户沟通工具TG需要科学上网才能使用，所以你">
+<meta name="keywords" content="Shadowsocks">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HowTo Use SSR Service on Mac">
+<meta property="og:url" content="https://samzong.me/2017/11/15/howto-user-ssr-on-mac/index.html">
+<meta property="og:site_name" content="SAMZONG">
+<meta property="og:description" content="应邀制作一份关于Mac SSR的连接使用。 准备 SSR 服务提供商，SSGlobal ，你可以到Telegram加入我们。SSGlobal Group MacOS 版本 10.12.6，经过实测OS版本对实际使用影响并不大。 SSR Client， 下载  SSR服务如果你需要科学上网的话，非常愿意给你推荐我正在使用的SSR服务商，但是由于其官方网站和客户沟通工具TG需要科学上网才能使用，所以你">
+<meta property="og:image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/x6fbl.jpg">
+<meta property="og:image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/r4oo0.jpg">
+<meta property="og:image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/lmcst.jpg">
+<meta property="og:image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/xba0a.jpg">
+<meta property="og:image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/bc4jy.jpg">
+<meta property="og:image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/p7wkf.jpg">
+<meta property="og:image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/iycjw.jpg">
+<meta property="og:image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/7bbj6.jpg">
+<meta property="og:image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/gzrb5.jpg">
+<meta property="og:image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/9rhe6.jpg">
+<meta property="og:updated_time" content="2017-11-15T09:48:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HowTo Use SSR Service on Mac">
+<meta name="twitter:description" content="应邀制作一份关于Mac SSR的连接使用。 准备 SSR 服务提供商，SSGlobal ，你可以到Telegram加入我们。SSGlobal Group MacOS 版本 10.12.6，经过实测OS版本对实际使用影响并不大。 SSR Client， 下载  SSR服务如果你需要科学上网的话，非常愿意给你推荐我正在使用的SSR服务商，但是由于其官方网站和客户沟通工具TG需要科学上网才能使用，所以你">
+<meta name="twitter:image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/x6fbl.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'BMU7LQK8AV',
+      apiKey: '39d2b07255732fc491f8ded4f47f4b04',
+      indexName: 'samzong',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://samzong.me/2017/11/15/howto-user-ssr-on-mac/"/>
+
+
+
+
+
+  <title>HowTo Use SSR Service on Mac | SAMZONG</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a76f6cdf9fa01b6846463e3b570e0528";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SAMZONG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://samzong.me/2017/11/15/howto-user-ssr-on-mac/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="SAMZONG">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://samzong.oss-cn-shenzhen.aliyuncs.com/3-200.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SAMZONG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HowTo Use SSR Service on Mac</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-15T16:57:13+08:00">
+                2017-11-15
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-11-15T17:48:31+08:00">
+                2017-11-15
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Shadowsocks/" itemprop="url" rel="index">
+                    <span itemprop="name">Shadowsocks</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/15/howto-user-ssr-on-mac/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/11/15/howto-user-ssr-on-mac/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2017/11/15/howto-user-ssr-on-mac/" class="leancloud_visitors" data-flag-title="HowTo Use SSR Service on Mac">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>应邀制作一份关于Mac SSR的连接使用。</p>
+<h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><ol>
+<li>SSR 服务提供商，<a href="http://www.ssglobal.co/wp/" target="_blank" rel="external">SSGlobal</a> ，你可以到Telegram加入我们。<a href="https://t.me/joinchat/ESwgR0Ckp_zXMCuRKqykqA" target="_blank" rel="external">SSGlobal Group</a></li>
+<li>MacOS 版本 10.12.6，经过实测OS版本对实际使用影响并不大。</li>
+<li>SSR Client， <a href="http://www.ssglobal.co/wp/wp-content/uploads/2017/02/ShadowsocksX-NG-R8.dmg" target="_blank" rel="external">下载</a></li>
+</ol>
+<h4 id="SSR服务"><a href="#SSR服务" class="headerlink" title="SSR服务"></a>SSR服务</h4><p>如果你需要科学上网的话，非常愿意给你推荐我正在使用的SSR服务商，但是由于其官方网站和客户沟通工具TG需要科学上网才能使用，所以你可以联系到我来介绍你们。</p>
+<p>最新定价计划：</p>
+<ul>
+<li>Plan-A：<strong>¥15.00元</strong>，1个月，无限流量，不限速，可自助切换节点。</li>
+<li>Plan-B：<strong>¥15.00元</strong>，3个月，6G流量包，不限速，可自助切换节点。</li>
+<li>增加线路：<strong>¥8.00元</strong>，1个月，1条。</li>
+</ul>
+<blockquote>
+<p> 注：增加线路仅支持Plan-A用户配套购买，不超过主线路最长期限，不足1个月剩余时限用户不支持购买</p>
+</blockquote>
+<h5 id="注册账号"><a href="#注册账号" class="headerlink" title="注册账号"></a>注册账号</h5><p><a href="http://www.ssglobal.co/wp/registration/?action=register" target="_blank" rel="external">立即注册</a></p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/x6fbl.jpg" alt="05"></p>
+<blockquote>
+<p>这里alexman@mac.local 仅仅是演示邮箱，请填写对应属于你的邮箱.</p>
+</blockquote>
+<p>当你点击提交完成后，在你的邮箱会收到一封激活邮件，点击其中链接或将链接复制到浏览器中即可激活。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/r4oo0.jpg" alt="07"></p>
+<blockquote>
+<p>这里同样是激活链接，同样仅作为演示。</p>
+</blockquote>
+<h5 id="登录系统"><a href="#登录系统" class="headerlink" title="登录系统"></a>登录系统</h5><p><a href="http://www.ssglobal.co/wp/login-2/?redirect_to=http://www.ssglobal.co/wp/registration/" target="_blank" rel="external">立即登录</a></p>
+<p>输入注册时的用户名密码，即可登录到系统内，然后在首页找到进入后台按钮，即可看到试用信息。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/lmcst.jpg" alt="06"></p>
+<blockquote>
+<p>这里填写用户名或邮箱都可以。</p>
+</blockquote>
+<p>进入系统后，找到订阅链接信息，默认情况下，你应该只有一条线路信息，付费用户享有应急通道。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/xba0a.jpg" alt="04"></p>
+<blockquote>
+<p>上图中”切换“，用来切换不同服务器节点，注意，切换后要到客户端内刷新订阅信息，下面会讲到。</p>
+</blockquote>
+<h4 id="SSR-Client-安装"><a href="#SSR-Client-安装" class="headerlink" title="SSR Client 安装"></a>SSR Client 安装</h4><p>在本文最上面已经有了，如何下载SSR 客户端的地方，细心的朋友，应该已经在SSGlobal官网上找到了对应下载页面，其中包含全平台的客户端工具。</p>
+<h5 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h5><p><a href="http://www.ssglobal.co/wp/wp-content/uploads/2017/02/ShadowsocksX-NG-R8.dmg" target="_blank" rel="external">立即下载</a></p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/bc4jy.jpg" alt="01"></p>
+<p>下载完成后，找到你的下载文件，双击打开，将程序拖到Mac程序目录即完成安装，和Mac其他软件安装并无不同。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/p7wkf.jpg" alt="02"></p>
+<h4 id="启动程序"><a href="#启动程序" class="headerlink" title="启动程序"></a>启动程序</h4><p> 在Launchpad中找到最近安装的 Shadowsocks NG R8，点击启动后，Mac右上角导航栏中会有一个小飞机的图标，点击可以看到以下信息：</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/iycjw.jpg" alt="03"></p>
+<blockquote>
+<p>上图中已经有我的订阅信息，请忽略</p>
+</blockquote>
+<h4 id="编辑订阅信息"><a href="#编辑订阅信息" class="headerlink" title="编辑订阅信息"></a>编辑订阅信息</h4><p>选择编辑订阅信息，然后将你在SSGlobal 网站后台拿到的订阅信息添加到其中</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/7bbj6.jpg" alt="09"></p>
+<blockquote>
+<p>注意只要添加URL信息即可，不需要修改其他。</p>
+</blockquote>
+<p>然后选择手动更新订阅，这里在你的服务列表内，就有了你的服务器节点信息，选择对应节点即可开启科学上网</p>
+<h5 id="PAC-规则"><a href="#PAC-规则" class="headerlink" title="PAC 规则"></a>PAC 规则</h5><p>首次使用PAC需要更新一次PAC规则，操作如下图。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/gzrb5.jpg" alt="10"></p>
+<p>这里的PAC规则是从GFWLists更新的，由于其更新速度较慢，所以如果日常使用发现某些网站无法使用，可以手动添加到PAC规则内</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/9rhe6.jpg" alt="11"></p>
+<blockquote>
+<p>|| domain , 这里表示匹配所有代理</p>
+</blockquote>
+<p>更多关于用户规则，可以查看这里，<a href="https://adblockplus.org/en/filter-cheatsheet" target="_blank" rel="external">使用手册</a> </p>
+<h4 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h4><p>到这里，基本常用的安装和使用已经完成了，如果测试后仍旧无法正常使用，请仔细检查是否遗漏步骤，也可以与我取得沟通。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Shadowsocks/" rel="tag"># Shadowsocks</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/13/centos7-configure-dns-server/" rel="next" title="CentOS 7 Configure DNS Server">
+                <i class="fa fa-chevron-left"></i> CentOS 7 Configure DNS Server
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div id="sidebar-dimmer"></div>
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://samzong.oss-cn-shenzhen.aliyuncs.com/3-200.jpg"
+               alt="SAMZONG" />
+          <p class="site-author-name" itemprop="name">SAMZONG</p>
+           
+              <p class="site-description motion-element" itemprop="description">面朝大海，春暖花开</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">111</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SAMZONG" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:samzong.lu@gmail.com" target="_blank" title="Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  Mail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#准备"><span class="nav-number">1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSR服务"><span class="nav-number">2.</span> <span class="nav-text">SSR服务</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#注册账号"><span class="nav-number">2.1.</span> <span class="nav-text">注册账号</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#登录系统"><span class="nav-number">2.2.</span> <span class="nav-text">登录系统</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSR-Client-安装"><span class="nav-number">3.</span> <span class="nav-text">SSR Client 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#下载"><span class="nav-number">3.1.</span> <span class="nav-text">下载</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动程序"><span class="nav-number">4.</span> <span class="nav-text">启动程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编辑订阅信息"><span class="nav-number">5.</span> <span class="nav-text">编辑订阅信息</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#PAC-规则"><span class="nav-number">5.1.</span> <span class="nav-text">PAC 规则</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结语"><span class="nav-number">6.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">SAMZONG</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyt1o1spk';
+      var conf = 'prod_5af118a1818cbadadd3298facadf1c48';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("zKBiHHclrnIqtewvTXUjqqTb-gzGzoHsz", "TtKGBrMabdSprnnhqaRatIbB");AV.useAVCloudUS();</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.1"></script>
+
+
+  
+
+</body>
+</html>
