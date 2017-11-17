@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Wannacry蠕虫病毒事件及修复方案 · SAMZONG</title><meta name="description" content="Wannacry蠕虫病毒事件及修复方案 - SAMZONG"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://samzong.me/atom.xml" title="SAMZONG"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Wannacry蠕虫病毒事件及修复方案</h1><div class="post-info">May 13, 2017</div><div class="post-content"><p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/3d0jo.png" alt=""></p>
+<h3 id="事件背景"><a href="#事件背景" class="headerlink" title="事件背景"></a>事件背景</h3><p>5月12日晚， WannaCry 蠕虫病毒在全球大肆爆发。据BBC、CNN等媒体报道，恶意攻击者利用 NSA（美国国家安全局）泄露的 Windows 0day 利用工具对99个国家实施了超过75000次攻击，主要影响SMB和RDP服务，主要影响了137、138、139、445端口。</p>
+<p>目前已知已知的Windows版本包括但不限于一下都受影响：</p>
+<ul>
+<li>Windows NT</li>
+<li>Windows 2000</li>
+<li>Windows XP</li>
+<li>Windows 2003</li>
+<li>Windows Vista</li>
+<li>Windows 7</li>
+<li>Windows 8</li>
+<li>Windows 10</li>
+<li>Windows 2008</li>
+<li>Windows 2008 R2</li>
+<li>Windows Server 2012 SP0</li>
+</ul>
+<p>勒索者源头来自暗网，攻击具备兼容性、多语言支持，多个行业受到影响，国内高校网络系统沦为感染重灾区。据有关机构统计，目前国内每天有数万台机器遭到该蠕虫病毒袭击，国内的ATM机、火车站、自助终端、邮政、医院、政府办事终端、视频监控都可能遭受攻击。据报道，今日全国多地的中石油加油站无法进行网络支付，只能进行现金支付。中石油有关负责人表示，怀疑受到病毒攻击，具体情况还在核查。而截至目前，一些公安系统已经遭到入侵。</p>
+<p>如果你也遇到了这样的问题，请不要担心，我在下面给出了如何修复这个漏洞的建议。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/9y7cc.jpg" alt=""></p>
+<h3 id="什么是比特币蠕虫病毒？"><a href="#什么是比特币蠕虫病毒？" class="headerlink" title="什么是比特币蠕虫病毒？"></a>什么是比特币蠕虫病毒？</h3><p>这次攻击的始作俑者是一款名为“WannaCry”（中文名：想哭）的勒索病毒，带有加密功能，它利用 Windows 在 445 端口的安全漏洞潜入电脑并对多种文件类型加密并添加后缀(.onion)使用户无法打开，用户电脑存在文档被加密的情况，攻击者称需支付比特币解锁。(比特币是一种全球通用的互联网加密货币)</p>
+<h3 id="漏洞验证"><a href="#漏洞验证" class="headerlink" title="漏洞验证"></a>漏洞验证</h3><ol>
+<li><p>使用<code>Win</code>+<code>R</code>按键打开运行窗口，输入cmd，进入命令行工具，然后输入<code>netstat -an</code> 查看是否开放了对应的端口。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/3m1jm.png" alt=""></p>
+<p>上图中的服务器就是开放了445端口，这有很大的风险可能会WannaCry 蠕虫病毒被攻击到，所以我们应该关掉对应端口，并修复漏洞。</p>
+<h3 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h3><ol>
+<li>目前微软已发布补丁MS17-010修复了“永恒之蓝”攻击的系统漏洞，请尽快为电脑安装此补丁，网址为<a href="https://laod.cn/go.php?url=https://technet.microsoft.com/zh-cn/library/security/MS17-010" target="_blank" rel="external">https://technet.microsoft.com/zh-cn/library/security/MS17-010</a></li>
+<li>对于XP、2003等微软已不再提供安全更新的机器，推荐使用360“NSA武器库免疫工具”检测系统是否存在漏洞，并关闭受到漏洞影响的端口，可以避免遭到勒索软件等病毒的侵害，可以在360电脑安全管家中找到。</li>
+<li>开启系统防火墙，利用系统防火墙的“高级设置”阻止外部对 445 端口进的访问（存在一定影响，该操作会影响使用 445 端口的服务）。</li>
+</ol>
+</li>
+</ol>
+<h3 id="修复脚本"><a href="#修复脚本" class="headerlink" title="修复脚本"></a>修复脚本</h3><p>如果以上方式都不能修复漏洞，大家可以使用我以下的批处理脚本文件来尝试关闭端口及服务，批处理禁用该漏洞可能利用到的端口，全版本通用，右键管理员启动即可，注意这需要打开Windows的防火墙。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">net stop SCardSvr</div><div class="line">net stop SCPolicySvc</div><div class="line">sc config SCardSvr start=disabled</div><div class="line">sc config SCPolicySvc start=disabled</div><div class="line">net start MpsSvc</div><div class="line">sc config MpsSvc start=auto</div><div class="line">netsh advfirewall <span class="built_in">set</span> allprofiles state on</div><div class="line">netsh advfirewall firewall add rule name=<span class="string">"deny udp 137"</span> dir=<span class="keyword">in</span> protocol=udp localport=137 action=block</div><div class="line">netsh advfirewall firewall add rule name=<span class="string">"deny tcp 137"</span> dir=<span class="keyword">in</span> protocol=tcp localport=137 action=block</div><div class="line">netsh advfirewall firewall add rule name=<span class="string">"deny udp 138"</span> dir=<span class="keyword">in</span> protocol=udp localport=138 action=block</div><div class="line">netsh advfirewall firewall add rule name=<span class="string">"deny tcp 138"</span> dir=<span class="keyword">in</span> protocol=tcp localport=138 action=block</div><div class="line">netsh advfirewall firewall add rule name=<span class="string">"deny udp 139"</span> dir=<span class="keyword">in</span> protocol=udp localport=139 action=block</div><div class="line">netsh advfirewall firewall add rule name=<span class="string">"deny tcp 139"</span> dir=<span class="keyword">in</span> protocol=tcp localport=139 action=block</div><div class="line">netsh advfirewall firewall add rule name=<span class="string">"deny udp 445"</span> dir=<span class="keyword">in</span> protocol=udp localport=445 action=block</div><div class="line">netsh advfirewall firewall add rule name=<span class="string">"deny tcp 445"</span> dir=<span class="keyword">in</span> protocol=tcp localport=445 action=block</div><div class="line">pause</div></pre></td></tr></table></figure>
+<p>我已经将脚本上传到百度云盘中，大家可以自行下载运行，注意解压缩Zip包之后的fix_WannaCry.bat</p>
+<p>下载链接：<a href="https://pan.baidu.com/s/1gfceNRH" target="_blank" rel="external">https://pan.baidu.com/s/1gfceNRH</a></p>
+<h3 id="添加防火规则"><a href="#添加防火规则" class="headerlink" title="添加防火规则"></a>添加防火规则</h3><ol>
+<li><p>打开控制面板中的Windows防火墙，并保证防火墙处于启用状态；</p>
+</li>
+<li><p>打开防火墙的高级设置；</p>
+</li>
+<li><p>在“入站规则”中新建一条规则，本地端口号选择445，操作选择阻止连接。</p>
+<p><img src="https://pic3.zhimg.com/v2-85f14330cdba1fbf89369b26b9e48f52_b.png" alt=""></p>
+<p><img src="https://pic2.zhimg.com/v2-1bbe08395ec8ef8d0e2028cbccb01055_b.png" alt=""></p>
+</li>
+</ol>
+<h3 id="手动导入安全策略"><a href="#手动导入安全策略" class="headerlink" title="手动导入安全策略"></a>手动导入安全策略</h3><p>下载策略文件</p>
+<p><a href="https://share.weiyun.com/15b7bbd3f86c493a66721dd948a81c54" target="_blank" rel="external">https://share.weiyun.com/15b7bbd3f86c493a66721dd948a81c54</a></p>
+<p>打开控制面板–管理工具-本地安全策略–IP安全策略 –&gt;所有任务–&gt;导入策略：</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/hj9f4.jpg" alt=""></p>
+<p>或者，通过<code>Win</code>+<code>R</code>，输入<code>gpedit.msc</code></p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/9vsqx.jpg" alt=""></p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/tosjk.jpg" alt=""></p>
+<p><img src="/Users/Alex/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/573578678/QQ/Temp.db/539E3FA1-2A85-4B41-95BC-C32B82A5DA0D.png" alt="539E3FA1-2A85-4B41-95BC-C32B82A5DA0D"></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2017/05/17/howto-automatic-easyback-mysql-with-crontab/" class="prev">PREV</a><a href="/2017/05/11/fix-pip-install-timeout-inChina/" class="next">NEXT</a></div><div class="copyright"><p>© 2012 - 2017 <a href="https://samzong.me">SAMZONG</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

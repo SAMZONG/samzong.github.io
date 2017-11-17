@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Jmeter(一)：使用BlazeMeter为Jmeter录制脚本 · SAMZONG</title><meta name="description" content="Jmeter(一)：使用BlazeMeter为Jmeter录制脚本 - SAMZONG"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://samzong.me/atom.xml" title="SAMZONG"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Jmeter(一)：使用BlazeMeter为Jmeter录制脚本</h1><div class="post-info">Aug 17, 2017</div><div class="post-content"><p>之前一直使用阿里云的PTS服务作为测试，但是今天发现阿里云的PTS服务正在升级无法使用，所以打算用Jmeter来做压力测试，并使用Chrome插件BlazeMeter来录制.jmx脚本。</p>
+<h4 id="安装BlazeMeter插件"><a href="#安装BlazeMeter插件" class="headerlink" title="安装BlazeMeter插件"></a>安装BlazeMeter插件</h4><p><a href="https://chrome.google.com/webstore/search/blazemeter" target="_blank" rel="external">插件安装</a> , 需要能登录到Chrome应用商店，如果不能登录的话，可以在网上搜索下载crx包，手动加载到Chrome中即可。</p>
+<p>安装成功之后，在Chrome插件栏可以看到程序入口，<img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/r0ps7.jpg" alt=""></p>
+<p>BlazeMeter限制需要登录才能导出jmx脚本，所以首先需要注册账号。成功登陆后，完整界面如图所示：</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/oamv4.png" alt=""></p>
+<h4 id="录制过程"><a href="#录制过程" class="headerlink" title="录制过程"></a>录制过程</h4><p>填写测试脚本名称后，点击开始录制，执行一系列操作后，点停止录制，然后到处jmx文件到本地。</p>
+<h4 id="导入脚本到Jmeter"><a href="#导入脚本到Jmeter" class="headerlink" title="导入脚本到Jmeter"></a>导入脚本到Jmeter</h4><p>在Jmeter中”File-Open”导入你jmx脚本，为了方便观察结果，我们需要增加一些察看报告。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/uxe75.jpg" alt=""></p>
+<h5 id="聚合报告-Aggregate-Report"><a href="#聚合报告-Aggregate-Report" class="headerlink" title="聚合报告(Aggregate Report)"></a>聚合报告(Aggregate Report)</h5><p>我们可以在聚合报告中一些非常有用的信息，这有助于对性能测试的分析。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/j93gs.png" alt=""></p>
+<ul>
+<li>Samples ： 一共完成了多少事务</li>
+<li>Averge ： 平均响应时间</li>
+<li>Median ： 统计意义上的响应时间的中值</li>
+<li>90% Line ：90%的事务响应时间都小于xx ms</li>
+<li>Min ：最小响应时间 ms</li>
+<li>Max :  最大响应时间 ms</li>
+<li>Eror %  : 出错率</li>
+<li>Throughput ： 吞吐量，事务/秒</li>
+<li>KB/sec ： 用流量来衡量的吞吐量</li>
+</ul>
+<blockquote>
+<p>吞吐量=完成的事务数/完成这些事务数所需要的时间；</p>
+<p>平均响应时间=所有响应时间的总和/完成的事务数；</p>
+<p>失败率=失败的个数/事务数。</p>
+</blockquote>
+<h5 id="查看结果树-View-Results-Tree"><a href="#查看结果树-View-Results-Tree" class="headerlink" title="查看结果树(View Results Tree)"></a>查看结果树(View Results Tree)</h5><p>通过查看结果树，可以看到每个事务的返回结果，其中红色是出错，绿色则为正常。建议在测试开始前将log/Display Only中Errors打上勾即可，不然会输出很多东西，不方便查看。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/moo9h.png" alt=""></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2017/08/22/mac-recoding-gif/" class="prev">PREV</a><a href="/2017/08/15/mactips-choose-apps-deafults-language/" class="next">NEXT</a></div><div class="copyright"><p>© 2012 - 2017 <a href="https://samzong.me">SAMZONG</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
