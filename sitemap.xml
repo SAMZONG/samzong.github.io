@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://samzong.me/404.html</loc>
+    
+    <lastmod>2017-12-26T07:48:26.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://samzong.me/2017/11/21/Install_redmine3.4_rbuy2.4.1_passenger_nginx_mysql_ubuntu16.04/</loc>
     
     <lastmod>2017-12-11T10:22:24.000Z</lastmod>
@@ -208,13 +215,6 @@
     <loc>https://samzong.me/2017/05/13/fix-Wannacry/</loc>
     
     <lastmod>2017-05-15T03:05:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://samzong.me/404.html</loc>
-    
-    <lastmod>2017-04-29T08:38:20.000Z</lastmod>
     
   </url>
   
