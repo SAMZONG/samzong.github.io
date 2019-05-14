@@ -144,17 +144,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-08-02T08:04:48.000Z">2016-08-02</time>
+                <time class="level-item has-text-grey" datetime="2016-07-10T03:21:47.000Z">2016-07-10</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/CentOS/">CentOS</a>
+                <a class="has-link-grey -link" href="/categories/Azure/">Azure</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    2 minutes read (About 372 words)
+                    2 minutes read (About 228 words)
                 </span>
                 
                 
@@ -163,20 +163,21 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/08/02/install-openfire/">HowTo Install Openfire  on CentOS</a>
+                <a class="has-link-black-ter" href="/2016/07/10/reset-azure-vm-linux-password/">HowTo Reset Azure VM Linux Password</a>
             
         </h1>
         <div class="content">
-            <h4 id="Install-Centos-6-x-x86-64"><a href="#Install-Centos-6-x-x86-64" class="headerlink" title="Install Centos 6.x x86_64"></a>Install Centos 6.x x86_64</h4><p>  <em>略.</em></p>
-<h4 id="安装依赖软件"><a href="#安装依赖软件" class="headerlink" title="安装依赖软件"></a>安装依赖软件</h4><figure class="highlight mipsasm hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y <span class="hljs-keyword">install </span>wget <span class="hljs-keyword">java </span>glibc.i686</span><br></pre></td></tr></table></figure>
-<h4 id="下载openfire-3-8-到本地"><a href="#下载openfire-3-8-到本地" class="headerlink" title="下载openfire 3.8 到本地"></a>下载openfire 3.8 到本地</h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http:<span class="hljs-regexp">//</span>download.igniterealtime.org<span class="hljs-regexp">/openfire/</span>openfire-<span class="hljs-number">3.8</span>.<span class="hljs-number">1</span>-<span class="hljs-number">1</span>.i386.rpm</span><br></pre></td></tr></table></figure>
-<h4 id="安装openfire-3-8"><a href="#安装openfire-3-8" class="headerlink" title="安装openfire 3.8"></a>安装openfire 3.8</h4><figure class="highlight cmake hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y <span class="hljs-keyword">install</span> ./openfire*rpm</span><br></pre></td></tr></table></figure>
-<h4 id="设置服务开启自启动"><a href="#设置服务开启自启动" class="headerlink" title="设置服务开启自启动"></a>设置服务开启自启动</h4><figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig openfire <span class="hljs-keyword">on</span></span><br></pre></td></tr></table></figure>
-<h4 id="Yum-Install-mysql-server"><a href="#Yum-Install-mysql-server" class="headerlink" title="Yum Install mysql-server"></a>Yum Install mysql-server</h4><p>详见： <a href="http://blog.ultraera.org/how-to-install-mysql-5-6-on-centos/" target="_blank" rel="noopener">How to Install MySQL 5.5/6/7 on RHEL/CentOS 5/6/7</a></p>
-<h4 id="创建openfire数据库"><a href="#创建openfire数据库" class="headerlink" title="创建openfire数据库"></a>创建openfire数据库</h4><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">create</span> <span class="hljs-keyword">database</span> openfire <span class="hljs-built_in">character</span> <span class="hljs-keyword">set</span> utf8;</span><br><span class="line"><span class="hljs-keyword">grant</span> all <span class="hljs-keyword">privileges</span> <span class="hljs-keyword">on</span> openfire.* <span class="hljs-keyword">to</span> <span class="hljs-string">'openfire'</span>@<span class="hljs-string">'127.0.0.1'</span> <span class="hljs-keyword">identified</span> <span class="hljs-keyword">by</span> <span class="hljs-string">'openfire'</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">grant</span> <span class="hljs-keyword">option</span>;</span><br></pre></td></tr></table></figure>
-<h4 id="启动openfire"><a href="#启动openfire" class="headerlink" title="启动openfire"></a>启动openfire</h4><figure class="highlight dts hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-symbol">http:</span><span class="hljs-comment">//Host:9090</span></span><br></pre></td></tr></table></figure>
-<h4 id="之后的初始化步骤，请根据实际操作，注意设定数据库地址用户名和密码时不要出错"><a href="#之后的初始化步骤，请根据实际操作，注意设定数据库地址用户名和密码时不要出错" class="headerlink" title="之后的初始化步骤，请根据实际操作，注意设定数据库地址用户名和密码时不要出错"></a>之后的初始化步骤，请根据实际操作，注意设定数据库地址用户名和密码时不要出错</h4><h4 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h4><p>openfire安装完毕后无法登录控制台<br><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">报错：Login failed:make sure your username and password are correct and that you’re an admin or moderator</span><br><span class="line"></span><br><span class="line">解决方案如下：</span><br><span class="line">1.使用Mysql查看工具进入数据库，进入表“ofuser”，将该表清空，然后执行该SQL</span><br><span class="line"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> ofUser (username, plainPassword, <span class="hljs-keyword">name</span>, email, creationDate, modificationDate)</span><br><span class="line">    <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">'admin'</span>, <span class="hljs-string">'admin'</span>, <span class="hljs-string">'Administrator'</span>, <span class="hljs-string">'admin@example.com'</span>, <span class="hljs-string">'0'</span>, <span class="hljs-string">'0'</span>);</span><br><span class="line"></span><br><span class="line">2.关闭openfire服务，就是从其控制台<span class="hljs-keyword">stop</span>然后再<span class="hljs-keyword">start</span>，再用用户名：<span class="hljs-keyword">admin</span>,密码：<span class="hljs-keyword">admin</span>登录即可</span><br></pre></td></tr></table></figure></p>
-<p>openfire 进程无法启动<br><figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">报错：nohup: failed <span class="hljs-keyword">to</span> <span class="hljs-built_in">run</span> command `/opt/openfire/jre/bin/java': No such <span class="hljs-built_in">file</span> <span class="hljs-keyword">or</span> directory</span><br><span class="line"></span><br><span class="line">解决方案如下：</span><br><span class="line">经检查是由于openfire未能正确识别jre环境变量导致，安装时自带的jre是<span class="hljs-number">32</span>位，但操作系统却是<span class="hljs-number">64</span>位操作平台。</span><br><span class="line">，故在/etc/init.d/openfire的启动脚本修改，</span><br><span class="line">JAVA_HOME=<span class="hljs-string">"/usr/lib/jvm/jre-$VERSION.x86_64"</span></span><br></pre></td></tr></table></figure></p>
+            <blockquote>
+<p>  <strong>Setup1:</strong> 这种方法仅适用于已存在的用户，也就是说$Username是之前创建过的用户，否则不适用</p>
+</blockquote>
+<h3 id="1-指定虚拟机"><a href="#1-指定虚拟机" class="headerlink" title="1. 指定虚拟机"></a><strong>1. 指定虚拟机</strong></h3><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash">vm = Get-AzureVM -ServiceName <span class="hljs-string">'云服务名称'</span> -Name <span class="hljs-string">'虚拟机名称'</span></span></span><br><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash">vm.GetInstance().ProvisionGuestAgent = <span class="hljs-variable">$true</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="2-输入您当前的用户名和新密码"><a href="#2-输入您当前的用户名和新密码" class="headerlink" title="2. 输入您当前的用户名和新密码"></a><strong>2. 输入您当前的用户名和新密码</strong></h3><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash">UserName = <span class="hljs-string">"指定用户名"</span></span></span><br><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash">Password = <span class="hljs-string">"指定密码"</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash">PrivateConfig = <span class="hljs-string">'&#123;"username":"'</span>+ <span class="hljs-variable">$UserName</span> + <span class="hljs-string">'", "password":"'</span> +  <span class="hljs-variable">$Password</span> + <span class="hljs-string">'"&#125;'</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="3-开始执行"><a href="#3-开始执行" class="headerlink" title="3. 开始执行"></a><strong>3. 开始执行</strong></h3><figure class="highlight lasso hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ExtensionName = <span class="hljs-string">'VMAccessForLinux'</span></span><br><span class="line">$Publisher = <span class="hljs-string">'Microsoft.OSTCExtensions'</span></span><br><span class="line">$Version =  <span class="hljs-string">'1.0'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">Set</span><span class="hljs-params">-AzureVMExtension</span> <span class="hljs-params">-ExtensionName</span> $ExtensionName <span class="hljs-params">-VM</span>  $vm <span class="hljs-params">-Publisher</span> $Publisher <span class="hljs-params">-Version</span> $Version <span class="hljs-params">-PrivateConfiguration</span> $PrivateConfig | Update<span class="hljs-params">-AzureVM</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>Setup2:</strong> 如果是由于错误修改了SSH的配置文件导致无法登录，例如在登录时报错：This service allows sftp connections only.Connection to vm closed.这是因为错误配置了sftp导致的，那碰到这种问题需要做的是重置ssh服务。</p>
+</blockquote>
+<h3 id="1-指定虚拟机-1"><a href="#1-指定虚拟机-1" class="headerlink" title="1. 指定虚拟机"></a><strong>1. 指定虚拟机</strong></h3><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash">vm = Get-AzureVM -ServiceName <span class="hljs-string">'MyServiceName'</span> -Name <span class="hljs-string">'MyVMName'</span></span></span><br><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash">PrivateConfig = <span class="hljs-string">'&#123;"reset_ssh":"True"&#125;'</span><span class="hljs-string">'</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="2-开始执行"><a href="#2-开始执行" class="headerlink" title="2. 开始执行"></a><strong>2. 开始执行</strong></h3><figure class="highlight lasso hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ExtensionName = <span class="hljs-string">'VMAccessForLinux'</span></span><br><span class="line">$Publisher = <span class="hljs-string">'Microsoft.OSTCExtensions'</span></span><br><span class="line">$Version =  <span class="hljs-string">'1.0'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">Set</span><span class="hljs-params">-AzureVMExtension</span> <span class="hljs-params">-ExtensionName</span> $ExtensionName <span class="hljs-params">-VM</span>  $vm <span class="hljs-params">-Publisher</span> $Publisher <span class="hljs-params">-Version</span> $Version <span class="hljs-params">-PrivateConfiguration</span> $PrivateConfig | Update<span class="hljs-params">-AzureVM</span></span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -198,7 +199,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-08-02T07:44:20.000Z">2016-08-02</time>
+                <time class="level-item has-text-grey" datetime="2016-07-07T00:03:28.000Z">2016-07-07</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/Docker/">Docker</a>
@@ -208,7 +209,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    9 minutes read (About 1382 words)
+                    a minute read (About 218 words)
                 </span>
                 
                 
@@ -217,18 +218,21 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/08/02/docker01/">HowTo Use Docker create a Tomcat Project</a>
+                <a class="has-link-black-ter" href="/2016/07/07/how-to-install-docker-on-centos-6-x-2/">HowTo Install Docker on CentOS 6.x</a>
             
         </h1>
         <div class="content">
-            <h4 id="1-安装CentOS-7-x"><a href="#1-安装CentOS-7-x" class="headerlink" title="1. 安装CentOS 7.x"></a><strong>1. 安装CentOS 7.x</strong></h4><pre><code>略。
-</code></pre><h4 id="2-安装docker"><a href="#2-安装docker" class="headerlink" title="2. 安装docker"></a><strong>2. 安装docker</strong></h4><p>详见： <a href="http://samzong.me/2016/07/07/how-to-install-docker-on-centos-6-x-2/">How to Install Docker on CentOS 6.x</a></p>
-<h4 id="3-基础docker命令"><a href="#3-基础docker命令" class="headerlink" title="3. 基础docker命令"></a><strong>3. 基础docker命令</strong></h4><figure class="highlight vim hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">＃ 获取centos6 docker镜像</span><br><span class="line">[root@docker ~]# docker pull centos6</span><br><span class="line">Using default <span class="hljs-keyword">ta</span><span class="hljs-variable">g:</span> latest</span><br><span class="line">lates<span class="hljs-variable">t:</span> Pulling from library/cento<span class="hljs-variable">s:centos6</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-number">43</span>db9dbdcb30: Downloading <span class="hljs-number">41.14</span> MB/<span class="hljs-number">49.33</span> MB</span><br><span class="line"><span class="hljs-number">43</span>db9dbdcb30: Pull <span class="hljs-built_in">complete</span></span><br><span class="line"><span class="hljs-number">2</span>dc64e8f8d4f: Pull <span class="hljs-built_in">complete</span></span><br><span class="line"><span class="hljs-number">670</span>a583e1b50: Pull <span class="hljs-built_in">complete</span></span><br><span class="line"><span class="hljs-number">183</span>b0bfcd10e: Pull <span class="hljs-built_in">complete</span></span><br><span class="line">Diges<span class="hljs-variable">t:</span> <span class="hljs-built_in">sha256</span>:c6674c44c6439673bf56536c1a15916639c47ea04c3d6296c5df938add67b54b</span><br><span class="line">Statu<span class="hljs-variable">s:</span> Downloaded newer image <span class="hljs-keyword">for</span> centso:centos6</span><br><span class="line"></span><br><span class="line">＃ 查看当前服务器上的docker镜像</span><br><span class="line">[root@docker ~]# docker images</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">centos6-visionet    latest              aeed37612ecb        <span class="hljs-number">6</span> hours ago         <span class="hljs-number">1.916</span> GB</span><br><span class="line">centos              centos6             a3c09d36ab4a        <span class="hljs-number">2</span> days ago          <span class="hljs-number">194.6</span> MB</span><br><span class="line">registry            latest              c6c14b3960bd        <span class="hljs-number">3</span> days ago          <span class="hljs-number">33.28</span> MB</span><br><span class="line">＃ 查找docker镜像</span><br><span class="line">[root@docker ~]# docker <span class="hljs-built_in">search</span> cento<span class="hljs-variable">s:centos6</span></span><br><span class="line">NAME                                     DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</span><br><span class="line">imagine10255/centos6-lnmp-php56          centos6-lnmp-php56                              <span class="hljs-number">10</span>                   [OK]</span><br><span class="line">lemonbar/centos6-ssh                     Installed openssh-server <span class="hljs-keyword">on</span> centos6, defau...   <span class="hljs-number">7</span>                    [OK]</span><br><span class="line">sergeyzh/centos6-nginx                                                                   <span class="hljs-number">2</span>                    [OK]</span><br><span class="line">guyton/centos6                           From official centos6 container with full ...   <span class="hljs-number">2</span>                    [OK]</span><br><span class="line">paijp/centos6-apache-php-sqlite2         php5.<span class="hljs-number">3.3</span> with sqlite2 <span class="hljs-built_in">and</span> apache <span class="hljs-keyword">on</span> CentOS...   <span class="hljs-number">1</span>                    [OK]</span><br><span class="line">edrans/centos6                                                                           <span class="hljs-number">1</span>                    [OK]</span><br><span class="line">mohri1219/centos6.<span class="hljs-number">7</span>-ruby2.<span class="hljs-number">2.2</span>-mysql5.<span class="hljs-number">6</span>   centos6.<span class="hljs-number">7</span>-ruby2.<span class="hljs-number">2.2</span>-mysql5.<span class="hljs-number">6</span>                    <span class="hljs-number">1</span>                    [OK]</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">＃ 删除 centos6 docker镜像</span><br><span class="line">[root@docker ~]# docker rmi IMAGES_NAME</span><br><span class="line">[root@docker ~]# docker rmi cento<span class="hljs-variable">s:centos6</span></span><br><span class="line"># 报错无法删除</span><br><span class="line">Error response from daemon: conflic<span class="hljs-variable">t:</span> unable <span class="hljs-keyword">to</span> <span class="hljs-built_in">remove</span> repository reference <span class="hljs-string">"centos"</span> (must force) - container <span class="hljs-number">705</span>a30cbc002 <span class="hljs-keyword">is</span> using its referenced image <span class="hljs-number">42118</span>e3df429</span><br><span class="line"># 这是因为之间的运行的进程没有清楚导致该images正在使用中，使用一下命令查看占有的进程</span><br><span class="line">[root@docker ~]# docker <span class="hljs-keyword">ps</span> -<span class="hljs-keyword">a</span> ＃ 查看所有的docker进程</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND               CREATED             STATUS                     PORTS               NAMES</span><br><span class="line"><span class="hljs-number">705</span>a30cbc002        cento<span class="hljs-variable">s:centos6</span>              <span class="hljs-string">"/bin/bash"</span>           <span class="hljs-number">6</span> minutes ago       Exited (<span class="hljs-number">0</span>) <span class="hljs-number">6</span> minutes ago                       centos6</span><br><span class="line">[root@docker ~]# docker rm <span class="hljs-number">705</span>a30cbc002</span><br><span class="line"><span class="hljs-number">705</span>a30cbc002</span><br><span class="line">[root@docker ~]# docker rmi cento<span class="hljs-variable">s:centos6</span></span><br><span class="line">Untagged: cento<span class="hljs-variable">s:centos6</span></span><br><span class="line">Deleted: <span class="hljs-built_in">sha256</span>:<span class="hljs-number">42118</span>e3df429f09ca581a9deb3df274601930e428e452f7e4e9f1833c56a100a</span><br><span class="line">Deleted: <span class="hljs-built_in">sha256</span>:d72d0199021776e77ac14a764a3decd156e9f6f18b37e25b867b0f1ca42fb3d9</span><br><span class="line">Deleted: <span class="hljs-built_in">sha256</span>:fb178c6cea1453d089ce033b96eba0efdb42274138e042517ea2d5ea7bb51665</span><br><span class="line">Deleted: <span class="hljs-built_in">sha256</span>:<span class="hljs-number">8945</span>af30572845a904adce2aeaf73402c842d86e99e8f10688b25cb27834110b</span><br><span class="line">Deleted: <span class="hljs-built_in">sha256</span>:ea9f151abb7e06353e73172dad421235611d4f6d0560ec95db26e0dc240642c1</span><br></pre></td></tr></table></figure>
-<h4 id="4-运行一个docker镜像"><a href="#4-运行一个docker镜像" class="headerlink" title="4. 运行一个docker镜像"></a><strong>4. 运行一个docker镜像</strong></h4><h4 id="进入交互式程序"><a href="#进入交互式程序" class="headerlink" title="进入交互式程序"></a>进入交互式程序</h4><figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="hljs-variable">@docker</span> ~]<span class="hljs-comment"># docker run  -it centos:centos6 /bin/bash</span></span><br><span class="line">[root<span class="hljs-variable">@c1d190f95562</span> /]<span class="hljs-comment"># cat /etc/redhat-release</span></span><br><span class="line">CentOS release <span class="hljs-number">6.8</span> (Final)</span><br><span class="line"><span class="hljs-comment"># Install openssh-server and httpd</span></span><br><span class="line">root<span class="hljs-variable">@d8c122dbe09d</span><span class="hljs-symbol">:/</span><span class="hljs-comment"># yum install -y openssh-sever httpd</span></span><br><span class="line">root<span class="hljs-variable">@d8c122dbe09d</span><span class="hljs-symbol">:/</span><span class="hljs-comment"># exit</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 注意当你执行exit，从容器之中退出时，容器也会随着关闭，这时如果还继续执行上条命令</span></span><br><span class="line"><span class="hljs-comment"># 你会发现之前所有的操作都被还原，因为相对于docker，又是新开了一个进程</span></span><br><span class="line"><span class="hljs-comment"># 在exit退出之后，使用一下命令查看上次提交，然后commit修改，便可保存之前的修改</span></span><br><span class="line"></span><br><span class="line">[root<span class="hljs-variable">@docker</span> ~]<span class="hljs-comment"># docker ps -l</span></span><br><span class="line">[root<span class="hljs-variable">@docker</span> ~]<span class="hljs-comment"># docker commit c1d190f95562 centos:centos6-httpd</span></span><br><span class="line"><span class="hljs-symbol">sha256:</span><span class="hljs-number">77</span>eb12e36c7bbe9ef874555b1873019022b5258740aa731627e2cd6fa749c325</span><br><span class="line">[root<span class="hljs-variable">@docker</span> ~]<span class="hljs-comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">centos              centos6-httpd       <span class="hljs-number">77</span>eb12e36c7b        <span class="hljs-number">3</span> seconds ago       <span class="hljs-number">290.3</span> MB</span><br><span class="line">centos6-visionet    latest              aeed37612ecb        <span class="hljs-number">6</span> hours ago         <span class="hljs-number">1.916</span> GB</span><br><span class="line">centos              centos6             a3c09d36ab4a        <span class="hljs-number">2</span> days ago          <span class="hljs-number">194.6</span> MB</span><br><span class="line">registry            latest              c6c14b3960bd        <span class="hljs-number">3</span> days ago          <span class="hljs-number">33.28</span> MB</span><br></pre></td></tr></table></figure>
-<h4 id="5-编辑Dockerfile"><a href="#5-编辑Dockerfile" class="headerlink" title="5. 编辑Dockerfile"></a><strong>5. 编辑Dockerfile</strong></h4><figure class="highlight dockerfile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># dockfile的第一行一定是FROM，指定了父镜像</span></span><br><span class="line"><span class="hljs-keyword">FROM</span> centos:centos6</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># RUN 指的是运行的命令</span></span><br><span class="line"><span class="hljs-keyword">RUN</span><span class="hljs-bash"> yum install -y epel-release</span></span><br><span class="line"><span class="hljs-bash">RUN yum install -y bash-completion</span></span><br><span class="line"><span class="hljs-bash">RUN yum install -y openssh-server openssh-client sudo</span></span><br><span class="line"><span class="hljs-bash">RUN sed -i <span class="hljs-string">'s/UsePAM yes/UsePAM no/g'</span> /etc/ssh/sshd_config</span></span><br><span class="line"><span class="hljs-bash">RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span></span><br><span class="line"><span class="hljs-bash"></span></span><br><span class="line"><span class="hljs-bash"><span class="hljs-comment"># 增加一个用户，并赋予sudo权限</span></span></span><br><span class="line"><span class="hljs-bash">RUN useradd visionet</span></span><br><span class="line"><span class="hljs-bash">RUN <span class="hljs-built_in">echo</span> <span class="hljs-string">"visionet:visionet"</span> | chpasswd</span></span><br><span class="line"><span class="hljs-bash">RUN <span class="hljs-built_in">echo</span> <span class="hljs-string">"visionet   ALL=(ALL)       ALL"</span> &gt;&gt; /etc/sudoers</span></span><br><span class="line"><span class="hljs-bash"></span></span><br><span class="line"><span class="hljs-bash">＃ 注意，如果没有执行一下两个命令，sshd是无法远程登陆的</span></span><br><span class="line"><span class="hljs-bash">RUN ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key</span></span><br><span class="line"><span class="hljs-bash">RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key</span></span><br><span class="line"><span class="hljs-bash"></span></span><br><span class="line"><span class="hljs-bash">＃ EXPOSE 22， 将22端口暴露出来，方便ssh远程连接</span></span><br><span class="line"><span class="hljs-bash">RUN mkdir /var/run/sshd</span></span><br><span class="line"><span class="hljs-bash">EXPOSE 22</span></span><br><span class="line"><span class="hljs-bash">＃ CMD 为系统内部执行命令</span></span><br><span class="line"><span class="hljs-bash">CMD [<span class="hljs-string">"/usr/sbin/sshd"</span>, <span class="hljs-string">"-D"</span>]</span></span><br></pre></td></tr></table></figure>
-<h4 id="6-生成自定义docker镜像"><a href="#6-生成自定义docker镜像" class="headerlink" title="6. 生成自定义docker镜像"></a><strong>6. 生成自定义docker镜像</strong></h4><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> build 编译镜像</span></span><br><span class="line">[root@docker ~]# docker build -f dockerfile3 -t centos:centos6-ssh .</span><br><span class="line">Sending build context to Docker daemon 44.54 kB</span><br><span class="line">Step 1 : FROM centos:centos6</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> a3c09d36ab4a</span></span><br><span class="line">Step 2 : RUN yum install -y epel-release</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> 04d81f280a63</span></span><br><span class="line">Step 3 : RUN yum install -y bash-completion</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> 5ca26894dc9d</span></span><br><span class="line">Step 4 : RUN yum install -y openssh-server openssh-client sudo</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> 42278450311e</span></span><br><span class="line">Step 5 : RUN sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> db35bef562a2</span></span><br><span class="line">Step 6 : RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> dc9f2b82e198</span></span><br><span class="line">Step 7 : RUN useradd visionet</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> 06c574a51755</span></span><br><span class="line">Step 8 : RUN echo "visionet:visionet" | chpasswd</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> 03412f053d04</span></span><br><span class="line">Step 9 : RUN echo "visionet   ALL=(ALL)       ALL" &gt;&gt; /etc/sudoers</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> bf8476812a62</span></span><br><span class="line">Step 10 : RUN ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> 2314cce75171</span></span><br><span class="line">Step 11 : RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> 99304cd9ac15</span></span><br><span class="line">Step 12 : RUN mkdir /var/run/sshd</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> f87283751553</span></span><br><span class="line">Step 13 : EXPOSE 22</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> 56c41202dcb9</span></span><br><span class="line">Step 14 : CMD /usr/sbin/sshd -D</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> d6dccb483fa6</span></span><br><span class="line">Successfully built d6dccb483fa6</span><br><span class="line">[root@docker ~]# docker images</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">centos              centos6-ssh         d6dccb483fa6        2 minutes ago         363 MB</span><br><span class="line">centos              centos6-httpd       77eb12e36c7b        6 minutes ago       290.3 MB</span><br><span class="line">centos6-visionet    latest              aeed37612ecb        6 hours ago         1.916 GB</span><br><span class="line">centos              centos6             a3c09d36ab4a        2 days ago          194.6 MB</span><br><span class="line">registry            latest              c6c14b3960bd        3 days ago          33.28 MB</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 后台运行docker容器，并指定nat端口转发</span></span><br><span class="line">[root@docker ~]# docker run -d -p 2222:22 -P --name=sshd centos:centos6-ssh</span><br><span class="line">b4211f7a304d9e34b72b510230be2c7a76b276886b488f08f3e12896a4d3c172</span><br></pre></td></tr></table></figure>
-<h4 id="7-ssh登陆到docker容器内，部署项目环境"><a href="#7-ssh登陆到docker容器内，部署项目环境" class="headerlink" title="7. ssh登陆到docker容器内，部署项目环境"></a><strong>7. ssh登陆到docker容器内，部署项目环境</strong></h4><figure class="highlight gherkin hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># inspect 查看docker 容器IP地址</span></span><br><span class="line">[root<span class="hljs-meta">@docker</span> ~]<span class="hljs-comment"># docker inspect sshd | grep IPAddress</span></span><br><span class="line">[root<span class="hljs-meta">@docker</span> ~]<span class="hljs-comment"># ssh visionet@172.17.0.2</span></span><br><span class="line">visionet<span class="hljs-meta">@172.17.0.2's</span> password:</span><br><span class="line">[visionet<span class="hljs-meta">@b4211f7a304d</span> ~]$</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Install mysql</span></span><br><span class="line"><span class="hljs-comment"># Install tomcat server</span></span><br><span class="line"></span><br><span class="line">[visionet<span class="hljs-meta">@b4211f7a304d</span> ~]$ exit</span><br><span class="line">[root<span class="hljs-meta">@docker</span> ~]<span class="hljs-comment"># docker stop sshd</span></span><br><span class="line">sshd</span><br><span class="line">[root<span class="hljs-meta">@docker</span> ~]<span class="hljs-comment"># docker ps -l</span></span><br><span class="line">CONTAINER ID        IMAGE                COMMAND               CREATED             STATUS                       PORTS               NAMES</span><br><span class="line">b4211f7a304d        centos:centos6-ssh   <span class="hljs-string">"/usr/sbin/sshd -D"</span>   6 minutes ago       Exited (255) 3 seconds ago                       sshd</span><br><span class="line">[root<span class="hljs-meta">@docker</span> ~]<span class="hljs-comment"># docker commit b4211f7a304d centos:centos6-tomcat</span></span><br><span class="line">sha256:b4f114d5484822d9a3ddf1100b76b460985ba5e5d31e936570e8d7dbd8df282c</span><br><span class="line">[root<span class="hljs-meta">@docker</span> ~]<span class="hljs-comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">centos              centos6-tomcat      b4f114d54848        4 seconds ago       363.1 MB</span><br><span class="line">centos              centos6-httpd       77eb12e36c7b        15 minutes ago      290.3 MB</span><br><span class="line">centos6-visionet    latest              aeed37612ecb        7 hours ago         1.916 GB</span><br><span class="line">centos              centos6-ssh         d6dccb483fa6        9 hours ago         363 MB</span><br><span class="line">centos              centos6             a3c09d36ab4a        2 days ago          194.6 MB</span><br><span class="line">registry            latest              c6c14b3960bd        3 days ago          33.28 MB</span><br></pre></td></tr></table></figure>
-<h4 id="8-推送centos-centos6-tomcat到私有docker仓库"><a href="#8-推送centos-centos6-tomcat到私有docker仓库" class="headerlink" title="8. 推送centos:centos6-tomcat到私有docker仓库"></a><strong>8. 推送centos:centos6-tomcat到私有docker仓库</strong></h4>
+            <h3 id="1-Add-the-EPEL-Repository"><a href="#1-Add-the-EPEL-Repository" class="headerlink" title="1. Add the EPEL Repository"></a><strong>1. Add the EPEL Repository</strong></h3><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -iUvh http:<span class="hljs-regexp">//</span>dl.fedoraproject.org<span class="hljs-regexp">/pub/</span>epel<span class="hljs-regexp">/6/</span>x86_64<span class="hljs-regexp">/epel-release-6-8.noarch.rpm</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-Update-your-system"><a href="#2-Update-your-system" class="headerlink" title="2. Update your system"></a><strong>2. Update your system</strong></h3><figure class="highlight stata hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">update</span> -<span class="hljs-built_in">y</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-Install"><a href="#3-Install" class="headerlink" title="3. Install"></a><strong>3. Install</strong></h3><figure class="highlight cmake hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> -y docker-io</span><br></pre></td></tr></table></figure>
+<h3 id="4-Configure"><a href="#4-Configure" class="headerlink" title="4. Configure"></a><strong>4. Configure</strong></h3><figure class="highlight livecodeserver hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">service docker <span class="hljs-built_in">start</span></span><br><span class="line">chkconfig docker <span class="hljs-keyword">on</span></span><br><span class="line"></span><br><span class="line">docker info</span><br></pre></td></tr></table></figure>
+<h3 id="5-Download-a-Docker-Container"><a href="#5-Download-a-Docker-Container" class="headerlink" title="5. Download a Docker Container"></a><strong>5. Download a Docker Container</strong></h3><figure class="highlight ebnf hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attribute">docker pull centos</span></span><br></pre></td></tr></table></figure>
+<h3 id="6-Run-a-Docker-Container"><a href="#6-Run-a-Docker-Container" class="headerlink" title="6. Run a Docker Container"></a><strong>6. Run a Docker Container</strong></h3><figure class="highlight dockerfile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="hljs-keyword">run</span><span class="hljs-bash"> -i -t centos /bin/bash</span></span><br></pre></td></tr></table></figure>
+<h3 id="7-Find-Docker-Container"><a href="#7-Find-Docker-Container" class="headerlink" title="7. Find Docker Container"></a><strong>7. Find Docker Container</strong></h3><figure class="highlight ebnf hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attribute">docker search ubuntu</span></span><br></pre></td></tr></table></figure>
+<h3 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a><strong>FAQ</strong></h3><h4 id="1-Faild-to-start-docker-on-CentOS-6-x"><a href="#1-Faild-to-start-docker-on-CentOS-6-x" class="headerlink" title="1. Faild to start docker on CentOS 6.x"></a><strong>1. Faild to start docker on CentOS 6.x</strong></h4><p><code><strong><em>/usr/bin/docker: relocation error: /usr/bin/docker: symbol dm_task_get_info_with_deferred_remove, version Base not defined in file libdevmapper.so.1.02 with link time reference</em></strong></code><br><figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">the <span class="hljs-class"><span class="hljs-keyword">lib</span>-<span class="hljs-title">device</span>-<span class="hljs-title">mapper</span> <span class="hljs-title">that</span> <span class="hljs-title">you</span> <span class="hljs-title">have</span> <span class="hljs-title">isn</span>'<span class="hljs-title">t</span> <span class="hljs-title">exporting</span> <span class="hljs-title">a</span> <span class="hljs-title">symbol</span> ("<span class="hljs-title">Base</span>") <span class="hljs-title">that</span> <span class="hljs-title">Docker</span> <span class="hljs-title">needs</span>.</span></span><br><span class="line">this by upgrading <span class="hljs-class"><span class="hljs-keyword">lib</span>-<span class="hljs-title">device</span>-<span class="hljs-title">mapper</span> <span class="hljs-title">to</span> <span class="hljs-title">version</span> 1.02.90.</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># You may have to enable the public_ol6_latest repo in order to get this package.</span></span><br><span class="line">sudo yum-config-manager --enable public_ol6_latest</span><br><span class="line">sudo yum install device-mapper-event-libs</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-Faild-to-use-docker"><a href="#2-Faild-to-use-docker" class="headerlink" title="2. Faild to use docker"></a><strong>2. Faild to use docker</strong></h4><p><code><strong><em>Get <a href="http:///var/run/docker.sock/v1.19/info" target="_blank" rel="noopener">http:///var/run/docker.sock/v1.19/info</a>: dial unix /var/run/docker.sock: no such file or directory. Are you trying to connect to a TLS-enabled daemon without TLS?</em></strong></code><br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># this is because docker no restart ok.</span></span><br><span class="line"></span><br><span class="line">pkill -9 docker &amp;&amp;<span class="hljs-built_in"> service </span>docker start</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-HowTo-save-‘docker-run-i-t-xxx-bin-bash’"><a href="#3-HowTo-save-‘docker-run-i-t-xxx-bin-bash’" class="headerlink" title="3. HowTo save ‘docker run -i -t xxx /bin/bash’"></a><strong>3. HowTo save ‘docker run -i -t xxx /bin/bash’</strong></h4><figure class="highlight haxe hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker ps -l</span><br><span class="line">docker commit ID <span class="hljs-keyword">new</span><span class="hljs-type">name</span></span><br><span class="line"><span class="hljs-type">docker</span> images</span><br></pre></td></tr></table></figure>
+
         </div>
         
         
@@ -249,17 +253,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-07-31T16:15:54.000Z">2016-08-01</time>
+                <time class="level-item has-text-grey" datetime="2016-07-06T21:35:32.000Z">2016-07-07</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/似水年华/">似水年华</a>
+                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    8 minutes read (About 1186 words)
+                    6 minutes read (About 932 words)
                 </span>
                 
                 
@@ -268,16 +272,38 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/08/01/hey-August/">你好，八月</a>
+                <a class="has-link-black-ter" href="/2016/07/07/how-to-install-mysql-5-6-on-centos/">HowTo Install MySQL 5.5/6/7 on RHEL/CentOS 5/6/7</a>
             
         </h1>
         <div class="content">
-            <p>还剩不到1小时就要进入8月，也许写完这篇文章就已经8月，我其实不擅长写作文，自小如此，所以每次都是特别慢；时间慢慢流逝，听着音乐，随心所致，大概也是件快乐的事情吧。</p>
-<p>定期自省己身，所行之事，所思之虑，有则改之，无则勉之，坚守吾心，戒嗔戒躁，自打懂得事理之后，便妄以此法施加吾身，奈何小子年幼，定力不坚，常因一时欢愉便抛诸脑后，事后便懊悔不已；虽言，生而为人，便逃不过七情六欲加身，然，时时自省吾身，常思吾之过，常念德行事，方可为人；撰此文，便是警醒己身。</p>
-<p>犯错并不是一件可怕的事儿，从小做了不知多少混账事，也没见的把天捅破，可见，所谓捅破天也不是件容易的事儿；首先是工作上的失职，自今年年初，开始搭建自身的团队班子，虽然只有三三两两人，刚开始做小头头，我并没有正确认识到自己的责任，在完成本职工作的同时，也要照顾底下的员工，不光是工作安排，还有学习成长，很多事情吩咐下去之后，自己又要去检查，弄的比自己一人工作时还要劳累；之后，连着手下两名员工都离职了，我开始反省自己，从招聘到工作分配到培养，头大如斗，深感做领导的不易。公司因装修改造，扩展一个会议室，我自己怕麻烦，便将工作推给一个员工，却未考虑他的自身的能力，导致原本清晰简单的事，拖拖拉拉2个月才算弄完，还害得这名员工离职，对行政部门的工作也造成了影响，经此事之后，发觉自身管理能力十分不足。另一事，公司微软云资源的账单，之前一人工作时制定的账单每月资源消耗账单，但是由于后将该事务分配与他人，导致最后帐不对本，弄巧成拙，最后还是花费大量时间，重新制作了所有的账单，问题在于自身没有将事务认真贯彻执行下去，而且任务甩出手之后，缺乏关心。另有很多这样大大小小之事，十分头疼，真应该好好学学如何做一个好领导。</p>
-<p>我不太会写叙述的文章，前面一段文字，自己看着都揪心，也是那些复杂的事儿都过去了，才能有闲工夫来写这些东西，两个助手离职之后，拉来之前同事过来帮忙，现在事情都在往好的方向发展，一点点在建立规则，接下来的工作和学习的重心都会放在大数据上，实在的事是公司给了我很好的学习机会，在这家公司也成长了非常的多，感谢的话言之不尽，唯有努力工作方可回报。</p>
-<p>谈下关于博客，最近找了一个漂亮的主题，所以一直在折腾怎么弄好看，感觉有点逾越了当初创建博客的初衷；所以，接下来的时间，要整理之前的博文，对知识进行梳理，好记性不如烂笔头，用XMind做思维导图，TodoList工具计划任务清单，博客记录学习内容FAQ等，一直认为好的学习方法才能达到事半功倍的效果，要加快成长，每次参加一些培训和技术的研讨会，都恨不得自己早生十年。</p>
-<p>谈下关于减肥，首先这肯定是一个永恒无止尽的话题，之前这段时间因为工作上的乱七八糟导致每天下班时间都到9-10多点钟，再加上公司到家地铁要1小时，所以健身房也一直没去，再加上饮食不规律，体重又回升到了可怕85KG，8月开始，要认真去健身了，该吃吃，该练练，目标体重75KG。</p>
+            <h2 id="Install-Mysql-5-5-on-RHEL-CentOS-5-6-7"><a href="#Install-Mysql-5-5-on-RHEL-CentOS-5-6-7" class="headerlink" title="Install Mysql 5.5 on RHEL/CentOS 5/6/7 "></a><font color="red">Install Mysql 5.5 on RHEL/CentOS 5/6/7 </font></h2><h3 id="Setup-1-Use-Repository"><a href="#Setup-1-Use-Repository" class="headerlink" title="Setup 1. Use Repository."></a><strong>Setup 1. Use Repository.</strong></h3><p>First, to set up the yum repository, install the mysql－community-server 5.5 RPM based on your CentOS/RHEL release: <br></p>
+<hr>
+<h4 id="mysql-server-5-5-repo-for-CentOS-RHEL-5-x"><a href="#mysql-server-5-5-repo-for-CentOS-RHEL-5-x" class="headerlink" title="mysql-server-5.5.repo for CentOS/RHEL 5.x"></a><strong>mysql-server-5.5.repo for CentOS/RHEL 5.x</strong></h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -Uvh http:<span class="hljs-regexp">//mi</span>rror.webtatic.com<span class="hljs-regexp">/yum/</span>el5<span class="hljs-regexp">/latest.rpm</span></span><br></pre></td></tr></table></figure>
+<h4 id="Only-Install-MySQL-5-5-On-CentOS-5-x"><a href="#Only-Install-MySQL-5-5-On-CentOS-5-x" class="headerlink" title=" *Only Install MySQL 5.5 On CentOS 5.x"></a><em> <em>*Only Install MySQL 5.5 On CentOS 5.x</em></em></h4><p>If you already have MySql client or server installed (rpm -q mysql mysql-server), then you can upgrade using the following method:<br><br><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> mysql.<span class="hljs-string">`uname -i`</span> yum-<span class="hljs-keyword">plugin</span>-<span class="hljs-keyword">replace</span></span><br><span class="line">yum <span class="hljs-keyword">replace</span> mysql <span class="hljs-comment">--replace-with mysql55w</span></span><br></pre></td></tr></table></figure></p>
+<p>“yum install mysql” is only there to make sure yum-plugin-replace can resolve dependencies correctly if only mysql-server was installed.<br><br>Otherwise, to install MySql client and server, then run:<br><br><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> mysql55w mysql55w-<span class="hljs-keyword">server</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<h4 id="mysql-server-5-5-repo-for-CentOS-RHEL-6-x"><a href="#mysql-server-5-5-repo-for-CentOS-RHEL-6-x" class="headerlink" title="mysql-server-5.5.repo for CentOS/RHEL 6.x"></a><strong>mysql-server-5.5.repo for CentOS/RHEL 6.x</strong></h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># For x86_64</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.5</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">6</span><span class="hljs-regexp">/x86_64/my</span>sql-community-release-el6-<span class="hljs-number">5</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># For i386</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.5</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">6</span><span class="hljs-regexp">/i386/my</span>sql-community-release-el6-<span class="hljs-number">5</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
+<h4 id="mysql-server-5-5-repo-for-CentOS-RHEL-7-x"><a href="#mysql-server-5-5-repo-for-CentOS-RHEL-7-x" class="headerlink" title="mysql-server-5.5.repo for CentOS/RHEL 7.x"></a><strong>mysql-server-5.5.repo for CentOS/RHEL 7.x</strong></h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># For x86_64</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.5</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">7</span><span class="hljs-regexp">/x86_64/my</span>sql-community-release-el7-<span class="hljs-number">5</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># For i386</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.5</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">7</span><span class="hljs-regexp">/i386/my</span>sql-community-release-el7-<span class="hljs-number">5</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
+<h3 id="Setup-2-Install-MySQL-Server-5-5"><a href="#Setup-2-Install-MySQL-Server-5-5" class="headerlink" title="Setup 2. Install MySQL Server 5.5"></a><strong>Setup 2. Install MySQL Server 5.5</strong></h3><p>If you already have MySql client or server installed (rpm -q mysql mysql-server), then you must uninstall using the following method:<br><br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># It's RHEL/CentOS 6/7</span></span><br><span class="line">yum <span class="hljs-builtin-name">remove</span> -y mysql-server</span><br><span class="line">yum <span class="hljs-builtin-name">remove</span> -y mysql*</span><br></pre></td></tr></table></figure></p>
+<p>If you don’t have mysql-server was installed.<br><br>Otherwise, to install MySql client and server, then run:<br><br><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> -y mysql-community-<span class="hljs-keyword">server</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Setup-3-Service-Configure"><a href="#Setup-3-Service-Configure" class="headerlink" title="Setup 3. Service Configure"></a><strong>Setup 3. Service Configure</strong></h3><p>You should upgrade existing tables before setting the server to become a production machine, which can be done by starting the server and running the mysql_upgrade script (this may take time depending on the size of the database).<br><br><figure class="highlight crmsh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld <span class="hljs-literal">start</span></span><br></pre></td></tr></table></figure></p>
+<p>This will issue a password prompt for the user. If you don’t have a root user password, remove the “-p”<br><br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure></p>
+<h2 id="Install-Mysql-5-6-on-RHEL-CentOS-5-6-7"><a href="#Install-Mysql-5-6-on-RHEL-CentOS-5-6-7" class="headerlink" title="Install Mysql 5.6 on RHEL/CentOS 5/6/7 "></a><font color="red">Install Mysql 5.6 on RHEL/CentOS 5/6/7 </font></h2><h3 id="Setup-1-Use-Repository-1"><a href="#Setup-1-Use-Repository-1" class="headerlink" title="Setup 1. Use Repository."></a><strong>Setup 1. Use Repository.</strong></h3><p>First, to set up the yum repository, install the mysql－community-server 5.6 RPM based on your CentOS/RHEL release: <br></p>
+<h4 id="mysql-server-5-6-repo-for-CentOS-RHEL-5-x"><a href="#mysql-server-5-6-repo-for-CentOS-RHEL-5-x" class="headerlink" title="mysql-server-5.6.repo for CentOS/RHEL 5.x"></a><strong>mysql-server-5.6.repo for CentOS/RHEL 5.x</strong></h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># For x86_64</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.6</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">5</span><span class="hljs-regexp">/x86_64/my</span>sql-community-release-el5-<span class="hljs-number">5</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># For i386</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.6</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">5</span><span class="hljs-regexp">/i386/my</span>sql-community-release-el5-<span class="hljs-number">5</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
+<h4 id="mysql-server-5-6-repo-for-CentOS-RHEL-6-x"><a href="#mysql-server-5-6-repo-for-CentOS-RHEL-6-x" class="headerlink" title="mysql-server-5.6.repo for CentOS/RHEL 6.x"></a><strong>mysql-server-5.6.repo for CentOS/RHEL 6.x</strong></h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># For x86_64</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.6</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">6</span><span class="hljs-regexp">/x86_64/my</span>sql-community-release-el6-<span class="hljs-number">5</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># For i386</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.6</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">6</span><span class="hljs-regexp">/i386/my</span>sql-community-release-el6-<span class="hljs-number">5</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
+<h4 id="mysql-server-5-6-repo-for-CentOS-RHEL-7-x"><a href="#mysql-server-5-6-repo-for-CentOS-RHEL-7-x" class="headerlink" title="mysql-server-5.6.repo for CentOS/RHEL 7.x"></a><strong>mysql-server-5.6.repo for CentOS/RHEL 7.x</strong></h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># For x86_64</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.6</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">7</span><span class="hljs-regexp">/x86_64/my</span>sql-community-release-el7-<span class="hljs-number">5</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># For i386</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.6</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">7</span><span class="hljs-regexp">/i386/my</span>sql-community-release-el7-<span class="hljs-number">5</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
+<h3 id="Setup-2-Install-MySQL-Server-5-6"><a href="#Setup-2-Install-MySQL-Server-5-6" class="headerlink" title="Setup 2. Install MySQL Server 5.6"></a><strong>Setup 2. Install MySQL Server 5.6</strong></h3><p>If you already have MySql client or server installed (rpm -q mysql mysql-server), then you must uninstall using the following method:<br><br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-builtin-name">remove</span> -y mysql-server</span><br><span class="line">yum <span class="hljs-builtin-name">remove</span> -y mysql*</span><br></pre></td></tr></table></figure></p>
+<p>If you don’t have mysql-server was installed.<br><br>Otherwise, to install MySql client and server, then run:<br><br><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> -y mysql-community-<span class="hljs-keyword">server</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Setup-3-Service-Configure-1"><a href="#Setup-3-Service-Configure-1" class="headerlink" title="Setup 3. Service Configure"></a><strong>Setup 3. Service Configure</strong></h3><p>You should upgrade existing tables before setting the server to become a production machine, which can be done by starting the server and running the mysql_upgrade script (this may take time depending on the size of the database).<br><br><figure class="highlight crmsh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld <span class="hljs-literal">start</span></span><br></pre></td></tr></table></figure></p>
+<p>This will issue a password prompt for the user. If you don’t have a root user password, remove the “-p”<br><br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure></p>
+<h2 id="Install-Mysql-5-7-on-RHEL-CentOS-5-6-7"><a href="#Install-Mysql-5-7-on-RHEL-CentOS-5-6-7" class="headerlink" title="Install Mysql 5.7 on RHEL/CentOS 5/6/7 "></a><font color="red">Install Mysql 5.7 on RHEL/CentOS 5/6/7 </font></h2><h3 id="Setup-1-Use-Repository-2"><a href="#Setup-1-Use-Repository-2" class="headerlink" title="Setup 1. Use Repository."></a><strong>Setup 1. Use Repository.</strong></h3><p>First, to set up the yum repository, install the mysql－community-server 5.7 RPM based on your CentOS/RHEL release: <br></p>
+<h4 id="mysql-server-5-7-repo-for-CentOS-RHEL-5-x"><a href="#mysql-server-5-7-repo-for-CentOS-RHEL-5-x" class="headerlink" title="mysql-server-5.7.repo for CentOS/RHEL 5.x"></a><strong>mysql-server-5.7.repo for CentOS/RHEL 5.x</strong></h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># For x86_64</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.7</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">5</span><span class="hljs-regexp">/x86_64/my</span>sql-community-release-el5-<span class="hljs-number">7</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># For i386</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.7</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">5</span><span class="hljs-regexp">/i386/my</span>sql-community-release-el5-<span class="hljs-number">7</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
+<h4 id="mysql-server-5-7-repo-for-CentOS-RHEL-6-x"><a href="#mysql-server-5-7-repo-for-CentOS-RHEL-6-x" class="headerlink" title="mysql-server-5.7.repo for CentOS/RHEL 6.x"></a><strong>mysql-server-5.7.repo for CentOS/RHEL 6.x</strong></h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># For x86_64</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.7</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">6</span><span class="hljs-regexp">/x86_64/my</span>sql-community-release-el6-<span class="hljs-number">7</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># For i386</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.7</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">6</span><span class="hljs-regexp">/i386/my</span>sql-community-release-el6-<span class="hljs-number">7</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
+<h4 id="mysql-server-5-7-repo-for-CentOS-RHEL-7-x"><a href="#mysql-server-5-7-repo-for-CentOS-RHEL-7-x" class="headerlink" title="mysql-server-5.7.repo for CentOS/RHEL 7.x"></a><strong>mysql-server-5.7.repo for CentOS/RHEL 7.x</strong></h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># For x86_64</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.7</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">7</span><span class="hljs-regexp">/x86_64/my</span>sql-community-release-el7-<span class="hljs-number">7</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># For i386</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.7</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">7</span><span class="hljs-regexp">/i386/my</span>sql-community-release-el7-<span class="hljs-number">7</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
+<h3 id="Setup-2-Install-MySQL-Server-5-7"><a href="#Setup-2-Install-MySQL-Server-5-7" class="headerlink" title="Setup 2. Install MySQL Server 5.7"></a><strong>Setup 2. Install MySQL Server 5.7</strong></h3><p>If you already have MySql client or server installed (rpm -q mysql mysql-server), then you must uninstall using the following method:<br><br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-builtin-name">remove</span> -y mysql-server</span><br><span class="line">yum <span class="hljs-builtin-name">remove</span> -y mysql*</span><br></pre></td></tr></table></figure></p>
+<p>If you don’t have mysql-server was installed.<br><br>Otherwise, to install MySql client and server, then run:<br><br><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> -y mysql-community-<span class="hljs-keyword">server</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Setup-3-Service-Configure-2"><a href="#Setup-3-Service-Configure-2" class="headerlink" title="Setup 3. Service Configure"></a><strong>Setup 3. Service Configure</strong></h3><p>You should upgrade existing tables before setting the server to become a production machine, which can be done by starting the server and running the mysql_upgrade script (this may take time depending on the size of the database).<br><br><figure class="highlight crmsh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld <span class="hljs-literal">start</span></span><br></pre></td></tr></table></figure></p>
+<p>This will issue a password prompt for the user. If you don’t have a root user password, remove the “-p”<br><br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure></p>
 
         </div>
         
@@ -299,17 +325,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-07-31T16:12:29.000Z">2016-08-01</time>
+                <time class="level-item has-text-grey" datetime="2016-07-06T19:49:02.000Z">2016-07-07</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Ghost/">Ghost</a>
+                <a class="has-link-grey -link" href="/categories/Redis/">Redis</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    a minute read (About 166 words)
+                    6 minutes read (About 839 words)
                 </span>
                 
                 
@@ -318,20 +344,33 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/08/01/insert-music/">在网页中插入歌曲</a>
+                <a class="has-link-black-ter" href="/2016/07/07/redis01/">HowTo Use Remi Install Redis</a>
             
         </h1>
         <div class="content">
-            <p>纠正下，在下面博文中的错误，关于单曲不能生成外链的问题，现已经纠正。</p>
-<p>我试过百度音乐、QQ音乐、虾米音乐和网易云音乐，目前只有网易云音乐有此功能，先在网易云音乐选择歌曲即可：</p>
-<h4 id="分享单曲"><a href="#分享单曲" class="headerlink" title="分享单曲"></a>分享单曲</h4><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=101906&auto=1&height=66"></iframe>
-
-
-<h4 id="分享专辑，歌单"><a href="#分享专辑，歌单" class="headerlink" title="分享专辑，歌单"></a>分享专辑，歌单</h4><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="450" src="//music.163.com/outchain/player?type=0&id=26096079&auto=1&height=430"></iframe>
-
-<p><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>选定歌单之后，在歌单页面有个生成外链播放器的按钮</strong></p>
-<div align="center"><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/07/1-6UcK4gXBrACw.jpg"><br></div><br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>然后，根据页面提示信息，生成你要的html代码，并嵌入到你的页面之中。</strong><br><div align="center"><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/07/2-6UcK4gXBrACw.jpg"><br></div>
-
+            <h2 id="Setup-1-Install"><a href="#Setup-1-Install" class="headerlink" title="Setup 1. Install"></a><strong>Setup 1. Install</strong></h2><p>Frist, To install remi Repo and epel Repo.</p>
+<h4 id="Remi-EL6-for-CentOS-RHEL-6-x"><a href="#Remi-EL6-for-CentOS-RHEL-6-x" class="headerlink" title="Remi EL6 for CentOS/RHEL 6.x"></a><strong>Remi EL6 for CentOS/RHEL 6.x</strong></h4><figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -Uvh <span class="hljs-string">https:</span><span class="hljs-comment">//dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</span></span><br><span class="line">rpm -Uvh <span class="hljs-string">http:</span><span class="hljs-comment">//rpms.famillecollet.com/enterprise/remi-release-6.rpm</span></span><br></pre></td></tr></table></figure>
+<h4 id="Remi-EL5-for-CentOS-RHEL-5-x"><a href="#Remi-EL5-for-CentOS-RHEL-5-x" class="headerlink" title="Remi EL5 for CentOS/RHEL 5.x"></a><strong>Remi EL5 for CentOS/RHEL 5.x</strong></h4><figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -Uvh <span class="hljs-string">https:</span><span class="hljs-comment">//dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm</span></span><br><span class="line">rpm -Uvh <span class="hljs-string">http:</span><span class="hljs-comment">//rpms.famillecollet.com/enterprise/remi-release-5.rpm</span></span><br></pre></td></tr></table></figure>
+<h4 id="有时间我们会碰到remi-repo无法使用报错，就像这样："><a href="#有时间我们会碰到remi-repo无法使用报错，就像这样：" class="headerlink" title="有时间我们会碰到remi.repo无法使用报错，就像这样："></a>有时间我们会碰到remi.repo无法使用报错，就像这样：</h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="hljs-regexp">//</span>remi.schlundtech.de<span class="hljs-regexp">/enterprise/</span>latest<span class="hljs-regexp">/remi/</span>x86_64<span class="hljs-regexp">/repodata/</span>repomd.xml: [Errno <span class="hljs-number">14</span>] PYCURL ERROR <span class="hljs-number">22</span> - <span class="hljs-string">"The requested URL returned error: 404 Not Found"</span></span><br></pre></td></tr></table></figure>
+<h4 id="这时我们需要修改-etc-yum-repos-d-remi-repo，像这样："><a href="#这时我们需要修改-etc-yum-repos-d-remi-repo，像这样：" class="headerlink" title="这时我们需要修改/etc/yum.repos.d/remi.repo，像这样："></a>这时我们需要修改/etc/yum.repos.d/remi.repo，像这样：</h4><figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">baseurl=<span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/rpms.famillecollet.com/enterprise</span><span class="hljs-regexp">/5/remi</span><span class="hljs-regexp">/$basearch/</span></span><br><span class="line"><span class="hljs-comment">#mirrorlist=http://rpms.famillecollet.com/enterprise/5/remi/mirror/$basearch/</span></span><br></pre></td></tr></table></figure>
+<h4 id="如果发现安装后yum-makecache没看到相应的源站点，请检查repo文件的enable参数是否为1，1为开启，0为关闭状态。"><a href="#如果发现安装后yum-makecache没看到相应的源站点，请检查repo文件的enable参数是否为1，1为开启，0为关闭状态。" class="headerlink" title="如果发现安装后yum makecache没看到相应的源站点，请检查repo文件的enable参数是否为1，1为开启，0为关闭状态。"></a>如果发现安装后yum makecache没看到相应的源站点，请检查repo文件的enable参数是否为1，1为开启，0为关闭状态。</h4><figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[repoName]</span><br><span class="line">name=repoName repo</span><br><span class="line">baseurl=http://repoPath</span><br><span class="line">gpgcheck=0                <span class="hljs-comment"># 是否启用gpgkey检查</span></span><br><span class="line">enabled=0                 <span class="hljs-comment"># 是否启用该源</span></span><br></pre></td></tr></table></figure>
+<h4 id="Install-Redis"><a href="#Install-Redis" class="headerlink" title="Install Redis"></a><strong>Install Redis</strong></h4><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> -y redis</span><br><span class="line"></span><br><span class="line">[root@zabbix yum.repos.d]# rpm -qi redis</span><br><span class="line"><span class="hljs-keyword">Name</span>        : redis</span><br><span class="line"><span class="hljs-keyword">Version</span>     : <span class="hljs-number">3.2</span><span class="hljs-number">.1</span></span><br><span class="line"><span class="hljs-keyword">Release</span>     : <span class="hljs-number">2.</span>el5.remi</span><br><span class="line">Architecture: x86_64</span><br><span class="line"><span class="hljs-keyword">Install</span> <span class="hljs-built_in">Date</span>: Thu <span class="hljs-number">28</span> Jul <span class="hljs-number">2016</span> <span class="hljs-number">12</span>:<span class="hljs-number">00</span>:<span class="hljs-number">41</span> PM CST</span><br><span class="line"><span class="hljs-keyword">Group</span>       : Applications/<span class="hljs-keyword">Databases</span></span><br><span class="line"><span class="hljs-keyword">Size</span>        : <span class="hljs-number">2113279</span></span><br><span class="line">License     : BSD</span><br><span class="line">Signature   : DSA/<span class="hljs-keyword">SHA1</span>, Fri <span class="hljs-number">24</span> Jun <span class="hljs-number">2016</span> <span class="hljs-number">01</span>:<span class="hljs-number">30</span>:<span class="hljs-number">12</span> PM CST, <span class="hljs-keyword">Key</span> <span class="hljs-keyword">ID</span> <span class="hljs-number">004e6</span>f4700f97f56</span><br><span class="line"><span class="hljs-keyword">Source</span> RPM  : redis<span class="hljs-number">-3.2</span><span class="hljs-number">.1</span><span class="hljs-number">-2.</span>el5.remi.src.rpm</span><br><span class="line"><span class="hljs-keyword">Build</span> <span class="hljs-built_in">Date</span>  : Fri <span class="hljs-number">24</span> Jun <span class="hljs-number">2016</span> <span class="hljs-number">01</span>:<span class="hljs-number">28</span>:<span class="hljs-number">27</span> PM CST</span><br><span class="line"><span class="hljs-keyword">Build</span> Host  : builder.remirepo.net</span><br><span class="line">Relocations : (<span class="hljs-keyword">not</span> relocatable)</span><br><span class="line">Packager    : <span class="hljs-keyword">http</span>://blog.remirepo.net/</span><br><span class="line">Vendor      : Remi Collet</span><br><span class="line"><span class="hljs-keyword">URL</span>         : <span class="hljs-keyword">http</span>://redis.io</span><br><span class="line">Summary     : A persistent <span class="hljs-keyword">key</span>-<span class="hljs-keyword">value</span> <span class="hljs-keyword">database</span></span><br></pre></td></tr></table></figure>
+<h2 id="Setup-2-基本配置项"><a href="#Setup-2-基本配置项" class="headerlink" title="Setup 2. 基本配置项"></a><strong>Setup 2. 基本配置项</strong></h2><h4 id="Redis-配置默认文件-etc-redis-conf"><a href="#Redis-配置默认文件-etc-redis-conf" class="headerlink" title="Redis 配置默认文件/etc/redis.conf"></a>Redis 配置默认文件/etc/redis.conf</h4><p> ＃ 设置Redis的运行模式，yes表示后台运行，no表示不开启后台运行。<br><figure class="highlight nginx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attribute">daemonize</span> <span class="hljs-literal">yes</span></span><br></pre></td></tr></table></figure></p>
+<p> ＃ 指定 redis 监听端口，默认为 6379<br><figure class="highlight elm hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">port</span> 6379</span><br></pre></td></tr></table></figure></p>
+<p>＃ 设置bind_ip，默认监听接口，默认是监听本地，如果未配置的情况下，只有本地可以访问redis，如果取消，则默认监听所有接口<br><figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># <span class="hljs-selector-tag">bind</span> 127<span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.1</span></span><br></pre></td></tr></table></figure></p>
+<p>＃ 指定日志记录级别<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> debug  记录很多信息，用于开发和测试</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> varbose 很多精简的有用信息，不像 debug 会记录那么多</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> notice 普通的 verbose，常用于生产环境</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> warning 只有非常重要或者严重的信息会记录到日志</span></span><br><span class="line"></span><br><span class="line">loglevel verbose</span><br></pre></td></tr></table></figure></p>
+<p>＃ 配置 log 文件名称和全路径地址，默认为stdout，即标准输出，输出到/dev/null，可以手动指定redis日志文件地址，建议级别不要太高，否则会产生大量日志，注意避免磁盘因此撑满。<br><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logfile <span class="hljs-built_in">stdout</span></span><br></pre></td></tr></table></figure></p>
+<p>＃ 可用数据库数，默认值为 16，默认数据库存储在 DB 0 号 ID 库中，无特殊需求，建议仅设置一个数据库<br><br>＃ 查询数据库使用  SELECT ‘dbid’，dbid 介于 0 到 ‘databases’-1 之间。<br><figure class="highlight lsl hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">database <span class="hljs-number">16</span></span><br></pre></td></tr></table></figure></p>
+<p>＃ 安全限定，要求客户端在处理任何命令时都要验证身份和设置密码。<br><br>＃ 默认不启用，若要启用，需要将下行取消注释，并将foobared设置自定一的密码接即可。<br><br>＃ <strong>因为redis加密是通过配置文件进行，所以目前各大云厂家的redis PAAS 服务，都不支持redis加密，在程序开发时需要注意。</strong><br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> requirepass foobared</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 如果开启了安全验证，这时通过redis-cli登录时需要首先执行auth，否则不能正常使用。</span></span><br><span class="line"><span class="hljs-meta">redis-cli&gt;</span><span class="hljs-bash"> auth foobared</span></span><br></pre></td></tr></table></figure></p>
+<p>＃ 向redis内插入一条数据<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">redis-cli&gt;</span><span class="hljs-bash">  <span class="hljs-built_in">set</span> [key] [values]</span></span><br></pre></td></tr></table></figure></p>
+<p>＃ 获取key的值<br><figure class="highlight maxima hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli&gt; <span class="hljs-built_in">get</span> <span class="hljs-built_in">key</span></span><br></pre></td></tr></table></figure></p>
+<p>＃ 查看redis的db信息<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">redis-cli&gt;</span><span class="hljs-bash"> info</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="Setup-3-Others"><a href="#Setup-3-Others" class="headerlink" title="Setup 3. Others"></a><strong>Setup 3. Others</strong></h2><ul>
+<li>redis-dump</li>
+<li>master/slave</li>
+<li>slow log</li>
+</ul>
+<h3 id="Wait-…"><a href="#Wait-…" class="headerlink" title="Wait … "></a><font color="blackm,sis" size="45">Wait … </font></h3>
         </div>
         
         
@@ -352,7 +391,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-07-28T23:26:19.000Z">2016-07-29</time>
+                <time class="level-item has-text-grey" datetime="2016-07-04T17:58:03.000Z">2016-07-05</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/CentOS/">CentOS</a>
@@ -362,7 +401,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 minutes read (About 459 words)
+                    4 minutes read (About 666 words)
                 </span>
                 
                 
@@ -371,93 +410,106 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/07/29/trun-off-ipv6/">HowTo Trun Off IPv6 in CentOS 6.x</a>
+                <a class="has-link-black-ter" href="/2016/07/05/use-fuse-sshfs-to-mount-remote-filesystems/">HowTo Use Fuse-sshfs to Mount Remote Filesystems</a>
             
         </h1>
         <div class="content">
-            <h2 id="1-CentOS-6-x"><a href="#1-CentOS-6-x" class="headerlink" title="1. CentOS 6.x"></a>1. CentOS 6.x</h2><p>CentOS 6 上是默认打开了IPv6，但其实在我们实际使用中很难用到它，所以本篇的内容就是如何关闭IPv6。</p>
-<p>＃ 可以看到 inet6 ，说明还没关闭。<br><figure class="highlight less hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-attr">[root@ultraera ~]</span># <span class="hljs-selector-tag">ifconfig</span> <span class="hljs-selector-tag">eth0</span></span><br><span class="line"><span class="hljs-selector-tag">eth0</span>      <span class="hljs-selector-tag">Link</span> <span class="hljs-selector-tag">encap</span><span class="hljs-selector-pseudo">:Ethernet</span>  <span class="hljs-selector-tag">HWaddr</span> <span class="hljs-selector-tag">00</span><span class="hljs-selector-pseudo">:0C</span><span class="hljs-selector-pseudo">:29</span><span class="hljs-selector-pseudo">:3A</span><span class="hljs-selector-pseudo">:F9</span><span class="hljs-selector-pseudo">:6F</span></span><br><span class="line">          <span class="hljs-selector-tag">inet</span> <span class="hljs-selector-tag">addr</span><span class="hljs-selector-pseudo">:172.16.102.161</span>  <span class="hljs-selector-tag">Bcast</span><span class="hljs-selector-pseudo">:172.16.102.255</span>  <span class="hljs-selector-tag">Mask</span><span class="hljs-selector-pseudo">:255.255.255.0</span></span><br><span class="line">          <span class="hljs-selector-tag">inet6</span> <span class="hljs-selector-tag">addr</span>: <span class="hljs-selector-tag">fe80</span><span class="hljs-selector-pseudo">::20c</span><span class="hljs-selector-pseudo">:29ff</span><span class="hljs-selector-pseudo">:fe3a</span><span class="hljs-selector-pseudo">:f96f</span>/<span class="hljs-selector-tag">64</span> <span class="hljs-selector-tag">Scope</span><span class="hljs-selector-pseudo">:Link</span></span><br><span class="line">          <span class="hljs-selector-tag">UP</span> <span class="hljs-selector-tag">BROADCAST</span> <span class="hljs-selector-tag">RUNNING</span> <span class="hljs-selector-tag">MULTICAST</span>  <span class="hljs-selector-tag">MTU</span><span class="hljs-selector-pseudo">:1500</span>  <span class="hljs-selector-tag">Metric</span><span class="hljs-selector-pseudo">:1</span></span><br><span class="line">          <span class="hljs-selector-tag">RX</span> <span class="hljs-selector-tag">packets</span><span class="hljs-selector-pseudo">:199</span> <span class="hljs-selector-tag">errors</span><span class="hljs-selector-pseudo">:0</span> <span class="hljs-selector-tag">dropped</span><span class="hljs-selector-pseudo">:0</span> <span class="hljs-selector-tag">overruns</span><span class="hljs-selector-pseudo">:0</span> <span class="hljs-selector-tag">frame</span><span class="hljs-selector-pseudo">:0</span></span><br><span class="line">          <span class="hljs-selector-tag">TX</span> <span class="hljs-selector-tag">packets</span><span class="hljs-selector-pseudo">:122</span> <span class="hljs-selector-tag">errors</span><span class="hljs-selector-pseudo">:0</span> <span class="hljs-selector-tag">dropped</span><span class="hljs-selector-pseudo">:0</span> <span class="hljs-selector-tag">overruns</span><span class="hljs-selector-pseudo">:0</span> <span class="hljs-selector-tag">carrier</span><span class="hljs-selector-pseudo">:0</span></span><br><span class="line">          <span class="hljs-selector-tag">collisions</span><span class="hljs-selector-pseudo">:0</span> <span class="hljs-selector-tag">txqueuelen</span><span class="hljs-selector-pseudo">:1000</span></span><br><span class="line">          <span class="hljs-selector-tag">RX</span> <span class="hljs-selector-tag">bytes</span><span class="hljs-selector-pseudo">:20124</span> (<span class="hljs-number">19.6</span> KiB)  <span class="hljs-selector-tag">TX</span> <span class="hljs-selector-tag">bytes</span><span class="hljs-selector-pseudo">:17182</span> (<span class="hljs-number">16.7</span> KiB)</span><br></pre></td></tr></table></figure></p>
-<p>＃ 修改/etc/modprobe.d/dist.conf<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@ultraera ~]# vi /etc/modprobe.d/dist.conf</span><br><span class="line"><span class="hljs-comment"># 添加下面两行内容</span></span><br><span class="line">alias net-pf-10 off</span><br><span class="line">alias<span class="hljs-built_in"> ipv6 </span>off</span><br><span class="line"><span class="hljs-comment"># 保存退出，并且重新启动系统</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 开机不启动</span></span><br><span class="line">[root@ultraera ~]# chkconfig ip6tables off</span><br></pre></td></tr></table></figure></p>
-<p>＃ 系统重启完成后，检查是否加载IPv6<br><figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="hljs-symbol">@ultraera</span> ~]<span class="hljs-meta"># lsmod | grep v6</span></span><br></pre></td></tr></table></figure></p>
-<p>＃ 补充</p>
-<ul>
-<li><p>修改/etc/sysconfig/network，追加</p>
-<figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">NETWORKING_IPV6</span>=<span class="hljs-literal">no</span></span><br></pre></td></tr></table></figure>
+            <p>传统我们服务器之间文件共享的方式有采用NFS、Samba等等，但是在我看来配置都有一定的复杂性，当然复杂也有它们的优势，这里推荐一个依赖于SSH的文件共享工具，Fuse-sshfs。<br><br>SSH 是一个强大且安全的工具，我们除了可以用它来远程管理主机外，还可以通过它建立 SSH tunnel 作 Proxy 用，远程传输文件等等。而这里我想要介绍另外一个功能，那就是结合 sshfs 这个工具可以把远程主机的文件系统映射到本地主机上，透过 SSH 把远程文件系统挂载到本机上，这样我们可以不必使用 scp 工具就可以做到直接复制及删除远程主机的文件了，就像操作本地磁盘一样方便。<br><br>sshfs 是基于 FUSE 构建的 SSH 文件系统客户端程序，通过它远程主机的配置无需作任何改变，就可以透过 SSH 协议来挂载远程文件系统了，非常方便及安全。<br><br></p>
+<h3 id="Install-fuse-sshfs"><a href="#Install-fuse-sshfs" class="headerlink" title="Install fuse-sshfs"></a>Install fuse-sshfs</h3><figure class="highlight d hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="hljs-built_in">cent</span><span class="hljs-keyword">@localhost</span> ~]$ sudo yum install -y epel-relese</span><br><span class="line">[<span class="hljs-built_in">cent</span><span class="hljs-keyword">@localhost</span> ~]$ sudo yum --enablerepo=epel install -y fuse-sshfs</span><br></pre></td></tr></table></figure>
+<h3 id="挂载远程-ssh文件系统"><a href="#挂载远程-ssh文件系统" class="headerlink" title="挂载远程 ssh文件系统"></a>挂载远程 ssh文件系统</h3><figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[cent<span class="hljs-variable">@localhost</span> ~]<span class="hljs-variable">$ </span>mkdir ./mnt</span><br><span class="line">[cent<span class="hljs-variable">@localhost</span> ~]<span class="hljs-variable">$ </span>sshfs root<span class="hljs-variable">@192</span>.<span class="hljs-number">168.16</span>.<span class="hljs-number">230</span><span class="hljs-symbol">:/home/</span> ./mnt</span><br><span class="line">root<span class="hljs-variable">@192</span>.<span class="hljs-number">168.16</span>.<span class="hljs-number">230</span><span class="hljs-string">'s password:</span></span><br><span class="line"><span class="hljs-string">[cent@localhost ~]$ mount</span></span><br><span class="line"><span class="hljs-string">root@192.168.16.230:/home/ on /home/cent/mnt type fuse.sshfs (rw,nosuid,nodev,user=cent)</span></span><br></pre></td></tr></table></figure>
+<h3 id="卸载远程-ssh文件系统"><a href="#卸载远程-ssh文件系统" class="headerlink" title="卸载远程 ssh文件系统"></a>卸载远程 ssh文件系统</h3><figure class="highlight d hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="hljs-built_in">cent</span><span class="hljs-keyword">@localhost</span> ~]$ fusermount -u ./mnt</span><br></pre></td></tr></table></figure>
+<h3 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h3><figure class="highlight haml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-<span class="hljs-ruby">C 压缩，或者-o compression=yes</span></span><br><span class="line"><span class="hljs-ruby">-o reconnect 自动重连</span></span><br><span class="line"><span class="hljs-ruby">-o transform_symlinks 表示转换绝对链接符号为相对链接符号</span></span><br><span class="line"><span class="hljs-ruby">-o follow_symlinks 沿用服务器上的链接符号</span></span><br><span class="line"><span class="hljs-ruby">-o cache=yes</span></span><br><span class="line"><span class="hljs-ruby">-o allow_other 这个参数最重要，必须写，否则任何文件都是Permission Deny</span></span><br></pre></td></tr></table></figure>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>当然sshfs也不尽是优点，例如远程主机失去响应后本地挂载点卡死并影响本地系统使用，需要手工找出 sshfs进程并杀死，因网速问题造成操作响应缓慢等等，不过一般在稳定快速的网络中不太会遇上，对比其强大的功能，还是可以接受的，正所谓暇不掩瑜。</p>
+<ol>
+<li>所以sshfs适合内部网络比较稳定的地方</li>
+<li>配合ssh免密登录使用会更好哦</li>
+<li>可以看到的是sshfs默认挂载是rw的权限，但是通过sshfs –help 可以看到有非常详尽的参数配置可以选择，大家可以仔细研究下。</li>
+</ol>
+<h3 id="附1"><a href="#附1" class="headerlink" title="附1."></a>附1.</h3><p><a href="http://igikorn.com/sshfs-windows-8/" target="_blank" rel="noopener">Link</a> 在windows下可以使用sshfs.</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-06-15T18:29:00.000Z">2016-06-16</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 minutes read (About 874 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/06/16/mysql03/">MySQL(1) 常用优化</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p><strong>环境：MySQL 5.5 &amp; MySQL 5.6 &amp; RHEL/CentOS 5/6/7</strong></p>
+</blockquote>
+<h3 id="1-MySQL-系统配置优化"><a href="#1-MySQL-系统配置优化" class="headerlink" title="1. MySQL 系统配置优化"></a>1. MySQL 系统配置优化</h3><p>网络配置方面：修改/etc/sysctl.conf<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 增加tcp支持的队列数</span></span><br><span class="line">     net.ipv4.tcp_max_syn_backlog = 65535</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 减少断开时</span></span><br></pre></td></tr></table></figure></p>
+<p> 打开文件限制 修改/etc/security/limits.conf<br><figure class="highlight livecodeserver hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 增加：</span></span><br><span class="line">     * <span class="hljs-built_in">sort</span> nofile <span class="hljs-number">65535</span></span><br><span class="line">     * hard nofile <span class="hljs-number">65535</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="2-MySQL-配置文件优化"><a href="#2-MySQL-配置文件优化" class="headerlink" title="2.  MySQL 配置文件优化"></a>2.  MySQL 配置文件优化</h3><ul>
+<li><p>配置文件位置：/etc/my.cnf /etc/mysql/my.cnf</p>
 </li>
-<li><p>修改/etc/hosts文件，把ipv6的那句本地主机名解析的也注释掉</p>
-<figure class="highlight clean hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#::<span class="hljs-number">1</span>   localhost localhost6 localhost6.localdomain6</span><br></pre></td></tr></table></figure>
+<li><p>如果/etc下没有my.cnf，需要拷贝一份</p>
+<figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/mysql/my</span>-medium.cnf <span class="hljs-regexp">/etc/my</span>.cnf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置文件查找顺序：mysql -verbose –help | grep -A 1 ‘Default options’</p>
+</li>
+<li><p>常用配置说明:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">innodb_buffer_pool_size</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><br></p>
-<h2 id="2-CentOS-7-x"><a href="#2-CentOS-7-x" class="headerlink" title="2. CentOS 7.x"></a>2. CentOS 7.x</h2><h4 id="Setup-1-修改grub文件，在启动引导时不加载ipv6"><a href="#Setup-1-修改grub文件，在启动引导时不加载ipv6" class="headerlink" title="Setup 1. 修改grub文件，在启动引导时不加载ipv6"></a>Setup 1. 修改grub文件，在启动引导时不加载ipv6</h4><figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="hljs-symbol">@ultraera</span> ~]<span class="hljs-meta"># vim /etc/default/grub</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># 在GRUB_CMDLINE_LINUX=<span class="hljs-string">" "</span> ,中增加</span></span><br><span class="line">ipv6.disable＝<span class="hljs-number">1</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># 重新生产启动引导文件，注意，这里重启系统是没用的，需要手动重建引导文件</span></span><br><span class="line">[root<span class="hljs-symbol">@ultraera</span> ~]<span class="hljs-meta"># grub2-mkconfig -o /boot/grub2/grub.cfg</span></span><br><span class="line">[root<span class="hljs-symbol">@ultraera</span> ~]<span class="hljs-meta"># reboot</span></span><br></pre></td></tr></table></figure>
-<p>＃ 验证是否关闭<br><figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="hljs-symbol">@ultraera</span> ~]<span class="hljs-meta"># lsmod | grep ipv6</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="Setup-2-第二种方式"><a href="#Setup-2-第二种方式" class="headerlink" title="Setup 2. 第二种方式"></a>Setup 2. 第二种方式</h4><figure class="highlight stata hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 修改/etc/sysctl.<span class="hljs-keyword">conf</span>,增加以下：</span><br><span class="line"><span class="hljs-keyword">net</span>.ipv6.<span class="hljs-keyword">conf</span>.all.disable_ipv6 = 1</span><br><span class="line"></span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>IPv6是默认支持的，所以当你要重新开起IPv6支持时，将以上添加的指令注释掉即可。</p>
-<font color="red"><b>之前碰到过安装某些服务时，不能启动，后来检查原因是因为关闭ipv6的问题，因为在这些服务的conf文件，指定了类似监听ipv6,因为关闭了ipv6导致服务无法启动，将其关闭即可。<b></b></b></font>
-
-</blockquote>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-07-27T09:34:01.000Z">2016-07-27</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/KVM/">KVM</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 minutes read (About 557 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/07/27/install-kvm-web-manage-server-webvirtmgr/">HowTo Install KVM Manage Server : webvirtmgr</a>
-            
-        </h1>
-        <div class="content">
-            <p>生产环境的KVM宿主机越来越多，需要对宿主机的状态进行调控。这里用webvirtmgr进行管理。图形化的WEB，让人能更方便的查看kvm 宿主机的情况和操作.</p>
-<p><strong><em><a href="https://github.com/retspen/webvirtmgr" target="_blank" rel="noopener">GitHub Project.</a></em></strong></p>
-<h3 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h3><h4 id="安装支持的软件源"><a href="#安装支持的软件源" class="headerlink" title="安装支持的软件源"></a>安装支持的软件源</h4><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> -y epel-<span class="hljs-keyword">release</span></span><br></pre></td></tr></table></figure>
-<h4 id="安装相关软件"><a href="#安装相关软件" class="headerlink" title="安装相关软件"></a>安装相关软件</h4><figure class="highlight mel hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install git <span class="hljs-keyword">python</span>-pip libvirt-<span class="hljs-keyword">python</span> libxml2-<span class="hljs-keyword">python</span> <span class="hljs-keyword">python</span>-websockify supervisor nginx</span><br></pre></td></tr></table></figure>
-<h4 id="从git-hub中下载相关的webvirtmgr代码"><a href="#从git-hub中下载相关的webvirtmgr代码" class="headerlink" title="从git-hub中下载相关的webvirtmgr代码"></a>从git-hub中下载相关的webvirtmgr代码</h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/src/</span></span><br><span class="line">git clone git:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/retspen/</span>webvirtmgr.git</span><br></pre></td></tr></table></figure>
-<h4 id="安装webvirtmgr"><a href="#安装webvirtmgr" class="headerlink" title="安装webvirtmgr"></a>安装webvirtmgr</h4><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">cd</span> webvirtmgr/</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
-<h4 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h4><figure class="highlight cmake hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> python-sqlite2</span><br></pre></td></tr></table></figure>
-<h4 id="对django进行环境配置"><a href="#对django进行环境配置" class="headerlink" title="对django进行环境配置"></a>对django进行环境配置</h4><figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">./manage.py syncdb</span><br><span class="line"></span><br><span class="line">You just installed Django<span class="hljs-string">'s auth system, which means you don'</span>t have any superusers <span class="hljs-keyword">defined</span>.</span><br><span class="line">Would you like to create one now? (yes/no): yes</span><br><span class="line">Username (leave blank to <span class="hljs-keyword">use</span> <span class="hljs-string">'root'</span>): admin</span><br><span class="line">Email <span class="hljs-symbol">address:</span> luchuanjia<span class="hljs-variable">@msn</span>.com</span><br><span class="line"><span class="hljs-symbol">Password:</span>*********</span><br><span class="line">Password (again)<span class="hljs-symbol">:*********</span></span><br><span class="line"></span><br><span class="line">./manage.py collectstatic <span class="hljs-comment">#生成配置文件</span></span><br><span class="line">./manage.py createsuperuser <span class="hljs-comment">#添加管理员账号</span></span><br></pre></td></tr></table></figure>
-<h4 id="拷贝web到-相关目录"><a href="#拷贝web到-相关目录" class="headerlink" title="拷贝web到 相关目录"></a>拷贝web到 相关目录</h4><figure class="highlight stata hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">cd</span> ..</span><br><span class="line"><span class="hljs-keyword">rm</span> -rf /<span class="hljs-keyword">var</span>/www</span><br><span class="line"><span class="hljs-keyword">mkdir</span> -pv /<span class="hljs-keyword">var</span>/www</span><br><span class="line">cp -Rv webvirtmgr /<span class="hljs-keyword">var</span>/www/webvirtmgr</span><br></pre></td></tr></table></figure>
-<h4 id="设置ssh"><a href="#设置ssh" class="headerlink" title="设置ssh"></a>设置ssh</h4><figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-tag">ssh-keygen</span></span><br><span class="line"><span class="hljs-selector-tag">ssh-copy-id</span> 192<span class="hljs-selector-class">.168</span><span class="hljs-selector-class">.2</span><span class="hljs-selector-class">.32</span></span><br><span class="line"><span class="hljs-selector-tag">ssh</span> 192<span class="hljs-selector-class">.168</span><span class="hljs-selector-class">.2</span><span class="hljs-selector-class">.32</span> <span class="hljs-selector-tag">-L</span> <span class="hljs-selector-tag">localhost</span><span class="hljs-selector-pseudo">:8000</span><span class="hljs-selector-pseudo">:localhost</span><span class="hljs-selector-pseudo">:8000</span> <span class="hljs-selector-tag">-L</span> <span class="hljs-selector-tag">localhost</span><span class="hljs-selector-pseudo">:6080</span><span class="hljs-selector-pseudo">:localhost</span><span class="hljs-selector-pseudo">:6080</span></span><br></pre></td></tr></table></figure>
-<h4 id="编辑nginx配置文件"><a href="#编辑nginx配置文件" class="headerlink" title="编辑nginx配置文件"></a>编辑nginx配置文件</h4><figure class="highlight nginx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attribute">mv</span> /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak</span><br><span class="line">vim /etc/nginx/conf.d/webvirtmgr.conf  <span class="hljs-comment">#添加下面内容到文件中</span></span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span> default_server;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-attribute">server_name</span> <span class="hljs-variable">$hostname</span>;</span><br><span class="line">    <span class="hljs-comment">#access_log /var/log/nginx/webvirtmgr_access_log;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-attribute">location</span> /static/ &#123;</span><br><span class="line">        <span class="hljs-attribute">root</span> /var/www/webvirtmgr/webvirtmgr; <span class="hljs-comment"># or /srv instead of /var</span></span><br><span class="line">        <span class="hljs-attribute">expires</span> max;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-attribute">location</span> / &#123;</span><br><span class="line">        <span class="hljs-attribute">proxy_pass</span> http://127.0.0.1:8000;</span><br><span class="line">        <span class="hljs-attribute">proxy_set_header</span> X-Real-IP <span class="hljs-variable">$remote_addr</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_set_header</span> X-Forwarded-for <span class="hljs-variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_set_header</span> Host <span class="hljs-variable">$host</span>:<span class="hljs-variable">$server_port</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_set_header</span> X-Forwarded-Proto <span class="hljs-variable">$remote_addr</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_connect_timeout</span> <span class="hljs-number">600</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_read_timeout</span> <span class="hljs-number">600</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_send_timeout</span> <span class="hljs-number">600</span>;</span><br><span class="line">        <span class="hljs-attribute">client_max_body_size</span> <span class="hljs-number">1024M</span>; <span class="hljs-comment"># Set higher depending on your needs</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="启动nginx"><a href="#启动nginx" class="headerlink" title="启动nginx"></a>启动nginx</h4><figure class="highlight crmsh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service nginx <span class="hljs-literal">start</span></span><br></pre></td></tr></table></figure>
-<h4 id="修改防火墙规则-如果关闭selinux，此步可省略"><a href="#修改防火墙规则-如果关闭selinux，此步可省略" class="headerlink" title="修改防火墙规则 ( 如果关闭selinux，此步可省略)"></a>修改防火墙规则 ( 如果关闭selinux，此步可省略)</h4><figure class="highlight jboss-cli hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">/usr/sbin/setsebool</span> httpd_can_network_<span class="hljs-keyword">connect</span> <span class="hljs-literal">true</span></span><br></pre></td></tr></table></figure>
-<h4 id="设置-supervisor"><a href="#设置-supervisor" class="headerlink" title="设置 supervisor"></a>设置 supervisor</h4><figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">chown -R nginx:nginx /var/www/webvirtmgr</span><br><span class="line">vim /etc/supervisord.conf <span class="hljs-comment">#在文件末尾添加</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[program:webvirtmgr]</span></span><br><span class="line">command=/usr/bin/python /var/www/webvirtmgr/manage.py run_gunicorn -c /var/www/webvirtmgr/conf/gunicorn.conf.py</span><br><span class="line">directory=/var/www/webvirtmgr</span><br><span class="line">autostart=true</span><br><span class="line">autorestart=true</span><br><span class="line">logfile=/var/log/supervisor/webvirtmgr.log</span><br><span class="line">log_stderr=true</span><br><span class="line">user=nginx</span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[program:webvirtmgr-console]</span></span><br><span class="line">command=/usr/bin/python /var/www/webvirtmgr/console/webvirtmgr-console</span><br><span class="line">directory=/var/www/webvirtmgr</span><br><span class="line">autostart=true</span><br><span class="line">autorestart=true</span><br><span class="line">stdout_logfile=/var/log/supervisor/webvirtmgr-console.log</span><br><span class="line">redirect_stderr=true</span><br><span class="line">user=nginx</span><br><span class="line"></span><br><span class="line">修改/var/www/webvirtmgr/conf/gunicorn.conf.py</span><br><span class="line">bind = <span class="hljs-string">"0:8000"</span></span><br></pre></td></tr></table></figure>
-<h4 id="设置开机启动"><a href="#设置开机启动" class="headerlink" title="设置开机启动"></a>设置开机启动</h4><figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">chkconfig supervisord <span class="hljs-keyword">on</span></span><br><span class="line">chkconfig nginx <span class="hljs-keyword">on</span></span><br><span class="line">vim /etc/rc.<span class="hljs-keyword">local</span></span><br><span class="line">      /usr/sbin/setsebool httpd_can_network_connect <span class="hljs-literal">true</span></span><br></pre></td></tr></table></figure>
-<h4 id="启动进程"><a href="#启动进程" class="headerlink" title="启动进程"></a>启动进程</h4><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service nginx start</span><br><span class="line">service supervisord start</span><br></pre></td></tr></table></figure>
-<h4 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="hljs-regexp">//</span><span class="hljs-variable">$server_ip</span><span class="hljs-regexp">/login/</span></span><br></pre></td></tr></table></figure>
+<p>设置mysql数据库innodb存储缓冲池的大小，如果是独立的mysql服务，建议设置为物理内存的75％左右，如果和apahce等服务一起运行时，则根据实际需求设定，尽可能大。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">innodb_buffer_pool_instances</span><br></pre></td></tr></table></figure>
+<p>这是mysql5.5中新增的一个参数，用于控制缓冲池的个数，默认情况下只有1个缓冲池，设置多个缓冲池可以增加并发性，提事物运算效率。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">innodb_log_buffer_size</span><br></pre></td></tr></table></figure>
+<p>设定日志缓冲区的大小，由于体制最长每秒就会刷新，不需要太大。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">innodb_flush_log_at_trx_commit</span><br></pre></td></tr></table></figure>
+<p>关键参数，对于innodb的IO效率影响很大，默认值为1，可以取值0：不自动同步log到磁盘，由mysql每秒自动执行，1：将所有事物直接写到磁盘，可以用在保证数据绝对安全的地方，会影响效率，2：先将事物纪录保存在内存中，有mysql每秒统一写入磁盘，建议设定为2</p>
+<figure class="highlight abnf hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">innodb_read_io_threads<span class="hljs-comment">;</span></span><br><span class="line">innodb_write_io_threadsm<span class="hljs-comment">;</span></span><br></pre></td></tr></table></figure>
+<p>mysql5.5 新增的两个参数，决定了Innodb读写的io进程数量，默认为4，可以根据CPU的实际性能设定。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">innodb_file_per_table</span><br></pre></td></tr></table></figure>
+<p>关键参数，控制Innodb每一个表实用独立的表空间，默认为off，也就是所有的表都会建立在共享空间，不利于资源回收</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">innodb_stats_on_metadata</span><br></pre></td></tr></table></figure>
+<p>决定了mysql在什么情况下会刷新innodb表的统计信息，可以关闭，管理员选取时间手动刷新。存在的目的保证优化器正确找到索引.</p>
+<p> mysql最大连接数限制<br><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">max_connections</span>=<span class="hljs-number">5000</span></span><br></pre></td></tr></table></figure></p>
+<p> 不区分表名称大小写<br><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">lower_case_table_names</span>=<span class="hljs-number">1</span></span><br></pre></td></tr></table></figure></p>
+<p> 修改默认字符编码<br><figure class="highlight vala hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta"># mysql 5.1</span></span><br><span class="line"><span class="hljs-keyword">default</span>-character-<span class="hljs-keyword">set</span>=utf8</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># mysql 5.5 &amp; mysql 5.6</span></span><br><span class="line">character-<span class="hljs-keyword">set</span>-server=utf8</span><br></pre></td></tr></table></figure></p>
+<p> 最大错误操作次数 : 默认是10，尽量调大，否则容易导致mysql对来访主机锁定<br><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">max_connect_errors</span> = <span class="hljs-number">10000</span></span><br></pre></td></tr></table></figure></p>
+<p> 设置mysql时区：默认mysql使用的系统时区，其实我们也可以在mysql内设定时区<br><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">default-time_zone</span> = <span class="hljs-string">'+8:00'</span></span><br></pre></td></tr></table></figure></p>
+<p> 以上配置，如何在mysql内，检测是否生效<br><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">show</span> <span class="hljs-keyword">variables</span> <span class="hljs-keyword">like</span> <span class="hljs-string">'%max_connections%'</span></span><br><span class="line"><span class="hljs-keyword">show</span> <span class="hljs-keyword">variables</span> <span class="hljs-keyword">like</span> <span class="hljs-string">'%time_zone%'</span></span><br><span class="line"><span class="hljs-keyword">show</span> <span class="hljs-keyword">variables</span> <span class="hljs-keyword">like</span> <span class="hljs-string">'%max_connect_errors%'</span></span><br><span class="line"><span class="hljs-keyword">show</span> <span class="hljs-keyword">variables</span> <span class="hljs-keyword">like</span> <span class="hljs-string">'%character-set-server%'</span></span><br><span class="line"><span class="hljs-keyword">show</span> <span class="hljs-keyword">variables</span> <span class="hljs-keyword">like</span> <span class="hljs-string">'%lower_case_table_names%'</span></span><br></pre></td></tr></table></figure></p>
+<p> 修改/etc/my.cnf这是需要重启mysql才能生效，但是很多时候，我们不方便重启mysql，这时我们需要在mysql临时修改配置，注意并不是所有选项都可以在运行中修改，以修改时区为例：<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 修改全局设置</span></span><br><span class="line"><span class="hljs-builtin-name">set</span> global <span class="hljs-attribute">time_zone</span>=<span class="hljs-string">'+8:00'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 修改当前会话</span></span><br><span class="line"><span class="hljs-builtin-name">set</span> <span class="hljs-attribute">time_zone</span>=<span class="hljs-string">'+8:00'</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="3-第三方工具对mysql配置进行优化"><a href="#3-第三方工具对mysql配置进行优化" class="headerlink" title="3.  第三方工具对mysql配置进行优化"></a>3.  第三方工具对mysql配置进行优化</h3><ul>
+<li><a href="http://toolspercona.com" target="_blank" rel="noopener">http://toolspercona.com</a> <br><br>先回答问题，然后根据问题你给出的答案，网站会给你一个参考配置。</li>
+</ul>
 
         </div>
         
@@ -479,17 +531,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-07-27T02:27:54.000Z">2016-07-27</time>
+                <time class="level-item has-text-grey" datetime="2016-06-15T18:28:35.000Z">2016-06-16</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/CentOS/">CentOS</a>
+                <a class="has-link-grey -link" href="/categories/Tomcat/">Tomcat</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    7 minutes read (About 1013 words)
+                    3 minutes read (About 447 words)
                 </span>
                 
                 
@@ -498,38 +550,33 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/07/27/centosxia-yumzhong-releaseverhe-basearchde-qu-zhi/">Yum中$releasever和$basearch的取值</a>
+                <a class="has-link-black-ter" href="/2016/06/16/apache-tomcat-you-hua-she-ding-yi/">Tomcat(3) 优化设定</a>
             
         </h1>
         <div class="content">
-            <h4 id="查看-etc-yum-repos-d-CentOS-Base-repo"><a href="#查看-etc-yum-repos-d-CentOS-Base-repo" class="headerlink" title="查看/etc/yum.repos.d/CentOS-Base.repo"></a>查看/etc/yum.repos.d/CentOS-Base.repo</h4><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-section">[base]</span></span><br><span class="line"><span class="hljs-attr">name</span>=CentOS-<span class="hljs-variable">$releasever</span> - Base</span><br><span class="line"><span class="hljs-attr">mirrorlist</span>=http://mirrorlist.centos.org/?release=<span class="hljs-variable">$releasever</span>&amp;arch=<span class="hljs-variable">$basearch</span>&amp;repo=os&amp;infra=<span class="hljs-variable">$infra</span></span><br><span class="line"><span class="hljs-comment">#baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch/</span></span><br><span class="line"><span class="hljs-attr">gpgcheck</span>=<span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">gpgkey</span>=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-<span class="hljs-number">6</span></span><br></pre></td></tr></table></figure>
-<p>其实在日常使用之中，我们在很多地方，特别是脚本内看到了调用<code>$releasever</code>和<code>$basearch</code></p>
-
-<ol>
-<li>$releasever的值,这个表示当前系统的发行版本</li>
-</ol>
-<figure class="highlight ada hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@ultraera /]# rpm -qi centos-release</span><br><span class="line">Name        : <span class="hljs-type">centos</span>-release               Relocations: (<span class="hljs-keyword">not</span> relocatable)</span><br><span class="line">Version     : 6                                 <span class="hljs-type">Vendor</span>: CentOS</span><br><span class="line">Release     : 7.<span class="hljs-type">el6.centos.12.3</span>             Build Date: Tue <span class="hljs-number">04</span> Aug <span class="hljs-number">2015</span> <span class="hljs-number">12</span>:<span class="hljs-number">13</span>:<span class="hljs-number">46</span> AM CST</span><br><span class="line">Install Date: Sat <span class="hljs-number">21</span> May <span class="hljs-number">2016</span> <span class="hljs-number">03</span>:<span class="hljs-number">31</span>:<span class="hljs-number">27</span> AM CST      Build Host: c6b9.bsys.dev.centos.org</span><br><span class="line">Group       : <span class="hljs-type">System</span> Environment/Base       Source RPM: centos-release-<span class="hljs-number">6</span>-<span class="hljs-number">7</span>.el6.centos.<span class="hljs-number">12.3</span>.src.rpm</span><br><span class="line">Size        : 35634                            <span class="hljs-type">License</span>: GPLv2</span><br><span class="line">Signature   : <span class="hljs-type">RSA</span>/SHA1, Tue <span class="hljs-number">04</span> Aug <span class="hljs-number">2015</span> <span class="hljs-number">12</span>:<span class="hljs-number">15</span>:<span class="hljs-number">08</span> AM CST, Key ID <span class="hljs-number">0946</span>fca2c105b9de</span><br><span class="line">Packager    : <span class="hljs-type">CentOS</span> BuildSystem &lt;http://bugs.centos.org&gt;</span><br><span class="line">Summary     : <span class="hljs-type">CentOS</span> release file</span><br><span class="line">Description :</span><br><span class="line">CentOS release files</span><br><span class="line"></span><br><span class="line"># 其中Version <span class="hljs-number">6</span> 就是我们的版本号</span><br></pre></td></tr></table></figure>
-<ol>
-<li>$basearch是我们的系统硬件架构(CPU指令集),就是我们常说的i386\i486\i586\i686\</li>
-</ol>
-<figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="hljs-symbol">@ultraera</span> /]<span class="hljs-meta"># arch</span></span><br><span class="line">i386</span><br></pre></td></tr></table></figure>
-<p>但是，当我在命令行查看是却发现<code>$releasever</code>和<code>$basearch</code>是空的。<br><br><br>Google 一下之后，说明Yum变量的说明可以在这里（5.3.3. Using Yum Variables）找到，说明如下：</p>
-<blockquote>
-<p>5.3.3. Using Yum Variables</p>
-</blockquote>
-<p>You can use and reference the following built-in variables in yum commands and in all Yum configuration files (that is, /etc/yum.conf and all .repo files in the /etc/yum.repos.d/ directory):</p>
-<p>$releasever<br><br>You can use this variable to reference the release version of Red Hat Enterprise Linux. Yum obtains the value of $releasever from the distroverpkg=value line in the /etc/yum.conf configuration file. If there is no such line in /etc/yum.conf, then yum infers the correct value by deriving the version number from the redhat-release package.</p>
-<p>$arch<br><br>You can use this variable to refer to the system’s CPU architecture as returned when calling Python’s os.uname() function. Valid values for $arch include: i586, i686 and x86_64.</p>
-<p>$basearch<br><br>You can use $basearch to reference the base architecture of the system. For example, i686 and i586 machines both have a base architecture of i386, and AMD64 and Intel64 machines have a base architecture of x86_64.</p>
-<p>$YUM0-9<br><br>These ten variables are each replaced with the value of any shell environment variables with the same name. If one of these variables is referenced (in /etc/yum.conf for example) and a shell environment variable with the same name does not exist, then the configuration file variable is not replaced.</p>
-<p>To define a custom variable or to override the value of an existing one, create a file with the same name as the variable (without the “$” sign) in the /etc/yum/vars/ directory, and add the desired value on its first line.</p>
-<p>For example, repository descriptions often include the operating system name. To define a new variable called $osname, create a new file with “Red Hat Enterprise Linux” on the first line and save it as /etc/yum/vars/osname:</p>
-<p><code>echo “Red Hat Enterprise Linux” &gt; /etc/yum/vars/osname</code></p>
-<p>Instead of “Red Hat Enterprise Linux 6”, you can now use the following in the .repo files: name=$osname $releasever</p>
-<p>文中说到$releasever的定义可以查看 /etc/yum.conf 文件的事distroverpkg=value 行，打开 /etc/yum.conf 看一下，默认文件（我的是CentOS 6）内容如下：</p>
-<figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-section">[main]</span></span><br><span class="line"><span class="hljs-attr">cachedir</span>=/var/cache/yum/<span class="hljs-variable">$basearch</span>/<span class="hljs-variable">$releasever</span></span><br><span class="line"><span class="hljs-attr">keepcache</span>=<span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-attr">debuglevel</span>=<span class="hljs-number">2</span></span><br><span class="line"><span class="hljs-attr">logfile</span>=/var/log/yum.log</span><br><span class="line"><span class="hljs-attr">exactarch</span>=<span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">obsoletes</span>=<span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">gpgcheck</span>=<span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">plugins</span>=<span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">installonly_limit</span>=<span class="hljs-number">5</span></span><br><span class="line"><span class="hljs-attr">bugtracker_url</span>=http://bugs.centos.org/set_project.php?project_id=<span class="hljs-number">16</span>&amp;ref=http://bugs.centos.org/bug_report_page.php?category=yum</span><br><span class="line"><span class="hljs-attr">distroverpkg</span>=centos-release</span><br></pre></td></tr></table></figure>
-<p>distroverpkg=centos-release 代表什么？ 去哪找 centos-release 。找到这里我再一次表示困惑。<br>不过另一篇文章进行了我的视野： yum的$releasever真是太反动了， 关键内空如下：<br><br>在 /etc/yum.repos.d/ 目录下的软件库定义文件中，常常会在 baseurl 的路径中提到 $releasever 这个变量，表示当前发行版的大版本号，但大家知道这个变量是在哪设置的吗？我 grep 了整个 etc 目录都没找到，还是看了 yum.conf 才知道的，是在 yum.conf 文件里 distroverpkg 选项定义的。但这个选项就很有问题：<br><br>distroverpkg 和 releasever 名字不同，且看不出什么联系<br>distroverpkg 的值，并不是明文，而是“redhat-release”。不知道大家看到这个会有什么想法，反正我是首先想到了 /etc/redhat-release 文件，但我错了。实际上指的是 redhat-release 这个RPM包。所谓“distroverpkg=redhat-release”的意思，其实是将 $releasever 设置为 redhat-release 这个RPM包的版本号.</p>
-<h5 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：<br></h5><p>yum中的$releasever变量是取redhat-release-server rpm包的属性值( %{version})。<br>[root@ldap01 ~]# rpm -q –qf %{version} redhat-release-server;echo<br>6Server</p>
+            <ul>
+<li>设置JVM空间大小，Xms和Xmx一样大：JVM初始分配的内存由-Xms指定，默认是物理内存的1/64；JVM最大分配的内存由-Xmx指定，默认是物理内存的1/4。默认空余堆内存小于 40%时，JVM就会增大堆直到-Xmx的最大限制；空余堆内存大于70%时，JVM会减少堆直到-Xms的最小限制。因此服务器一般设置-Xms、 -Xmx相等以避免在每次GC 后调整堆的大小。</li>
+<li>关闭dns查询</li>
+<li>增加线程数量</li>
+<li>maxThreads、acceptCount ： 增加并发，同时增加这两个的数量</li>
+<li><p>内存优化 ： /tomcatbin/catalina.sh</p>
+</li>
+<li><p>JAVA_OPTS=”-XX:PermSize=64M -XX:MaxPermSize=128m -Xms512m -Xmx1024m -Duser.timezone=Asia/Shanghai”</p>
+</li>
+<li>缓存优化</li>
+<li>并发优化，线程优化</li>
+<li>&lt;Connector port=”80” protocol=”HTTP/1.1” maxThreads=”600” minSpareThreads=”100” maxSpareThreads=”500” acceptCount=”700”</li>
+<li>connectionTimeout=”20000” redirectPort=”8443” /&gt;</li>
+<li>关闭DNS查询 :修改server.xml文件中的Connector元素，修改属性enableLookups参数值: enableLookups=”false”</li>
+<li><p>使用apr插件，提高tomcat响应时间 <br></p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">(1)安装APR tomcat-native</span><br><span class="line">  apr-1.3.8.tar.gz   安装在/usr/local/apr</span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash">tar zxvf apr-1.3.8.tar.gz</span></span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash"><span class="hljs-built_in">cd</span> apr-1.3.8</span></span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash">./configure;make;make install</span></span><br><span class="line"></span><br><span class="line">  apr-util-1.3.9.tar.gz  安装在/usr/local/apr/lib</span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash">tar zxvf apr-util-1.3.9.tar.gz</span></span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash"><span class="hljs-built_in">cd</span> apr-util-1.3.9</span></span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash">./configure --with-apr=/usr/<span class="hljs-built_in">local</span>/apr ----with-java-home=JDK;make;make install</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash"><span class="hljs-built_in">cd</span> apache-tomcat-6.0.20/bin</span></span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash">tar zxvf tomcat-native.tar.gz</span></span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash"><span class="hljs-built_in">cd</span> tomcat-native/jni/native</span></span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash">./configure --with-apr=/usr/<span class="hljs-built_in">local</span>/apr;make;make install</span></span><br><span class="line"></span><br><span class="line">(2)设置 Tomcat 整合 APR</span><br><span class="line">  修改 tomcat 的启动 shell （startup.sh），在该文件中加入启动参数：</span><br><span class="line">    CATALINA_OPTS="$CATALINA_OPTS -Djava.library.path=/usr/local/apr/lib" 。</span><br><span class="line"></span><br><span class="line">(3)判断安装成功:</span><br><span class="line">  如果看到下面的启动日志，表示成功。</span><br><span class="line">    2007-4-26 15:34:32 org.apache.coyote.http11.Http11AprProtocol init</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开启manager 管理</p>
+</li>
+<li>使用<a href="http://visualvm.Java.net/download.html" target="_blank" rel="noopener">http://visualvm.Java.net/download.html</a> 工具监控tomcat的性能</li>
+<li>JAVA_OPTS=’-Dcom.sun.management.jmxremote.port=8999 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false’</li>
+<li>设置自动更新autodeploy＝false</li>
+</ul>
 
         </div>
         
@@ -569,7 +616,7 @@
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/16/">16</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/14/">14</a></li>
             
         </ul>
     </nav>
@@ -617,7 +664,7 @@
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        108
+                        92
                     </p>
                 </div>
             </div>
@@ -627,7 +674,7 @@
                         Categories
                     </p>
                     <p class="title has-text-weight-normal">
-                        28
+                        25
                     </p>
                 </div>
             </div>
@@ -637,7 +684,7 @@
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        42
+                        39
                     </p>
                 </div>
             </div>
@@ -927,30 +974,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/似水年华/">
-            <span class="level-start">
-                <span class="level-item">似水年华</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">14</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/我的微博/">
-            <span class="level-start">
-                <span class="level-item">我的微博</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/来自知乎/">
-            <span class="level-start">
-                <span class="level-item">来自知乎</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/魔方/">
             <span class="level-start">
                 <span class="level-item">魔方</span>
@@ -970,7 +993,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AWS/" style="font-size: 10px;">AWS</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 14.29px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 17.14px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 12.86px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 12.86px;">Ghost</a> <a href="/tags/Git/" style="font-size: 14.29px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 12.86px;">Linux</a> <a href="/tags/Mac/" style="font-size: 15.71px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.43px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 12.86px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.43px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 14.29px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.43px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.43px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 15.71px;">Tomcat</a> <a href="/tags/Weisk/" style="font-size: 10px;">Weisk</a> <a href="/tags/Yum/" style="font-size: 12.86px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.43px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/似水年华/" style="font-size: 10px;">似水年华</a> <a href="/tags/何余生/" style="font-size: 10px;">何余生</a> <a href="/tags/我给你讲个故事吧/" style="font-size: 18.57px;">我给你讲个故事吧</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
+        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AWS/" style="font-size: 10px;">AWS</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Weisk/" style="font-size: 10px;">Weisk</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
     </div>
 </div>
 
@@ -984,25 +1007,6 @@
         <h3 class="menu-label">
             Recent
         </h3>
-        
-        <article class="media">
-            
-            <a href="/2018/10/14/sdnedrletremfdrltmertedd/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="何余生说要感谢身边所有美好的人">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-14T08:48:47.000Z">2018-10-14</time></div>
-                    <a href="/2018/10/14/sdnedrletremfdrltmertedd/" class="has-link-black-ter is-size-6">何余生说要感谢身边所有美好的人</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/似水年华/">似水年华</a>
-                    </p>
-                </div>
-            </div>
-        </article>
         
         <article class="media">
             
@@ -1080,6 +1084,25 @@
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
+                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1091,17 +1114,6 @@
             Archives
         </h3>
         <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2018/05/">
@@ -1197,7 +1209,7 @@
                     <span class="level-item">April 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1230,7 +1242,7 @@
                     <span class="level-item">January 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1241,7 +1253,7 @@
                     <span class="level-item">December 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1252,7 +1264,7 @@
                     <span class="level-item">November 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1263,7 +1275,7 @@
                     <span class="level-item">October 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1274,7 +1286,7 @@
                     <span class="level-item">September 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1285,7 +1297,7 @@
                     <span class="level-item">August 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1296,7 +1308,7 @@
                     <span class="level-item">July 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -1340,51 +1352,7 @@
                     <span class="level-item">March 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2016/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2016</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/06/">
-                <span class="level-start">
-                    <span class="level-item">June 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/04/">
-                <span class="level-start">
-                    <span class="level-item">April 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -1665,27 +1633,6 @@
                     <a class="tags has-addons" href="/tags/iOS/">
                         <span class="tag">iOS</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/似水年华/">
-                        <span class="tag">似水年华</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/何余生/">
-                        <span class="tag">何余生</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/我给你讲个故事吧/">
-                        <span class="tag">我给你讲个故事吧</span>
-                        <span class="tag is-grey">13</span>
                     </a>
                 </div>
                 
@@ -1721,25 +1668,6 @@
         
         <article class="media">
             
-            <a href="/2018/10/14/sdnedrletremfdrltmertedd/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="何余生说要感谢身边所有美好的人">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-14T08:48:47.000Z">2018-10-14</time></div>
-                    <a href="/2018/10/14/sdnedrletremfdrltmertedd/" class="has-link-black-ter is-size-6">何余生说要感谢身边所有美好的人</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/似水年华/">似水年华</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2018/05/03/unlink_weisk_with_thirdpart_weixin/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="解除微信公众平台对微上客的授权">
@@ -1814,6 +1742,25 @@
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
+                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1825,17 +1772,6 @@
             Archives
         </h3>
         <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2018/05/">
@@ -1931,7 +1867,7 @@
                     <span class="level-item">April 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1964,7 +1900,7 @@
                     <span class="level-item">January 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1975,7 +1911,7 @@
                     <span class="level-item">December 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1986,7 +1922,7 @@
                     <span class="level-item">November 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1997,7 +1933,7 @@
                     <span class="level-item">October 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2008,7 +1944,7 @@
                     <span class="level-item">September 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2019,7 +1955,7 @@
                     <span class="level-item">August 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -2030,7 +1966,7 @@
                     <span class="level-item">July 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -2074,51 +2010,7 @@
                     <span class="level-item">March 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2016/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2016</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/06/">
-                <span class="level-start">
-                    <span class="level-item">June 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/04/">
-                <span class="level-start">
-                    <span class="level-item">April 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -2399,27 +2291,6 @@
                     <a class="tags has-addons" href="/tags/iOS/">
                         <span class="tag">iOS</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/似水年华/">
-                        <span class="tag">似水年华</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/何余生/">
-                        <span class="tag">何余生</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/我给你讲个故事吧/">
-                        <span class="tag">我给你讲个故事吧</span>
-                        <span class="tag is-grey">13</span>
                     </a>
                 </div>
                 

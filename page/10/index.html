@@ -144,17 +144,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-07-26T18:18:24.000Z">2016-07-27</time>
+                <time class="level-item has-text-grey" datetime="2016-06-15T18:28:02.000Z">2016-06-16</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Shell/">Shell</a>
+                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    11 minutes read (About 1687 words)
+                    4 minutes read (About 535 words)
                 </span>
                 
                 
@@ -163,17 +163,15 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/07/27/manage-tomcat-service-use-bash-shell-script/">Manage Tomcat Service Use Shell Script</a>
+                <a class="has-link-black-ter" href="/2016/06/16/shi-yong-moshdai-ti-sshlian-jie-fu-wu-qi/">使用mosh代替ssh连接服务器</a>
             
         </h1>
         <div class="content">
-            <h4 id="Tomcat-项目管理交互式脚本"><a href="#Tomcat-项目管理交互式脚本" class="headerlink" title="Tomcat 项目管理交互式脚本."></a>Tomcat 项目管理交互式脚本.</h4><ul>
-<li>Install pssh</li>
-<li>Use Key Login Server Hosts</li>
-<li>~/.ssh/config 配置使用host名登录服务</li>
-<li>指定 Server Group Files 存放位置</li>
-</ul>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="hljs-meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Author Alex LU</span></span><br><span class="line"><span class="hljs-comment"># Date 2016-07-20</span></span><br><span class="line"><span class="hljs-comment"># Version 1.0</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># HostFile</span></span><br><span class="line">HostDIR=~/.ssh/host/</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># war包上传到该目录</span></span><br><span class="line"><span class="hljs-comment"># /warfolder</span></span><br><span class="line"></span><br><span class="line">:<span class="hljs-string">'</span></span><br><span class="line"><span class="hljs-string">jobs_select ()&#123;</span></span><br><span class="line"><span class="hljs-string">    STRING=``cat $vmname | grep group</span></span><br><span class="line"><span class="hljs-string">    if [ -z "$STRING" ]</span></span><br><span class="line"><span class="hljs-string">    then</span></span><br><span class="line"><span class="hljs-string">        job_tomcat</span></span><br><span class="line"><span class="hljs-string">    else</span></span><br><span class="line"><span class="hljs-string">        job2_tomcat</span></span><br><span class="line"><span class="hljs-string">    fi</span></span><br><span class="line"><span class="hljs-string">&#125;</span></span><br><span class="line"><span class="hljs-string">'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">function</span> HOST()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">""</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"############ Host List ###############"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"ckgroup:ck01,ck02,ck03,ck04"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"sjgroup:sj01,sj02,sj03,sj04"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"ddgroup:dd01,dd02,dd03,dd04"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"htgroup:ht01,ht02"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"othergroup:report,tg"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"######################################"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">""</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">" Tips: 如果要选择ck01，则输入ck01即可，如果输入ck组，输入ckgroup即可,如果要退出当前脚本输入exit"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">" Tips: 退回上一步请输入back"</span></span><br><span class="line">    <span class="hljs-built_in">read</span> -p <span class="hljs-string">"请输入你的选择:"</span> vmname</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">case</span> <span class="hljs-string">"<span class="hljs-variable">$vmname</span>"</span> <span class="hljs-keyword">in</span></span><br><span class="line">        ck01|ck02|ck03|ck04|sj01|sj02|sj03|sj04|dd01|dd02|dd03|dd04|report|tg|ht01|ht02)</span><br><span class="line">            job_tomcat <span class="hljs-variable">$vmname</span></span><br><span class="line">            ;;</span><br><span class="line">        ckgroup|sjgroup|htgroup|ddgroup|othergroup)</span><br><span class="line">            job2_tomcat <span class="hljs-variable">$vmname</span></span><br><span class="line">            ;;</span><br><span class="line">        <span class="hljs-built_in">exit</span>)</span><br><span class="line">            <span class="hljs-built_in">exit</span> 0;</span><br><span class="line">            ;;</span><br><span class="line">        back)</span><br><span class="line">            clear</span><br><span class="line">            <span class="hljs-built_in">echo</span> <span class="hljs-string">""</span></span><br><span class="line">            <span class="hljs-built_in">echo</span> <span class="hljs-string">"Tips: 欢迎使用Tomcat项目服务管理工具,您需要预先安装pssh工具，以及配置好ssh免密登录到服务器"</span></span><br><span class="line">            main</span><br><span class="line">            ;;</span><br><span class="line">        *)</span><br><span class="line">            <span class="hljs-built_in">echo</span> <span class="hljs-string">"请输入的选择!"</span></span><br><span class="line">            HOST</span><br><span class="line">            ;;</span><br><span class="line">    <span class="hljs-keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">function</span> job_tomcat ()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">""</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"############ 动作 ###############"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"  1. 查看当前tomcat7状态"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"  2. 关闭tomcat7"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"  3. 启动tomcat7"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"  4. 重启tomcat7"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"  5. 获取最近200行日志"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"  6. 重新选择主机"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"  7. 回到顶层目录"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">""</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"#################################"</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-built_in">read</span> -p <span class="hljs-string">"请输入你的选择:"</span> service_tomcat</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">case</span> <span class="hljs-variable">$service_tomcat</span> <span class="hljs-keyword">in</span></span><br><span class="line">        1)</span><br><span class="line">        pssh -H <span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"ps aux | grep tomcat"</span></span><br><span class="line">        job_tomcat</span><br><span class="line">        ;;</span><br><span class="line">        2)</span><br><span class="line">        pssh -H <span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"service tomcat7 stop"</span></span><br><span class="line">        <span class="hljs-comment"># tips： 下面grep的字符串要和你的tomcat项目名称契合</span></span><br><span class="line">        pssh -H <span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"ps aux | grep tomcat7 | awk '&#123;print <span class="hljs-variable">$2</span>&#125;' | xargs kill -9 "</span></span><br><span class="line">        <span class="hljs-comment"># tips: 下面用到的路径为绝对路径，请更改为自己tomcat的目录，也可以在前面增加自定义变量</span></span><br><span class="line">        pssh -H <span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"rm -rf /tomcat7/work/*"</span></span><br><span class="line">        pssh -H <span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"rm -rf /tomcat7/logs/*"</span></span><br><span class="line">        pssh -H <span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"rm -rf /tomcat7/temp/*"</span></span><br><span class="line">        job_tomcat</span><br><span class="line">        ;;</span><br><span class="line">        3)</span><br><span class="line">        pssh -H <span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"service tomcat7 start"</span></span><br><span class="line">        job_tomcat</span><br><span class="line">        ;;</span><br><span class="line">        4)</span><br><span class="line">        pssh -H <span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"service tomcat7 stop"</span></span><br><span class="line">        <span class="hljs-comment"># tips： 下面grep的字符串要和你的tomcat项目名称契合</span></span><br><span class="line">        pssh -H <span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"ps aux | grep tomcat7 | awk '&#123;print <span class="hljs-variable">$2</span>&#125;' | xargs kill -9 "</span></span><br><span class="line">        <span class="hljs-comment"># tips: 下面用到的路径为绝对路径，请更改为自己tomcat的目录，也可以在前面增加自定义变量</span></span><br><span class="line">        pssh -H <span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"rm -rf /tomcat7/work/*"</span></span><br><span class="line">        pssh -H <span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"rm -rf /tomcat7/logs/*"</span></span><br><span class="line">        pssh -H <span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"rm -rf /tomcat7/temp/*"</span></span><br><span class="line">        sleep 1</span><br><span class="line">        pssh -H <span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"service tomcat7 start"</span></span><br><span class="line">        job_tomcat</span><br><span class="line">        ;;</span><br><span class="line">        5)</span><br><span class="line">        pssh -H <span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"tail -n 200 /tomcat7/logs/catalina.out"</span></span><br><span class="line">        job_tomcat</span><br><span class="line">        ;;</span><br><span class="line">        6)</span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">""</span></span><br><span class="line">        HOST</span><br><span class="line">        ;;</span><br><span class="line">        7)</span><br><span class="line">        clear</span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">""</span></span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">"Tips: 欢迎使用Tomcat项目服务管理工具,您需要预先安装pssh工具，以及配置好ssh免密登录到服务器"</span></span><br><span class="line">        main</span><br><span class="line">        ;;</span><br><span class="line">        *)</span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">"请输入正确的选项！"</span></span><br><span class="line">        job_tomcat</span><br><span class="line">        ;;</span><br><span class="line">    <span class="hljs-keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">function</span> job2_tomcat ()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">""</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"############ 动作 ###############"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"  1. 查看当前tomcat7状态"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"  2. 关闭tomcat7"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"  3. 启动tomcat7"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"  4. 重启tomcat7"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"  5. 获取最近200行日志"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"  6. 重新选择主机"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"  7. 回到顶层目录"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">""</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"################################"</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-built_in">read</span> -p <span class="hljs-string">"请输入你的选择:"</span> service_tomcat</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">case</span> <span class="hljs-variable">$service_tomcat</span> <span class="hljs-keyword">in</span></span><br><span class="line">        1)</span><br><span class="line">        pssh -h <span class="hljs-variable">$HostDIR</span>/<span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"ps aux | grep tomcat"</span></span><br><span class="line">        job2_tomcat</span><br><span class="line">        ;;</span><br><span class="line">        2)</span><br><span class="line">        pssh -h <span class="hljs-variable">$HostDIR</span>/<span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"service tomcat7 stop"</span></span><br><span class="line">        <span class="hljs-comment"># tips： 下面grep的字符串要和你的tomcat项目名称契合</span></span><br><span class="line">        pssh -h <span class="hljs-variable">$HostDIR</span>/<span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"ps aux | grep tomcat7 | awk '&#123;print <span class="hljs-variable">$2</span>&#125;' | xargs kill -9 "</span></span><br><span class="line">        <span class="hljs-comment"># tips: 下面用到的路径为绝对路径，请更改为自己tomcat的目录，也可以在前面增加自定义变量</span></span><br><span class="line">        pssh -h <span class="hljs-variable">$HostDIR</span>/<span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"rm -rf /tomcat7/work/*"</span></span><br><span class="line">        pssh -h <span class="hljs-variable">$HostDIR</span>/<span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"rm -rf /tomcat7/logs/*"</span></span><br><span class="line">        pssh -h <span class="hljs-variable">$HostDIR</span>/<span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"rm -rf /tomcat7/temp/*"</span></span><br><span class="line">        job2_tomcat</span><br><span class="line">        ;;</span><br><span class="line">        3)</span><br><span class="line">        pssh -h <span class="hljs-variable">$HostDIR</span>/<span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"service tomcat7 start"</span></span><br><span class="line">        job2_tomcat</span><br><span class="line">        ;;</span><br><span class="line">        4)</span><br><span class="line">        pssh -h <span class="hljs-variable">$HostDIR</span>/<span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"service tomcat7 stop"</span></span><br><span class="line">        <span class="hljs-comment"># tips： 下面grep的字符串要和你的tomcat项目名称契合</span></span><br><span class="line">        pssh -h <span class="hljs-variable">$HostDIR</span>/<span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"ps aux | grep tomcat7 | awk '&#123;print <span class="hljs-variable">$2</span>&#125;' | xargs kill -9 "</span></span><br><span class="line">        <span class="hljs-comment"># tips: 下面用到的路径为绝对路径，请更改为自己tomcat的目录，也可以在前面增加自定义变量</span></span><br><span class="line">        pssh -h <span class="hljs-variable">$HostDIR</span>/<span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"rm -rf /tomcat7/work/*"</span></span><br><span class="line">        pssh -h <span class="hljs-variable">$HostDIR</span>/<span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"rm -rf /tomcat7/logs/*"</span></span><br><span class="line">        pssh -h <span class="hljs-variable">$HostDIR</span>/<span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"rm -rf /tomcat7/temp/*"</span></span><br><span class="line">        sleep 1</span><br><span class="line">        pssh -h <span class="hljs-variable">$HostDIR</span>/<span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"service tomcat7 start"</span></span><br><span class="line">        job2_tomcat</span><br><span class="line">        ;;</span><br><span class="line">        5)</span><br><span class="line">        pssh -h <span class="hljs-variable">$HostDIR</span>/<span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"tail -n 200 /tomcat7/logs/catalina.out"</span></span><br><span class="line">        job2_tomcat</span><br><span class="line">        ;;</span><br><span class="line">        6)</span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">""</span></span><br><span class="line">        HOST</span><br><span class="line">        ;;</span><br><span class="line">        7)</span><br><span class="line">        clear</span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">""</span></span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">"Tips: 欢迎使用Tomcat项目服务管理工具,您需要预先安装pssh工具，以及配置好ssh免密登录到服务器"</span></span><br><span class="line">        main</span><br><span class="line">        ;;</span><br><span class="line">        *)</span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">"请输入正确的选项！"</span></span><br><span class="line">        job_tomcat</span><br><span class="line">        ;;</span><br><span class="line">    <span class="hljs-keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">function</span> HOST2()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">""</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"############ Host List ###############"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"ckgroup:ck01,ck02,ck03,ck04"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"sjgroup:sj01,sj02,sj03,sj04"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"ddgroup:dd01,dd02,dd03,dd04"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"htgroup:ht01,ht02"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"othergroup:report,tg"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"######################################"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">""</span></span><br><span class="line"><span class="hljs-comment"># 确认是否所有项目包发布后立即启动</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> -e <span class="hljs-string">"\033[7m 更新订单服务器的war包时，会自动启动tomcat程序，为了释放war包，修改order.no，请设置war包内order.no＝0 ,其它服务器tomcat不会自启动，请使用命令操作 \033[0m"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">" Tips: 如果要选择ck01，则输入ck01即可，如果输入ck组，输入ckgroup即可,如果要退出当前脚本输入exit"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">" Tips: 退回上一步请输入back"</span></span><br><span class="line">    <span class="hljs-built_in">read</span> -p <span class="hljs-string">"请输入你的选择:"</span> vmname</span><br><span class="line">    <span class="hljs-keyword">case</span> <span class="hljs-string">"<span class="hljs-variable">$vmname</span>"</span> <span class="hljs-keyword">in</span></span><br><span class="line">        ck01|ck02|ck03|ck04|sj01|sj02|sj03|sj04|dd01|dd02|dd03|dd04|report|tg|ht01|ht02)</span><br><span class="line">            <span class="hljs-built_in">read</span> -p <span class="hljs-string">"请输入war包的名称,例如:dzcx_ck.war :"</span> warname</span><br><span class="line">            pscp_tomcat <span class="hljs-variable">$vmname</span> <span class="hljs-variable">$warname</span></span><br><span class="line">            ;;</span><br><span class="line">        ckgroup|sjgroup|htgroup|othergroup)</span><br><span class="line">            <span class="hljs-built_in">read</span> -p <span class="hljs-string">"请输入war包的名称,例如:dzcx_ck.war :"</span> warname</span><br><span class="line">            pscp2_tomcat <span class="hljs-variable">$vmname</span> <span class="hljs-variable">$warname</span></span><br><span class="line">            ;;</span><br><span class="line">        ddgroup)</span><br><span class="line">            <span class="hljs-built_in">read</span> -p <span class="hljs-string">"请输入war包的名称,例如:dzcx_ck.war :"</span> warname</span><br><span class="line">            pscp3_tomcat <span class="hljs-variable">$vmname</span> <span class="hljs-variable">$warname</span></span><br><span class="line">            ;;</span><br><span class="line">        <span class="hljs-built_in">exit</span>)</span><br><span class="line">            <span class="hljs-built_in">exit</span> 0;</span><br><span class="line">            ;;</span><br><span class="line">        back)</span><br><span class="line">            clear</span><br><span class="line">            <span class="hljs-built_in">echo</span> <span class="hljs-string">""</span></span><br><span class="line">            <span class="hljs-built_in">echo</span> <span class="hljs-string">"Tips: 欢迎使用Tomcat项目服务管理工具,您需要预先安装pssh工具，以及配置好ssh免密登录到服务器"</span></span><br><span class="line">            main</span><br><span class="line">            ;;</span><br><span class="line">        *)</span><br><span class="line">            <span class="hljs-built_in">echo</span> <span class="hljs-string">"请输入的选择!"</span></span><br><span class="line">            HOST</span><br><span class="line">            ;;</span><br><span class="line">    <span class="hljs-keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">function</span> pscp_tomcat ()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-comment"># single host</span></span><br><span class="line">    pscp.pssh -H <span class="hljs-variable">$vmname</span> /warfolder/<span class="hljs-string">"<span class="hljs-variable">$warname</span>"</span> /tomcat7/webapps/</span><br><span class="line">    HOST2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">function</span> pscp2_tomcat ()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-comment"># group</span></span><br><span class="line">    pscp.pssh -h <span class="hljs-variable">$HostDIR</span>/<span class="hljs-variable">$vmname</span> /warfolder/<span class="hljs-string">"<span class="hljs-variable">$warname</span>"</span> /tomcat7/webapps/</span><br><span class="line">    HOST2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">function</span> pscp3_tomcat ()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-comment"># group dd 因为订单需要修改服务器编号</span></span><br><span class="line">    pscp.pssh -h <span class="hljs-variable">$HostDIR</span>/<span class="hljs-variable">$vmname</span> /warfolder/<span class="hljs-string">"<span class="hljs-variable">$warname</span>"</span> /tomcat7/webapps/</span><br><span class="line">    pssh -h <span class="hljs-variable">$vmname</span> -i <span class="hljs-string">"service tomcat7 start"</span></span><br><span class="line">    sleep 10</span><br><span class="line">    pssh -H dd02 <span class="hljs-string">"sed -i 's/order.no=0/order.no=1/g' /tomcat7/webapps/dzcx_socket/WEB-INF/classes/base.properties"</span></span><br><span class="line">    pssh -H dd03 <span class="hljs-string">"sed -i 's/order.no=0/order.no=2/g' /tomcat7/webapps/dzcx_socket/WEB-INF/classes/base.properties"</span></span><br><span class="line">    pssh -H dd04 <span class="hljs-string">"sed -i 's/order.no=0/order.no=3/g' /tomcat7/webapps/dzcx_socket/WEB-INF/classes/base.properties"</span></span><br><span class="line">    HOST2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">function</span> main ()</span><br><span class="line">&#123;</span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">""</span></span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">"######################################"</span></span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">""</span></span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">"#  1. 更新war包"</span></span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">"#  2. 管理tomcat7"</span></span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">"#  3. 管理mysql"</span></span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">"#  4. 管理redis"</span></span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">"#  5. 同步服务器时间"</span></span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">"#  6. 清理当前屏幕"</span></span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">"#  7. 退出"</span></span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">""</span></span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">"######################################"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">read</span> -p <span class="hljs-string">"请输入你的选择:"</span> num</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">case</span> <span class="hljs-string">"<span class="hljs-variable">$num</span>"</span> <span class="hljs-keyword">in</span></span><br><span class="line">    1)</span><br><span class="line">        HOST2</span><br><span class="line">        ;;</span><br><span class="line">    2)</span><br><span class="line">        HOST</span><br><span class="line">        ;;</span><br><span class="line">    3)</span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">"该功能暂未开放"</span></span><br><span class="line">        ;;</span><br><span class="line">    4)</span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">"该功能暂未开放"</span></span><br><span class="line">        ;;</span><br><span class="line">    5)</span><br><span class="line">        pssh -h <span class="hljs-variable">$HostDIR</span>/allhost -i <span class="hljs-string">"service ntpd restart"</span></span><br><span class="line">        ;;</span><br><span class="line">    6)</span><br><span class="line">        clear</span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">""</span></span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">"Tips: 欢迎使用Tomcat项目服务管理工具,您需要预先安装pssh工具，以及配置好ssh免密登录到服务器"</span></span><br><span class="line">        main</span><br><span class="line">        ;;</span><br><span class="line">    7)</span><br><span class="line">        <span class="hljs-built_in">exit</span> 0</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">"请输入正确的数值！"</span></span><br><span class="line">        main</span><br><span class="line">    ;;</span><br><span class="line"><span class="hljs-keyword">esac</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># --------------------------------- main -------------------------------------------------</span></span><br><span class="line"></span><br><span class="line">clear</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">""</span></span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">"Tips: 欢迎使用Tomcat项目服务管理工具,您需要预先安装pssh工具，以及配置好ssh免密登录到服务器"</span></span><br><span class="line"><span class="hljs-built_in">command</span> -v pssh &gt; /dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> [ $? -eq 0 ]</span><br><span class="line"><span class="hljs-keyword">then</span></span><br><span class="line">    main</span><br><span class="line"><span class="hljs-keyword">else</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> -e <span class="hljs-string">"\033[07m"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> -e <span class="hljs-string">"系统检测到您还没安装pssh，请预先安装pssh"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"yum install -y epel-release"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"yum install -y pssh"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> <span class="hljs-string">"安装成功请重新运行此脚本"</span></span><br><span class="line">    <span class="hljs-built_in">echo</span> -e <span class="hljs-string">"\033[0m"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">fi</span></span><br></pre></td></tr></table></figure>
+            <p>身为一名服务器运维人员，每天打交道最多的就是服务器了，最常用的连接服务器的工具就是SSH，因为SSH是一个不可持续的连接，当网络出现波动时，SSH断开会导致当前正在运行的服务中断，对工作产生非常大的影响，无意间看到了Mosh这个东西，安装使用下，发现网络波动这种事情不会导致服务器连接断开了，特意查了下，原来Mosh使用的是UDP方式传输：虽然也支持使用SSH配置进行认证登录，但是数据传输本身是使用UDP方式的，Mosh支持在会话中断时，不会立即退出，而是启用一个计时器，当网络恢复后会自动连接，同时会延续之前的会话，不会重新开启一个。</p>
+<h4 id="Mosh-主页"><a href="#Mosh-主页" class="headerlink" title="Mosh 主页"></a>Mosh <a href="https://mosh.mit.edu/#getting" target="_blank" rel="noopener">主页</a></h4><h4 id="1-安装配置"><a href="#1-安装配置" class="headerlink" title="1. 安装配置"></a>1. 安装配置</h4><p>需要在服务端和客户端同时安装Mosh：<br><figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">＃ 以centos <span class="hljs-number">6</span>.x 为例：</span><br><span class="line">[user<span class="hljs-variable">@host</span> ~]<span class="hljs-variable">$ </span>sudo yum install -y epel-release</span><br><span class="line">[user<span class="hljs-variable">@host</span> ~]<span class="hljs-variable">$ </span>sudo yum install -y mosh</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-采用SSH配置进行认证登录，只需要将ssh-替换为mosh即可"><a href="#2-采用SSH配置进行认证登录，只需要将ssh-替换为mosh即可" class="headerlink" title="2. 采用SSH配置进行认证登录，只需要将ssh 替换为mosh即可"></a>2. 采用SSH配置进行认证登录，只需要将ssh 替换为mosh即可</h4><figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[user<span class="hljs-variable">@host</span> ~]<span class="hljs-variable">$ </span>mosh user<span class="hljs-variable">@host</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 如何需要指定特定的ssh port或者使用ssh keyfile. 可以使用-ssh参数：</span></span><br><span class="line">[user<span class="hljs-variable">@host</span> ~]<span class="hljs-variable">$ </span>mosh -ssh=<span class="hljs-string">"ssh -i ~/.ssh/id_rsa -p 10002"</span> user<span class="hljs-variable">@host</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-Other"><a href="#3-Other" class="headerlink" title="3. Other"></a>3. Other</h4><p>另外Mosh还支持使用临时key的方式认证，需要服务器端创建临时key，然后客户端通过这个key进行登录，该key在会话结束的十分钟后自动失效。</p>
+<figure class="highlight coffeescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 创建临时key</span></span><br><span class="line">[user@host ~]$ mosh-server</span><br><span class="line">MOSH CONNECT <span class="hljs-number">53371</span> asdAADfdse234LSDSdIbow</span><br><span class="line">mosh-server (mosh <span class="hljs-number">1.2</span><span class="hljs-number">.4</span>)</span><br><span class="line">Copyright <span class="hljs-number">2012</span> Keith Winstein &lt;mosh-devel@mit.edu&gt;</span><br><span class="line">License GPLv3+: GNU GPL version <span class="hljs-number">3</span> <span class="hljs-keyword">or</span> later &lt;http:<span class="hljs-regexp">//g</span>nu.org/licenses/gpl.html&gt;.</span><br><span class="line">This <span class="hljs-keyword">is</span> free software: you are free to change <span class="hljs-keyword">and</span> redistribute it.</span><br><span class="line">There <span class="hljs-keyword">is</span> NO WARRANTY, to the extent permitted <span class="hljs-keyword">by</span> law.</span><br><span class="line">[mosh-server detached, pid = <span class="hljs-number">27290</span>]</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 然后在client定义MOSH_KEY</span></span><br><span class="line">[user@host ~]$ <span class="hljs-keyword">export</span> MOSH_KEY=asdAADfdse234LSDSdIbow</span><br><span class="line"><span class="hljs-comment"># 注意mosh-client只能跟上具体的ip和临时端口，不支持主机名和域名方式</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 使用临时key连接服务器</span></span><br><span class="line">[user@host ~]$ mosh-client <span class="hljs-number">10.0</span><span class="hljs-number">.2</span><span class="hljs-number">.4</span> <span class="hljs-number">53371</span></span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -195,113 +193,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-07-24T13:42:01.000Z">2016-07-24</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 minutes read (About 689 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/07/24/pokemongo/">HowTo Play Pokemon GO in China</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="Installtions"><a href="#Installtions" class="headerlink" title="Installtions"></a>Installtions</h3><ul>
-<li><a href="http://www.tutuapp.cn" target="_blank" rel="noopener">TuTuAPP</a></li>
-<li><a href="https://shadowsocks.biz/?ref=518" target="_blank" rel="noopener">VPN</a></li>
-<li><a href="https://accounts.google.com" target="_blank" rel="noopener">Google Account ID</a></li>
-</ul>
-<p></p><p>&emsp;&emsp;最近看到身边朋友都在玩Pokemon GO, 心痒难耐，于是跟同事请教琢磨了，终于在自己的手机上玩起来了，由于我的手机是iPhone 5s，身边朋友也都是iPhone，所以不确定是Android是否可以玩耍，想来应该是没有问题话，Android平台做破解等操作一直以来比iPhone更加方便。<br></p><p></p>
-<div align="center"><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/07/pokemongo1.jpg"><br></div><br>&emsp;&emsp;1. 点击上面的TuTuAPP，可以打开兔兔助手的网站，用手机扫描首页的二维码(可以用微信等，带有二维码扫描的都可以)，注意如果你的iPhone已经越狱，请切换标签页到越狱版本。<br><br>&emsp;&emsp;2. 安装时注意按照提示添加信任，等待兔兔助手安装完成之后，打开软件，在Search栏输入“精灵宝可梦GO”，请下载美区版，有两个版本：懒人版与移动版；懒人版有移动按钮，可以不需要走动躺在床上玩耍，移动版是需要人走动才能玩耍，我下载的移动版，你根据自己的喜欢选择，选择完成后，按提示按钮安装即可。<br><br>&emsp;&emsp;3. 安装完成Pokemon GO之后也需要设定信任，请按照提示操作；好了， 到这一步，Pokemon GO已经安装在你的手机上了，下一步就是怎么登录玩耍。<br><br>&emsp;&emsp;4. 到这里及一下的步骤能继续下去的前提是，你有一个美国的VPN节点。打开你手机App Store，搜索VPN，列表中会有很多的免费应用，因为我一直用的是付费VPN，所以对这些不是很清楚，朋友推荐<strong>ArkVPN</strong>，如果你没有付费VPN，可以试试这个，注意VPN节点要选择US，如果你也要使付费VPN的，我推荐Shadowsocks＋Potatso( App)<br><br>&emsp;&emsp;5. 注册Google Account ID，<a href="https://account.google.com" target="_blank" rel="noopener">点击</a><br><div align="center"><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/07/pokemongo2.jpg" width="360" height="640"><br></div><br>&emsp;&emsp;6. 进入游戏，登录Google ID，然后授权，进入游戏。<br><div align="center"><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/07/pokemongo3.png" width="360" height="640"><br></div><br>&emsp;&emsp;7. 开始捕捉你的小精灵吧，手动微笑。<br><br>&gt; Tips：这款游戏会大量耗电发热，因为打开摄像头捕捉小精灵；另外很容易入迷，在室外玩耍时一定要注意安全。<br><br>&emsp;&emsp;8. 注意：如果看到了GPS signal not found，说明是GPS信息丢失，这是根据GPS定位的游戏，所以这很重要，记得选择美国的VPN代理。<br><div align="center"><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/07/pokemongo4.png" width="360" height="640"><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/07/pokemongo5.png" width="360" height="640"><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/07/pokemongo6.png" width="360" height="640"><br></div>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-07-22T16:34:54.000Z">2016-07-23</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/似水年华/">似水年华</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    9 minutes read (About 1336 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/07/23/hey-friends-2/">Hey Friends</a>
-            
-        </h1>
-        <div class="content">
-            <p>吃一口饭，喝一杯水，夜晚抬头看星星与月亮，随手拍死一个蚊子；<br>听一首歌，看一场电影，记录下来感动瞬间，分享到朋友圈；</p>
-<p>忘记了上顿饭吃了什么，忘记了一天要喝8杯水，抬头看不懂星星和月亮的美，第二天还能看到蚊子叮咬过的痕迹；</p>
-<p>喜欢的音乐、电影、书籍，感动了你自己，于沉浸中转身，想要分享却找不到合适的人；</p>
-<p>心中有万壑千山，笔下滴墨未浸；</p>
-<p>我要睡觉了，但是睡不着，希望你认真看完下面的话。</p>
-<p>以前看过一段话：不要成为一个无穷无尽的逗比，不要因害怕冷场而笑得最大声闹得最起劲，不要急于亲近而忘了拿捏矜持放低骄傲，不要因在真爱的人面前莫名自卑而准备了一箩筐段子随时逗TA开心为自己解围。喜欢的人等你足够优秀时一定能在一起，逗比没什么不好，但因为你给的嬉笑太盛，于是没有人再欣赏你的认真。</p>
-<p>我人蠢笨，做事犯傻，经常忘记东西，不够聪明，很多毛病和缺点，多到我自己都在厌烦自己，我做着不找边际的梦想，过着碌碌无为的人生，永远叫嚷着减肥却饮食不节制也不坚持运动，朋友不多，前半生的简单重复，没鼓起勇气做牛逼的事情，没读过多少书，上学时间经常换学校，没留下多少朋友，所以，我很珍惜现在所拥有的一切。</p>
-<p>我热爱生活，唯一能做的是认真努力对待每一天，我很感恩珍惜现在所拥有的一切，朋友，家人，平淡的生活，我总是想努力维持在一个好的状态，讨厌隔阂，却又拙于处理这些问题，我性格开朗，稀里糊涂，像个没长大的孩子，经常犯二犯傻令人扶额凝语。</p>
-<p>我不在意朋友自己之间善意的玩笑，不在意被说多少次人傻犯蠢，智商堪忧，腿短腰粗脸大翘屁股，不介意被说唱歌难听，不介意人丑还自恋，我觉得这并没什么，我也经常自嘲，也会被带入你的节奏哼唱“卖弄美色”；接触这几年，我相信你们也明白我的性格，我觉得友情很重要，朋友是可以互相损讽，朋友是在需要的时候温柔相待，我是个逗比，我不会因朋友玩笑不开心，我在意的是嬉笑背后尊重我的认真。</p>
-<p>我很尊重你，也很敬佩你，我非常珍惜我们的友谊，不希望有隔阂，这会让我辗转反侧无意入眠，也是我写下这些话的原因，你是个非常优秀的姑娘，你的坦荡潇洒，另我自愧弗如，你身上有着许多耀眼的闪光点，与你为友是我的荣幸；我在做人说话方面得罪过不少人，以至如今我父母仍旧时常提醒我，但大多数仍是无心之举，我不喜欢狡辩，因我之过错越过你的底线，对不起，我很认真的道歉，以后会注意，昨夜的“不识相”实非有意说的，至于你之后说：“除了‘挂’衣服不来我房间”，我也错听为”除了‘换’衣服不来我房间“，以为你也是玩笑，所以才接了下句；言语不知轻重我非常抱歉；话还是要说清楚，朋友之间不应该有隔阂，今天都在想，搞不清楚如何处理和朋友相处的关系，是否要装作成熟不苟言笑，但是我估计很难改掉犯二的毛病，如此这般，我也不是我要做的我，生活也会索然无趣；总之，我会改正自己的毛病，也望你以后多多担待，不希望这样的事情在我们的友谊中埋下隔阂的种子，我希望，以后有自己喜欢的音乐电影书等等可以无顾虑的互相分享，对看不爽的人事一起吐槽，碰到喜欢的姑娘还可以找你当军师，可以促膝长谈，可以玩笑互损，可以简单纯粹快乐，可以给好朋友打上forever的标签，以后也会有争执但不会留下仇恨，就这样吧，晚安。</p>
-<blockquote>
-<p>Update Time: 2016/12/09</p>
-</blockquote>
-<p><em>心情早已平复，终究还是不能无情，希望你早日好起来</em></p>
-<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/uj9de.png" alt></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-07-10T03:21:47.000Z">2016-07-10</time>
+                <time class="level-item has-text-grey" datetime="2016-05-23T23:00:12.000Z">2016-05-24</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/Azure/">Azure</a>
@@ -311,7 +203,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 minutes read (About 228 words)
+                    a few seconds read (About 53 words)
                 </span>
                 
                 
@@ -320,21 +212,11 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/07/10/reset-azure-vm-linux-password/">HowTo Reset Azure VM Linux Password</a>
+                <a class="has-link-black-ter" href="/2016/05/24/azure-cli-on-mac-0/">Azure(2) HowTo Use Azure CLI on Mac</a>
             
         </h1>
         <div class="content">
-            <blockquote>
-<p>  <strong>Setup1:</strong> 这种方法仅适用于已存在的用户，也就是说$Username是之前创建过的用户，否则不适用</p>
-</blockquote>
-<h3 id="1-指定虚拟机"><a href="#1-指定虚拟机" class="headerlink" title="1. 指定虚拟机"></a><strong>1. 指定虚拟机</strong></h3><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash">vm = Get-AzureVM -ServiceName <span class="hljs-string">'云服务名称'</span> -Name <span class="hljs-string">'虚拟机名称'</span></span></span><br><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash">vm.GetInstance().ProvisionGuestAgent = <span class="hljs-variable">$true</span></span></span><br></pre></td></tr></table></figure>
-<h3 id="2-输入您当前的用户名和新密码"><a href="#2-输入您当前的用户名和新密码" class="headerlink" title="2. 输入您当前的用户名和新密码"></a><strong>2. 输入您当前的用户名和新密码</strong></h3><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash">UserName = <span class="hljs-string">"指定用户名"</span></span></span><br><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash">Password = <span class="hljs-string">"指定密码"</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash">PrivateConfig = <span class="hljs-string">'&#123;"username":"'</span>+ <span class="hljs-variable">$UserName</span> + <span class="hljs-string">'", "password":"'</span> +  <span class="hljs-variable">$Password</span> + <span class="hljs-string">'"&#125;'</span></span></span><br></pre></td></tr></table></figure>
-<h3 id="3-开始执行"><a href="#3-开始执行" class="headerlink" title="3. 开始执行"></a><strong>3. 开始执行</strong></h3><figure class="highlight lasso hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ExtensionName = <span class="hljs-string">'VMAccessForLinux'</span></span><br><span class="line">$Publisher = <span class="hljs-string">'Microsoft.OSTCExtensions'</span></span><br><span class="line">$Version =  <span class="hljs-string">'1.0'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">Set</span><span class="hljs-params">-AzureVMExtension</span> <span class="hljs-params">-ExtensionName</span> $ExtensionName <span class="hljs-params">-VM</span>  $vm <span class="hljs-params">-Publisher</span> $Publisher <span class="hljs-params">-Version</span> $Version <span class="hljs-params">-PrivateConfiguration</span> $PrivateConfig | Update<span class="hljs-params">-AzureVM</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>Setup2:</strong> 如果是由于错误修改了SSH的配置文件导致无法登录，例如在登录时报错：This service allows sftp connections only.Connection to vm closed.这是因为错误配置了sftp导致的，那碰到这种问题需要做的是重置ssh服务。</p>
-</blockquote>
-<h3 id="1-指定虚拟机-1"><a href="#1-指定虚拟机-1" class="headerlink" title="1. 指定虚拟机"></a><strong>1. 指定虚拟机</strong></h3><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash">vm = Get-AzureVM -ServiceName <span class="hljs-string">'MyServiceName'</span> -Name <span class="hljs-string">'MyVMName'</span></span></span><br><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash">PrivateConfig = <span class="hljs-string">'&#123;"reset_ssh":"True"&#125;'</span><span class="hljs-string">'</span></span></span><br></pre></td></tr></table></figure>
-<h3 id="2-开始执行"><a href="#2-开始执行" class="headerlink" title="2. 开始执行"></a><strong>2. 开始执行</strong></h3><figure class="highlight lasso hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ExtensionName = <span class="hljs-string">'VMAccessForLinux'</span></span><br><span class="line">$Publisher = <span class="hljs-string">'Microsoft.OSTCExtensions'</span></span><br><span class="line">$Version =  <span class="hljs-string">'1.0'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">Set</span><span class="hljs-params">-AzureVMExtension</span> <span class="hljs-params">-ExtensionName</span> $ExtensionName <span class="hljs-params">-VM</span>  $vm <span class="hljs-params">-Publisher</span> $Publisher <span class="hljs-params">-Version</span> $Version <span class="hljs-params">-PrivateConfiguration</span> $PrivateConfig | Update<span class="hljs-params">-AzureVM</span></span><br></pre></td></tr></table></figure>
+            <figure class="highlight markdown hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-section">## Install azure-cli on Mac and CentOS</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-section">### In Mac</span></span><br><span class="line"><span class="hljs-bullet">1. </span>Install brew.</span><br><span class="line"><span class="hljs-bullet">2. </span>brew install nodejs</span><br><span class="line"><span class="hljs-bullet">3. </span>echo “registry = https://registry.npm.taobao.org” &gt; ~/.npmrc</span><br><span class="line"><span class="hljs-bullet">4. </span>npm install azure-cli -g</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-section">### In CentOS</span></span><br><span class="line"><span class="hljs-bullet">1. </span>Install epel</span><br><span class="line"><span class="hljs-bullet">2. </span>yum install -y nodejs npm</span><br><span class="line"><span class="hljs-bullet">3. </span>echo “registry = https://registry.npm.taobao.org” &gt; ~/.npmrc</span><br><span class="line"><span class="hljs-bullet">4. </span>npm install azure-cli -g</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -356,17 +238,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-07-07T00:03:28.000Z">2016-07-07</time>
+                <time class="level-item has-text-grey" datetime="2016-05-23T22:20:43.000Z">2016-05-24</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Docker/">Docker</a>
+                <a class="has-link-grey -link" href="/categories/Azure/">Azure</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    a minute read (About 218 words)
+                    a few seconds read (About 17 words)
                 </span>
                 
                 
@@ -375,20 +257,11 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/07/07/how-to-install-docker-on-centos-6-x-2/">HowTo Install Docker on CentOS 6.x</a>
+                <a class="has-link-black-ter" href="/2016/05/24/azure-cli-on-mac/">Azure(3) HowTo Use Azure CLI on Mac</a>
             
         </h1>
         <div class="content">
-            <h3 id="1-Add-the-EPEL-Repository"><a href="#1-Add-the-EPEL-Repository" class="headerlink" title="1. Add the EPEL Repository"></a><strong>1. Add the EPEL Repository</strong></h3><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -iUvh http:<span class="hljs-regexp">//</span>dl.fedoraproject.org<span class="hljs-regexp">/pub/</span>epel<span class="hljs-regexp">/6/</span>x86_64<span class="hljs-regexp">/epel-release-6-8.noarch.rpm</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-Update-your-system"><a href="#2-Update-your-system" class="headerlink" title="2. Update your system"></a><strong>2. Update your system</strong></h3><figure class="highlight stata hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">update</span> -<span class="hljs-built_in">y</span></span><br></pre></td></tr></table></figure>
-<h3 id="3-Install"><a href="#3-Install" class="headerlink" title="3. Install"></a><strong>3. Install</strong></h3><figure class="highlight cmake hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> -y docker-io</span><br></pre></td></tr></table></figure>
-<h3 id="4-Configure"><a href="#4-Configure" class="headerlink" title="4. Configure"></a><strong>4. Configure</strong></h3><figure class="highlight livecodeserver hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">service docker <span class="hljs-built_in">start</span></span><br><span class="line">chkconfig docker <span class="hljs-keyword">on</span></span><br><span class="line"></span><br><span class="line">docker info</span><br></pre></td></tr></table></figure>
-<h3 id="5-Download-a-Docker-Container"><a href="#5-Download-a-Docker-Container" class="headerlink" title="5. Download a Docker Container"></a><strong>5. Download a Docker Container</strong></h3><figure class="highlight ebnf hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attribute">docker pull centos</span></span><br></pre></td></tr></table></figure>
-<h3 id="6-Run-a-Docker-Container"><a href="#6-Run-a-Docker-Container" class="headerlink" title="6. Run a Docker Container"></a><strong>6. Run a Docker Container</strong></h3><figure class="highlight dockerfile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="hljs-keyword">run</span><span class="hljs-bash"> -i -t centos /bin/bash</span></span><br></pre></td></tr></table></figure>
-<h3 id="7-Find-Docker-Container"><a href="#7-Find-Docker-Container" class="headerlink" title="7. Find Docker Container"></a><strong>7. Find Docker Container</strong></h3><figure class="highlight ebnf hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attribute">docker search ubuntu</span></span><br></pre></td></tr></table></figure>
-<h3 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a><strong>FAQ</strong></h3><h4 id="1-Faild-to-start-docker-on-CentOS-6-x"><a href="#1-Faild-to-start-docker-on-CentOS-6-x" class="headerlink" title="1. Faild to start docker on CentOS 6.x"></a><strong>1. Faild to start docker on CentOS 6.x</strong></h4><p><code><strong><em>/usr/bin/docker: relocation error: /usr/bin/docker: symbol dm_task_get_info_with_deferred_remove, version Base not defined in file libdevmapper.so.1.02 with link time reference</em></strong></code><br><figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">the <span class="hljs-class"><span class="hljs-keyword">lib</span>-<span class="hljs-title">device</span>-<span class="hljs-title">mapper</span> <span class="hljs-title">that</span> <span class="hljs-title">you</span> <span class="hljs-title">have</span> <span class="hljs-title">isn</span>'<span class="hljs-title">t</span> <span class="hljs-title">exporting</span> <span class="hljs-title">a</span> <span class="hljs-title">symbol</span> ("<span class="hljs-title">Base</span>") <span class="hljs-title">that</span> <span class="hljs-title">Docker</span> <span class="hljs-title">needs</span>.</span></span><br><span class="line">this by upgrading <span class="hljs-class"><span class="hljs-keyword">lib</span>-<span class="hljs-title">device</span>-<span class="hljs-title">mapper</span> <span class="hljs-title">to</span> <span class="hljs-title">version</span> 1.02.90.</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># You may have to enable the public_ol6_latest repo in order to get this package.</span></span><br><span class="line">sudo yum-config-manager --enable public_ol6_latest</span><br><span class="line">sudo yum install device-mapper-event-libs</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-Faild-to-use-docker"><a href="#2-Faild-to-use-docker" class="headerlink" title="2. Faild to use docker"></a><strong>2. Faild to use docker</strong></h4><p><code><strong><em>Get <a href="http:///var/run/docker.sock/v1.19/info" target="_blank" rel="noopener">http:///var/run/docker.sock/v1.19/info</a>: dial unix /var/run/docker.sock: no such file or directory. Are you trying to connect to a TLS-enabled daemon without TLS?</em></strong></code><br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># this is because docker no restart ok.</span></span><br><span class="line"></span><br><span class="line">pkill -9 docker &amp;&amp;<span class="hljs-built_in"> service </span>docker start</span><br></pre></td></tr></table></figure></p>
-<h4 id="3-HowTo-save-‘docker-run-i-t-xxx-bin-bash’"><a href="#3-HowTo-save-‘docker-run-i-t-xxx-bin-bash’" class="headerlink" title="3. HowTo save ‘docker run -i -t xxx /bin/bash’"></a><strong>3. HowTo save ‘docker run -i -t xxx /bin/bash’</strong></h4><figure class="highlight haxe hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker ps -l</span><br><span class="line">docker commit ID <span class="hljs-keyword">new</span><span class="hljs-type">name</span></span><br><span class="line"><span class="hljs-type">docker</span> images</span><br></pre></td></tr></table></figure>
+            <p><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/05/D50E240D-1468-486F-8CA7-C5D3DC7463DE.png" alt></p>
 
         </div>
         
@@ -410,17 +283,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-07-06T21:35:32.000Z">2016-07-07</time>
+                <time class="level-item has-text-grey" datetime="2016-05-19T23:24:58.000Z">2016-05-20</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
+                <a class="has-link-grey -link" href="/categories/Zabbix/">Zabbix</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    6 minutes read (About 932 words)
+                    2 minutes read (About 331 words)
                 </span>
                 
                 
@@ -429,38 +302,18 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/07/07/how-to-install-mysql-5-6-on-centos/">HowTo Install MySQL 5.5/6/7 on RHEL/CentOS 5/6/7</a>
+                <a class="has-link-black-ter" href="/2016/05/20/how-to-use-zabbix-monitoring-mysql-server-on-centos-6-x/">HowTo Monitoring MySQL server for Zabbix</a>
             
         </h1>
         <div class="content">
-            <h2 id="Install-Mysql-5-5-on-RHEL-CentOS-5-6-7"><a href="#Install-Mysql-5-5-on-RHEL-CentOS-5-6-7" class="headerlink" title="Install Mysql 5.5 on RHEL/CentOS 5/6/7 "></a><font color="red">Install Mysql 5.5 on RHEL/CentOS 5/6/7 </font></h2><h3 id="Setup-1-Use-Repository"><a href="#Setup-1-Use-Repository" class="headerlink" title="Setup 1. Use Repository."></a><strong>Setup 1. Use Repository.</strong></h3><p>First, to set up the yum repository, install the mysql－community-server 5.5 RPM based on your CentOS/RHEL release: <br></p>
-<hr>
-<h4 id="mysql-server-5-5-repo-for-CentOS-RHEL-5-x"><a href="#mysql-server-5-5-repo-for-CentOS-RHEL-5-x" class="headerlink" title="mysql-server-5.5.repo for CentOS/RHEL 5.x"></a><strong>mysql-server-5.5.repo for CentOS/RHEL 5.x</strong></h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -Uvh http:<span class="hljs-regexp">//mi</span>rror.webtatic.com<span class="hljs-regexp">/yum/</span>el5<span class="hljs-regexp">/latest.rpm</span></span><br></pre></td></tr></table></figure>
-<h4 id="Only-Install-MySQL-5-5-On-CentOS-5-x"><a href="#Only-Install-MySQL-5-5-On-CentOS-5-x" class="headerlink" title=" *Only Install MySQL 5.5 On CentOS 5.x"></a><em> <em>*Only Install MySQL 5.5 On CentOS 5.x</em></em></h4><p>If you already have MySql client or server installed (rpm -q mysql mysql-server), then you can upgrade using the following method:<br><br><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> mysql.<span class="hljs-string">`uname -i`</span> yum-<span class="hljs-keyword">plugin</span>-<span class="hljs-keyword">replace</span></span><br><span class="line">yum <span class="hljs-keyword">replace</span> mysql <span class="hljs-comment">--replace-with mysql55w</span></span><br></pre></td></tr></table></figure></p>
-<p>“yum install mysql” is only there to make sure yum-plugin-replace can resolve dependencies correctly if only mysql-server was installed.<br><br>Otherwise, to install MySql client and server, then run:<br><br><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> mysql55w mysql55w-<span class="hljs-keyword">server</span></span><br></pre></td></tr></table></figure></p>
-<hr>
-<h4 id="mysql-server-5-5-repo-for-CentOS-RHEL-6-x"><a href="#mysql-server-5-5-repo-for-CentOS-RHEL-6-x" class="headerlink" title="mysql-server-5.5.repo for CentOS/RHEL 6.x"></a><strong>mysql-server-5.5.repo for CentOS/RHEL 6.x</strong></h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># For x86_64</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.5</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">6</span><span class="hljs-regexp">/x86_64/my</span>sql-community-release-el6-<span class="hljs-number">5</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># For i386</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.5</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">6</span><span class="hljs-regexp">/i386/my</span>sql-community-release-el6-<span class="hljs-number">5</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
-<h4 id="mysql-server-5-5-repo-for-CentOS-RHEL-7-x"><a href="#mysql-server-5-5-repo-for-CentOS-RHEL-7-x" class="headerlink" title="mysql-server-5.5.repo for CentOS/RHEL 7.x"></a><strong>mysql-server-5.5.repo for CentOS/RHEL 7.x</strong></h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># For x86_64</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.5</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">7</span><span class="hljs-regexp">/x86_64/my</span>sql-community-release-el7-<span class="hljs-number">5</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># For i386</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.5</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">7</span><span class="hljs-regexp">/i386/my</span>sql-community-release-el7-<span class="hljs-number">5</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
-<h3 id="Setup-2-Install-MySQL-Server-5-5"><a href="#Setup-2-Install-MySQL-Server-5-5" class="headerlink" title="Setup 2. Install MySQL Server 5.5"></a><strong>Setup 2. Install MySQL Server 5.5</strong></h3><p>If you already have MySql client or server installed (rpm -q mysql mysql-server), then you must uninstall using the following method:<br><br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># It's RHEL/CentOS 6/7</span></span><br><span class="line">yum <span class="hljs-builtin-name">remove</span> -y mysql-server</span><br><span class="line">yum <span class="hljs-builtin-name">remove</span> -y mysql*</span><br></pre></td></tr></table></figure></p>
-<p>If you don’t have mysql-server was installed.<br><br>Otherwise, to install MySql client and server, then run:<br><br><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> -y mysql-community-<span class="hljs-keyword">server</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="Setup-3-Service-Configure"><a href="#Setup-3-Service-Configure" class="headerlink" title="Setup 3. Service Configure"></a><strong>Setup 3. Service Configure</strong></h3><p>You should upgrade existing tables before setting the server to become a production machine, which can be done by starting the server and running the mysql_upgrade script (this may take time depending on the size of the database).<br><br><figure class="highlight crmsh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld <span class="hljs-literal">start</span></span><br></pre></td></tr></table></figure></p>
-<p>This will issue a password prompt for the user. If you don’t have a root user password, remove the “-p”<br><br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure></p>
-<h2 id="Install-Mysql-5-6-on-RHEL-CentOS-5-6-7"><a href="#Install-Mysql-5-6-on-RHEL-CentOS-5-6-7" class="headerlink" title="Install Mysql 5.6 on RHEL/CentOS 5/6/7 "></a><font color="red">Install Mysql 5.6 on RHEL/CentOS 5/6/7 </font></h2><h3 id="Setup-1-Use-Repository-1"><a href="#Setup-1-Use-Repository-1" class="headerlink" title="Setup 1. Use Repository."></a><strong>Setup 1. Use Repository.</strong></h3><p>First, to set up the yum repository, install the mysql－community-server 5.6 RPM based on your CentOS/RHEL release: <br></p>
-<h4 id="mysql-server-5-6-repo-for-CentOS-RHEL-5-x"><a href="#mysql-server-5-6-repo-for-CentOS-RHEL-5-x" class="headerlink" title="mysql-server-5.6.repo for CentOS/RHEL 5.x"></a><strong>mysql-server-5.6.repo for CentOS/RHEL 5.x</strong></h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># For x86_64</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.6</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">5</span><span class="hljs-regexp">/x86_64/my</span>sql-community-release-el5-<span class="hljs-number">5</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># For i386</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.6</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">5</span><span class="hljs-regexp">/i386/my</span>sql-community-release-el5-<span class="hljs-number">5</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
-<h4 id="mysql-server-5-6-repo-for-CentOS-RHEL-6-x"><a href="#mysql-server-5-6-repo-for-CentOS-RHEL-6-x" class="headerlink" title="mysql-server-5.6.repo for CentOS/RHEL 6.x"></a><strong>mysql-server-5.6.repo for CentOS/RHEL 6.x</strong></h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># For x86_64</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.6</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">6</span><span class="hljs-regexp">/x86_64/my</span>sql-community-release-el6-<span class="hljs-number">5</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># For i386</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.6</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">6</span><span class="hljs-regexp">/i386/my</span>sql-community-release-el6-<span class="hljs-number">5</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
-<h4 id="mysql-server-5-6-repo-for-CentOS-RHEL-7-x"><a href="#mysql-server-5-6-repo-for-CentOS-RHEL-7-x" class="headerlink" title="mysql-server-5.6.repo for CentOS/RHEL 7.x"></a><strong>mysql-server-5.6.repo for CentOS/RHEL 7.x</strong></h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># For x86_64</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.6</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">7</span><span class="hljs-regexp">/x86_64/my</span>sql-community-release-el7-<span class="hljs-number">5</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># For i386</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.6</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">7</span><span class="hljs-regexp">/i386/my</span>sql-community-release-el7-<span class="hljs-number">5</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
-<h3 id="Setup-2-Install-MySQL-Server-5-6"><a href="#Setup-2-Install-MySQL-Server-5-6" class="headerlink" title="Setup 2. Install MySQL Server 5.6"></a><strong>Setup 2. Install MySQL Server 5.6</strong></h3><p>If you already have MySql client or server installed (rpm -q mysql mysql-server), then you must uninstall using the following method:<br><br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-builtin-name">remove</span> -y mysql-server</span><br><span class="line">yum <span class="hljs-builtin-name">remove</span> -y mysql*</span><br></pre></td></tr></table></figure></p>
-<p>If you don’t have mysql-server was installed.<br><br>Otherwise, to install MySql client and server, then run:<br><br><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> -y mysql-community-<span class="hljs-keyword">server</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="Setup-3-Service-Configure-1"><a href="#Setup-3-Service-Configure-1" class="headerlink" title="Setup 3. Service Configure"></a><strong>Setup 3. Service Configure</strong></h3><p>You should upgrade existing tables before setting the server to become a production machine, which can be done by starting the server and running the mysql_upgrade script (this may take time depending on the size of the database).<br><br><figure class="highlight crmsh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld <span class="hljs-literal">start</span></span><br></pre></td></tr></table></figure></p>
-<p>This will issue a password prompt for the user. If you don’t have a root user password, remove the “-p”<br><br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure></p>
-<h2 id="Install-Mysql-5-7-on-RHEL-CentOS-5-6-7"><a href="#Install-Mysql-5-7-on-RHEL-CentOS-5-6-7" class="headerlink" title="Install Mysql 5.7 on RHEL/CentOS 5/6/7 "></a><font color="red">Install Mysql 5.7 on RHEL/CentOS 5/6/7 </font></h2><h3 id="Setup-1-Use-Repository-2"><a href="#Setup-1-Use-Repository-2" class="headerlink" title="Setup 1. Use Repository."></a><strong>Setup 1. Use Repository.</strong></h3><p>First, to set up the yum repository, install the mysql－community-server 5.7 RPM based on your CentOS/RHEL release: <br></p>
-<h4 id="mysql-server-5-7-repo-for-CentOS-RHEL-5-x"><a href="#mysql-server-5-7-repo-for-CentOS-RHEL-5-x" class="headerlink" title="mysql-server-5.7.repo for CentOS/RHEL 5.x"></a><strong>mysql-server-5.7.repo for CentOS/RHEL 5.x</strong></h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># For x86_64</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.7</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">5</span><span class="hljs-regexp">/x86_64/my</span>sql-community-release-el5-<span class="hljs-number">7</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># For i386</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.7</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">5</span><span class="hljs-regexp">/i386/my</span>sql-community-release-el5-<span class="hljs-number">7</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
-<h4 id="mysql-server-5-7-repo-for-CentOS-RHEL-6-x"><a href="#mysql-server-5-7-repo-for-CentOS-RHEL-6-x" class="headerlink" title="mysql-server-5.7.repo for CentOS/RHEL 6.x"></a><strong>mysql-server-5.7.repo for CentOS/RHEL 6.x</strong></h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># For x86_64</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.7</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">6</span><span class="hljs-regexp">/x86_64/my</span>sql-community-release-el6-<span class="hljs-number">7</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># For i386</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.7</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">6</span><span class="hljs-regexp">/i386/my</span>sql-community-release-el6-<span class="hljs-number">7</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
-<h4 id="mysql-server-5-7-repo-for-CentOS-RHEL-7-x"><a href="#mysql-server-5-7-repo-for-CentOS-RHEL-7-x" class="headerlink" title="mysql-server-5.7.repo for CentOS/RHEL 7.x"></a><strong>mysql-server-5.7.repo for CentOS/RHEL 7.x</strong></h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># For x86_64</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.7</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">7</span><span class="hljs-regexp">/x86_64/my</span>sql-community-release-el7-<span class="hljs-number">7</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># For i386</span></span><br><span class="line">yum install http:<span class="hljs-regexp">//</span>repo.mysql.com<span class="hljs-regexp">/yum/my</span>sql-<span class="hljs-number">5.7</span>-community<span class="hljs-regexp">/el/</span><span class="hljs-number">7</span><span class="hljs-regexp">/i386/my</span>sql-community-release-el7-<span class="hljs-number">7</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
-<h3 id="Setup-2-Install-MySQL-Server-5-7"><a href="#Setup-2-Install-MySQL-Server-5-7" class="headerlink" title="Setup 2. Install MySQL Server 5.7"></a><strong>Setup 2. Install MySQL Server 5.7</strong></h3><p>If you already have MySql client or server installed (rpm -q mysql mysql-server), then you must uninstall using the following method:<br><br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-builtin-name">remove</span> -y mysql-server</span><br><span class="line">yum <span class="hljs-builtin-name">remove</span> -y mysql*</span><br></pre></td></tr></table></figure></p>
-<p>If you don’t have mysql-server was installed.<br><br>Otherwise, to install MySql client and server, then run:<br><br><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> -y mysql-community-<span class="hljs-keyword">server</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="Setup-3-Service-Configure-2"><a href="#Setup-3-Service-Configure-2" class="headerlink" title="Setup 3. Service Configure"></a><strong>Setup 3. Service Configure</strong></h3><p>You should upgrade existing tables before setting the server to become a production machine, which can be done by starting the server and running the mysql_upgrade script (this may take time depending on the size of the database).<br><br><figure class="highlight crmsh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld <span class="hljs-literal">start</span></span><br></pre></td></tr></table></figure></p>
-<p>This will issue a password prompt for the user. If you don’t have a root user password, remove the “-p”<br><br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure></p>
+            <h2 id="安装插件包"><a href="#安装插件包" class="headerlink" title="安装插件包"></a>安装插件包</h2><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> <span class="hljs-keyword">http</span>://www.percona.com/downloads/percona-<span class="hljs-keyword">release</span>/redhat/<span class="hljs-number">0.1</span><span class="hljs-number">-3</span>/percona-<span class="hljs-keyword">release</span><span class="hljs-number">-0.1</span><span class="hljs-number">-3.</span>noarch.rpm -y</span><br><span class="line">yum <span class="hljs-keyword">install</span> percona-zabbix-templates.noarch -y</span><br><span class="line">yum <span class="hljs-keyword">install</span> php* -y</span><br></pre></td></tr></table></figure>
+<h2 id="导入模板"><a href="#导入模板" class="headerlink" title="导入模板"></a>导入模板</h2><p>把/var/lib/zabbix/percona/templates/zabbix_agent_template_percona_mysql_server_ht_2.0.9-sver1.1.6.xml 文件拷贝出来，通过Zabbix的监控页面导入:<br>ConfigurationTemplatesImport(在右上角)<br>选择导出的模板文件，点击Import完成导入</p>
+<p><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/05/zabbix-mysql01.png" alt></p>
+<h2 id="安装Agent"><a href="#安装Agent" class="headerlink" title="安装Agent"></a>安装Agent</h2><figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh <span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/repo.zabbix.com/zabbix</span><span class="hljs-regexp">/2.4/rhel</span><span class="hljs-regexp">/6/x</span>86_64/zabbix-release-<span class="hljs-number">2.4</span>-<span class="hljs-number">1</span>.el6.noarch.rpm</span><br><span class="line">yum install zabbix-agent</span><br><span class="line">vim /etc/zabbix/zabbix-agentd.conf</span><br><span class="line"><span class="hljs-comment">#配置监控服务器地址</span></span><br><span class="line">Server=<span class="hljs-number">192.168</span>.<span class="hljs-number">1.15</span></span><br><span class="line"><span class="hljs-comment">#导入配置文件</span></span><br><span class="line">cp /var/<span class="hljs-class"><span class="hljs-keyword">lib</span>/<span class="hljs-title">zabbix</span>/<span class="hljs-title">percona</span>/<span class="hljs-title">templates</span>/<span class="hljs-title">userparameter_percona_mysql</span>.<span class="hljs-title">conf</span> /<span class="hljs-title">etc</span>/<span class="hljs-title">zabbix</span>/<span class="hljs-title">zabbix_agentd</span>.<span class="hljs-title">d</span>/</span></span><br><span class="line"><span class="hljs-comment">#重启agent</span></span><br><span class="line">service zabbix-agent restart</span><br></pre></td></tr></table></figure>
+<h2 id="Mysql新建用户"><a href="#Mysql新建用户" class="headerlink" title="Mysql新建用户"></a>Mysql新建用户</h2><p>登陆Mysql数据库，新建一个本地的只有查询权限的mysql用户<br>grant select on <em>.</em> to ‘percona’@’localhost’ identified by ‘percona’;<br>flush tables;</p>
+<h2 id="配置Percona插件"><a href="#配置Percona插件" class="headerlink" title="配置Percona插件"></a>配置Percona插件</h2><p>修改插件使用的mysql用户名密码<br>sed -i s/cactiuser/percona/g /var/lib/zabbix/percona/scripts/ss_get_mysql_stats.php</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>测试是否可以获取到值<br>cd /var/lib/zabbix/percona/scripts/<br>./get_mysql_stats_wrapper.sh gg<br>如果获取到值，则说明配置成功<br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/05/zabbix-mysql02.png" alt></p>
+<p>注意：执行完脚本后，请手动删除/tmp/文件夹下生成的*-mysql_cacti_stats.txt文件，然后让程序自己调用创建新文件。</p>
 
         </div>
         
@@ -482,17 +335,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-07-06T19:49:02.000Z">2016-07-07</time>
+                <time class="level-item has-text-grey" datetime="2016-05-19T22:12:40.000Z">2016-05-20</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Redis/">Redis</a>
+                <a class="has-link-grey -link" href="/categories/Zabbix/">Zabbix</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    6 minutes read (About 839 words)
+                    a few seconds read (About 0 words)
                 </span>
                 
                 
@@ -501,33 +354,101 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/07/07/redis01/">HowTo Use Remi Install Redis</a>
+                <a class="has-link-black-ter" href="/2016/05/20/how-to-install-zabbix-2-4-on-centos-6-x/">HowTo Install Zabbix 2.4 on CentOS 6.x</a>
             
         </h1>
         <div class="content">
-            <h2 id="Setup-1-Install"><a href="#Setup-1-Install" class="headerlink" title="Setup 1. Install"></a><strong>Setup 1. Install</strong></h2><p>Frist, To install remi Repo and epel Repo.</p>
-<h4 id="Remi-EL6-for-CentOS-RHEL-6-x"><a href="#Remi-EL6-for-CentOS-RHEL-6-x" class="headerlink" title="Remi EL6 for CentOS/RHEL 6.x"></a><strong>Remi EL6 for CentOS/RHEL 6.x</strong></h4><figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -Uvh <span class="hljs-string">https:</span><span class="hljs-comment">//dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</span></span><br><span class="line">rpm -Uvh <span class="hljs-string">http:</span><span class="hljs-comment">//rpms.famillecollet.com/enterprise/remi-release-6.rpm</span></span><br></pre></td></tr></table></figure>
-<h4 id="Remi-EL5-for-CentOS-RHEL-5-x"><a href="#Remi-EL5-for-CentOS-RHEL-5-x" class="headerlink" title="Remi EL5 for CentOS/RHEL 5.x"></a><strong>Remi EL5 for CentOS/RHEL 5.x</strong></h4><figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -Uvh <span class="hljs-string">https:</span><span class="hljs-comment">//dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm</span></span><br><span class="line">rpm -Uvh <span class="hljs-string">http:</span><span class="hljs-comment">//rpms.famillecollet.com/enterprise/remi-release-5.rpm</span></span><br></pre></td></tr></table></figure>
-<h4 id="有时间我们会碰到remi-repo无法使用报错，就像这样："><a href="#有时间我们会碰到remi-repo无法使用报错，就像这样：" class="headerlink" title="有时间我们会碰到remi.repo无法使用报错，就像这样："></a>有时间我们会碰到remi.repo无法使用报错，就像这样：</h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="hljs-regexp">//</span>remi.schlundtech.de<span class="hljs-regexp">/enterprise/</span>latest<span class="hljs-regexp">/remi/</span>x86_64<span class="hljs-regexp">/repodata/</span>repomd.xml: [Errno <span class="hljs-number">14</span>] PYCURL ERROR <span class="hljs-number">22</span> - <span class="hljs-string">"The requested URL returned error: 404 Not Found"</span></span><br></pre></td></tr></table></figure>
-<h4 id="这时我们需要修改-etc-yum-repos-d-remi-repo，像这样："><a href="#这时我们需要修改-etc-yum-repos-d-remi-repo，像这样：" class="headerlink" title="这时我们需要修改/etc/yum.repos.d/remi.repo，像这样："></a>这时我们需要修改/etc/yum.repos.d/remi.repo，像这样：</h4><figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">baseurl=<span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/rpms.famillecollet.com/enterprise</span><span class="hljs-regexp">/5/remi</span><span class="hljs-regexp">/$basearch/</span></span><br><span class="line"><span class="hljs-comment">#mirrorlist=http://rpms.famillecollet.com/enterprise/5/remi/mirror/$basearch/</span></span><br></pre></td></tr></table></figure>
-<h4 id="如果发现安装后yum-makecache没看到相应的源站点，请检查repo文件的enable参数是否为1，1为开启，0为关闭状态。"><a href="#如果发现安装后yum-makecache没看到相应的源站点，请检查repo文件的enable参数是否为1，1为开启，0为关闭状态。" class="headerlink" title="如果发现安装后yum makecache没看到相应的源站点，请检查repo文件的enable参数是否为1，1为开启，0为关闭状态。"></a>如果发现安装后yum makecache没看到相应的源站点，请检查repo文件的enable参数是否为1，1为开启，0为关闭状态。</h4><figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[repoName]</span><br><span class="line">name=repoName repo</span><br><span class="line">baseurl=http://repoPath</span><br><span class="line">gpgcheck=0                <span class="hljs-comment"># 是否启用gpgkey检查</span></span><br><span class="line">enabled=0                 <span class="hljs-comment"># 是否启用该源</span></span><br></pre></td></tr></table></figure>
-<h4 id="Install-Redis"><a href="#Install-Redis" class="headerlink" title="Install Redis"></a><strong>Install Redis</strong></h4><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> -y redis</span><br><span class="line"></span><br><span class="line">[root@zabbix yum.repos.d]# rpm -qi redis</span><br><span class="line"><span class="hljs-keyword">Name</span>        : redis</span><br><span class="line"><span class="hljs-keyword">Version</span>     : <span class="hljs-number">3.2</span><span class="hljs-number">.1</span></span><br><span class="line"><span class="hljs-keyword">Release</span>     : <span class="hljs-number">2.</span>el5.remi</span><br><span class="line">Architecture: x86_64</span><br><span class="line"><span class="hljs-keyword">Install</span> <span class="hljs-built_in">Date</span>: Thu <span class="hljs-number">28</span> Jul <span class="hljs-number">2016</span> <span class="hljs-number">12</span>:<span class="hljs-number">00</span>:<span class="hljs-number">41</span> PM CST</span><br><span class="line"><span class="hljs-keyword">Group</span>       : Applications/<span class="hljs-keyword">Databases</span></span><br><span class="line"><span class="hljs-keyword">Size</span>        : <span class="hljs-number">2113279</span></span><br><span class="line">License     : BSD</span><br><span class="line">Signature   : DSA/<span class="hljs-keyword">SHA1</span>, Fri <span class="hljs-number">24</span> Jun <span class="hljs-number">2016</span> <span class="hljs-number">01</span>:<span class="hljs-number">30</span>:<span class="hljs-number">12</span> PM CST, <span class="hljs-keyword">Key</span> <span class="hljs-keyword">ID</span> <span class="hljs-number">004e6</span>f4700f97f56</span><br><span class="line"><span class="hljs-keyword">Source</span> RPM  : redis<span class="hljs-number">-3.2</span><span class="hljs-number">.1</span><span class="hljs-number">-2.</span>el5.remi.src.rpm</span><br><span class="line"><span class="hljs-keyword">Build</span> <span class="hljs-built_in">Date</span>  : Fri <span class="hljs-number">24</span> Jun <span class="hljs-number">2016</span> <span class="hljs-number">01</span>:<span class="hljs-number">28</span>:<span class="hljs-number">27</span> PM CST</span><br><span class="line"><span class="hljs-keyword">Build</span> Host  : builder.remirepo.net</span><br><span class="line">Relocations : (<span class="hljs-keyword">not</span> relocatable)</span><br><span class="line">Packager    : <span class="hljs-keyword">http</span>://blog.remirepo.net/</span><br><span class="line">Vendor      : Remi Collet</span><br><span class="line"><span class="hljs-keyword">URL</span>         : <span class="hljs-keyword">http</span>://redis.io</span><br><span class="line">Summary     : A persistent <span class="hljs-keyword">key</span>-<span class="hljs-keyword">value</span> <span class="hljs-keyword">database</span></span><br></pre></td></tr></table></figure>
-<h2 id="Setup-2-基本配置项"><a href="#Setup-2-基本配置项" class="headerlink" title="Setup 2. 基本配置项"></a><strong>Setup 2. 基本配置项</strong></h2><h4 id="Redis-配置默认文件-etc-redis-conf"><a href="#Redis-配置默认文件-etc-redis-conf" class="headerlink" title="Redis 配置默认文件/etc/redis.conf"></a>Redis 配置默认文件/etc/redis.conf</h4><p> ＃ 设置Redis的运行模式，yes表示后台运行，no表示不开启后台运行。<br><figure class="highlight nginx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attribute">daemonize</span> <span class="hljs-literal">yes</span></span><br></pre></td></tr></table></figure></p>
-<p> ＃ 指定 redis 监听端口，默认为 6379<br><figure class="highlight elm hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">port</span> 6379</span><br></pre></td></tr></table></figure></p>
-<p>＃ 设置bind_ip，默认监听接口，默认是监听本地，如果未配置的情况下，只有本地可以访问redis，如果取消，则默认监听所有接口<br><figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># <span class="hljs-selector-tag">bind</span> 127<span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.1</span></span><br></pre></td></tr></table></figure></p>
-<p>＃ 指定日志记录级别<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> debug  记录很多信息，用于开发和测试</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> varbose 很多精简的有用信息，不像 debug 会记录那么多</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> notice 普通的 verbose，常用于生产环境</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> warning 只有非常重要或者严重的信息会记录到日志</span></span><br><span class="line"></span><br><span class="line">loglevel verbose</span><br></pre></td></tr></table></figure></p>
-<p>＃ 配置 log 文件名称和全路径地址，默认为stdout，即标准输出，输出到/dev/null，可以手动指定redis日志文件地址，建议级别不要太高，否则会产生大量日志，注意避免磁盘因此撑满。<br><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logfile <span class="hljs-built_in">stdout</span></span><br></pre></td></tr></table></figure></p>
-<p>＃ 可用数据库数，默认值为 16，默认数据库存储在 DB 0 号 ID 库中，无特殊需求，建议仅设置一个数据库<br><br>＃ 查询数据库使用  SELECT ‘dbid’，dbid 介于 0 到 ‘databases’-1 之间。<br><figure class="highlight lsl hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">database <span class="hljs-number">16</span></span><br></pre></td></tr></table></figure></p>
-<p>＃ 安全限定，要求客户端在处理任何命令时都要验证身份和设置密码。<br><br>＃ 默认不启用，若要启用，需要将下行取消注释，并将foobared设置自定一的密码接即可。<br><br>＃ <strong>因为redis加密是通过配置文件进行，所以目前各大云厂家的redis PAAS 服务，都不支持redis加密，在程序开发时需要注意。</strong><br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> requirepass foobared</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 如果开启了安全验证，这时通过redis-cli登录时需要首先执行auth，否则不能正常使用。</span></span><br><span class="line"><span class="hljs-meta">redis-cli&gt;</span><span class="hljs-bash"> auth foobared</span></span><br></pre></td></tr></table></figure></p>
-<p>＃ 向redis内插入一条数据<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">redis-cli&gt;</span><span class="hljs-bash">  <span class="hljs-built_in">set</span> [key] [values]</span></span><br></pre></td></tr></table></figure></p>
-<p>＃ 获取key的值<br><figure class="highlight maxima hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli&gt; <span class="hljs-built_in">get</span> <span class="hljs-built_in">key</span></span><br></pre></td></tr></table></figure></p>
-<p>＃ 查看redis的db信息<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">redis-cli&gt;</span><span class="hljs-bash"> info</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="Setup-3-Others"><a href="#Setup-3-Others" class="headerlink" title="Setup 3. Others"></a><strong>Setup 3. Others</strong></h2><ul>
-<li>redis-dump</li>
-<li>master/slave</li>
-<li>slow log</li>
-</ul>
-<h3 id="Wait-…"><a href="#Wait-…" class="headerlink" title="Wait … "></a><font color="blackm,sis" size="45">Wait … </font></h3>
+            
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-05-17T18:38:59.000Z">2016-05-18</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/CloudStack/">CloudStack</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 minutes read (About 424 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/05/18/how-to-install-cloudstack-on-centos-6-x/">HowTo Install CloudStack 4.8 on CentOS 6.x</a>
+            
+        </h1>
+        <div class="content">
+            <figure class="highlight pf hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="hljs-comment">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Install  CloudStack.sh</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># setting static ip in : /etc/sysconfig/network-scripts/ifcfg-eth0</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Check Service</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Install</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># hostname --fqdn</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># service network restart</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># trun off selinux in : /etc/selinux/config</span></span><br><span class="line"><span class="hljs-comment">#SELinux=disabed</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># trun off iptables.</span></span><br><span class="line">service iptables stop</span><br><span class="line">service ip6tables stop</span><br><span class="line"></span><br><span class="line">chkconfig iptables off</span><br><span class="line">chkconfig ip6tables off</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#NTP</span></span><br><span class="line">yum install -y ntp</span><br><span class="line">chkconfig ntpd <span class="hljs-keyword">on</span></span><br><span class="line">service ntpd start</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># adding cloudstack repos</span></span><br><span class="line">[cloudstack]</span><br><span class="line">name=cloudstack</span><br><span class="line">baseurl=http://cloudstack.apt-get.eu/centos/<span class="hljs-number">6</span>/<span class="hljs-number">4.5</span>/</span><br><span class="line">enabled=<span class="hljs-number">1</span></span><br><span class="line">gpgcheck=<span class="hljs-number">0</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#NFS</span></span><br><span class="line">yum install -y nfs-utils</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># /etc/exports</span></span><br><span class="line">/secondary *(rw,async,no_root_squash,no_subtree_check)</span><br><span class="line">/primary *(rw,async,no_root_squash,no_subtree_check)</span><br><span class="line"><span class="hljs-comment"># add top to /etc/sysconfig/nfs</span></span><br><span class="line">LOCKD_TCPPORT=<span class="hljs-number">32803</span></span><br><span class="line">LOCKD_UDPPORT=<span class="hljs-number">32769</span></span><br><span class="line">MOUNTD_PORT=<span class="hljs-number">892</span></span><br><span class="line">RQUOTAD_PORT=<span class="hljs-number">875</span></span><br><span class="line">STATD_PORT=<span class="hljs-number">662</span></span><br><span class="line">STATD_OUTGOING_PORT=<span class="hljs-number">2020</span></span><br><span class="line"><span class="hljs-comment"># add iptable rules to /etc/sysconfig/iptables</span></span><br><span class="line">-A INPUT -s <span class="hljs-number">172.16</span>.<span class="hljs-number">10.0</span>/<span class="hljs-number">24</span> -m <span class="hljs-keyword">state</span> --state NEW -p udp --dport <span class="hljs-number">111</span> -j ACCEPT</span><br><span class="line">-A INPUT -s <span class="hljs-number">172.16</span>.<span class="hljs-number">10.0</span>/<span class="hljs-number">24</span> -m <span class="hljs-keyword">state</span> --state NEW -p tcp --dport <span class="hljs-number">111</span> -j ACCEPT</span><br><span class="line">-A INPUT -s <span class="hljs-number">172.16</span>.<span class="hljs-number">10.0</span>/<span class="hljs-number">24</span> -m <span class="hljs-keyword">state</span> --state NEW -p tcp --dport <span class="hljs-number">2049</span> -j ACCEPT</span><br><span class="line">-A INPUT -s <span class="hljs-number">172.16</span>.<span class="hljs-number">10.0</span>/<span class="hljs-number">24</span> -m <span class="hljs-keyword">state</span> --state NEW -p tcp --dport <span class="hljs-number">32803</span> -j ACCEPT</span><br><span class="line">-A INPUT -s <span class="hljs-number">172.16</span>.<span class="hljs-number">10.0</span>/<span class="hljs-number">24</span> -m <span class="hljs-keyword">state</span> --state NEW -p udp --dport <span class="hljs-number">32769</span> -j ACCEPT</span><br><span class="line">-A INPUT -s <span class="hljs-number">172.16</span>.<span class="hljs-number">10.0</span>/<span class="hljs-number">24</span> -m <span class="hljs-keyword">state</span> --state NEW -p tcp --dport <span class="hljs-number">892</span> -j ACCEPT</span><br><span class="line">-A INPUT -s <span class="hljs-number">172.16</span>.<span class="hljs-number">10.0</span>/<span class="hljs-number">24</span> -m <span class="hljs-keyword">state</span> --state NEW -p udp --dport <span class="hljs-number">892</span> -j ACCEPT</span><br><span class="line">-A INPUT -s <span class="hljs-number">172.16</span>.<span class="hljs-number">10.0</span>/<span class="hljs-number">24</span> -m <span class="hljs-keyword">state</span> --state NEW -p tcp --dport <span class="hljs-number">875</span> -j ACCEPT</span><br><span class="line">-A INPUT -s <span class="hljs-number">172.16</span>.<span class="hljs-number">10.0</span>/<span class="hljs-number">24</span> -m <span class="hljs-keyword">state</span> --state NEW -p udp --dport <span class="hljs-number">875</span> -j ACCEPT</span><br><span class="line">-A INPUT -s <span class="hljs-number">172.16</span>.<span class="hljs-number">10.0</span>/<span class="hljs-number">24</span> -m <span class="hljs-keyword">state</span> --state NEW -p tcp --dport <span class="hljs-number">662</span> -j ACCEPT</span><br><span class="line">-A INPUT -s <span class="hljs-number">172.16</span>.<span class="hljs-number">10.0</span>/<span class="hljs-number">24</span> -m <span class="hljs-keyword">state</span> --state NEW -p udp --dport <span class="hljs-number">662</span> -j ACCEPT</span><br><span class="line"><span class="hljs-comment"># service iptables restart</span></span><br><span class="line">service rpcbind start</span><br><span class="line">service nfs start</span><br><span class="line">chkconfig rpcbind <span class="hljs-keyword">on</span></span><br><span class="line">chkconfig nfs <span class="hljs-keyword">on</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># MySQL server</span></span><br><span class="line">yum install -y mysql-server</span><br><span class="line"><span class="hljs-comment"># adding configure file in /etc/my.cnf : [mysqld]</span></span><br><span class="line">innodb_rollback_on_timeout=<span class="hljs-number">1</span></span><br><span class="line">innodb_lock_wait_timeout=<span class="hljs-number">600</span></span><br><span class="line">max_connections=<span class="hljs-number">350</span></span><br><span class="line">log-bin=mysql-bin</span><br><span class="line">binlog-format = 'ROW'</span><br><span class="line"></span><br><span class="line">service mysqld start</span><br><span class="line">chkconfig mysqld <span class="hljs-keyword">on</span></span><br><span class="line">mysql_secure_installation 	<span class="hljs-comment"># remeber the root pass.</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Cloudstack-management</span></span><br><span class="line">yum -y install cloudstack-management</span><br><span class="line">cloudstack-setup-databases cloud:[password]@localhost --deploy-as=root:[password]</span><br><span class="line">cloudstack-setup-management</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#System Template Setup</span></span><br><span class="line">/usr/share/cloudstack-common/scripts/storage/secondary/cloud-install-sys-tmplt -m /secondary -u http://cloudstack.apt-get.eu/systemvm/<span class="hljs-number">4.6</span>/systemvm64template-<span class="hljs-number">4.6</span>.<span class="hljs-number">0</span>-kvm.qcow2.bz2 -h kvm -F</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Install kvm</span></span><br><span class="line">yum -y install cloudstack-agent</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># qemu configuration : /etc/libvirt/qemu.conf</span></span><br><span class="line">vnc_listen=<span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span></span><br><span class="line"><span class="hljs-comment"># Libvirt Configuration : /etc/libvirt/libvirtd.conf</span></span><br><span class="line">listen_tls = <span class="hljs-number">0</span></span><br><span class="line">listen_tcp = <span class="hljs-number">1</span></span><br><span class="line">tcp_port = <span class="hljs-string">"16059"</span></span><br><span class="line">auth_tcp = <span class="hljs-string">"none"</span></span><br><span class="line">mdns_adv = <span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-comment">#  /etc/sysconfig/libvirtd</span></span><br><span class="line">LIBVIRTD_ARGS=<span class="hljs-string">"--listen"</span></span><br><span class="line"></span><br><span class="line">service libvirtd restart</span><br><span class="line"></span><br><span class="line">lsmod | grep kvm:</span><br><span class="line">kvm_intel              <span class="hljs-number">55496</span>  <span class="hljs-number">0</span></span><br><span class="line">kvm                   <span class="hljs-number">337772</span>  <span class="hljs-number">1</span> kvm_intel</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">##### UI Setting ####</span></span><br><span class="line">http://[ip]:<span class="hljs-number">8080</span>/client</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-05-15T04:52:05.000Z">2016-05-15</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/OpenStack/">OpenStack</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a minute read (About 180 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/05/15/openstak-jie-shao/">OpenStak 介绍</a>
+            
+        </h1>
+        <div class="content">
+            <p><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F05%2FSlide01.jpg" alt><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F05%2FSlide02.jpg" alt><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F05%2FSlide03.jpg" alt><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F05%2FSlide04.jpg" alt><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F05%2FSlide05.jpg" alt><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F05%2FSlide07.jpg" alt><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F05%2FSlide08.jpg" alt><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F05%2FSlide09.jpg" alt><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F05%2FSlide10.jpg" alt><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F05%2FSlide11.jpg" alt><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F05%2FSlide12.jpg" alt><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F05%2FSlide13.jpg" alt><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F05%2FSlide14.jpg" alt><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F05%2FSlide15.jpg" alt><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F05%2FSlide16.jpg" alt><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F05%2FSlide17.jpg" alt><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F05%2FSlide18.jpg" alt><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F05%2FSlide19.jpg" alt></p>
+
         </div>
         
         
@@ -566,7 +487,7 @@
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/16/">16</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/14/">14</a></li>
             
         </ul>
     </nav>
@@ -614,7 +535,7 @@
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        108
+                        92
                     </p>
                 </div>
             </div>
@@ -624,7 +545,7 @@
                         Categories
                     </p>
                     <p class="title has-text-weight-normal">
-                        28
+                        25
                     </p>
                 </div>
             </div>
@@ -634,7 +555,7 @@
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        42
+                        39
                     </p>
                 </div>
             </div>
@@ -924,30 +845,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/似水年华/">
-            <span class="level-start">
-                <span class="level-item">似水年华</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">14</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/我的微博/">
-            <span class="level-start">
-                <span class="level-item">我的微博</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/来自知乎/">
-            <span class="level-start">
-                <span class="level-item">来自知乎</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/魔方/">
             <span class="level-start">
                 <span class="level-item">魔方</span>
@@ -967,7 +864,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AWS/" style="font-size: 10px;">AWS</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 14.29px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 17.14px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 12.86px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 12.86px;">Ghost</a> <a href="/tags/Git/" style="font-size: 14.29px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 12.86px;">Linux</a> <a href="/tags/Mac/" style="font-size: 15.71px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.43px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 12.86px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.43px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 14.29px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.43px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.43px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 15.71px;">Tomcat</a> <a href="/tags/Weisk/" style="font-size: 10px;">Weisk</a> <a href="/tags/Yum/" style="font-size: 12.86px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.43px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/似水年华/" style="font-size: 10px;">似水年华</a> <a href="/tags/何余生/" style="font-size: 10px;">何余生</a> <a href="/tags/我给你讲个故事吧/" style="font-size: 18.57px;">我给你讲个故事吧</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
+        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AWS/" style="font-size: 10px;">AWS</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Weisk/" style="font-size: 10px;">Weisk</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
     </div>
 </div>
 
@@ -981,25 +878,6 @@
         <h3 class="menu-label">
             Recent
         </h3>
-        
-        <article class="media">
-            
-            <a href="/2018/10/14/sdnedrletremfdrltmertedd/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="何余生说要感谢身边所有美好的人">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-14T08:48:47.000Z">2018-10-14</time></div>
-                    <a href="/2018/10/14/sdnedrletremfdrltmertedd/" class="has-link-black-ter is-size-6">何余生说要感谢身边所有美好的人</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/似水年华/">似水年华</a>
-                    </p>
-                </div>
-            </div>
-        </article>
         
         <article class="media">
             
@@ -1077,6 +955,25 @@
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
+                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1088,17 +985,6 @@
             Archives
         </h3>
         <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2018/05/">
@@ -1194,7 +1080,7 @@
                     <span class="level-item">April 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1227,7 +1113,7 @@
                     <span class="level-item">January 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1238,7 +1124,7 @@
                     <span class="level-item">December 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1249,7 +1135,7 @@
                     <span class="level-item">November 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1260,7 +1146,7 @@
                     <span class="level-item">October 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1271,7 +1157,7 @@
                     <span class="level-item">September 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1282,7 +1168,7 @@
                     <span class="level-item">August 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1293,7 +1179,7 @@
                     <span class="level-item">July 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -1337,51 +1223,7 @@
                     <span class="level-item">March 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2016/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2016</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/06/">
-                <span class="level-start">
-                    <span class="level-item">June 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/04/">
-                <span class="level-start">
-                    <span class="level-item">April 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -1662,27 +1504,6 @@
                     <a class="tags has-addons" href="/tags/iOS/">
                         <span class="tag">iOS</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/似水年华/">
-                        <span class="tag">似水年华</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/何余生/">
-                        <span class="tag">何余生</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/我给你讲个故事吧/">
-                        <span class="tag">我给你讲个故事吧</span>
-                        <span class="tag is-grey">13</span>
                     </a>
                 </div>
                 
@@ -1718,25 +1539,6 @@
         
         <article class="media">
             
-            <a href="/2018/10/14/sdnedrletremfdrltmertedd/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="何余生说要感谢身边所有美好的人">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-14T08:48:47.000Z">2018-10-14</time></div>
-                    <a href="/2018/10/14/sdnedrletremfdrltmertedd/" class="has-link-black-ter is-size-6">何余生说要感谢身边所有美好的人</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/似水年华/">似水年华</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2018/05/03/unlink_weisk_with_thirdpart_weixin/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="解除微信公众平台对微上客的授权">
@@ -1811,6 +1613,25 @@
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
+                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1822,17 +1643,6 @@
             Archives
         </h3>
         <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2018/05/">
@@ -1928,7 +1738,7 @@
                     <span class="level-item">April 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1961,7 +1771,7 @@
                     <span class="level-item">January 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1972,7 +1782,7 @@
                     <span class="level-item">December 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1983,7 +1793,7 @@
                     <span class="level-item">November 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1994,7 +1804,7 @@
                     <span class="level-item">October 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2005,7 +1815,7 @@
                     <span class="level-item">September 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2016,7 +1826,7 @@
                     <span class="level-item">August 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -2027,7 +1837,7 @@
                     <span class="level-item">July 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -2071,51 +1881,7 @@
                     <span class="level-item">March 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2016/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2016</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/06/">
-                <span class="level-start">
-                    <span class="level-item">June 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/04/">
-                <span class="level-start">
-                    <span class="level-item">April 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -2396,27 +2162,6 @@
                     <a class="tags has-addons" href="/tags/iOS/">
                         <span class="tag">iOS</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/似水年华/">
-                        <span class="tag">似水年华</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/何余生/">
-                        <span class="tag">何余生</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/我给你讲个故事吧/">
-                        <span class="tag">我给你讲个故事吧</span>
-                        <span class="tag is-grey">13</span>
                     </a>
                 </div>
                 

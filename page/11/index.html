@@ -144,7 +144,53 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-07-04T17:58:03.000Z">2016-07-05</time>
+                <time class="level-item has-text-grey" datetime="2016-05-11T22:12:02.000Z">2016-05-12</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Azure/">Azure</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a minute read (About 130 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/05/12/chuang-jian-he-shi-yong-azure-redis-cache/">Azure(4) 创建和使用Azure Redis Cache</a>
+            
+        </h1>
+        <div class="content">
+            <p>我们以管理员身份，运行PowerShell，执行以下命令。实现创建Standard类型，大小为13GB的Redis Cache</p>
+<figure class="highlight vala hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#弹出界面输入用户名密码</span></span><br><span class="line">Add-AzureAccount -Environment AzureChinaCloud</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#设置当前订阅名称</span></span><br><span class="line">Select-AzureSubscription <span class="hljs-string">'[SubscriptionName]'</span> –Current</span><br><span class="line"></span><br><span class="line">Switch-AzureMode -name AzureResourceManager</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#在中国东部数据中心，创建新的资源组</span></span><br><span class="line">New-AzureResourceGroup -name [YourResourceGroupName] -Location <span class="hljs-string">'China East'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#在中国东部数据中心，申请13GB的Redis Cache，类型为Standard，有SLA保证</span></span><br><span class="line">New-AzureRedisCache -ResourceGroupName [YourResourceGroupName] -Name [RedisCacheName] -Location <span class="hljs-string">'China East'</span> -sku <span class="hljs-string">'Standard'</span> -Size <span class="hljs-string">'13GB'</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-05-04T21:54:08.000Z">2016-05-05</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/CentOS/">CentOS</a>
@@ -154,7 +200,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 minutes read (About 666 words)
+                    a few seconds read (About 27 words)
                 </span>
                 
                 
@@ -163,22 +209,11 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/07/05/use-fuse-sshfs-to-mount-remote-filesystems/">HowTo Use Fuse-sshfs to Mount Remote Filesystems</a>
+                <a class="has-link-black-ter" href="/2016/05/05/how-to-install-fabric-on-centos-7/">HowTo Install Fabric on CentOS 7.x</a>
             
         </h1>
         <div class="content">
-            <p>传统我们服务器之间文件共享的方式有采用NFS、Samba等等，但是在我看来配置都有一定的复杂性，当然复杂也有它们的优势，这里推荐一个依赖于SSH的文件共享工具，Fuse-sshfs。<br><br>SSH 是一个强大且安全的工具，我们除了可以用它来远程管理主机外，还可以通过它建立 SSH tunnel 作 Proxy 用，远程传输文件等等。而这里我想要介绍另外一个功能，那就是结合 sshfs 这个工具可以把远程主机的文件系统映射到本地主机上，透过 SSH 把远程文件系统挂载到本机上，这样我们可以不必使用 scp 工具就可以做到直接复制及删除远程主机的文件了，就像操作本地磁盘一样方便。<br><br>sshfs 是基于 FUSE 构建的 SSH 文件系统客户端程序，通过它远程主机的配置无需作任何改变，就可以透过 SSH 协议来挂载远程文件系统了，非常方便及安全。<br><br></p>
-<h3 id="Install-fuse-sshfs"><a href="#Install-fuse-sshfs" class="headerlink" title="Install fuse-sshfs"></a>Install fuse-sshfs</h3><figure class="highlight d hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="hljs-built_in">cent</span><span class="hljs-keyword">@localhost</span> ~]$ sudo yum install -y epel-relese</span><br><span class="line">[<span class="hljs-built_in">cent</span><span class="hljs-keyword">@localhost</span> ~]$ sudo yum --enablerepo=epel install -y fuse-sshfs</span><br></pre></td></tr></table></figure>
-<h3 id="挂载远程-ssh文件系统"><a href="#挂载远程-ssh文件系统" class="headerlink" title="挂载远程 ssh文件系统"></a>挂载远程 ssh文件系统</h3><figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[cent<span class="hljs-variable">@localhost</span> ~]<span class="hljs-variable">$ </span>mkdir ./mnt</span><br><span class="line">[cent<span class="hljs-variable">@localhost</span> ~]<span class="hljs-variable">$ </span>sshfs root<span class="hljs-variable">@192</span>.<span class="hljs-number">168.16</span>.<span class="hljs-number">230</span><span class="hljs-symbol">:/home/</span> ./mnt</span><br><span class="line">root<span class="hljs-variable">@192</span>.<span class="hljs-number">168.16</span>.<span class="hljs-number">230</span><span class="hljs-string">'s password:</span></span><br><span class="line"><span class="hljs-string">[cent@localhost ~]$ mount</span></span><br><span class="line"><span class="hljs-string">root@192.168.16.230:/home/ on /home/cent/mnt type fuse.sshfs (rw,nosuid,nodev,user=cent)</span></span><br></pre></td></tr></table></figure>
-<h3 id="卸载远程-ssh文件系统"><a href="#卸载远程-ssh文件系统" class="headerlink" title="卸载远程 ssh文件系统"></a>卸载远程 ssh文件系统</h3><figure class="highlight d hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="hljs-built_in">cent</span><span class="hljs-keyword">@localhost</span> ~]$ fusermount -u ./mnt</span><br></pre></td></tr></table></figure>
-<h3 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h3><figure class="highlight haml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-<span class="hljs-ruby">C 压缩，或者-o compression=yes</span></span><br><span class="line"><span class="hljs-ruby">-o reconnect 自动重连</span></span><br><span class="line"><span class="hljs-ruby">-o transform_symlinks 表示转换绝对链接符号为相对链接符号</span></span><br><span class="line"><span class="hljs-ruby">-o follow_symlinks 沿用服务器上的链接符号</span></span><br><span class="line"><span class="hljs-ruby">-o cache=yes</span></span><br><span class="line"><span class="hljs-ruby">-o allow_other 这个参数最重要，必须写，否则任何文件都是Permission Deny</span></span><br></pre></td></tr></table></figure>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>当然sshfs也不尽是优点，例如远程主机失去响应后本地挂载点卡死并影响本地系统使用，需要手工找出 sshfs进程并杀死，因网速问题造成操作响应缓慢等等，不过一般在稳定快速的网络中不太会遇上，对比其强大的功能，还是可以接受的，正所谓暇不掩瑜。</p>
-<ol>
-<li>所以sshfs适合内部网络比较稳定的地方</li>
-<li>配合ssh免密登录使用会更好哦</li>
-<li>可以看到的是sshfs默认挂载是rw的权限，但是通过sshfs –help 可以看到有非常详尽的参数配置可以选择，大家可以仔细研究下。</li>
-</ol>
-<h3 id="附1"><a href="#附1" class="headerlink" title="附1."></a>附1.</h3><p><a href="http://igikorn.com/sshfs-windows-8/" target="_blank" rel="noopener">Link</a> 在windows下可以使用sshfs.</p>
+            <figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Installed CentOS 7.</span><br><span class="line"></span><br><span class="line">yum <span class="hljs-keyword">update</span> -y</span><br><span class="line">reboot</span><br><span class="line"></span><br><span class="line">yum <span class="hljs-keyword">install</span> -y epel-<span class="hljs-keyword">release</span></span><br><span class="line">python -V # <span class="hljs-number">2.7</span> <span class="hljs-keyword">version</span></span><br><span class="line"></span><br><span class="line">yum <span class="hljs-keyword">install</span> -y pyhton-devel python-pip python-setuptools pycrypto</span><br><span class="line"></span><br><span class="line">pip <span class="hljs-keyword">install</span> fabric</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -200,7 +235,98 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-06-15T18:29:00.000Z">2016-06-16</time>
+                <time class="level-item has-text-grey" datetime="2016-05-04T21:43:55.000Z">2016-05-05</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/CentOS/">CentOS</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a few seconds read (About 22 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/05/05/centos-7-1-xiu-gai-xi-tong-zhu-ji-ming-2/">CentOS 7(2) 系统服务管理方式</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="关闭防火墙："><a href="#关闭防火墙：" class="headerlink" title="关闭防火墙："></a>关闭防火墙：</h2><figure class="highlight gauss hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="hljs-keyword">stop</span> firewalld.service   <span class="hljs-meta"># 关闭</span></span><br><span class="line">systemctl <span class="hljs-keyword">disable</span> firewalld.service <span class="hljs-meta"># 开机不自启动</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-05-04T21:41:39.000Z">2016-05-05</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/CentOS/">CentOS</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a few seconds read (About 75 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/05/05/centos-7-1-xiu-gai-xi-tong-zhu-ji-ming/">CentOS 7(1) 修改系统主机名</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="CentOS-7-修改主机名"><a href="#CentOS-7-修改主机名" class="headerlink" title="CentOS 7 修改主机名"></a>CentOS 7 修改主机名</h2><h3 id="方法1-hostname-主机名"><a href="#方法1-hostname-主机名" class="headerlink" title="方法1:  hostname 主机名"></a>方法1: <code> hostname 主机名</code></h3><p>这种方式，只能修改临时的主机名，当重启机器后，主机名称又变回来了。</p>
+<h3 id="方法2-hostnamectl-set-hostname-lt-主机名-gt"><a href="#方法2-hostnamectl-set-hostname-lt-主机名-gt" class="headerlink" title="方法2:  hostnamectl set-hostname &lt;主机名&gt;  "></a>方法2: <code> hostnamectl set-hostname &lt;主机名&gt;  </code></h3><p>使用这种方式修改，可以永久性的修改主机名称！</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-05-04T20:30:11.000Z">2016-05-05</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
@@ -210,7 +336,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    6 minutes read (About 874 words)
+                    10 minutes read (About 1505 words)
                 </span>
                 
                 
@@ -219,308 +345,155 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/06/16/mysql03/">MySQL(1) 常用优化</a>
+                <a class="has-link-black-ter" href="/2016/05/05/mysqldumpchang-yong-can-shu/">MySQL(3) mysqldump常用参数</a>
             
         </h1>
         <div class="content">
-            <blockquote>
-<p><strong>环境：MySQL 5.5 &amp; MySQL 5.6 &amp; RHEL/CentOS 5/6/7</strong></p>
+            <p>常用的mysqldump命令组合。</p>
+<h2 id="备份数据库"><a href="#备份数据库" class="headerlink" title="备份数据库"></a>备份数据库</h2><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysqldump db_name &gt; bak_name.sql</span><br><span class="line">mysqldump -A -u [dbuser] -<span class="hljs-selector-tag">p</span> db_name &gt; bak_name.sql</span><br><span class="line">mysqldump -d -A --add-drop-<span class="hljs-selector-tag">table</span> -uroot -<span class="hljs-selector-tag">p</span> &gt;xxx.sql</span><br></pre></td></tr></table></figure>
+<h2 id="备份所有库到一个单独的文件"><a href="#备份所有库到一个单独的文件" class="headerlink" title="备份所有库到一个单独的文件"></a>备份所有库到一个单独的文件</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -e 'show databases' | sed -n '2,$p' | xargs -I DB 'mysqldump DB &gt; DB.sql'</span><br></pre></td></tr></table></figure>
+<h3 id="1-导出结构不导出数据"><a href="#1-导出结构不导出数据" class="headerlink" title="1. 导出结构不导出数据"></a>1. 导出结构不导出数据</h3><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump　--opt　-d　db_name　-u　root　-<span class="hljs-selector-tag">p</span>　&gt;　xxx.sql</span><br></pre></td></tr></table></figure>
+<h3 id="2-导出数据不导出结构"><a href="#2-导出数据不导出结构" class="headerlink" title="2. 导出数据不导出结构"></a>2. 导出数据不导出结构</h3><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump　-t　db_name　-uroot　-<span class="hljs-selector-tag">p</span>　&gt;　xxx.sql</span><br></pre></td></tr></table></figure>
+<h3 id="3-导出数据和表结构"><a href="#3-导出数据和表结构" class="headerlink" title="3. 导出数据和表结构"></a>3. 导出数据和表结构</h3><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump　db_name　-uroot　-<span class="hljs-selector-tag">p</span>　&gt;　xxx.sql</span><br></pre></td></tr></table></figure>
+<h3 id="4-导出特定表的结构"><a href="#4-导出特定表的结构" class="headerlink" title="4. 导出特定表的结构"></a>4. 导出特定表的结构</h3><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump　-uroot　-<span class="hljs-selector-tag">p</span>　-B　db_name　--<span class="hljs-selector-tag">table</span>　tb_name　&gt;　xxx.sql</span><br></pre></td></tr></table></figure>
+<h2 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h2><p> 因为mysqldump导出的是完整的SQL语句，所以用mysql客户程序很容易就能把数据导入了：<br><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql -u db_user -<span class="hljs-selector-tag">p</span> db_name  &lt; xxx.sql</span><br><span class="line">mysql&gt; source /path/xxx.sql</span><br></pre></td></tr></table></figure></p>
+<h2 id="mysqldump参数详解："><a href="#mysqldump参数详解：" class="headerlink" title="mysqldump参数详解："></a>mysqldump参数详解：</h2><p><code>–all-databases , -A </code><br>导出全部数据库<br><br>mysqldump -uroot -p –all-databases</p>
+<p><code>–all-tablespaces , -Y</code><br>导出全部表空间<br><br>mysqldump -uroot -p –all-databases –all-tablespaces</p>
+<p><code>–no-tablespaces , -y</code><br>不导出任何表空间信息<br><br>mysqldump -uroot -p –all-databases –no-tablespaces</p>
+<p><code>–add-drop-database</code><br>每个数据库创建之前添加drop数据库语句<br><br>mysqldump -uroot -p –all-databases –add-drop-database</p>
+<p><code>–add-drop-table</code><br>每个数据表创建之前添加drop数据表语句。(默认为打开状态，使用–skip-add-drop-table取消选项)<br><br>mysqldump -uroot -p –all-databases (默认添加drop语句)<br>mysqldump -uroot -p –all-databases –skip-add-drop-table (取消drop语句)</p>
+<p><code>–add-locks</code><br>在每个表导出之前增加LOCK TABLES并且之后UNLOCK TABLE。(默认为打开状态，使用–skip-add-locks取消选项)<br><br>mysqldump -uroot -p –all-databases(默认添加LOCK语句)<br>mysqldump -uroot -p –all-databases –skip-add-locks (取消LOCK语句)</p>
+<p><code>–comments</code><br>附加注释信息。<br><br>默认为打开，可以用–skip-comments取消mysqldump -uroot -p –all-databases (默认记录注释)mysqldump -uroot -p –all-databases “code”<br>skip-comments (取消注释)</p>
+<p><code>–compact</code><br>导出更少的输出信息(用于调试),去掉注释和头尾等结构,可以使用选项：–skip-add-drop-table –skip-add-locks –skip-comments –skip-disable-keys<br><br>mysqldump -uroot -p –all-databases –compact</p>
+<p><code>–complete-insert, -c</code><br>使用完整的insert语句(包含列名称)。这么做能提高插入效率，但是可能会受到max_allowed_packet参数的影响而导致插入失败。<br><br>mysqldump -uroot -p –all-databases –complete-insert</p>
+<p><code>–compress, -C</code><br>在客户端和服务器之间启用压缩传递所有信息<br><br>mysqldump -uroot -p –all-databases –compress</p>
+<p><code>–databases, -B</code><br>导出几个数据库。参数后面所有名字参量都被看作数据库名。<br><br>mysqldump -uroot -p –databases test mysql</p>
+<p><code>–debug</code><br>输出debug信息，用于调试。<br><br>默认值为：d:t:o,/tmp/mysqldump.trace<br><br>mysqldump -uroot -p –all-databases –debug<br><br>mysqldump -uroot -p –all-databases –debug=”d:t:o,/tmp/debug.trace”</p>
+<p><code>–debug-info</code><br>输出调试信息并退出<br><br>mysqldump -uroot -p –all-databases –debug-info</p>
+<p><code>–default-character-set</code><br>设置默认字符集，默认值为utf8<br><br>mysqldump -uroot -p –all-databases –default-character-set=latin1</p>
+<p><code>–delayed-insert</code><br>采用延时插入方式（INSERT DELAYED）导出数据<br><br>mysqldump -uroot -p –all-databases –delayed-insert</p>
+<p><code>–events, -E</code><br>导出事件<br><br>mysqldump -uroot -p –all-databases –events</p>
+<p><code>–flush-logs</code><br>开始导出之前刷新日志<br><br>请注意：假如一次导出多个数据库(使用选项–databases或者–all-databases)，将会逐个数据库刷新日志。除使用–lock-all-tables或者–master-data外。在这种情况下，日志将会被刷新一次，相应的所以表同时被锁定。因此，如果打算同时导出和刷新日志应该使用–lock-all-tables 或者–master-data 和–flush-logs.<br><br>mysqldump -uroot -p –all-databases –flush-logs</p>
+<p><code>–flush-privileges</code><br>在导出mysql数据库之后，发出一条FLUSH PRIVILEGES 语句。为了正确恢复，该选项应该用于导出mysql数据库和依赖mysql数据库数据的任何时候。<br><br>mysqldump -uroot -p –all-databases –flush-privileges</p>
+<p><code>–force</code><br>在导出过程中忽略出现的SQL错误<br><br>mysqldump -uroot -p –all-databases –force</p>
+<p><code>–host, -h</code><br>需要导出的主机信息<br><br>mysqldump -uroot -p –host=localhost –all-databases</p>
+<p><code>–ignore-table</code></p>
+<p>不导出指定表。<br>指定忽略多个表时，需要重复多次，每次一个表。每个表必须同时指定数据库和表名.<br>例如：<br>–ignore-table=database.table1 –ignore-table=database.table2 ……<br><br>mysqldump -uroot -p –host=localhost –all-databases –ignore-table=mysql.user</p>
+<p><code>–lock-all-tables, -x</code><br>提交请求锁定所有数据库中的所有表，以保证数据的一致性。<br>这是一个全局读锁，并且自动关闭–single-transaction 和–lock-tables 选项。<br><br>mysqldump -uroot -p –host=localhost –all-databases –lock-all-tables</p>
+<p><code>–lock-tables, -l</code><br>开始导出前，锁定所有表。<br><br>用READ LOCAL锁定表以允许MyISAM表并行插入。对于支持事务的表例如InnoDB和BDB，–single-transaction是一个更好的选择，因为它根本不需要锁定表.<br><br>请注意当导出多个数据库时，–lock-tables分别为每个数据库锁定表。因此，该选项不能保证导出文件中的表在数据库之间的逻辑一致性。不同数据库表的导出状态可以完全不同。<br><br>mysqldump -uroot -p –host=localhost –all-databases –lock-tables</p>
+<p><code>–no-create-db, -n </code><br>只导出数据，而不添加CREATE DATABASE 语句。<br><br>mysqldump -uroot -p –host=localhost –all-databases –no-create-db</p>
+<p><code>–no-create-info,-t</code><br>只导出数据，而不添加CREATE TABLE 语句<br><br>mysqldump -uroot -p –host=localhost –all-databases –no-create-info</p>
+<p><code> –no-data, -d </code><br>不导出任何数据，只导出数据库表结构<br><br>mysqldump -uroot -p –host=localhost –all-databases –no-data</p>
+<p><code> –password, -p </code><br>连接数据库密码</p>
+<p><code> –port, -P </code><br>连接数据库端口号</p>
+<p><code> –user, -u </code><br>指定连接的用户名。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-05-04T03:04:19.000Z">2016-05-04</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 240 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/05/04/installing-python-2-7-8-on-centos-6-5/">HowTo Install Python 2.7.8 on CentOS 6.x</a>
+            
+        </h1>
+        <div class="content">
+            <p>CentOS 6.5 still come with Python 2.6 and I need 2.7, below a simple tutorial how to achieve this with no pain and not messing with installed Python.</p>
+<p>Update CentOS and install development tools</p>
+<figure class="highlight nginx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attribute">yum</span> -y update</span><br><span class="line">yum groupinstall -y <span class="hljs-string">'development tools'</span></span><br></pre></td></tr></table></figure>
+<p>Also you need the packages below to enable SSL, bz2, zlib for Python and some utils:<br><figure class="highlight mipsasm hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install </span>-y zlib-devel <span class="hljs-keyword">bzip2-devel </span>openssl-devel xz-libs wget</span><br></pre></td></tr></table></figure></p>
+<h2 id="Installing-Python-2-7-8-from-source"><a href="#Installing-Python-2-7-8-from-source" class="headerlink" title="Installing Python 2.7.8 from source"></a>Installing Python 2.7.8 from source</h2><p>Download Python and extract it<br><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http:<span class="hljs-comment">//www.python.org/ftp/python/2.7.8/Python-2.7.8.tar.xz</span></span><br><span class="line">xz -d Python-<span class="hljs-number">2.7</span>.<span class="hljs-number">8</span><span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.xz</span></span><br><span class="line">tar -xvf Python-<span class="hljs-number">2.7</span>.<span class="hljs-number">8</span>.tar</span><br></pre></td></tr></table></figure></p>
+<h2 id="Installation-process"><a href="#Installation-process" class="headerlink" title="Installation process"></a>Installation process</h2><p>Since we already installed all the dependencies we are ready to go:<br><figure class="highlight jboss-cli hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Enter the directory:</span></span><br><span class="line"><span class="hljs-keyword">cd</span> Python-2.7.8</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Run the configure:</span></span><br><span class="line"><span class="hljs-string">./configure</span> <span class="hljs-params">--prefix=/usr/local</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># compile and install it:</span></span><br><span class="line">make</span><br><span class="line">make altinstall</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Checking Python version:</span></span><br><span class="line">[root@nicetry ~]<span class="hljs-comment"># python2.7 -V</span></span><br><span class="line">Python 2.7.8</span><br></pre></td></tr></table></figure></p>
+<p>If you need set <code>PATH</code> variable check the line below:<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">PATH</span>=<span class="hljs-string">"/usr/local/bin:<span class="hljs-variable">$PATH</span>"</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="Installing-pip-and-virtualenv"><a href="#Installing-pip-and-virtualenv" class="headerlink" title="Installing pip and virtualenv"></a>Installing pip and virtualenv</h2><p>Now we have Python installed, but something is missing isn’t? Yes! We need pip and virtualenv.</p>
+<h3 id="Install-setuptools"><a href="#Install-setuptools" class="headerlink" title="Install setuptools"></a>Install setuptools</h3><figure class="highlight vim hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wget --<span class="hljs-keyword">no</span>-check-certificate http<span class="hljs-variable">s:</span>//pypi.<span class="hljs-keyword">python</span>.org/packages/<span class="hljs-keyword">source</span>/s/setuptools/setuptools-<span class="hljs-number">1.4</span>.<span class="hljs-number">2</span>.tar.gz</span><br><span class="line"></span><br><span class="line"># Extract the <span class="hljs-keyword">file</span><span class="hljs-variable">s:</span></span><br><span class="line">tar -xvf setuptools-<span class="hljs-number">1.4</span>.<span class="hljs-number">2</span>.tar.gz</span><br><span class="line"><span class="hljs-keyword">cd</span> setuptools-<span class="hljs-number">1.4</span>.<span class="hljs-number">2</span></span><br><span class="line"></span><br><span class="line"># Install setuptools using the Python <span class="hljs-number">2.7</span>.<span class="hljs-number">8</span>:</span><br><span class="line">python2.<span class="hljs-number">7</span> setup.<span class="hljs-keyword">py</span> install</span><br></pre></td></tr></table></figure>
+<h3 id="Install-pip"><a href="#Install-pip" class="headerlink" title="Install pip"></a>Install pip</h3><figure class="highlight dsconfig hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">curl </span><span class="hljs-string">https:</span>//<span class="hljs-string">raw.</span><span class="hljs-string">githubusercontent.</span><span class="hljs-string">com/</span><span class="hljs-string">pypa/</span><span class="hljs-string">pip/</span><span class="hljs-string">master/</span><span class="hljs-string">contrib/</span><span class="hljs-built_in">get-pip.py</span> | <span class="hljs-string">python2.</span>7 -</span><br></pre></td></tr></table></figure>
+<h3 id="And-finally-virtualenv"><a href="#And-finally-virtualenv" class="headerlink" title="And finally virtualenv"></a>And finally virtualenv</h3><figure class="highlight cmake hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip2.<span class="hljs-number">7</span> <span class="hljs-keyword">install</span> virtualenv</span><br></pre></td></tr></table></figure>
+<p>And that’s all, we have Python 2.7.8 installed on CentOS.</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-04-27T08:51:58.000Z">2016-04-27</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Ghost/">Ghost</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 minutes read (About 394 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/04/27/how-to-add-piwik-tracking-to-ghost/">HowTo Add Piwik Tracking to Ghost</a>
+            
+        </h1>
+        <div class="content">
+            <p>This is what about piwik on wiki. <a href="https://en.wikipedia.org/wiki/Piwik" target="_blank" rel="noopener">goto</a></p>
+<h2 id="Step-1-Getting-your-Piwik-Tracking-code"><a href="#Step-1-Getting-your-Piwik-Tracking-code" class="headerlink" title="Step 1 - Getting your Piwik Tracking code"></a>Step 1 - Getting your Piwik Tracking code</h2><p>The first step to having Piwik tracking your Ghost blog will be to add a new website in Piwik, if you are unfamiliar with this process you can checkout the Piwik documention on Managing Websites. With your Ghost blog added into Piwik you will end up with tracking code that will look similar to the following:<br><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">&lt;!-- Piwik --&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span>&gt;</span><span class="hljs-undefined"></span></span><br><span class="line"><span class="hljs-actionscript">    <span class="hljs-keyword">var</span> _paq = _paq || [];</span></span><br><span class="line"><span class="hljs-javascript">    (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123; <span class="hljs-keyword">var</span> u=((<span class="hljs-string">"https:"</span> == <span class="hljs-built_in">document</span>.location.protocol) ? <span class="hljs-string">"https://&#123;$PIWIK_URL&#125;/"</span> : <span class="hljs-string">"http://&#123;$PIWIK_URL&#125;/"</span>);</span></span><br><span class="line"><span class="hljs-actionscript">    _paq.push([<span class="hljs-string">'setSiteId'</span>, &#123;$IDSITE&#125;]);</span></span><br><span class="line"><span class="hljs-actionscript">    _paq.push([<span class="hljs-string">'setTrackerUrl'</span>, u+<span class="hljs-string">'piwik.php'</span>]);</span></span><br><span class="line"><span class="hljs-actionscript">    _paq.push([<span class="hljs-string">'trackPageView'</span>]);</span></span><br><span class="line"><span class="hljs-actionscript">    _paq.push([<span class="hljs-string">'enableLinkTracking'</span>]);</span></span><br><span class="line"><span class="hljs-javascript">    <span class="hljs-keyword">var</span> d=<span class="hljs-built_in">document</span>, g=d.createElement(<span class="hljs-string">'script'</span>), s=d.getElementsByTagName(<span class="hljs-string">'script'</span>)[<span class="hljs-number">0</span>]; g.type=<span class="hljs-string">'text/javascript'</span>; g.defer=<span class="hljs-literal">true</span>; g.async=<span class="hljs-literal">true</span>; g.src=u+<span class="hljs-string">'piwik.js'</span>;</span></span><br><span class="line"><span class="hljs-undefined">    s.parentNode.insertBefore(g,s); &#125;)();</span></span><br><span class="line"><span class="hljs-undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="line"><span class="hljs-comment">&lt;!-- End Piwik Code --&gt;</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Where <code>$PIWIK_URL</code> will be the domain name you have setup for Piwik.</p>
 </blockquote>
-<h3 id="1-MySQL-系统配置优化"><a href="#1-MySQL-系统配置优化" class="headerlink" title="1. MySQL 系统配置优化"></a>1. MySQL 系统配置优化</h3><p>网络配置方面：修改/etc/sysctl.conf<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 增加tcp支持的队列数</span></span><br><span class="line">     net.ipv4.tcp_max_syn_backlog = 65535</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 减少断开时</span></span><br></pre></td></tr></table></figure></p>
-<p> 打开文件限制 修改/etc/security/limits.conf<br><figure class="highlight livecodeserver hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 增加：</span></span><br><span class="line">     * <span class="hljs-built_in">sort</span> nofile <span class="hljs-number">65535</span></span><br><span class="line">     * hard nofile <span class="hljs-number">65535</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="2-MySQL-配置文件优化"><a href="#2-MySQL-配置文件优化" class="headerlink" title="2.  MySQL 配置文件优化"></a>2.  MySQL 配置文件优化</h3><ul>
-<li><p>配置文件位置：/etc/my.cnf /etc/mysql/my.cnf</p>
-</li>
-<li><p>如果/etc下没有my.cnf，需要拷贝一份</p>
-<figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/mysql/my</span>-medium.cnf <span class="hljs-regexp">/etc/my</span>.cnf</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置文件查找顺序：mysql -verbose –help | grep -A 1 ‘Default options’</p>
-</li>
-<li><p>常用配置说明:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">innodb_buffer_pool_size</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>设置mysql数据库innodb存储缓冲池的大小，如果是独立的mysql服务，建议设置为物理内存的75％左右，如果和apahce等服务一起运行时，则根据实际需求设定，尽可能大。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">innodb_buffer_pool_instances</span><br></pre></td></tr></table></figure>
-<p>这是mysql5.5中新增的一个参数，用于控制缓冲池的个数，默认情况下只有1个缓冲池，设置多个缓冲池可以增加并发性，提事物运算效率。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">innodb_log_buffer_size</span><br></pre></td></tr></table></figure>
-<p>设定日志缓冲区的大小，由于体制最长每秒就会刷新，不需要太大。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">innodb_flush_log_at_trx_commit</span><br></pre></td></tr></table></figure>
-<p>关键参数，对于innodb的IO效率影响很大，默认值为1，可以取值0：不自动同步log到磁盘，由mysql每秒自动执行，1：将所有事物直接写到磁盘，可以用在保证数据绝对安全的地方，会影响效率，2：先将事物纪录保存在内存中，有mysql每秒统一写入磁盘，建议设定为2</p>
-<figure class="highlight abnf hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">innodb_read_io_threads<span class="hljs-comment">;</span></span><br><span class="line">innodb_write_io_threadsm<span class="hljs-comment">;</span></span><br></pre></td></tr></table></figure>
-<p>mysql5.5 新增的两个参数，决定了Innodb读写的io进程数量，默认为4，可以根据CPU的实际性能设定。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">innodb_file_per_table</span><br></pre></td></tr></table></figure>
-<p>关键参数，控制Innodb每一个表实用独立的表空间，默认为off，也就是所有的表都会建立在共享空间，不利于资源回收</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">innodb_stats_on_metadata</span><br></pre></td></tr></table></figure>
-<p>决定了mysql在什么情况下会刷新innodb表的统计信息，可以关闭，管理员选取时间手动刷新。存在的目的保证优化器正确找到索引.</p>
-<p> mysql最大连接数限制<br><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">max_connections</span>=<span class="hljs-number">5000</span></span><br></pre></td></tr></table></figure></p>
-<p> 不区分表名称大小写<br><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">lower_case_table_names</span>=<span class="hljs-number">1</span></span><br></pre></td></tr></table></figure></p>
-<p> 修改默认字符编码<br><figure class="highlight vala hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta"># mysql 5.1</span></span><br><span class="line"><span class="hljs-keyword">default</span>-character-<span class="hljs-keyword">set</span>=utf8</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># mysql 5.5 &amp; mysql 5.6</span></span><br><span class="line">character-<span class="hljs-keyword">set</span>-server=utf8</span><br></pre></td></tr></table></figure></p>
-<p> 最大错误操作次数 : 默认是10，尽量调大，否则容易导致mysql对来访主机锁定<br><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">max_connect_errors</span> = <span class="hljs-number">10000</span></span><br></pre></td></tr></table></figure></p>
-<p> 设置mysql时区：默认mysql使用的系统时区，其实我们也可以在mysql内设定时区<br><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">default-time_zone</span> = <span class="hljs-string">'+8:00'</span></span><br></pre></td></tr></table></figure></p>
-<p> 以上配置，如何在mysql内，检测是否生效<br><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">show</span> <span class="hljs-keyword">variables</span> <span class="hljs-keyword">like</span> <span class="hljs-string">'%max_connections%'</span></span><br><span class="line"><span class="hljs-keyword">show</span> <span class="hljs-keyword">variables</span> <span class="hljs-keyword">like</span> <span class="hljs-string">'%time_zone%'</span></span><br><span class="line"><span class="hljs-keyword">show</span> <span class="hljs-keyword">variables</span> <span class="hljs-keyword">like</span> <span class="hljs-string">'%max_connect_errors%'</span></span><br><span class="line"><span class="hljs-keyword">show</span> <span class="hljs-keyword">variables</span> <span class="hljs-keyword">like</span> <span class="hljs-string">'%character-set-server%'</span></span><br><span class="line"><span class="hljs-keyword">show</span> <span class="hljs-keyword">variables</span> <span class="hljs-keyword">like</span> <span class="hljs-string">'%lower_case_table_names%'</span></span><br></pre></td></tr></table></figure></p>
-<p> 修改/etc/my.cnf这是需要重启mysql才能生效，但是很多时候，我们不方便重启mysql，这时我们需要在mysql临时修改配置，注意并不是所有选项都可以在运行中修改，以修改时区为例：<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 修改全局设置</span></span><br><span class="line"><span class="hljs-builtin-name">set</span> global <span class="hljs-attribute">time_zone</span>=<span class="hljs-string">'+8:00'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 修改当前会话</span></span><br><span class="line"><span class="hljs-builtin-name">set</span> <span class="hljs-attribute">time_zone</span>=<span class="hljs-string">'+8:00'</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="3-第三方工具对mysql配置进行优化"><a href="#3-第三方工具对mysql配置进行优化" class="headerlink" title="3.  第三方工具对mysql配置进行优化"></a>3.  第三方工具对mysql配置进行优化</h3><ul>
-<li><a href="http://toolspercona.com" target="_blank" rel="noopener">http://toolspercona.com</a> <br><br>先回答问题，然后根据问题你给出的答案，网站会给你一个参考配置。</li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-06-15T18:28:35.000Z">2016-06-16</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Tomcat/">Tomcat</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 minutes read (About 447 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/06/16/apache-tomcat-you-hua-she-ding-yi/">Tomcat(3) 优化设定</a>
-            
-        </h1>
-        <div class="content">
-            <ul>
-<li>设置JVM空间大小，Xms和Xmx一样大：JVM初始分配的内存由-Xms指定，默认是物理内存的1/64；JVM最大分配的内存由-Xmx指定，默认是物理内存的1/4。默认空余堆内存小于 40%时，JVM就会增大堆直到-Xmx的最大限制；空余堆内存大于70%时，JVM会减少堆直到-Xms的最小限制。因此服务器一般设置-Xms、 -Xmx相等以避免在每次GC 后调整堆的大小。</li>
-<li>关闭dns查询</li>
-<li>增加线程数量</li>
-<li>maxThreads、acceptCount ： 增加并发，同时增加这两个的数量</li>
-<li><p>内存优化 ： /tomcatbin/catalina.sh</p>
-</li>
-<li><p>JAVA_OPTS=”-XX:PermSize=64M -XX:MaxPermSize=128m -Xms512m -Xmx1024m -Duser.timezone=Asia/Shanghai”</p>
-</li>
-<li>缓存优化</li>
-<li>并发优化，线程优化</li>
-<li>&lt;Connector port=”80” protocol=”HTTP/1.1” maxThreads=”600” minSpareThreads=”100” maxSpareThreads=”500” acceptCount=”700”</li>
-<li>connectionTimeout=”20000” redirectPort=”8443” /&gt;</li>
-<li>关闭DNS查询 :修改server.xml文件中的Connector元素，修改属性enableLookups参数值: enableLookups=”false”</li>
-<li><p>使用apr插件，提高tomcat响应时间 <br></p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">(1)安装APR tomcat-native</span><br><span class="line">  apr-1.3.8.tar.gz   安装在/usr/local/apr</span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash">tar zxvf apr-1.3.8.tar.gz</span></span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash"><span class="hljs-built_in">cd</span> apr-1.3.8</span></span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash">./configure;make;make install</span></span><br><span class="line"></span><br><span class="line">  apr-util-1.3.9.tar.gz  安装在/usr/local/apr/lib</span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash">tar zxvf apr-util-1.3.9.tar.gz</span></span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash"><span class="hljs-built_in">cd</span> apr-util-1.3.9</span></span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash">./configure --with-apr=/usr/<span class="hljs-built_in">local</span>/apr ----with-java-home=JDK;make;make install</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash"><span class="hljs-built_in">cd</span> apache-tomcat-6.0.20/bin</span></span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash">tar zxvf tomcat-native.tar.gz</span></span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash"><span class="hljs-built_in">cd</span> tomcat-native/jni/native</span></span><br><span class="line"><span class="hljs-meta">  #</span><span class="hljs-bash">./configure --with-apr=/usr/<span class="hljs-built_in">local</span>/apr;make;make install</span></span><br><span class="line"></span><br><span class="line">(2)设置 Tomcat 整合 APR</span><br><span class="line">  修改 tomcat 的启动 shell （startup.sh），在该文件中加入启动参数：</span><br><span class="line">    CATALINA_OPTS="$CATALINA_OPTS -Djava.library.path=/usr/local/apr/lib" 。</span><br><span class="line"></span><br><span class="line">(3)判断安装成功:</span><br><span class="line">  如果看到下面的启动日志，表示成功。</span><br><span class="line">    2007-4-26 15:34:32 org.apache.coyote.http11.Http11AprProtocol init</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>开启manager 管理</p>
-</li>
-<li>使用<a href="http://visualvm.Java.net/download.html" target="_blank" rel="noopener">http://visualvm.Java.net/download.html</a> 工具监控tomcat的性能</li>
-<li>JAVA_OPTS=’-Dcom.sun.management.jmxremote.port=8999 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false’</li>
-<li>设置自动更新autodeploy＝false</li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-06-15T18:28:02.000Z">2016-06-16</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 minutes read (About 535 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/06/16/shi-yong-moshdai-ti-sshlian-jie-fu-wu-qi/">使用mosh代替ssh连接服务器</a>
-            
-        </h1>
-        <div class="content">
-            <p>身为一名服务器运维人员，每天打交道最多的就是服务器了，最常用的连接服务器的工具就是SSH，因为SSH是一个不可持续的连接，当网络出现波动时，SSH断开会导致当前正在运行的服务中断，对工作产生非常大的影响，无意间看到了Mosh这个东西，安装使用下，发现网络波动这种事情不会导致服务器连接断开了，特意查了下，原来Mosh使用的是UDP方式传输：虽然也支持使用SSH配置进行认证登录，但是数据传输本身是使用UDP方式的，Mosh支持在会话中断时，不会立即退出，而是启用一个计时器，当网络恢复后会自动连接，同时会延续之前的会话，不会重新开启一个。</p>
-<h4 id="Mosh-主页"><a href="#Mosh-主页" class="headerlink" title="Mosh 主页"></a>Mosh <a href="https://mosh.mit.edu/#getting" target="_blank" rel="noopener">主页</a></h4><h4 id="1-安装配置"><a href="#1-安装配置" class="headerlink" title="1. 安装配置"></a>1. 安装配置</h4><p>需要在服务端和客户端同时安装Mosh：<br><figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">＃ 以centos <span class="hljs-number">6</span>.x 为例：</span><br><span class="line">[user<span class="hljs-variable">@host</span> ~]<span class="hljs-variable">$ </span>sudo yum install -y epel-release</span><br><span class="line">[user<span class="hljs-variable">@host</span> ~]<span class="hljs-variable">$ </span>sudo yum install -y mosh</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-采用SSH配置进行认证登录，只需要将ssh-替换为mosh即可"><a href="#2-采用SSH配置进行认证登录，只需要将ssh-替换为mosh即可" class="headerlink" title="2. 采用SSH配置进行认证登录，只需要将ssh 替换为mosh即可"></a>2. 采用SSH配置进行认证登录，只需要将ssh 替换为mosh即可</h4><figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[user<span class="hljs-variable">@host</span> ~]<span class="hljs-variable">$ </span>mosh user<span class="hljs-variable">@host</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 如何需要指定特定的ssh port或者使用ssh keyfile. 可以使用-ssh参数：</span></span><br><span class="line">[user<span class="hljs-variable">@host</span> ~]<span class="hljs-variable">$ </span>mosh -ssh=<span class="hljs-string">"ssh -i ~/.ssh/id_rsa -p 10002"</span> user<span class="hljs-variable">@host</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-Other"><a href="#3-Other" class="headerlink" title="3. Other"></a>3. Other</h4><p>另外Mosh还支持使用临时key的方式认证，需要服务器端创建临时key，然后客户端通过这个key进行登录，该key在会话结束的十分钟后自动失效。</p>
-<figure class="highlight coffeescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 创建临时key</span></span><br><span class="line">[user@host ~]$ mosh-server</span><br><span class="line">MOSH CONNECT <span class="hljs-number">53371</span> asdAADfdse234LSDSdIbow</span><br><span class="line">mosh-server (mosh <span class="hljs-number">1.2</span><span class="hljs-number">.4</span>)</span><br><span class="line">Copyright <span class="hljs-number">2012</span> Keith Winstein &lt;mosh-devel@mit.edu&gt;</span><br><span class="line">License GPLv3+: GNU GPL version <span class="hljs-number">3</span> <span class="hljs-keyword">or</span> later &lt;http:<span class="hljs-regexp">//g</span>nu.org/licenses/gpl.html&gt;.</span><br><span class="line">This <span class="hljs-keyword">is</span> free software: you are free to change <span class="hljs-keyword">and</span> redistribute it.</span><br><span class="line">There <span class="hljs-keyword">is</span> NO WARRANTY, to the extent permitted <span class="hljs-keyword">by</span> law.</span><br><span class="line">[mosh-server detached, pid = <span class="hljs-number">27290</span>]</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 然后在client定义MOSH_KEY</span></span><br><span class="line">[user@host ~]$ <span class="hljs-keyword">export</span> MOSH_KEY=asdAADfdse234LSDSdIbow</span><br><span class="line"><span class="hljs-comment"># 注意mosh-client只能跟上具体的ip和临时端口，不支持主机名和域名方式</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 使用临时key连接服务器</span></span><br><span class="line">[user@host ~]$ mosh-client <span class="hljs-number">10.0</span><span class="hljs-number">.2</span><span class="hljs-number">.4</span> <span class="hljs-number">53371</span></span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-05-23T23:00:12.000Z">2016-05-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Azure/">Azure</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a few seconds read (About 53 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/05/24/azure-cli-on-mac-0/">Azure(2) HowTo Use Azure CLI on Mac</a>
-            
-        </h1>
-        <div class="content">
-            <figure class="highlight markdown hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-section">## Install azure-cli on Mac and CentOS</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-section">### In Mac</span></span><br><span class="line"><span class="hljs-bullet">1. </span>Install brew.</span><br><span class="line"><span class="hljs-bullet">2. </span>brew install nodejs</span><br><span class="line"><span class="hljs-bullet">3. </span>echo “registry = https://registry.npm.taobao.org” &gt; ~/.npmrc</span><br><span class="line"><span class="hljs-bullet">4. </span>npm install azure-cli -g</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-section">### In CentOS</span></span><br><span class="line"><span class="hljs-bullet">1. </span>Install epel</span><br><span class="line"><span class="hljs-bullet">2. </span>yum install -y nodejs npm</span><br><span class="line"><span class="hljs-bullet">3. </span>echo “registry = https://registry.npm.taobao.org” &gt; ~/.npmrc</span><br><span class="line"><span class="hljs-bullet">4. </span>npm install azure-cli -g</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-05-23T22:20:43.000Z">2016-05-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Azure/">Azure</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a few seconds read (About 17 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/05/24/azure-cli-on-mac/">Azure(3) HowTo Use Azure CLI on Mac</a>
-            
-        </h1>
-        <div class="content">
-            <p><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/05/D50E240D-1468-486F-8CA7-C5D3DC7463DE.png" alt></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-05-19T23:24:58.000Z">2016-05-20</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Zabbix/">Zabbix</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 minutes read (About 331 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/05/20/how-to-use-zabbix-monitoring-mysql-server-on-centos-6-x/">HowTo Monitoring MySQL server for Zabbix</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="安装插件包"><a href="#安装插件包" class="headerlink" title="安装插件包"></a>安装插件包</h2><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> <span class="hljs-keyword">http</span>://www.percona.com/downloads/percona-<span class="hljs-keyword">release</span>/redhat/<span class="hljs-number">0.1</span><span class="hljs-number">-3</span>/percona-<span class="hljs-keyword">release</span><span class="hljs-number">-0.1</span><span class="hljs-number">-3.</span>noarch.rpm -y</span><br><span class="line">yum <span class="hljs-keyword">install</span> percona-zabbix-templates.noarch -y</span><br><span class="line">yum <span class="hljs-keyword">install</span> php* -y</span><br></pre></td></tr></table></figure>
-<h2 id="导入模板"><a href="#导入模板" class="headerlink" title="导入模板"></a>导入模板</h2><p>把/var/lib/zabbix/percona/templates/zabbix_agent_template_percona_mysql_server_ht_2.0.9-sver1.1.6.xml 文件拷贝出来，通过Zabbix的监控页面导入:<br>ConfigurationTemplatesImport(在右上角)<br>选择导出的模板文件，点击Import完成导入</p>
-<p><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/05/zabbix-mysql01.png" alt></p>
-<h2 id="安装Agent"><a href="#安装Agent" class="headerlink" title="安装Agent"></a>安装Agent</h2><figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh <span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/repo.zabbix.com/zabbix</span><span class="hljs-regexp">/2.4/rhel</span><span class="hljs-regexp">/6/x</span>86_64/zabbix-release-<span class="hljs-number">2.4</span>-<span class="hljs-number">1</span>.el6.noarch.rpm</span><br><span class="line">yum install zabbix-agent</span><br><span class="line">vim /etc/zabbix/zabbix-agentd.conf</span><br><span class="line"><span class="hljs-comment">#配置监控服务器地址</span></span><br><span class="line">Server=<span class="hljs-number">192.168</span>.<span class="hljs-number">1.15</span></span><br><span class="line"><span class="hljs-comment">#导入配置文件</span></span><br><span class="line">cp /var/<span class="hljs-class"><span class="hljs-keyword">lib</span>/<span class="hljs-title">zabbix</span>/<span class="hljs-title">percona</span>/<span class="hljs-title">templates</span>/<span class="hljs-title">userparameter_percona_mysql</span>.<span class="hljs-title">conf</span> /<span class="hljs-title">etc</span>/<span class="hljs-title">zabbix</span>/<span class="hljs-title">zabbix_agentd</span>.<span class="hljs-title">d</span>/</span></span><br><span class="line"><span class="hljs-comment">#重启agent</span></span><br><span class="line">service zabbix-agent restart</span><br></pre></td></tr></table></figure>
-<h2 id="Mysql新建用户"><a href="#Mysql新建用户" class="headerlink" title="Mysql新建用户"></a>Mysql新建用户</h2><p>登陆Mysql数据库，新建一个本地的只有查询权限的mysql用户<br>grant select on <em>.</em> to ‘percona’@’localhost’ identified by ‘percona’;<br>flush tables;</p>
-<h2 id="配置Percona插件"><a href="#配置Percona插件" class="headerlink" title="配置Percona插件"></a>配置Percona插件</h2><p>修改插件使用的mysql用户名密码<br>sed -i s/cactiuser/percona/g /var/lib/zabbix/percona/scripts/ss_get_mysql_stats.php</p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>测试是否可以获取到值<br>cd /var/lib/zabbix/percona/scripts/<br>./get_mysql_stats_wrapper.sh gg<br>如果获取到值，则说明配置成功<br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/05/zabbix-mysql02.png" alt></p>
-<p>注意：执行完脚本后，请手动删除/tmp/文件夹下生成的*-mysql_cacti_stats.txt文件，然后让程序自己调用创建新文件。</p>
+<h2 id="Step-2-Adding-Piwik-Tracking-Code-To-Ghost-Theme-File"><a href="#Step-2-Adding-Piwik-Tracking-Code-To-Ghost-Theme-File" class="headerlink" title="Step 2 - Adding Piwik Tracking Code To Ghost Theme File"></a>Step 2 - Adding Piwik Tracking Code To Ghost Theme File</h2><p>Piwik recommends that you add the tracking code right above the <code>&#60;/body&#62;</code> tag, which you can find in your Ghost’s <code>default.hbs</code> theme file. You will find the <code>default.hbs</code> file in <code>/path/to/ghost/content/themes/your-theme/default.hbs</code><br>How you add the tracking code to your <code>default.hbs</code> will depend on if you are editing the file on your local computer or directly on the server. If you are editing your theme locally you can edit this file in any text editor and when you are finished upload this file to your server. Otherwise if you are editing this file directly on the server you can use the command line editor, <code>vim</code>, to add the tracking code.</p>
+<h2 id="Step-3-Restart-Ghost"><a href="#Step-3-Restart-Ghost" class="headerlink" title="Step 3 - Restart Ghost"></a>Step 3 - Restart Ghost</h2><p>For the changes in your theme to take effect you will need to restart Ghost. Restarting Ghost will load up a fresh copy of your theme files, with your Piwik tracking code. How you restart Ghost depends on how you started Ghost. If you followed our <a href="https://www.howtoinstallghost.com/how-to-start-ghost-with-forever/" target="_blank" rel="noopener">Keep Ghost Running with forever</a>, then you can restart Ghost with <code>forever restart ghost</code>.<br>Within a few moments you will start to see data coming in for your Ghost blog!<br>If you have any questions about setting this up or run into any issues please leave us a comment below and we will do what we can to help.</p>
 
         </div>
         
@@ -558,9 +531,9 @@
             
             <li><a class="pagination-link has-text-black-ter" href="/page/12/">12</a></li>
             
-            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/13/">13</a></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/16/">16</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/14/">14</a></li>
             
         </ul>
     </nav>
@@ -608,7 +581,7 @@
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        108
+                        92
                     </p>
                 </div>
             </div>
@@ -618,7 +591,7 @@
                         Categories
                     </p>
                     <p class="title has-text-weight-normal">
-                        28
+                        25
                     </p>
                 </div>
             </div>
@@ -628,7 +601,7 @@
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        42
+                        39
                     </p>
                 </div>
             </div>
@@ -918,30 +891,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/似水年华/">
-            <span class="level-start">
-                <span class="level-item">似水年华</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">14</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/我的微博/">
-            <span class="level-start">
-                <span class="level-item">我的微博</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/来自知乎/">
-            <span class="level-start">
-                <span class="level-item">来自知乎</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/魔方/">
             <span class="level-start">
                 <span class="level-item">魔方</span>
@@ -961,7 +910,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AWS/" style="font-size: 10px;">AWS</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 14.29px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 17.14px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 12.86px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 12.86px;">Ghost</a> <a href="/tags/Git/" style="font-size: 14.29px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 12.86px;">Linux</a> <a href="/tags/Mac/" style="font-size: 15.71px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.43px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 12.86px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.43px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 14.29px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.43px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.43px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 15.71px;">Tomcat</a> <a href="/tags/Weisk/" style="font-size: 10px;">Weisk</a> <a href="/tags/Yum/" style="font-size: 12.86px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.43px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/似水年华/" style="font-size: 10px;">似水年华</a> <a href="/tags/何余生/" style="font-size: 10px;">何余生</a> <a href="/tags/我给你讲个故事吧/" style="font-size: 18.57px;">我给你讲个故事吧</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
+        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AWS/" style="font-size: 10px;">AWS</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Weisk/" style="font-size: 10px;">Weisk</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
     </div>
 </div>
 
@@ -975,25 +924,6 @@
         <h3 class="menu-label">
             Recent
         </h3>
-        
-        <article class="media">
-            
-            <a href="/2018/10/14/sdnedrletremfdrltmertedd/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="何余生说要感谢身边所有美好的人">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-14T08:48:47.000Z">2018-10-14</time></div>
-                    <a href="/2018/10/14/sdnedrletremfdrltmertedd/" class="has-link-black-ter is-size-6">何余生说要感谢身边所有美好的人</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/似水年华/">似水年华</a>
-                    </p>
-                </div>
-            </div>
-        </article>
         
         <article class="media">
             
@@ -1071,6 +1001,25 @@
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
+                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1082,17 +1031,6 @@
             Archives
         </h3>
         <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2018/05/">
@@ -1188,7 +1126,7 @@
                     <span class="level-item">April 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1221,7 +1159,7 @@
                     <span class="level-item">January 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1232,7 +1170,7 @@
                     <span class="level-item">December 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1243,7 +1181,7 @@
                     <span class="level-item">November 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1254,7 +1192,7 @@
                     <span class="level-item">October 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1265,7 +1203,7 @@
                     <span class="level-item">September 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1276,7 +1214,7 @@
                     <span class="level-item">August 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1287,7 +1225,7 @@
                     <span class="level-item">July 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -1331,51 +1269,7 @@
                     <span class="level-item">March 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2016/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2016</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/06/">
-                <span class="level-start">
-                    <span class="level-item">June 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/04/">
-                <span class="level-start">
-                    <span class="level-item">April 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -1656,27 +1550,6 @@
                     <a class="tags has-addons" href="/tags/iOS/">
                         <span class="tag">iOS</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/似水年华/">
-                        <span class="tag">似水年华</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/何余生/">
-                        <span class="tag">何余生</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/我给你讲个故事吧/">
-                        <span class="tag">我给你讲个故事吧</span>
-                        <span class="tag is-grey">13</span>
                     </a>
                 </div>
                 
@@ -1712,25 +1585,6 @@
         
         <article class="media">
             
-            <a href="/2018/10/14/sdnedrletremfdrltmertedd/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="何余生说要感谢身边所有美好的人">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-14T08:48:47.000Z">2018-10-14</time></div>
-                    <a href="/2018/10/14/sdnedrletremfdrltmertedd/" class="has-link-black-ter is-size-6">何余生说要感谢身边所有美好的人</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/似水年华/">似水年华</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2018/05/03/unlink_weisk_with_thirdpart_weixin/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="解除微信公众平台对微上客的授权">
@@ -1805,6 +1659,25 @@
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
+                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1816,17 +1689,6 @@
             Archives
         </h3>
         <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2018/05/">
@@ -1922,7 +1784,7 @@
                     <span class="level-item">April 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1955,7 +1817,7 @@
                     <span class="level-item">January 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1966,7 +1828,7 @@
                     <span class="level-item">December 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1977,7 +1839,7 @@
                     <span class="level-item">November 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1988,7 +1850,7 @@
                     <span class="level-item">October 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1999,7 +1861,7 @@
                     <span class="level-item">September 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2010,7 +1872,7 @@
                     <span class="level-item">August 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -2021,7 +1883,7 @@
                     <span class="level-item">July 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -2065,51 +1927,7 @@
                     <span class="level-item">March 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2016/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2016</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/06/">
-                <span class="level-start">
-                    <span class="level-item">June 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/04/">
-                <span class="level-start">
-                    <span class="level-item">April 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -2390,27 +2208,6 @@
                     <a class="tags has-addons" href="/tags/iOS/">
                         <span class="tag">iOS</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/似水年华/">
-                        <span class="tag">似水年华</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/何余生/">
-                        <span class="tag">何余生</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/我给你讲个故事吧/">
-                        <span class="tag">我给你讲个故事吧</span>
-                        <span class="tag is-grey">13</span>
                     </a>
                 </div>
                 

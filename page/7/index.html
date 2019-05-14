@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html  lang="zh">
-<head>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
 <title>SAMZONG</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -144,258 +144,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-11-27T14:40:54.000Z">2016-11-27</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/来自知乎/">来自知乎</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a minute read (About 179 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/11/27/sdfwsdserbnssd/">世界上最没用的东西</a>
-            
-        </h1>
-        <div class="content">
-            <p><a href="https://www.zhihu.com/question/21905681/answer/93684468" target="_blank" rel="noopener">知乎</a></p>
-<p>@匿名用户</p>
-<hr>
-
-<p>旧手机的充电器<br>暗恋时的独角戏<br>情人节后的鲜花<br>单身狗的第二杯半价</p>
-<p>政客上任的许诺<br>渴望理解的诉说<br>花前月下的誓言<br>回忆里微笑的脸</p>
-<p>过期的悔恨<br>懦弱的容忍<br>寒假前的作息表<br>满街的宣传口号</p>
-<p>天赋不足的认真<br>无疾而终的情深<br>所谓寂寞空虚冷<br>不可说与人知的疼</p>
-<p>失败后的借口<br>酒桌上的朋友<br>年轻时为你写的诗<br>心血来潮时的雄心壮志</p>
-<p>收藏夹里的心灵鸡汤<br>总结汇报的官样文章<br>额度不够的信用卡</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-11-23T08:24:40.000Z">2016-11-23</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/CentOS/">CentOS</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 minutes read (About 682 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/11/23/denyhosts-linux/">Denyhosts增加服务器SSH黑名单机制</a>
-            
-        </h1>
-        <div class="content">
-            <h5 id="查看当前服务器失败登录的统计："><a href="#查看当前服务器失败登录的统计：" class="headerlink" title="查看当前服务器失败登录的统计："></a>查看当前服务器失败登录的统计：</h5><figure class="highlight stata hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">cat</span> /<span class="hljs-keyword">var</span>/<span class="hljs-keyword">log</span>/secure | awk '/Failed/&#123;<span class="hljs-keyword">print</span> $(NF-3)&#125;' | <span class="hljs-keyword">sort</span> | uniq -c | <span class="hljs-keyword">sort</span> -<span class="hljs-keyword">n</span> |  awk '&#123;<span class="hljs-keyword">print</span> <span class="hljs-variable">$2</span><span class="hljs-string">" = "</span><span class="hljs-variable">$1&#125;</span>'</span><br></pre></td></tr></table></figure>
-<h5 id="Install-denyhosts"><a href="#Install-denyhosts" class="headerlink" title="Install denyhosts"></a>Install denyhosts</h5><figure class="highlight cmake hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 需要预先安装epel源</span></span><br><span class="line">sudo yum <span class="hljs-keyword">install</span> -y epel-release</span><br><span class="line">sudo yum <span class="hljs-keyword">install</span> -y denyhosts</span><br></pre></td></tr></table></figure>
-<h5 id="配置文件解析"><a href="#配置文件解析" class="headerlink" title="配置文件解析"></a>配置文件解析</h5><p>默认配置文件/etc/denyhosts。<br><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 查看的sshd日志文件</span></span><br><span class="line"><span class="hljs-attr">SECURE_LOG</span> = /var/log/secure</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 将阻止IP写入的配置文件</span></span><br><span class="line"><span class="hljs-attr">HOSTS_DENY</span> = /etc/hosts.deny</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 过多久之后清除，其中w代表周，d代表天，h代表小时，s代表秒，m代表分钟。</span></span><br><span class="line"><span class="hljs-attr">PURGE_DENY</span> = <span class="hljs-number">4</span>h</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 阻止的服务名称</span></span><br><span class="line"><span class="hljs-attr">BLOCK_SERVICE</span>  = sshd</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 允许无效用户（在/etc/passwd未列出）登录失败次数,允许无效用户登录失败的次数.</span></span><br><span class="line"><span class="hljs-attr">DENY_THRESHOLD_INVALID</span> = <span class="hljs-number">1</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 允许普通用户登录失败的次数</span></span><br><span class="line"><span class="hljs-attr">DENY_THRESHOLD_VALID</span> = <span class="hljs-number">5</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 允许root登录失败的次数</span></span><br><span class="line"><span class="hljs-attr">DENY_THRESHOLD_ROOT</span> = <span class="hljs-number">2</span></span><br><span class="line"><span class="hljs-attr">DENY_THRESHOLD_RESTRICTED</span> = <span class="hljs-number">1</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 设定 deny host 写入到该资料夹</span></span><br><span class="line"><span class="hljs-attr">WORK_DIR</span> = /var/lib/denyhosts</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 将deny的host或ip纪录到Work_dir中</span></span><br><span class="line"><span class="hljs-attr">SUSPICIOUS_LOGIN_REPORT_ALLOWED_HOSTS</span>=<span class="hljs-literal">YES</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 是否做域名反解</span></span><br><span class="line"><span class="hljs-attr">HOSTNAME_LOOKUP</span>=<span class="hljs-literal">YES</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 将DenyHOts启动的pid纪录到LOCK_FILE中，已确保服务正确启动，防止同时启动多个服务。</span></span><br><span class="line"><span class="hljs-attr">LOCK_FILE</span> = /var/lock/subsys/denyhosts</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 设置管理员邮件地址</span></span><br><span class="line"><span class="hljs-attr">ADMIN_EMAIL</span> = luchuanjia@msn.com</span><br><span class="line"><span class="hljs-attr">SMTP_HOST</span> = localhost</span><br><span class="line"><span class="hljs-attr">SMTP_PORT</span> = <span class="hljs-number">25</span></span><br><span class="line"><span class="hljs-attr">SMTP_FROM</span> = DenyHosts &lt;nobody@localhost&gt;</span><br><span class="line"><span class="hljs-attr">SMTP_SUBJECT</span> = DenyHosts Report from $[HOSTNAME]</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 有效用户登录失败计数归零的时间</span></span><br><span class="line"><span class="hljs-attr">AGE_RESET_VALID</span>=<span class="hljs-number">1</span>d</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># root用户登录失败计数归零的时间</span></span><br><span class="line"><span class="hljs-attr">AGE_RESET_ROOT</span>=<span class="hljs-number">25</span>d</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 用户的失败登录计数重置为0的时间(/usr/share/denyhosts/data/restricted-usernames)</span></span><br><span class="line"><span class="hljs-attr">AGE_RESET_RESTRICTED</span>=<span class="hljs-number">25</span>d</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 无效用户登录失败计数归零的时间</span></span><br><span class="line"><span class="hljs-attr">AGE_RESET_INVALID</span>=<span class="hljs-number">10</span>d</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># denyhosts的日志文件位置</span></span><br><span class="line"><span class="hljs-attr">DAEMON_LOG</span> = /var/log/denyhosts</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># denyhosts的轮询时间</span></span><br><span class="line"><span class="hljs-attr">DAEMON_SLEEP</span> = <span class="hljs-number">30</span>s</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 该项与PURGE_DENY 设置一样，也是清除hosts.deny中 ssh用户的时间</span></span><br><span class="line"><span class="hljs-attr">DAEMON_PURGE</span> = <span class="hljs-number">1</span>h</span><br></pre></td></tr></table></figure></p>
-<h5 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h5><ol>
-<li>如果想删除一个已经禁止的主机IP，并加入到允许主机例表，只在 /etc/hosts.deny 删除是没用的,还需要以下：<figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/var/<span class="hljs-class"><span class="hljs-keyword">lib</span>/<span class="hljs-title">denyhosts</span> 目录，进入以下操作：</span></span><br><span class="line"><span class="hljs-comment"># 停止denyhosts服务</span></span><br><span class="line">sudo service denyhosts stop</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 进入denyhosts的目录</span></span><br><span class="line">cd /var/<span class="hljs-class"><span class="hljs-keyword">lib</span>/<span class="hljs-title">denyhosts</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 查看哪些文件添加了ssh限制,将IP_addr替换成你的IP</span></span><br><span class="line">sudo grep IP_addr /usr/share/denyhosts/data/*</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 然后一个个删除文件中你想取消的主机IP所在的行:</span></span><br><span class="line">/usr/share/denyhosts/data/hosts</span><br><span class="line">/usr/share/denyhosts/data/hosts-restricted</span><br><span class="line">/usr/share/denyhosts/data/hosts-root</span><br><span class="line">/usr/share/denyhosts/data/hosts-valid</span><br><span class="line">/usr/share/denyhosts/data/users-hosts</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 添加你想允许的主机IP地址到allowed-hosts:</span></span><br><span class="line">sudo echo IP_addr &gt;&gt;<span class="hljs-regexp">/usr/share</span><span class="hljs-regexp">/denyhosts/data</span><span class="hljs-regexp">/allowed-hostsps</span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp"># 启动 DenyHosts服务：</span></span><br><span class="line"><span class="hljs-regexp"> service denyhosts start</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h5 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h5><ul>
-<li>尽量是用key验证登录服务器</li>
-<li>尽量从固定IP点登录服务器，然后将该地址加入白名单</li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-11-18T04:09:13.000Z">2016-11-18</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Ghost/">Ghost</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 minutes read (About 765 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/11/18/ghostzeng-jia-ping-lun-mo-kuai/">Ghost(2) 增加评论模块</a>
-            
-        </h1>
-        <div class="content">
-            <p>Ghost作为一个更加纯粹的博客平台，并没有打算为其开发内置的文章评论功能。而是将评论功能托管给第三方，好处也是让用户更有精力集中于网站内容的建设。实现的办法也很简单，只需要向Ghost主题的模板Handlebars(.hbs)插入第三方评论组件的JavaScript代码来为Ghost博客增加评论功能。 </p><br><p><em>国内最常用的多说评论框，支持国内常见的社交网络一键注册登录、盖楼讨论和分享而且对新用户上手简单。而Disqus功能强大、完善的社交网络和多国语言支持并且为其插件启用全球CDN加速。总的来说两个插件各有所长。</em></p><br><p>基于默认主题Casper的安装指南：</p><br><ul><br><li><a href="index.html#comments.hbs">创建一个模板</a></li><br><li><a href="index.html#Duoshuo">安装多说评论系统</a></li><br><li><a href="index.html#Disqus">安装Disqus</a></li><br></ul><br><hr><br><h4 id="comments.hbs">创建一个模板</h4><br><p>为了在需要评论框代码的时候方便引用，我选择事先在主题文件夹<code>content\themes\casper\partials</code>下面创建一个叫做<strong>comments.hbs</strong>的模板文件，也就是评论框的专属模板。</p><br><p>现在我只需要在我的Casper主题下面的post.hbs模板中的</p><br><pre><code>            &lt;/section&gt;<br><br>        &lt;/footer&gt;<br>    &lt;/article&gt;<br>&lt;/main&gt;<br></code></pre><br><p>前面部分添加一句<code>{{&gt; comments}}</code>就可以展示评论框了。</p><br><p>添加后就像这样：</p><br><pre><code>            &lt;/section&gt;<br>            {{&gt; comments}}<br>        &lt;/footer&gt;<br>    &lt;/article&gt;<br>&lt;/main&gt;<br></code></pre><br><p>这样以来的好处就可以在任何主题中轻松移植评论框代码。</p><br><p>开始之前：对评论框Html代码进行简要说明。</p><br><ul><br><li><code>&lt;section class=”post-comments”&gt;…&lt;/section&gt;</code>用于展示评论框</li><br><li><code>&lt;script type=”text/javascript”&gt;…&lt;/script&gt;</code>评论框公共代码</li><br><li><code>{{slug}}</code> 引用文章短名作为第三方社交平台识别文章的特征标志</li><br><li><code>{{title}}</code> 引用文章标题</li><br><li><code>{{url absolute="true"}}</code> 获取永久链接</li><br></ul><br><hr><br><h4 id="Duoshuo">安装多说评论框</h4><br><p>1.将下面的评论框代码插入<strong>comments.hbs</strong>文件。 <br><br>多说评论框：</p><br><pre><code>&lt;section class=”post-comments”&gt;<br>    &lt;div class=”ds-thread” data-thread-key=”{{slug}}“ data-title=”{{title}}“ data-url=”{{url absolute="true"}}“&gt;&lt;/div&gt;<br>    &lt;!– 务必插入多说公共JS代码 –&gt;<br>&lt;/section&gt;<br></code></pre><br><p>2.如何获取多说公共JS代码？</p><br><p>登录多说 &gt; 点击“我要安装”&gt; 创建站点 &gt; 获取公共代码（如图）</p><br><p><img src="https://www.binarization.com/content/images/2015/02/duoshuo-javascript.PNG" alt="多说公共JS代码"></p><br><hr><br><h4 id="Disqus">安装Disqus评论框</h4><br><p>1.将下面的评论框代码插入<strong>comments.hbs</strong>文件。 <br><br>Disqus评论框评论框：</p><br><pre><code>  &lt;section class=”post-comments”&gt;&lt;div id=”disqus_thread”&gt;&lt;/div&gt;<br>      &lt;!– 务必插入Disqus公共JS代码 –&gt;<br>  &lt;/section&gt;<br></code></pre><br><p>2.获取Disqus的公共JS代码</p><br><p>注册Disqus &gt; 安装平台选则 Universal Code &gt; 直接复制代码</p><br><p>3.添加完毕后，重新启动Ghost博客。</p><br><p>4.Disqus不能成功加载的时候可以在JavaScript中强制使用HTTPS以链接Disqus服务器。具体方法就是在<code>s.src</code>的提供的URL中加入<code>https://</code>。 </p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-11-10T16:32:13.000Z">2016-11-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    22 minutes read (About 3299 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/11/11/python-lesson-1/">Python(1) 基础</a>
-            
-        </h1>
-        <div class="content">
-            <p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;<br>&lt;!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” “<a href="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;" target="_blank" rel="noopener">http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</a></p>
-<html><head><meta name="generator" content="Hexo 3.8.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="exporter-version" content="Evernote Mac 6.10 (454269)"><meta name="author" content="Alex LU"><meta name="created" content="2016-09-29 02:27:16 +0000"><meta name="source" content="desktop.mac"><meta name="updated" content="2016-09-29 06:27:40 +0000"><title>Python学习笔记(1) –Python基础</title></head><body><br><ol><br><li>输出： print<br><ol><br><li>python2：print ‘Hello Python’</li><br><li>python3: print(‘Hello Python’)</li><br><li>python(‘10+20=‘,10+20)</li><br></ol><br></li><br><li>输入：<br><ol><br><li>python2：raw<em>input()</em></li><br><li>python3: input()</li><br></ol><br></li><br><li>python的语法比较简单，采用缩进的方式：</li><br></ol><br><div style="-en-codeblock: true; box-sizing: border-box; padding: 8px; font-family: Monaco, Menlo, Consolas, &quot;Courier New&quot;, monospace; font-size: 12px; color: rgb(51, 51, 51); border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(251, 250, 248); border: 1px solid rgba(0, 0, 0, 0.14902); background-position: initial initial; background-repeat: initial initial;"><br><div>a = 100</div><br><div>if a &gt;= 0:</div><br><div>     print(a)</div><br><div>else:</div><br><div>     print(-a)</div><br><div><br></div><br><div>&amp; diff &amp;</div><br><div>a = 100</div><br><div>if a &gt;=0:</div><br><div>print(a)</div><br><div>else:</div><br><div>print(-a)</div><br></div><br><ol start="4"><br><li># 开头为注释；: 结尾，缩进的语句视为代码块；Python大小写是敏感的，约定俗成：4个空格的缩进，可以吧tab设置为4个空格。</li><br><li>Python 的数据类型<br><ol><br><li>整数：python可以处理任意大小的整数</li><br><li>浮点数：也就是小数，之所以称之为浮点数，因为按照科学计数法表示时，一个浮点数的小数点位置是可变的</li><br><li>字符串：字符串是以’’和”” 包括起来的任意文本，例如’abc’,”xyz”；如果字符内部同时包含’和”，可以使用\转义字符来标识。<br><ol><br><li>如果字符串内部有很多换行，用\n不好阅读，python支持使用’’’…’’’ 的格式表示多行‘</li><br><li>r’…’  python可以使用r’’表示’’以内的字符不转义;多行: r’’’…’’’</li><br></ol><br></li><br><li>布尔值：布尔值和布尔代数表示的完全一致，一个布尔值只有True和False，python支持直接使用True和False表示布尔值，注意大小写，另外最好不要生命变量时使用True等，布尔值，经常用于在条件判断之中。<br><ol><br><li>and : 与运算，所有运算结果都是True，and的结果才是True</li><br><li>or：或运算，只有1个运算结果为True，or的结果就是True</li><br><li>not：他是一个单目运算符，取相反的值</li><br></ol><br></li><br><li>空值：python里的一个特殊值，用None表示，注意None不能理解为0，因为0是有意义的，而None是一个特殊的空值</li><br></ol><br></li><br><li>python的变量<br><ol><br><li>命名规则：必须是大小写英文，数字和的组合，且不能用数字开头；</li><br><li>赋值符号：’=’；等于的符号是’==’</li><br><li>动态语言：变量本身类型不固定的语言称之为动态语言，反之是静态语言，静态语言在定义变量时必须制定变量的数据类型，如果赋值的时候类型不匹配，就会报错；</li><br><li>变量在计算机内存中的表示：a=1,指的是python在内存中创建了整数1，然后在内存创建了变量a，并把它指向了整数1</li><br></ol><br></li><br><li>python的常量<br><ol><br><li>定义：常量就是不能改变的变量，在python中，通常使用全部大写的变量名表示常量</li><br><li>整数的除法是精确的，因为除法计算结果是浮点数，例如 9/3 结果为3.0 ; 另外一种除法是’//‘ 地板除，两个整数的除法任然是整数；余数运算’%’</li><br></ol><br></li><br><li>字符编码：字符串是一种数据类型，但是字符串还涉及到一个编码问题，Python3的字符串是支持多语言的<br><ol><br><li>ord(‘’)函数 获取字符的整数表示；</li><br><li>chr(‘’)函数 把编码转换成对应的字符；</li><br><li>python的字符串类型是str，在内存中以Unicode表示，一个字符对应若干字节，但是如果要在网络传输或者保存到磁盘，就要把str转化为单位的bytes；<br><ol><br><li>python对于bytes的数据类型用带b前缀的单引号或双引号表示：</li><br><li>另外，Unicode表示的str可用encode()函数，指定编码为bytes。 ‘ABC’ .encode(‘utf-8’)</li><br><li>decode() 可以吧bytes转变为str。b’ABC’ .decode(‘ascii’)</li><br><li>要计算str包含了多少个字符使用 len()函数： len(‘hello’) ,结果为5</li><br></ol><br></li><br><li style="-en-codeblock: true; box-sizing: border-box; padding: 8px; font-family: Monaco, Menlo, Consolas, &quot;Courier New&quot;, monospace; font-size: 12px; color: rgb(51, 51, 51); border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(251, 250, 248); border: 1px solid rgba(0, 0, 0, 0.14902); background-position: initial initial; background-repeat: initial initial;">#!/usr/bin/env python3<br><br># -<em>- coding: utf-8 -</em>-</li><br></ol><br></li><br><li>格式化： 如何处理格式化输出字符串，在python中使用的格式化方式和C语言是一致的，用’%’实现：<br><ol><br><li>%d 表示整数</li><br><li>%f 表示浮点数</li><br><li>%s 表示字符串，如果不确定用什么，用%s，它会把任何数据类型转换为字符串</li><br><li>%x 表示十六进制整数</li><br><li>%% 表示一个普通的%</li><br></ol><br></li><br><li>数据类型list和tuple<br><ol><br><li>list是python内置的一种数据类型：列表，list是一个有序的集合，可以随时添加和删除其中元素。<br><ol><br><li>classmates = [‘Michael’,’Bob’,’Tracy’]， 可以用len()函数获取这个list的元素的个数</li><br><li>可以用索引来访问list中的每一个位置的元素，记住索引的第一个位置是0：</li><br><li>当索引超出范围的时候，python会报出IndexError错误，记得最后一个索引是len(classmates) -1</li><br><li>如果直接取出最后一个索引可用classmates[-1],以此类推</li><br></ol><br></li><br><li>list是一个可变的有序列表，所以可以去追加，插入指定位置，删除，替换等操作，支持不同数据类型，支持嵌套list<br><ol><br><li>追加: classmates.append(‘Adam’)</li><br><li>插入指定位置: classmates.insert(2,’Jack’)</li><br><li>删除list末尾的元素： classmates.pop()</li><br><li>删除指定位置的元素: classmates.pop(1)</li><br><li>替换元素：classmates[1]=‘Sarch’ ， 直接给相应位置的元素重新赋值即可</li><br><li>list的元素支持不同的数据类型, L = [‘abc’,23,23.4]</li><br><li>list的元素支持嵌套另外一个list： s = [‘abc’,123,[‘XYZ’,2.34]]，注意这个时候len(s)的元素是3个</li><br><li>list也可以没有元素，就是一个空的list，它的长度为0</li><br></ol><br></li><br><li>tuple：元组，也是一种有序列表，但是tuple一旦初始化就不能修改，他没有append()也没有insert()，这样的方法，其他获取元素的方式和list一样，也不能赋值成为另外的元素：<br><ol><br><li>classmates = (‘Michael’,’Bob’,’Tracy’) 注意list用的是’[]’，而tuple用的是’()’</li><br><li>tuple 有个问题，当你定义1个元素的时候，tuple的()和数学公式中的小括号混淆 ，因此python规定，这种情况下面，当定义只有1个tuple时必须增加一个逗号’,’来消除歧义。</li><br><li>tuple的元素也可以为list或者tuple，tuple的元素不会改变，但是list是一个可以改变的有序数列，所以当tuple中包含list时，这个tuple是’可变的’</li><br></ol><br></li><br><li>取出特定元素： L[[‘Apple’,’Google’,’Microsoft’],[‘Java’,’Python’,’C’]] ; L[1][1] = ‘Python’</li><br></ol><br></li><br><li>条件判断<br><ol><br><li>if：根据python的缩进规则，如果if语句的判断是True，就会执行下面的语句，否则什么都不做</li><br><li>else：也可以个if添加else，意思就是，如果if的判断是false，不要执行if的内容，执行else的内容</li><br><li>elif：如果要嵌套多级判断条件的话，使用elif，elif 是else if的缩写</li><br><li>if语句执行有个特点，它是自上而下的判断，如果某个判断的结果是True，那么执行该判断对应的语句，就会忽略掉剩下的所有elif和else，if判断条件还可以简写: if x: 只要x是非零数值、非空字符串、非空list等，就判断为True，</li><br></ol><br></li><br><li>iput(): 需要注意的地方，默认input的返回类型是str，由于str不能直接整数比较，所以在碰到明明输入200，但是不能和201对比时，记住先要把str转化为整数，python提供了int()函数, 转化数据类型为int类型，但是如果输入’abc’则会得到1个ValueError的错误</li><br><li>循环<br><ol><br><li>for…in ： 依次把list或者tuple的每个元素迭代出来，for x in … ：循环就是把每个元素带入变量x，然后执行缩进的语句：</li><br><li>range()函数：用来生成一个整数序列，再通过list()函数转换为list，例如range(5)生成：0,1,2,3,4<br><ol><br><li>list(range(5)) = [0,1,2,3,4]</li><br><li>计算1+…+100的结果： for x in range(101): sum = sum +x</li><br></ol><br></li><br><li>while 循环： 只要条件满足，就不断循环，条件不足时退出循环：<br><ol><br><li>计算100以内所有奇数之和： sum = 0,n = 99, while n &gt; 0: sum =sum +n; n = n-2</li><br></ol><br></li><br><li>break: 在循环中，break语句可以提前退出循环，当程序执行满足break条件的时候，就会退出循环</li><br><li>continue: 在循环过程中，也可以通过continue语句，跳过当前的这次循环。</li><br><li>注意：循环是让计算机做重复任务的有效方法，break语句可以在循环过程总直接退出循环，continue语句可以提前结束本轮循环，并直接进入下一轮循环，这两个语句通常必须配合if语句使用，但是尽量不要滥用这两个语句，因为当break和continue使用过多会导致代码执行逻辑分支过多，容易出错。</li><br></ol><br></li><br><li>dict和set<br><ol><br><li>dict： python内置了字典：dict的支持，全称：dictionary，在其他语言中也称之为map，使用键值存储，具有极快的查找速度。</li><br><li>对比list处理方式：会过滤整个list的元素，这导致list越长，耗时越长；dict实现时，只需要创建key-values对应表，直接根据名字查找，无论这个表有多大，查找速度都不会变慢，但是内存消耗会大，典型用性能(内存空间)换时间。</li><br><li>dict的初始化: d {‘Michael’:95,’Bob’:75,’Tracy’:85}  # 注意dict使用的是大括号’{}‘</li><br><li>dict的数据插入： d [‘Adam’] = 67 </li><br><li>由于dict是根据key检索，所以key是固定的，一个key只能对应1个value,所以当对1个key多次放入value时，后面的值会把前面的值冲掉： （类似变量）</li><br><li>但是如果查询的key不存在,dict会报错，KeyError，可以用in 判断key是否存在: ‘key’ in d  : True/False</li><br><li>通过dict的get方法，如果key不存在，可以返回None，或者自己指定的值，d.get(‘Key’) , d.get(‘key’,-1)</li><br><li>d.pop(‘key’): 删除1个key，注意当key被删除是，相应的value也会被删除。</li><br><li>另外注意：dict内部存放的顺序和key放入的顺序是没有关系的：</li><br><li>dict应在需要高速查找的地方，正确使用dict非常重要，要牢记1点，dict的key必须是不可变的对象，因为dict是根据key来计算value的位置，如果每次计算相同的key得到的结果不一样，那么dict内部就完全混乱了，这个通过key计算位置的算法称之为Hash算法。</li><br><li>要保证hash的准确性，作为key的对象就不能改变，在python中，字符串·整数等都是不可变的，但是list是可以变的所以不能作为key</li><br><li>set： set和dict类似，也是一组key的集合，但是不存储value，由于key不能重复，所以，在set中，没有重复的key值。</li><br><li>要创建一个set，需要提供一个list作为输入集合。 s = set([1,2,3])   : s = {1,2,3}</li><br><li>注意set也不是有序的，而且重复在set存在的元素会被自动过滤： s = set([1,2,3,1,2,3,1,2,3])  s = {1,2,3}</li><br><li>通过s.add(key) 可以增加元素到set中，可以重复添加，但是不会有效果</li><br><li>通过s.remove(key) 可以删除元素</li><br><li>set 可以看成数学意义上的无序和无重复元素的集合，因此两个set可以做数学意义上的交集、并集能操作：<br><ol><br><li>s1 = set([1,2,3]), s2 = set([2,3,4]) ,交集： s1 &amp; s2 = {2,3} ; s1 | s2 = {1,2,3,4}</li><br></ol><br></li><br><li>set和dict的区别仅在于有没有存储对应的value，但是set和dict的原理是一样的，所以，同样不可以放置可变对象，因为无法判断两个对象是否相等，也就无法保证set内部的不会重复元素</li><br><li>不可变对象：str是不变对象，list是可变对象；对于可变对象，例如list，对list进行操作，list的内部会发生变化</li><br><li>a = ‘abc’ , a.replace(‘a’,’A’) # 这个操作是把所有小写的a替换成大写的A，但是注意a的值并没有发生改变，要牢记a是变量，’abc’才是字符对象。</li><br></ol><br></li><br></ol><br></body><br></html>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-11-09T18:53:13.000Z">2016-11-10</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 minutes read (About 703 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/11/10/lwuswahg/">MySQL(5) 清空表命令之：truncate与delete区别</a>
-            
-        </h1>
-        <div class="content">
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在实际工作中，有时我们会想要去清空一张表的所有数据，常用的命令有delete和truncate这两个命令。</p>
-<h3 id="1-delete"><a href="#1-delete" class="headerlink" title="1. delete"></a>1. delete</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在很多情况，我们对于delete的应用更多，因为它支持更多的匹配模式，我们可以使用where条件语句，清理一些特定的数据，关于delete的操作，这里不做过多解释，有空就专门写写delete的使用和原理。delete 在清空表时，如果表内有自增ID的设定，那么在delete清空之后，再插入数据时，自增ID不会从1开始，默认会继续增加; 除非我们使用OPTIMIZE TABLE，重置表属性；<br><figure class="highlight n1ql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> piwik_tmp;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-truncate"><a href="#2-truncate" class="headerlink" title="2. truncate"></a>2. truncate</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;truncate 在清空表时，会同时将自增ID重置，再插入新数据时会从1开始，而且truncate在清空表时，不关心表的行数，所以执行效率会高于delete；</p>
-<figure class="highlight excel hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; truncate table piwik_tmp;</span><br><span class="line">Query OK, <span class="hljs-number">0</span> <span class="hljs-built_in">rows</span> affected (<span class="hljs-number">0.01</span> <span class="hljs-built_in">sec</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="3-释放表空间"><a href="#3-释放表空间" class="headerlink" title="3. 释放表空间"></a>3. 释放表空间</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但是在truncate清空表数据时，myisam的表和innodb的表在使用上有一定的区别；myisam表会清空所有数据，并释放表空间，即硬盘空间会得到释放。innodb表也会清空所有数据，但不释放表空间。Innodb数据库对于已经删除的数据只是标记为删除，并不真正释放所占用的磁盘空间，这就导致InnoDB数据库文件不断增长。如果想彻底释放这些已经删除的数据，需要把数据库导出，删除InnoDB数据库文件，然后再导入。<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 备份数据库：</span></span><br><span class="line">mysqldump -u -p --quick --force --all-databases &gt; mysqldump.sql</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 停止数据库</span></span><br><span class="line">service mysqld stop</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 删除这些大文件</span></span><br><span class="line">rm /usr/local/mysql/var/ibdata1</span><br><span class="line">rm /usr/local/mysql/var/ib_logfile*</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 手动删除除Mysql之外所有数据库文件夹，然后启动数据库</span></span><br><span class="line">service mysqld start</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 还原数据</span></span><br><span class="line">mysql -uroot -proot &lt; mysqldump.sql</span><br></pre></td></tr></table></figure></p>
-<h3 id="4-innodb-file-per-table"><a href="#4-innodb-file-per-table" class="headerlink" title="4. innodb_file_per_table"></a>4. innodb_file_per_table</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;还有一种方式是在创建数据库的时候设置innodb_file_per_table，这样InnoDB会对每个表创建一个数据文件，然后只需要运行OPTIMIZE TABLE 命令就可以释放所有已经删除的磁盘空间。</p>
-<h4 id="4-1-修改mysql默认配置文件。"><a href="#4-1-修改mysql默认配置文件。" class="headerlink" title="4.1 修改mysql默认配置文件。"></a>4.1 修改mysql默认配置文件。</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编辑my.ini或my.cnf 在innodb段中加入 innodb_file_per_table=1 # 1为启用，0为禁用</p>
-<h4 id="4-2-查看修改结果"><a href="#4-2-查看修改结果" class="headerlink" title="4.2 查看修改结果"></a>4.2 查看修改结果</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过mysql语句可以查看该变量的值：<br><figure class="highlight gams hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show <span class="hljs-keyword">variables</span> like <span class="hljs-comment">'%per_table%'</span>;</span><br></pre></td></tr></table></figure></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2016-10-28T22:23:59.000Z">2016-10-29</time>
                 
                 <div class="level-item">
@@ -495,6 +243,344 @@
 
 
 
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-09-22T07:20:12.000Z">2016-09-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    11 minutes read (About 1713 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/09/22/how-to-use-pt-query-digest/">HowTo Use pt-query-digest</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h3><p>索引可以我们更快速的执行查询，但是肯定存在不合理的索引，如果想找到那些索引不是很合适的查询，并在它们成为问题前进行优化，则可以使用pt-query-digest的查询审查“review”功能，分析其EXPLAIN出来的执行计划。</p>
+<p>pt-query-digest是用于分析mysql慢查询的一个工具，它可以分析binlog、General log、slowlog，也可以通过SHOWPROCESSLIST或者通过tcpdump抓取的MySQL协议数据来进行分析。可以把分析结果输出到文件中，分析过程是先对查询语句的条件进行参数化，然后对参数化以后的查询进行分组统计，统计出各查询的执行时间、次数、占比等，可以借助分析结果找出问题进行优化。</p>
+<h3 id="2-Install-Percona-Toolkit-amp-pt-query-digest"><a href="#2-Install-Percona-Toolkit-amp-pt-query-digest" class="headerlink" title="2. Install Percona Toolkit &amp; pt-query-digest"></a>2. Install Percona Toolkit &amp; pt-query-digest</h3><p>percona-toolkit是一组高级命令行工具的集合，用来执行各种通过手工执行非常复杂和麻烦的mysql和系统任务。这些任务包括：</p>
+<ul>
+<li>检查master和slave数据的一致性</li>
+<li>有效地对记录进行归档</li>
+<li>查找重复的索引</li>
+<li>对服务器信息进行汇总</li>
+<li>分析来自日志和tcpdump的查询</li>
+<li>当系统出问题的时候收集重要的系统信息</li>
+</ul>
+<figure class="highlight vim hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">[root@ultrera ~]# wget percona.<span class="hljs-keyword">com</span>/<span class="hljs-built_in">get</span>/percona-toolkit.tar.gz</span><br><span class="line">--<span class="hljs-number">2016</span>-<span class="hljs-number">09</span>-<span class="hljs-number">22</span> <span class="hljs-number">09</span>:<span class="hljs-number">17</span>:<span class="hljs-number">00</span>--  http://percona.<span class="hljs-keyword">com</span>/<span class="hljs-built_in">get</span>/percona-toolkit.tar.gz</span><br><span class="line">Resolving percona.<span class="hljs-keyword">com</span>... <span class="hljs-number">74.121</span>.<span class="hljs-number">199.234</span>, <span class="hljs-number">74.121</span>.<span class="hljs-number">199.234</span></span><br><span class="line">Connecting <span class="hljs-keyword">to</span> percona.<span class="hljs-keyword">com</span>|<span class="hljs-number">74.121</span>.<span class="hljs-number">199.234</span>|:<span class="hljs-number">80</span>... connected.</span><br><span class="line">HTTP request sent, awaiting response... <span class="hljs-number">301</span> Moved Permanently</span><br><span class="line">Location: http<span class="hljs-variable">s:</span>//www.percona.<span class="hljs-keyword">com</span>/<span class="hljs-built_in">get</span>/percona-toolkit.tar.gz [following]</span><br><span class="line">--<span class="hljs-number">2016</span>-<span class="hljs-number">09</span>-<span class="hljs-number">22</span> <span class="hljs-number">09</span>:<span class="hljs-number">17</span>:<span class="hljs-number">02</span>--  http<span class="hljs-variable">s:</span>//www.percona.<span class="hljs-keyword">com</span>/<span class="hljs-built_in">get</span>/percona-toolkit.tar.gz</span><br><span class="line">Resolving www.percona.<span class="hljs-keyword">com</span>... <span class="hljs-number">74.121</span>.<span class="hljs-number">199.234</span>, <span class="hljs-number">74.121</span>.<span class="hljs-number">199.234</span></span><br><span class="line">Connecting <span class="hljs-keyword">to</span> www.percona.<span class="hljs-keyword">com</span>|<span class="hljs-number">74.121</span>.<span class="hljs-number">199.234</span>|:<span class="hljs-number">443</span>... connected.</span><br><span class="line">HTTP request sent, awaiting response... <span class="hljs-number">302</span> Found</span><br><span class="line">Location: http<span class="hljs-variable">s:</span>//www.percona.<span class="hljs-keyword">com</span>/downloads/percona-toolkit/<span class="hljs-number">2.2</span>.<span class="hljs-number">19</span>/tarball/percona-toolkit-<span class="hljs-number">2.2</span>.<span class="hljs-number">19</span>.tar.gz [following]</span><br><span class="line">--<span class="hljs-number">2016</span>-<span class="hljs-number">09</span>-<span class="hljs-number">22</span> <span class="hljs-number">09</span>:<span class="hljs-number">17</span>:<span class="hljs-number">03</span>--  http<span class="hljs-variable">s:</span>//www.percona.<span class="hljs-keyword">com</span>/downloads/percona-toolkit/<span class="hljs-number">2.2</span>.<span class="hljs-number">19</span>/tarball/percona-toolkit-<span class="hljs-number">2.2</span>.<span class="hljs-number">19</span>.tar.gz</span><br><span class="line">Reusing existing connection <span class="hljs-keyword">to</span> www.percona.<span class="hljs-keyword">com</span>:<span class="hljs-number">443</span>.</span><br><span class="line">HTTP request sent, awaiting response... <span class="hljs-number">200</span> OK</span><br><span class="line">Length: <span class="hljs-number">1425623</span> (<span class="hljs-number">1.4</span>M) [application/<span class="hljs-keyword">x</span>-gzip]</span><br><span class="line">Saving <span class="hljs-keyword">to</span>: “percona-toolkit.tar.gz”</span><br><span class="line"></span><br><span class="line"><span class="hljs-number">100</span>%[=======================&gt;] <span class="hljs-number">1</span>,<span class="hljs-number">425</span>,<span class="hljs-number">623</span>    <span class="hljs-number">766</span>K/s   in <span class="hljs-number">1.8</span>s</span><br><span class="line"></span><br><span class="line"><span class="hljs-number">2016</span>-<span class="hljs-number">09</span>-<span class="hljs-number">22</span> <span class="hljs-number">09</span>:<span class="hljs-number">17</span>:<span class="hljs-number">05</span> (<span class="hljs-number">766</span> KB/s) - “percona-toolkit.tar.gz” saved [<span class="hljs-number">1425623</span>/<span class="hljs-number">1425623</span>]</span><br><span class="line"></span><br><span class="line">[root@ultrera ~]# tar xf percona-toolkit.tar.gz</span><br><span class="line">[root@ultrera ~]# <span class="hljs-keyword">ls</span></span><br><span class="line">percona-toolkit-<span class="hljs-number">2.2</span>.<span class="hljs-number">19</span>  percona-toolkit.tar.gz</span><br><span class="line">[root@ultrera ~]# <span class="hljs-keyword">cd</span> percona-toolkit-<span class="hljs-number">2.2</span>.<span class="hljs-number">19</span></span><br><span class="line">[root@ultrera percona-toolkit-<span class="hljs-number">2.2</span>.<span class="hljs-number">19</span>]# <span class="hljs-keyword">perl</span> Makefile.PL</span><br><span class="line">Warnin<span class="hljs-variable">g:</span> prerequisite DBD::mysql <span class="hljs-number">3</span> not found.</span><br><span class="line">Writing Makefile <span class="hljs-keyword">for</span> percona-toolkit</span><br><span class="line">[root@ultrera percona-toolkit-<span class="hljs-number">2.2</span>.<span class="hljs-number">19</span>]# <span class="hljs-keyword">make</span></span><br><span class="line"><span class="hljs-keyword">cp</span> bin/<span class="hljs-keyword">pt</span>-mysql-summary blib/script/<span class="hljs-keyword">pt</span>-mysql-summary</span><br><span class="line">....</span><br><span class="line">Manifying blib/man1/<span class="hljs-keyword">pt</span>-<span class="hljs-built_in">index</span>-usage.<span class="hljs-number">1</span><span class="hljs-keyword">p</span></span><br><span class="line">Manifying blib/man1/<span class="hljs-keyword">pt</span>-duplicate-key-checker.<span class="hljs-number">1</span><span class="hljs-keyword">p</span></span><br><span class="line">Manifying blib/man1/<span class="hljs-keyword">pt</span>-config-diff.<span class="hljs-number">1</span><span class="hljs-keyword">p</span></span><br><span class="line">Manifying blib/man1/<span class="hljs-keyword">pt</span>-stalk.<span class="hljs-number">1</span><span class="hljs-keyword">p</span></span><br><span class="line">[root@ultrera percona-toolkit-<span class="hljs-number">2.2</span>.<span class="hljs-number">19</span>]# <span class="hljs-keyword">make</span> install</span><br><span class="line">Installing /usr/local/share/man/man1/<span class="hljs-keyword">pt</span>-query-digest.<span class="hljs-number">1</span><span class="hljs-keyword">p</span></span><br><span class="line">...</span><br><span class="line">Installing /usr/local/bin/<span class="hljs-keyword">pt</span>-query-digest</span><br><span class="line">...</span><br><span class="line">Appending installation info <span class="hljs-keyword">to</span> /usr/lib64/perl5/perllocal.pod</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>运行工具可能会遇到下面的错误: Can’t locate Time/HiRes.pm in @INC</p>
+</blockquote>
+<figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta"># 解决办法：</span></span><br><span class="line">[root<span class="hljs-symbol">@ultrera</span> ~]<span class="hljs-meta"># yum install -y perl-Time-HiRes</span></span><br><span class="line">[root<span class="hljs-symbol">@ultrera</span> ~]<span class="hljs-meta"># pt-query-digest --version</span></span><br><span class="line">pt-query-digest <span class="hljs-number">2.2</span><span class="hljs-number">.19</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-开启-mysql慢日志"><a href="#3-开启-mysql慢日志" class="headerlink" title="3. 开启 mysql慢日志"></a>3. 开启 mysql慢日志</h3><h5 id="a-查看当前‘slow-query-log’-状态："><a href="#a-查看当前‘slow-query-log’-状态：" class="headerlink" title="a. 查看当前‘slow_query_log’ 状态："></a>a. 查看当前‘slow_query_log’ 状态：</h5><figure class="highlight asciidoc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like <span class="hljs-emphasis">'%query%'</span>;</span><br><span class="line"><span class="hljs-code">+------------------------------+</span>---------------------------------+</span><br><span class="line">| Variable<span class="hljs-emphasis">_name                | Value                           |</span></span><br><span class="line"><span class="hljs-emphasis">+------------------------------+---------------------------------+</span></span><br><span class="line"><span class="hljs-emphasis">| binlog_</span>rows<span class="hljs-emphasis">_query_</span>log<span class="hljs-emphasis">_events | OFF                             |</span></span><br><span class="line"><span class="hljs-emphasis">| ft_</span>query<span class="hljs-emphasis">_expansion_</span>limit     | 20                              |</span><br><span class="line">| have<span class="hljs-emphasis">_query_</span>cache             | YES                             |</span><br><span class="line">| long<span class="hljs-emphasis">_query_</span>time              | 10.000000                       |</span><br><span class="line">| query<span class="hljs-emphasis">_alloc_</span>block<span class="hljs-emphasis">_size       | 8192                            |</span></span><br><span class="line"><span class="hljs-emphasis">| query_</span>cache<span class="hljs-emphasis">_limit            | 1048576                         |</span></span><br><span class="line"><span class="hljs-emphasis">| query_</span>cache<span class="hljs-emphasis">_min_</span>res<span class="hljs-emphasis">_unit     | 4096                            |</span></span><br><span class="line"><span class="hljs-emphasis">| query_</span>cache<span class="hljs-emphasis">_size             | 1048576                         |</span></span><br><span class="line"><span class="hljs-emphasis">| query_</span>cache<span class="hljs-emphasis">_type             | OFF                             |</span></span><br><span class="line"><span class="hljs-emphasis">| query_</span>cache<span class="hljs-emphasis">_wlock_</span>invalidate | OFF                             |</span><br><span class="line">| query<span class="hljs-emphasis">_prealloc_</span>size          | 8192                            |</span><br><span class="line">| slow<span class="hljs-emphasis">_query_</span>log               | OFF                             |</span><br><span class="line">| slow<span class="hljs-emphasis">_query_</span>log<span class="hljs-emphasis">_file          | /var/lib/mysql/ultrera-slow.log |</span></span><br><span class="line"><span class="hljs-emphasis">+------------------------------+---------------------------------+</span></span><br><span class="line"><span class="hljs-emphasis">13 rows in set (0.00 sec)</span></span><br><span class="line"><span class="hljs-emphasis"></span></span><br><span class="line"><span class="hljs-emphasis">mysql&gt; show variables like 'log_</span>queries<span class="hljs-emphasis">_not_</span>using<span class="hljs-emphasis">_indexes';</span></span><br><span class="line"><span class="hljs-emphasis">+-------------------------------+-------+</span></span><br><span class="line"><span class="hljs-emphasis">| Variable_</span>name                 | Value |</span><br><span class="line"><span class="hljs-code">+-------------------------------+</span>-------+</span><br><span class="line">| log<span class="hljs-emphasis">_queries_</span>not<span class="hljs-emphasis">_using_</span>indexes | OFF   |</span><br><span class="line"><span class="hljs-code">+-------------------------------+</span>-------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h5 id="b-启动slow-log-配置"><a href="#b-启动slow-log-配置" class="headerlink" title="b. 启动slow_log, 配置"></a>b. 启动slow_log, 配置</h5><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 设定记录大于2s的sql</span></span><br><span class="line"><span class="hljs-meta">mysql&gt;</span><span class="hljs-bash"> <span class="hljs-built_in">set</span> global long_query_time=2;</span></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 设定<span class="hljs-built_in">log</span>存放路径</span></span><br><span class="line"><span class="hljs-meta">mysql&gt;</span><span class="hljs-bash"> <span class="hljs-built_in">set</span> global slow_query_log_file=<span class="hljs-string">'/tmp/ultraera-slow.log'</span>;</span></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 启用慢日志</span></span><br><span class="line"><span class="hljs-meta">mysql&gt;</span><span class="hljs-bash"> <span class="hljs-built_in">set</span> global slow_query_log=ON;</span></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 同时记录没有使用索引的sql</span></span><br><span class="line"><span class="hljs-meta">mysql&gt;</span><span class="hljs-bash"> <span class="hljs-built_in">set</span> global log_queries_not_using_indexes=on;</span></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>等待一段时间，slow.log 增大的非常快，实际生产中，注意不要被slow.log将磁盘撑满，影响到正常生产使用。</p>
+</blockquote>
+<h3 id="4-分析"><a href="#4-分析" class="headerlink" title="4. 分析"></a>4. 分析</h3><p>pt-query-digest可以从普通MySQL日志，慢查询日志以及二进制日志中分析查询，甚至可以从SHOW PROCESSLIST和MySQL协议的tcpdump中进行分析，如果没有指定文件，它从标准输入流（STDIN）中读取数据。</p>
+<h5 id="a-简单使用方法："><a href="#a-简单使用方法：" class="headerlink" title="a. 简单使用方法："></a>a. 简单使用方法：</h5><figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-tag">pt-query-digest</span> <span class="hljs-selector-tag">slow</span><span class="hljs-selector-class">.logs</span></span><br></pre></td></tr></table></figure>
+<p>输出信息如下：</p>
+<div align="left"><br><img src="http://images.cnitblog.com/blog/288950/201312/14135450-6f7a732598054f7aa311e95cbd4df3b1.png" alt><br></div>
+
+<p><ul></ul></p>
+<ol>
+<li>Overall这个部分是一个大致的概要信息(类似loadrunner给出的概要信息)，通过它可以对当前MySQL的查询性能做一个初步的评估，比如各个指标的最大值(max)，平均值(min)，95%分布值，中位数(median)，标准偏差(stddev)<br></li><li>查询的执行时间（Exec time）</li><br><li>锁占用的时间（Lock time）</li><br><li>MySQL执行器需要检查的行数（Rows examine）</li><br><li>最后返回给客户端的行数（Rows sent）</li><br><li>查询的大小。</li><br><ul>
+<li>Profile<br></li><li>Rank ： 整个分析中该“语句”的排名，一般也就是性能最慢的</li><br><li>Query ID ：每个查询都有一个</li><br><li>Response time ： “语句”的响应时间以及整体占比情况。</li><br><li>Calls ：“语句”的执行次数</li><br><li>R/Call ：每次执行的平均响应时间。 </li><br><li>V/M</li><br></ul><h5 id="详细信息"><a href="#详细信息" class="headerlink" title="详细信息"></a>详细信息</h5><p>列出上面Profile中每个Query ID的详细信息</p>
+
+
+</ol>
+<h5 id="b-从tcpdump包中分析：通过tcpdump命令抓取一定时间网络数据包，然后进行分析："><a href="#b-从tcpdump包中分析：通过tcpdump命令抓取一定时间网络数据包，然后进行分析：" class="headerlink" title="b. 从tcpdump包中分析：通过tcpdump命令抓取一定时间网络数据包，然后进行分析："></a>b. 从tcpdump包中分析：通过tcpdump命令抓取一定时间网络数据包，然后进行分析：</h5><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pt-query-digest --type tcpdump mysql<span class="hljs-selector-class">.tcp</span><span class="hljs-selector-class">.txt</span></span><br></pre></td></tr></table></figure>
+<h5 id="c-pt-query-digest-还支持很对其他的数据包分析形势，但是我们主要使用的还是针对慢日志进行分析"><a href="#c-pt-query-digest-还支持很对其他的数据包分析形势，但是我们主要使用的还是针对慢日志进行分析" class="headerlink" title="c. pt-query-digest 还支持很对其他的数据包分析形势，但是我们主要使用的还是针对慢日志进行分析"></a>c. pt-query-digest 还支持很对其他的数据包分析形势，但是我们主要使用的还是针对慢日志进行分析</h5><blockquote>
+<p>更多的帮助文档，请查看官方文档：<a href="http://www.percona.com/doc/percona-toolkit/2.2/pt-query-digest.html" target="_blank" rel="noopener">http://www.percona.com/doc/percona-toolkit/2.2/pt-query-digest.html</a></p>
+</blockquote>
+<h3 id="5-使用Anemometer将pt-query-digest的MySQL慢查询可视化"><a href="#5-使用Anemometer将pt-query-digest的MySQL慢查询可视化" class="headerlink" title="5. 使用Anemometer将pt-query-digest的MySQL慢查询可视化"></a>5. 使用Anemometer将pt-query-digest的MySQL慢查询可视化</h3><ul>
+<li>需要安装php 5.3 and over</li>
+<li>需要预先配置mysql数据库</li>
+<li>需要预先安装好pt-query-digest</li>
+</ul>
+<h5 id="5-1-安装"><a href="#5-1-安装" class="headerlink" title="5.1 安装"></a>5.1 安装</h5><figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="hljs-symbol">@ultrera</span> ~]<span class="hljs-meta"># git clone https://github.com/box/Anemometer.git anemometer</span></span><br><span class="line"></span><br><span class="line">[root<span class="hljs-symbol">@ultrera</span> ~]<span class="hljs-meta"># mv anemometer /var/www/html</span></span><br><span class="line">[root<span class="hljs-symbol">@ultrera</span> ~]<span class="hljs-meta"># cd /var/www/html/anemometer/</span></span><br><span class="line">[root<span class="hljs-symbol">@ultrera</span> anemometer]<span class="hljs-meta"># mysql -h localhost -u root -p &lt; mysql56-install.sql</span></span><br><span class="line">[root<span class="hljs-symbol">@ultrera</span> anemometer]<span class="hljs-meta"># mysql -h localhost -u root -p -e <span class="hljs-string">"grant all privileges on slow_query_log.* to 'anemometer'@'%' identified by 'anemometer';"</span></span></span><br></pre></td></tr></table></figure>
+<h5 id="5-2-配置"><a href="#5-2-配置" class="headerlink" title="5.2 配置"></a>5.2 配置</h5><figure class="highlight cs hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[<span class="hljs-meta">root@ultrera anemometer</span>]<span class="hljs-meta"># cp conf/sample.config.inc.php conf/config.inc.php</span></span><br><span class="line">[<span class="hljs-meta">root@ultrera anemometer</span>]<span class="hljs-meta"># vim conf/config.inc.php</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 48,49 and <span class="hljs-meta-keyword">line</span> 284,285</span></span><br><span class="line">设置数据库的用户名和密码;</span><br><span class="line"></span><br><span class="line">[<span class="hljs-meta">root@ultrera anemometer</span>]<span class="hljs-meta"># vim conf/config.inc.php</span></span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 7,8</span></span><br><span class="line">设置数据库的用户名和密码;</span><br></pre></td></tr></table></figure>
+<h5 id="5-3-导入"><a href="#5-3-导入" class="headerlink" title="5.3 导入"></a>5.3 导入</h5><p>将pt-query-digest 的分析结果到anemometer；</p>
+<blockquote>
+<p>pt-query-digest version &lt; 2.2</p>
+</blockquote>
+<figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ pt-query-digest <span class="hljs-attribute">--user</span>=anemometer <span class="hljs-attribute">--password</span>=superSecurePass \</span><br><span class="line">                  --review <span class="hljs-attribute">h</span>=db.example.com,D=slow_query_log,t=global_query_review \</span><br><span class="line">                  --review-history <span class="hljs-attribute">h</span>=db.example.com,D=slow_query_log,t=global_query_review_history \</span><br><span class="line">                  --no-report <span class="hljs-attribute">--limit</span>=0% \</span><br><span class="line">                  <span class="hljs-attribute">--filter</span>=<span class="hljs-string">" \$event-&gt;&#123;Bytes&#125; = length(\$event-&gt;&#123;arg&#125;) and \$event-&gt;&#123;hostname&#125;=\"<span class="hljs-variable">$HOSTNAME</span>\""</span> \</span><br><span class="line">                  /var/lib/mysql/db.example.com-slow.log</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>pt-query-digest version &gt;= 2.2</p>
+</blockquote>
+<figure class="highlight stata hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pt-<span class="hljs-keyword">query</span>-digest --user=anemometer --password=superSecurePass \</span><br><span class="line">                  --review <span class="hljs-keyword">h</span>=<span class="hljs-keyword">db</span>.example.com,<span class="hljs-keyword">D</span>=slow_query_log,t=global_query_review \</span><br><span class="line">                  --history <span class="hljs-keyword">h</span>=<span class="hljs-keyword">db</span>.example.com,<span class="hljs-keyword">D</span>=slow_query_log,t=global_query_review_history \</span><br><span class="line">                  --<span class="hljs-keyword">no</span>-<span class="hljs-keyword">report</span> --limit=0% \</span><br><span class="line">                  --filter=<span class="hljs-string">" \$event-&gt;&#123;Bytes&#125; = length(\$event-&gt;&#123;arg&#125;) and \$event-&gt;&#123;hostname&#125;=\"</span><span class="hljs-variable">$HOSTNAME</span>\<span class="hljs-string">""</span> \</span><br><span class="line">                  /<span class="hljs-keyword">var</span>/lib/mysql/<span class="hljs-keyword">db</span>.example.com-slow.<span class="hljs-built_in">log</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Pipeline process 11 (aggregate fingerprint) caused <span class="hljs-keyword">an</span> <span class="hljs-keyword">error</span>: Argument <span class="hljs-string">"57A"</span> isn't numeric <span class="hljs-keyword">in</span> numeric gt (&gt;) at (eval 40) <span class="hljs-keyword">line</span> 6, &lt;&gt; <span class="hljs-keyword">line</span> 27.</span><br><span class="line">Pipeline process 11 (aggregate fingerprint) caused <span class="hljs-keyword">an</span> <span class="hljs-keyword">error</span>: Argument <span class="hljs-string">"57B"</span> isn't numeric <span class="hljs-keyword">in</span> numeric gt (&gt;) at (eval 40) <span class="hljs-keyword">line</span> 6, &lt;&gt; <span class="hljs-keyword">line</span> 28.</span><br><span class="line">Pipeline process 11 (aggregate fingerprint) caused <span class="hljs-keyword">an</span> <span class="hljs-keyword">error</span>: Argument <span class="hljs-string">"57C"</span> isn't numeric <span class="hljs-keyword">in</span> numeric gt (&gt;) at (eval 40) <span class="hljs-keyword">line</span> 6, &lt;&gt; <span class="hljs-keyword">line</span> 29.</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-09-19T02:25:53.000Z">2016-09-19</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Tomcat/">Tomcat</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 minutes read (About 884 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/09/19/install-a-tomcat-server-7/">HowTo Install a Tomcat Server 7</a>
+            
+        </h1>
+        <div class="content">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本文件是采用的模板是CentOS 6，同样适用于CentOS 系列其他发行版本。</p>
+<h4 id="1-测试环境"><a href="#1-测试环境" class="headerlink" title="1. 测试环境"></a>1. 测试环境</h4><ul>
+<li>VMware Fushion 8 Pro # windows Use <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="noopener">VirtualBox</a></li>
+<li><a href="http://mirrors.aliyun.com/centos/6.8/isos/x86_64/CentOS-6.8-x86_64-minimal.iso" target="_blank" rel="noopener">CentOS-6.8-x86_64-minimal.iso</a></li>
+<li><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="noopener">JDK 7</a></li>
+<li><a href="http://ftp.riken.jp/net/apache/tomcat/tomcat-7/" target="_blank" rel="noopener">Tomcat 7</a></li>
+</ul>
+<h4 id="2-Install-Java-SE-Development-Kit-7-JDK7"><a href="#2-Install-Java-SE-Development-Kit-7-JDK7" class="headerlink" title="2. Install Java SE Development Kit 7 (JDK7)"></a>2. Install Java SE Development Kit 7 (JDK7)</h4><figure class="highlight clean hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@ultraera ~]# curl -LO -H <span class="hljs-string">"Cookie: oraclelicense=accept-securebackup-cookie"</span> \</span><br><span class="line"><span class="hljs-string">"http://download.oracle.com/otn-pub/java/jdk/7u75-b13/jdk-7u75-linux-x64.rpm"</span></span><br><span class="line">[root@ultraera ~]# rpm -Uvh jdk<span class="hljs-number">-7</span>u75-linux-x64.rpm</span><br><span class="line">Preparing...                ########################################### [<span class="hljs-number">100</span>%]</span><br><span class="line">   <span class="hljs-number">1</span>:jdk                    ########################################### [<span class="hljs-number">100</span>%]</span><br><span class="line">Unpacking JAR files...</span><br><span class="line">        rt.jar...</span><br><span class="line">        jsse.jar...</span><br><span class="line">        charsets.jar...</span><br><span class="line">        tools.jar...</span><br><span class="line">        localedata.jar...</span><br><span class="line">        jfxrt.jar...</span><br></pre></td></tr></table></figure>
+<h4 id="3-Build-Java-Environment"><a href="#3-Build-Java-Environment" class="headerlink" title="3. Build Java Environment."></a>3. Build Java Environment.</h4><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@ultraera ~]# vi /etc/profile</span><br><span class="line"><span class="hljs-comment"># add follows to the end</span></span><br><span class="line"><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">JAVA_HOME</span>=/usr/java/default</span><br><span class="line"><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">PATH</span>=<span class="hljs-variable">$PATH</span>:$JAVA_HOME/bin</span><br><span class="line"><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">CLASSPATH</span>=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar</span><br><span class="line">[root@ultraera ~]# source /etc/profile</span><br><span class="line">[root@ultraera ~]# java -version</span><br><span class="line">java version <span class="hljs-string">"1.7.0_75"</span></span><br><span class="line">Java(TM) SE Runtime Environment (build 1.7.0_75-b13)</span><br><span class="line">Java HotSpot(TM) 64-Bit<span class="hljs-built_in"> Server </span>VM (build 24.75-b04, mixed mode)</span><br></pre></td></tr></table></figure>
+<h4 id="4-Download-Tomcat7"><a href="#4-Download-Tomcat7" class="headerlink" title="4. Download Tomcat7"></a>4. Download Tomcat7</h4><p>Make sure the latest one and download it from the site below.<br>=》 <a href="http://ftp.riken.jp/net/apache/tomcat/tomcat-7/" target="_blank" rel="noopener">http://ftp.riken.jp/net/apache/tomcat/tomcat-7/</a></p>
+<figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="hljs-symbol">@ultraera</span> ~]<span class="hljs-meta"># wget http://ftp.riken.jp/net/apache/tomcat/tomcat-7/v7.0.70/bin/apache-tomcat-7.0.70.tar.gz</span></span><br><span class="line">[root<span class="hljs-symbol">@ultraera</span> ~]<span class="hljs-meta"># tar zxvf apache-tomcat-7.0.70.tar.gz</span></span><br><span class="line">[root<span class="hljs-symbol">@ultraera</span> ~]<span class="hljs-meta"># mv apache-tomcat-7.0.70 /usr/tomcat7</span></span><br><span class="line">[root<span class="hljs-symbol">@ultraera</span> ~]<span class="hljs-meta"># useradd -M -d /usr/tomcat7 tomcat7</span></span><br><span class="line">[root<span class="hljs-symbol">@ultraera</span> ~]<span class="hljs-meta"># chown -R tomcat7. /usr/tomcat7</span></span><br></pre></td></tr></table></figure>
+<h4 id="5-create-a-script-use-service-manage-tomcat7"><a href="#5-create-a-script-use-service-manage-tomcat7" class="headerlink" title="5. create a script , use service manage tomcat7"></a>5. create a script , use service manage tomcat7</h4><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">[root@ultraera ~]# cat /etc/rc.d/init.d/tomcat7</span><br><span class="line"> #!/bin/bash</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Tomcat7: Start/Stop Tomcat 7</span></span><br><span class="line"><span class="hljs-comment">#</span></span><br><span class="line"><span class="hljs-comment"># chkconfig: - 90 10</span></span><br><span class="line"><span class="hljs-comment"># description: Tomcat is a Java application Server.</span></span><br><span class="line"></span><br><span class="line">. /etc/init.d/functions</span><br><span class="line">. /etc/sysconfig/network</span><br><span class="line"></span><br><span class="line"><span class="hljs-attribute">CATALINA_HOME</span>=/usr/tomcat7</span><br><span class="line"><span class="hljs-attribute">TOMCAT_USER</span>=tomcat7</span><br><span class="line"></span><br><span class="line"><span class="hljs-attribute">LOCKFILE</span>=/var/lock/subsys/tomcat7</span><br><span class="line"></span><br><span class="line"><span class="hljs-attribute">RETVAL</span>=0</span><br><span class="line">start()&#123;</span><br><span class="line">    echo <span class="hljs-string">"Starting Tomcat7: "</span></span><br><span class="line">    su - <span class="hljs-variable">$TOMCAT_USER</span> -c <span class="hljs-string">"<span class="hljs-variable">$CATALINA_HOME</span>/bin/startup.sh"</span></span><br><span class="line">    <span class="hljs-attribute">RETVAL</span>=$?</span><br><span class="line">    echo</span><br><span class="line">    [ <span class="hljs-variable">$RETVAL</span> -eq 0 ] &amp;&amp; touch <span class="hljs-variable">$LOCKFILE</span></span><br><span class="line">    return <span class="hljs-variable">$RETVAL</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">stop()&#123;</span><br><span class="line">    echo <span class="hljs-string">"Shutting down Tomcat7: "</span></span><br><span class="line">    <span class="hljs-variable">$CATALINA_HOME</span>/bin/shutdown.sh</span><br><span class="line">    <span class="hljs-attribute">RETVAL</span>=$?</span><br><span class="line">    echo</span><br><span class="line">    [ <span class="hljs-variable">$RETVAL</span> -eq 0 ] &amp;&amp; rm -f <span class="hljs-variable">$LOCKFILE</span></span><br><span class="line">    return <span class="hljs-variable">$RETVAL</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">case <span class="hljs-string">"<span class="hljs-variable">$1</span>"</span> <span class="hljs-keyword">in</span></span><br><span class="line">    start)</span><br><span class="line">        start</span><br><span class="line">        ;;</span><br><span class="line">    stop)</span><br><span class="line">        stop</span><br><span class="line">        ;;</span><br><span class="line">    restart)</span><br><span class="line">        stop</span><br><span class="line">        start</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        echo $<span class="hljs-string">"Usage: <span class="hljs-variable">$0</span> &#123;start|stop|restart&#125;"</span></span><br><span class="line">        exit 1</span><br><span class="line">        ;;</span><br><span class="line">esac</span><br><span class="line">exit $?</span><br></pre></td></tr></table></figure>
+<h4 id="6-Add-tomcat7-to-system-service"><a href="#6-Add-tomcat7-to-system-service" class="headerlink" title="6. Add tomcat7 to system service"></a>6. Add tomcat7 to system service</h4><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@ultraera ~]# chmod 755 /etc/rc.d/init.d/tomcat7</span><br><span class="line">[root@ultraera ~]# /etc/rc.d/init.d/tomcat7 start</span><br><span class="line">Starting Tomcat7:</span><br><span class="line">Using CATALINA_BASE:   /usr/tomcat7</span><br><span class="line">Using CATALINA_HOME:   /usr/tomcat7</span><br><span class="line">Using CATALINA_TMPDIR: /usr/tomcat7/temp</span><br><span class="line">Using JRE_HOME:        /usr/java/default</span><br><span class="line">Using CLASSPATH:       /usr/tomcat7/bin/bootstrap.jar:/usr/tomcat7/bin/tomcat-juli.jar</span><br><span class="line">Tomcat started.</span><br><span class="line">[root@ultraera ~]# netstat -ntlp | grep java</span><br><span class="line">tcp        0      0 ::ffff:127.0.0.1:8005       :::*                        LISTEN      6326/java</span><br><span class="line">tcp        0      0 :::8009                     :::*                        LISTEN      6326/java</span><br><span class="line">tcp        0      0 :::8080                    :::*                        LISTEN      6326/java</span><br><span class="line">[root@ultraera ~]# ps axu | grep java</span><br><span class="line">tomcat7       6326  8.3 85.6 5229768 2910176 ?     Sl   Aug22 3216:38 /usr/bin/java -Djava.util.logging.config.file=/usr/tomcat7/conf/logging.properties -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -server -Djava.endorsed.dirs=/usr/tomcat7/endorsed -classpath /usr/tomcat7/bin/bootstrap.jar:/usr/tomcat7/bin/tomcat-juli.jar -Dcatalina.base=/usr/tomcat7 -Dcatalina.home=/usr/tomcat7 -Djava.io.tmpdir=/usr/tomcat7/temp org.apache.catalina.startup.Bootstrap start</span><br><span class="line">[root@ultraera ~]# chkconfig --add tomcat7</span><br><span class="line">[root@ultraera ~]# chkconfig tomcat7 on</span><br></pre></td></tr></table></figure>
+<h4 id="7-打开浏览器测试Tomcat-Server搭建完成，默认页面如下"><a href="#7-打开浏览器测试Tomcat-Server搭建完成，默认页面如下" class="headerlink" title="7. 打开浏览器测试Tomcat Server搭建完成，默认页面如下"></a>7. 打开浏览器测试Tomcat Server搭建完成，默认页面如下</h4><p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/09/tomcat7.jpg" alt></p>
+<h4 id="8-使用curl-测试"><a href="#8-使用curl-测试" class="headerlink" title="8. 使用curl 测试"></a>8. 使用curl 测试</h4><figure class="highlight ldif hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@ultraera ~]<span class="hljs-comment"># curl -I http://localhost:8080</span></span><br><span class="line"><span class="hljs-attribute">HTTP/1.1 200 OK</span></span><br><span class="line"><span class="hljs-attribute">Server</span>: Apache-Coyote/1.1</span><br><span class="line"><span class="hljs-attribute">Content-Type</span>: text/html;charset=ISO-8859-1</span><br><span class="line"><span class="hljs-attribute">Transfer-Encoding</span>: chunked</span><br><span class="line"><span class="hljs-attribute">Date</span>: Sun, 18 Sep 2016 11:14:06 GMT</span><br></pre></td></tr></table></figure>
+<h4 id="9-Tomcat-文件树"><a href="#9-Tomcat-文件树" class="headerlink" title="9. Tomcat 文件树"></a>9. Tomcat 文件树</h4><figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-attr">[root@ultraera /usr/tomcat7]</span># <span class="hljs-selector-tag">tree</span></span><br><span class="line">.</span><br><span class="line">├── <span class="hljs-selector-tag">bin</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">bootstrap</span><span class="hljs-selector-class">.jar</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">catalina</span><span class="hljs-selector-class">.bat</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">catalina</span><span class="hljs-selector-class">.sh</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">catalina-tasks</span><span class="hljs-selector-class">.xml</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">commons-daemon</span><span class="hljs-selector-class">.jar</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">commons-daemon-native</span><span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.gz</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">configtest</span><span class="hljs-selector-class">.bat</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">configtest</span><span class="hljs-selector-class">.sh</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">daemon</span><span class="hljs-selector-class">.sh</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">digest</span><span class="hljs-selector-class">.bat</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">digest</span><span class="hljs-selector-class">.sh</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">setclasspath</span><span class="hljs-selector-class">.bat</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">setclasspath</span><span class="hljs-selector-class">.sh</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">shutdown</span><span class="hljs-selector-class">.bat</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">shutdown</span><span class="hljs-selector-class">.sh</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">startup</span><span class="hljs-selector-class">.bat</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">startup</span><span class="hljs-selector-class">.sh</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">tomcat-juli</span><span class="hljs-selector-class">.jar</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">tomcat-native</span><span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.gz</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">tool-wrapper</span><span class="hljs-selector-class">.bat</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">tool-wrapper</span><span class="hljs-selector-class">.sh</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">version</span><span class="hljs-selector-class">.bat</span></span><br><span class="line">│   └── <span class="hljs-selector-tag">version</span><span class="hljs-selector-class">.sh</span></span><br><span class="line">├── <span class="hljs-selector-tag">conf</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">catalina</span><span class="hljs-selector-class">.policy</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">catalina</span><span class="hljs-selector-class">.properties</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">context</span><span class="hljs-selector-class">.xml</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">logging</span><span class="hljs-selector-class">.properties</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">server</span><span class="hljs-selector-class">.xml</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">tomcat-users</span><span class="hljs-selector-class">.xml</span></span><br><span class="line">│   └── <span class="hljs-selector-tag">web</span><span class="hljs-selector-class">.xml</span></span><br><span class="line">├── <span class="hljs-selector-tag">lib</span></span><br><span class="line">├── <span class="hljs-selector-tag">LICENSE</span></span><br><span class="line">├── <span class="hljs-selector-tag">logs</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">catalina</span><span class="hljs-selector-class">.2016-09-18</span><span class="hljs-selector-class">.log</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">catalina</span><span class="hljs-selector-class">.out</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">host-manager</span><span class="hljs-selector-class">.2016-09-18</span><span class="hljs-selector-class">.log</span></span><br><span class="line">│   ├── <span class="hljs-selector-tag">localhost</span><span class="hljs-selector-class">.2016-09-18</span><span class="hljs-selector-class">.log</span></span><br><span class="line">│   └── <span class="hljs-selector-tag">manager</span><span class="hljs-selector-class">.2016-09-18</span><span class="hljs-selector-class">.log</span></span><br><span class="line">├── <span class="hljs-selector-tag">NOTICE</span></span><br><span class="line">├── <span class="hljs-selector-tag">RELEASE-NOTES</span></span><br><span class="line">├── <span class="hljs-selector-tag">RUNNING</span><span class="hljs-selector-class">.txt</span></span><br><span class="line">├── <span class="hljs-selector-tag">temp</span></span><br><span class="line">├── <span class="hljs-selector-tag">webapps</span></span><br><span class="line">│   └── <span class="hljs-selector-tag">ROOT</span></span><br><span class="line">└── <span class="hljs-selector-tag">work</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-08-12T22:12:43.000Z">2016-08-13</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Shell/">Shell</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 minutes read (About 455 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/08/13/use-wdlinux-install-lnmp/">Script Install LNMP</a>
+            
+        </h1>
+        <div class="content">
+            <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$1</span> == <span class="hljs-string">"uninstall"</span> ]];<span class="hljs-keyword">then</span></span><br><span class="line">	<span class="hljs-built_in">echo</span> <span class="hljs-string">"starting backup data..."</span></span><br><span class="line">	mkdir -p /www/backup</span><br><span class="line">	service mysqld stop</span><br><span class="line">	service nginxd stop</span><br><span class="line">	service httpd stop</span><br><span class="line">	service wdapache stop</span><br><span class="line">	service pureftpd stop</span><br><span class="line">	tar zcvf /www/backup/mysqldatdbk.tar.gz /www/wdlinux/mysql/var</span><br><span class="line">	tar zcvf /www/backup/ngconfbk.tar.gz /www/wdlinux/nginx/conf</span><br><span class="line">	tar zcvf /www/backup/apconfbk.tar.gz /www/wdlinux/apache/conf</span><br><span class="line">	rpm -e lanmp_wdcp --nodeps</span><br><span class="line">	rm -fr /www/wdlinux</span><br><span class="line">	<span class="hljs-built_in">echo</span></span><br><span class="line">	<span class="hljs-built_in">echo</span> <span class="hljs-string">"	lanmp,wdcp remove is OK"</span></span><br><span class="line">	<span class="hljs-built_in">echo</span></span><br><span class="line">	<span class="hljs-built_in">exit</span> 0</span><br><span class="line"><span class="hljs-keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">"Turn off selinux..."</span></span><br><span class="line">setenforce 0</span><br><span class="line">sed -i <span class="hljs-string">'s/SELINUX=enforcing/SELINUX=disabled/g'</span> /etc/selinux/config</span><br><span class="line">sed -i <span class="hljs-string">'s/^exclude=/#exclude=/g'</span> /etc/yum.conf</span><br><span class="line">yum install -y gcc gcc-c++ make autoconf libtool-ltdl-devel gd-devel freetype-devel libxml2-devel libjpeg-devel libpng-devel openssl-devel curl-devel patch libmcrypt-devel libmhash-devel ncurses-devel sudo bzip2 iptables sendmail iptables unzip</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#echo "Check the network..."</span></span><br><span class="line"><span class="hljs-comment">#ping -c 2 113.105.167.1</span></span><br><span class="line"><span class="hljs-comment">#if [[ $? != 0 ]];then</span></span><br><span class="line"><span class="hljs-comment">#	echo</span></span><br><span class="line"><span class="hljs-comment">#	echo "network err"</span></span><br><span class="line"><span class="hljs-comment">#	exit 1</span></span><br><span class="line"><span class="hljs-comment">#fi</span></span><br><span class="line">ping -c 3 dl.wdlinux.cn</span><br><span class="line"><span class="hljs-keyword">if</span> [[ $? == 2 ]];<span class="hljs-keyword">then</span></span><br><span class="line">	<span class="hljs-built_in">echo</span></span><br><span class="line">	<span class="hljs-built_in">echo</span> <span class="hljs-string">"dns error"</span></span><br><span class="line">	<span class="hljs-built_in">exit</span> 1</span><br><span class="line"><span class="hljs-keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> [[ ! -d /www/wdlinux ]];<span class="hljs-keyword">then</span></span><br><span class="line">	<span class="hljs-built_in">echo</span></span><br><span class="line">	<span class="hljs-built_in">echo</span> <span class="hljs-string">"rpm remove..."</span></span><br><span class="line">	rpm -e php --nodeps</span><br><span class="line">	rpm -e httpd --nodeps</span><br><span class="line">	rpm -e mysql-server --nodeps</span><br><span class="line">	rpm -e mysql --nodeps</span><br><span class="line"><span class="hljs-keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">"yum update..."</span></span><br><span class="line">yum install -y make autoconf sudo wget libtool-ltdl-devel gd-devel freetype-devel libxml2-devel libjpeg-devel libpng-devel openssl-devel curl-devel patch libmcrypt-devel libmhash-devel ncurses-devel iptables</span><br><span class="line"></span><br><span class="line">arch=i386</span><br><span class="line">Aurl=<span class="hljs-string">"http://dl.wdlinux.cn:5180/rpms"</span></span><br><span class="line"><span class="hljs-keyword">if</span> [[ `uname -m` == <span class="hljs-string">"x86_64"</span> ]];<span class="hljs-keyword">then</span></span><br><span class="line">	arch=<span class="hljs-string">"x86_64"</span></span><br><span class="line"><span class="hljs-keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">function</span> in_finsh &#123;</span><br><span class="line">        <span class="hljs-built_in">echo</span></span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">"          configuration ,lamp or lnmp,wdcp install is finshed"</span></span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">"          visit http://ip"</span></span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">"          wdcp visit http://ip:8080"</span></span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">"          more infomation please visit http://www.wdlinux.cn"</span></span><br><span class="line">        <span class="hljs-built_in">echo</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">function</span> in_check &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$1</span> == 1 ]];<span class="hljs-keyword">then</span></span><br><span class="line">                <span class="hljs-built_in">echo</span></span><br><span class="line">                <span class="hljs-built_in">echo</span> <span class="hljs-string">"============  <span class="hljs-variable">$2</span> install error  ============="</span></span><br><span class="line">                <span class="hljs-built_in">echo</span></span><br><span class="line">                <span class="hljs-built_in">exit</span> 1</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">                <span class="hljs-built_in">echo</span></span><br><span class="line">                <span class="hljs-built_in">echo</span> <span class="hljs-string">"============  <span class="hljs-variable">$2</span> install OK  =============="</span></span><br><span class="line">                <span class="hljs-built_in">echo</span></span><br><span class="line">                <span class="hljs-built_in">echo</span></span><br><span class="line">        <span class="hljs-keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">grep -E <span class="hljs-string">'wdOS 1|5\.'</span> /etc/redhat-release &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">v1=$?</span><br><span class="line">grep -E <span class="hljs-string">'wdOS 2|6\.'</span> /etc/redhat-release &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">v2=$?</span><br><span class="line"><span class="hljs-keyword">if</span> [ <span class="hljs-variable">$v1</span> == 0 ];<span class="hljs-keyword">then</span></span><br><span class="line">	RF=<span class="hljs-string">"lanmp_wdcp-2-5.<span class="hljs-variable">$arch</span>.rpm"</span>;</span><br><span class="line"><span class="hljs-keyword">elif</span> [ <span class="hljs-variable">$v2</span> == 0 ];<span class="hljs-keyword">then</span></span><br><span class="line">	RF=<span class="hljs-string">"lanmp_wdcp-2-5.el6.<span class="hljs-variable">$arch</span>.rpm"</span>;</span><br><span class="line">	<span class="hljs-keyword">if</span> [ <span class="hljs-variable">$arch</span> == <span class="hljs-string">"x86_64"</span> ];<span class="hljs-keyword">then</span></span><br><span class="line">		wget -c http://dl.wdlinux.cn:5180/soft/rpmforge-release-0.5.2-2.el6.rf.x86_64.rpm</span><br><span class="line">		rpm -ivh rpmforge-release-0.5.2-2.el6.rf.x86_64.rpm</span><br><span class="line">	<span class="hljs-keyword">else</span></span><br><span class="line">		wget -c http://dl.wdlinux.cn:5180/soft/rpmforge-release-0.5.2-2.el6.rf.i686.rpm</span><br><span class="line">		rpm -ivh rpmforge-release-0.5.2-2.el6.rf.i686.rpm</span><br><span class="line">	<span class="hljs-keyword">fi</span></span><br><span class="line">	yum install -y mhash-devel libmcrypt-devel</span><br><span class="line"><span class="hljs-keyword">else</span></span><br><span class="line">	<span class="hljs-built_in">echo</span></span><br><span class="line">	<span class="hljs-built_in">echo</span> <span class="hljs-string">"The current system does not support"</span></span><br><span class="line">	<span class="hljs-built_in">echo</span></span><br><span class="line">	<span class="hljs-built_in">exit</span></span><br><span class="line"><span class="hljs-keyword">fi</span></span><br><span class="line">wget -c http://dl.wdlinux.cn:5180/rpms/<span class="hljs-variable">$RF</span></span><br><span class="line">rpm -ivh <span class="hljs-variable">$RF</span> --nodeps</span><br><span class="line">I_F=$?</span><br><span class="line"><span class="hljs-keyword">if</span> [ <span class="hljs-variable">$I_F</span> == 0 ];<span class="hljs-keyword">then</span></span><br><span class="line">	<span class="hljs-built_in">echo</span></span><br><span class="line"><span class="hljs-keyword">fi</span></span><br><span class="line">in_check <span class="hljs-variable">$I_F</span> lanmp_wdcp</span><br><span class="line"></span><br><span class="line">rm -f wdcp_v*</span><br><span class="line">wget -c http://down.wdlinux.cn/down/wdcp_v2.5.tar.gz &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">tar zxvf wdcp_v2.5.tar.gz -C / &gt; /dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">in_finsh</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-08-04T05:14:15.000Z">2016-08-04</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 minutes read (About 1397 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/08/04/how-to-setup-mariadb-galera-cluster-10-on-centos-6/">HowTo Setup MariaDB Galera Cluster 10 On CentOS 6.x</a>
+            
+        </h1>
+        <div class="content">
+            <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MariaDB Galera Cluster 是一套在MySQL InnoDB存储引擎上面实现multi-master及数据实时同步的系统架构，业务层面无需做读写分离工作，数据库读写压力都能按照既定的规则分发到 各个节点上去。在数据方面完全兼容 MariaDB 和 MySQL。使用MariaDB Galera的解决方案，可以方便快速的搭建出高可用的数据库Cluster，不是主备模式，而是双活模式，也就是说，没有主节点和备份节点，每个节点都可以看做是主节点，都可以进行读写，由Galera来实现底层的数据同步。<br></p>
+
+<ul>
+<li>真正的多主架构，任何节点都可以进行读写</li>
+<li>同步复制，各节点间无延迟且节点宕机不会导致数据丢失</li>
+<li>紧密耦合，所有节点均保持相同状态</li>
+<li>自动节点配置，无需手工备份当前数据库并拷贝至新节点</li>
+</ul>
+<h4 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h4><ul>
+<li>Cluster node4 IP address 172.16.102.168</li>
+<li>Cluster node5 IP address 172.16.102.165</li>
+<li>Cluster node6 IP address 172.16.102.164</li>
+<li>setenforce 0；sed -i ‘s/SELINUX=enforcing/SELINUX=disabled/‘ /etc/selinux/config</li>
+<li>/etc/init.d/iptables stop;chkconfig iptables off</li>
+</ul>
+<blockquote>
+<p>使用vmware 测试需注意:克隆机器需要删除 <code>/etc/udev/rules.d/70-persistent-net.rules</code> 以及<code>/etc/sysconfig/network-scripts/ifcfg-eth0</code>中的网卡mac地址选项，不然网卡起不来</p>
+</blockquote>
+<h4 id="环境检测"><a href="#环境检测" class="headerlink" title="环境检测"></a>环境检测</h4><ul>
+<li>检查iptables状态：/etc/init.d/iptables status;chkconfig –list | grep iptables</li>
+<li>检查selinux状态：getenforce</li>
+<li>检查openssh-client包是否安装：系统中是否有ssh命令</li>
+<li>检查是否系统中含有mysql相关的包：rpm -qa | grep mysql，有的话都需要卸载掉</li>
+<li>检查网络是否通畅：ping www.baidu.com</li>
+</ul>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><h5 id="1-在所有节点编辑-etc-hosts"><a href="#1-在所有节点编辑-etc-hosts" class="headerlink" title="1. 在所有节点编辑/etc/hosts"></a>1. 在所有节点编辑/etc/hosts</h5><figure class="highlight x86asm hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@node4 ~]# vi /etc/hosts</span><br><span class="line"></span><br><span class="line"><span class="hljs-number">127.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.1</span>   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::<span class="hljs-number">1</span>         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line"></span><br><span class="line"># <span class="hljs-keyword">add</span> follows</span><br><span class="line"><span class="hljs-number">172.16</span><span class="hljs-meta">.102</span><span class="hljs-meta">.164</span> node6</span><br><span class="line"><span class="hljs-number">172.16</span><span class="hljs-meta">.102</span><span class="hljs-meta">.165</span> node5</span><br><span class="line"><span class="hljs-number">172.16</span><span class="hljs-meta">.102</span><span class="hljs-meta">.168</span> node4</span><br><span class="line"></span><br><span class="line">[root@node4 ~]#</span><br><span class="line"></span><br><span class="line"># 依次在node5和node6上编辑/etc/hosts</span><br></pre></td></tr></table></figure>
+<h5 id="2-在所有node上安装-MariaDB-Galera"><a href="#2-在所有node上安装-MariaDB-Galera" class="headerlink" title="2. 在所有node上安装 MariaDB Galera"></a>2. 在所有node上安装 MariaDB Galera</h5><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-section">[root@node4 ~]</span><span class="hljs-comment"># vi /etc/yum.repos.d/mariadb.repo</span></span><br><span class="line"> <span class="hljs-comment"># MariaDB 10.0 CentOS repository list</span></span><br><span class="line"><span class="hljs-comment"># http://mariadb.org/mariadb/repositories/</span></span><br><span class="line"><span class="hljs-section">[mariadb]</span></span><br><span class="line"><span class="hljs-attr">name</span> = MariaDB</span><br><span class="line"><span class="hljs-attr">baseurl</span> = http://yum.mariadb.org/<span class="hljs-number">10.0</span>/centos6-amd64</span><br><span class="line"><span class="hljs-attr">gpgkey</span>=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB</span><br><span class="line"><span class="hljs-attr">gpgcheck</span>=<span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">enabled</span>=<span class="hljs-number">0</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[root@node4 ~]</span><span class="hljs-comment"># yum --enablerepo=mariadb -y install MariaDB-Galera-server</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 依次在node5和node6上安装 MariaDB-Galera-server</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><i>注意安装完成之后，不要启动mysql</i></p>
+</blockquote>
+<h5 id="3-在其中一个节点上编辑-etc-my-cnf-d-server-cnf配置文件"><a href="#3-在其中一个节点上编辑-etc-my-cnf-d-server-cnf配置文件" class="headerlink" title="3. 在其中一个节点上编辑/etc/my.cnf.d/server.cnf配置文件"></a>3. 在其中一个节点上编辑/etc/my.cnf.d/server.cnf配置文件</h5><figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@node4 ~]<span class="hljs-comment"># vi /etc/my.cnf.d/server.cnf</span></span><br><span class="line"><span class="hljs-comment"># 19 行，取消下面的注释，并修改为需求</span></span><br><span class="line">[galera]</span><br><span class="line">wsrep_provider=/usr/lib64/galera/libgalera_smm.so</span><br><span class="line"><span class="hljs-comment"># 指定节点地址，这里也可以使用ip,如果没做安装1，可以直接把cluster的ip写在这里。</span></span><br><span class="line">wsrep_cluster_address=<span class="hljs-string">"gcomm://node4,node5,node6"</span></span><br><span class="line">binlog_format=row</span><br><span class="line">default_storage_engine=InnoDB</span><br><span class="line">innodb_autoinc_lock_mode=2</span><br><span class="line">bind-address=0.0.0.0</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># add follows</span></span><br><span class="line"><span class="hljs-comment"># cluster name</span></span><br><span class="line">wsrep_cluster_name=<span class="hljs-string">"Visionet_MariaDB_Cluster"</span></span><br><span class="line"><span class="hljs-comment"># replication provider</span></span><br><span class="line">wsrep_sst_method=rsync</span><br><span class="line"><span class="hljs-comment"># own IP address</span></span><br><span class="line">wsrep_node_address=<span class="hljs-string">"172.16.102.168"</span></span><br><span class="line">wsrep_node_name=<span class="hljs-string">"node4"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 启动数据库</span></span><br><span class="line">[root@node4 ~]<span class="hljs-comment"># /etc/rc.d/init.d/mysql bootstrap</span></span><br><span class="line">Starting MySQL. SUCCESS!</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 初始化你的数据库</span></span><br><span class="line">[root@node4 ~]<span class="hljs-comment"># mysql_secure_installation</span></span><br></pre></td></tr></table></figure>
+<h5 id="4-在其它节点上编辑-etc-my-cnf-d-server-cnf配置文件"><a href="#4-在其它节点上编辑-etc-my-cnf-d-server-cnf配置文件" class="headerlink" title="4. 在其它节点上编辑/etc/my.cnf.d/server.cnf配置文件"></a>4. 在其它节点上编辑/etc/my.cnf.d/server.cnf配置文件</h5><h5 id="node5"><a href="#node5" class="headerlink" title="node5"></a>node5</h5><figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@node5 ~]<span class="hljs-comment"># vi /etc/my.cnf.d/server.cnf</span></span><br><span class="line"><span class="hljs-comment"># 19 行，取消下面的注释，并修改为需求</span></span><br><span class="line">[galera]</span><br><span class="line">wsrep_provider=/usr/lib64/galera/libgalera_smm.so</span><br><span class="line"><span class="hljs-comment"># 指定节点地址，这里也可以使用ip,如果没做安装1，可以直接把cluster的ip写在这里。</span></span><br><span class="line">wsrep_cluster_address=<span class="hljs-string">"gcomm://node4,node5,node6"</span></span><br><span class="line">binlog_format=row</span><br><span class="line">default_storage_engine=InnoDB</span><br><span class="line">innodb_autoinc_lock_mode=2</span><br><span class="line">bind-address=0.0.0.0</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># add follows</span></span><br><span class="line"><span class="hljs-comment"># cluster name</span></span><br><span class="line">wsrep_cluster_name=<span class="hljs-string">"Visionet_MariaDB_Cluster"</span></span><br><span class="line"><span class="hljs-comment"># replication provider</span></span><br><span class="line">wsrep_sst_method=rsync</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 以下内容注意，注意应设置为当前服务器信息</span></span><br><span class="line">wsrep_node_address=<span class="hljs-string">"172.16.102.165"</span></span><br><span class="line">wsrep_node_name=<span class="hljs-string">"node5"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 启动数据库</span></span><br><span class="line">[root@node5 ~]<span class="hljs-comment"># /etc/rc.d/init.d/mysql start</span></span><br><span class="line">Starting MySQL...SST in progress, setting sleep higher. SUCCESS!</span><br></pre></td></tr></table></figure>
+<h5 id="node6"><a href="#node6" class="headerlink" title="node6"></a>node6</h5><figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@node6 ~]<span class="hljs-comment"># vi /etc/my.cnf.d/server.cnf</span></span><br><span class="line"><span class="hljs-comment"># 19 行，取消下面的注释，并修改为需求</span></span><br><span class="line">[galera]</span><br><span class="line">wsrep_provider=/usr/lib64/galera/libgalera_smm.so</span><br><span class="line"><span class="hljs-comment"># 指定节点地址，这里也可以使用ip,如果没做安装1，可以直接把cluster的ip写在这里。</span></span><br><span class="line">wsrep_cluster_address=<span class="hljs-string">"gcomm://node4,node5,node6"</span></span><br><span class="line">binlog_format=row</span><br><span class="line">default_storage_engine=InnoDB</span><br><span class="line">innodb_autoinc_lock_mode=2</span><br><span class="line">bind-address=0.0.0.0</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># add follows</span></span><br><span class="line"><span class="hljs-comment"># cluster name</span></span><br><span class="line">wsrep_cluster_name=<span class="hljs-string">"Visionet_MariaDB_Cluster"</span></span><br><span class="line"><span class="hljs-comment"># replication provider</span></span><br><span class="line">wsrep_sst_method=rsync</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 以下内容注意，注意应设置为当前服务器信息</span></span><br><span class="line">wsrep_node_address=<span class="hljs-string">"172.16.102.164"</span></span><br><span class="line">wsrep_node_name=<span class="hljs-string">"node6"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 启动数据库</span></span><br><span class="line">[root@node6 ~]<span class="hljs-comment"># /etc/rc.d/init.d/mysql start</span></span><br><span class="line">Starting MySQL...SST in progress, setting sleep higher. SUCCESS!</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：只需要初始化第一个节点服务器的数据库，其他数据的配置文件会自动同步，所以你给node4设置的root可以在node5和node6直接使用，当然这是安装正确的前提。</p>
+</blockquote>
+<h4 id="登陆各个节点数据库检查配置是否成功"><a href="#登陆各个节点数据库检查配置是否成功" class="headerlink" title="登陆各个节点数据库检查配置是否成功"></a>登陆各个节点数据库检查配置是否成功</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server.cnf的配置如果没有问题，那么wsrep_local_state_comment的状态应该是Synced。<br><figure class="highlight asciidoc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@node4 ~]# mysql -u root -p</span><br><span class="line">Enter password:</span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 15</span><br><span class="line">Server version: 10.0.26-MariaDB-wsrep MariaDB Server, wsrep<span class="hljs-emphasis">_25.13.raf7f02e</span></span><br><span class="line"><span class="hljs-emphasis"></span></span><br><span class="line"><span class="hljs-emphasis">Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.</span></span><br><span class="line"><span class="hljs-emphasis"></span></span><br><span class="line"><span class="hljs-emphasis">Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.</span></span><br><span class="line"><span class="hljs-emphasis"></span></span><br><span class="line"><span class="hljs-emphasis">MariaDB [(none)]&gt; show status like 'wsrep_</span>local<span class="hljs-emphasis">_state_</span>comment';</span><br><span class="line"><span class="hljs-code">+---------------------------+</span>--------+</span><br><span class="line">| Variable<span class="hljs-emphasis">_name             | Value  |</span></span><br><span class="line"><span class="hljs-emphasis">+---------------------------+--------+</span></span><br><span class="line"><span class="hljs-emphasis">| wsrep_</span>local<span class="hljs-emphasis">_state_</span>comment | Synced |</span><br><span class="line"><span class="hljs-code">+---------------------------+</span>--------+</span><br><span class="line">1 row in set (0.01 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MariaDB Galera没有主节点和备份节点，配置成功之后，可以在任何一个node节点上操作会自动同步到其他节点，任何一个节点宕机不会影响其他节点的数据和稳定性，配置HAProxy设置VIP的方式来实现负载均衡，提高服务的高可用性，另外，当宕机节点上线之后，事务会自动同步不丢失。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-08-02T08:04:48.000Z">2016-08-02</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/CentOS/">CentOS</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 372 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/08/02/install-openfire/">HowTo Install Openfire  on CentOS</a>
+            
+        </h1>
+        <div class="content">
+            <h4 id="Install-Centos-6-x-x86-64"><a href="#Install-Centos-6-x-x86-64" class="headerlink" title="Install Centos 6.x x86_64"></a>Install Centos 6.x x86_64</h4><p>  <em>略.</em></p>
+<h4 id="安装依赖软件"><a href="#安装依赖软件" class="headerlink" title="安装依赖软件"></a>安装依赖软件</h4><figure class="highlight mipsasm hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y <span class="hljs-keyword">install </span>wget <span class="hljs-keyword">java </span>glibc.i686</span><br></pre></td></tr></table></figure>
+<h4 id="下载openfire-3-8-到本地"><a href="#下载openfire-3-8-到本地" class="headerlink" title="下载openfire 3.8 到本地"></a>下载openfire 3.8 到本地</h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http:<span class="hljs-regexp">//</span>download.igniterealtime.org<span class="hljs-regexp">/openfire/</span>openfire-<span class="hljs-number">3.8</span>.<span class="hljs-number">1</span>-<span class="hljs-number">1</span>.i386.rpm</span><br></pre></td></tr></table></figure>
+<h4 id="安装openfire-3-8"><a href="#安装openfire-3-8" class="headerlink" title="安装openfire 3.8"></a>安装openfire 3.8</h4><figure class="highlight cmake hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y <span class="hljs-keyword">install</span> ./openfire*rpm</span><br></pre></td></tr></table></figure>
+<h4 id="设置服务开启自启动"><a href="#设置服务开启自启动" class="headerlink" title="设置服务开启自启动"></a>设置服务开启自启动</h4><figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig openfire <span class="hljs-keyword">on</span></span><br></pre></td></tr></table></figure>
+<h4 id="Yum-Install-mysql-server"><a href="#Yum-Install-mysql-server" class="headerlink" title="Yum Install mysql-server"></a>Yum Install mysql-server</h4><p>详见： <a href="http://blog.ultraera.org/how-to-install-mysql-5-6-on-centos/" target="_blank" rel="noopener">How to Install MySQL 5.5/6/7 on RHEL/CentOS 5/6/7</a></p>
+<h4 id="创建openfire数据库"><a href="#创建openfire数据库" class="headerlink" title="创建openfire数据库"></a>创建openfire数据库</h4><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">create</span> <span class="hljs-keyword">database</span> openfire <span class="hljs-built_in">character</span> <span class="hljs-keyword">set</span> utf8;</span><br><span class="line"><span class="hljs-keyword">grant</span> all <span class="hljs-keyword">privileges</span> <span class="hljs-keyword">on</span> openfire.* <span class="hljs-keyword">to</span> <span class="hljs-string">'openfire'</span>@<span class="hljs-string">'127.0.0.1'</span> <span class="hljs-keyword">identified</span> <span class="hljs-keyword">by</span> <span class="hljs-string">'openfire'</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">grant</span> <span class="hljs-keyword">option</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="启动openfire"><a href="#启动openfire" class="headerlink" title="启动openfire"></a>启动openfire</h4><figure class="highlight dts hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-symbol">http:</span><span class="hljs-comment">//Host:9090</span></span><br></pre></td></tr></table></figure>
+<h4 id="之后的初始化步骤，请根据实际操作，注意设定数据库地址用户名和密码时不要出错"><a href="#之后的初始化步骤，请根据实际操作，注意设定数据库地址用户名和密码时不要出错" class="headerlink" title="之后的初始化步骤，请根据实际操作，注意设定数据库地址用户名和密码时不要出错"></a>之后的初始化步骤，请根据实际操作，注意设定数据库地址用户名和密码时不要出错</h4><h4 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h4><p>openfire安装完毕后无法登录控制台<br><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">报错：Login failed:make sure your username and password are correct and that you’re an admin or moderator</span><br><span class="line"></span><br><span class="line">解决方案如下：</span><br><span class="line">1.使用Mysql查看工具进入数据库，进入表“ofuser”，将该表清空，然后执行该SQL</span><br><span class="line"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> ofUser (username, plainPassword, <span class="hljs-keyword">name</span>, email, creationDate, modificationDate)</span><br><span class="line">    <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">'admin'</span>, <span class="hljs-string">'admin'</span>, <span class="hljs-string">'Administrator'</span>, <span class="hljs-string">'admin@example.com'</span>, <span class="hljs-string">'0'</span>, <span class="hljs-string">'0'</span>);</span><br><span class="line"></span><br><span class="line">2.关闭openfire服务，就是从其控制台<span class="hljs-keyword">stop</span>然后再<span class="hljs-keyword">start</span>，再用用户名：<span class="hljs-keyword">admin</span>,密码：<span class="hljs-keyword">admin</span>登录即可</span><br></pre></td></tr></table></figure></p>
+<p>openfire 进程无法启动<br><figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">报错：nohup: failed <span class="hljs-keyword">to</span> <span class="hljs-built_in">run</span> command `/opt/openfire/jre/bin/java': No such <span class="hljs-built_in">file</span> <span class="hljs-keyword">or</span> directory</span><br><span class="line"></span><br><span class="line">解决方案如下：</span><br><span class="line">经检查是由于openfire未能正确识别jre环境变量导致，安装时自带的jre是<span class="hljs-number">32</span>位，但操作系统却是<span class="hljs-number">64</span>位操作平台。</span><br><span class="line">，故在/etc/init.d/openfire的启动脚本修改，</span><br><span class="line">JAVA_HOME=<span class="hljs-string">"/usr/lib/jvm/jre-$VERSION.x86_64"</span></span><br></pre></td></tr></table></figure></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -519,7 +605,7 @@
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/16/">16</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/14/">14</a></li>
             
         </ul>
     </nav>
@@ -567,7 +653,7 @@
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        108
+                        92
                     </p>
                 </div>
             </div>
@@ -577,7 +663,7 @@
                         Categories
                     </p>
                     <p class="title has-text-weight-normal">
-                        28
+                        25
                     </p>
                 </div>
             </div>
@@ -587,7 +673,7 @@
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        42
+                        39
                     </p>
                 </div>
             </div>
@@ -877,30 +963,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/似水年华/">
-            <span class="level-start">
-                <span class="level-item">似水年华</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">14</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/我的微博/">
-            <span class="level-start">
-                <span class="level-item">我的微博</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/来自知乎/">
-            <span class="level-start">
-                <span class="level-item">来自知乎</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/魔方/">
             <span class="level-start">
                 <span class="level-item">魔方</span>
@@ -920,7 +982,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AWS/" style="font-size: 10px;">AWS</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 14.29px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 17.14px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 12.86px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 12.86px;">Ghost</a> <a href="/tags/Git/" style="font-size: 14.29px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 12.86px;">Linux</a> <a href="/tags/Mac/" style="font-size: 15.71px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.43px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 12.86px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.43px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 14.29px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.43px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.43px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 15.71px;">Tomcat</a> <a href="/tags/Weisk/" style="font-size: 10px;">Weisk</a> <a href="/tags/Yum/" style="font-size: 12.86px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.43px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/似水年华/" style="font-size: 10px;">似水年华</a> <a href="/tags/何余生/" style="font-size: 10px;">何余生</a> <a href="/tags/我给你讲个故事吧/" style="font-size: 18.57px;">我给你讲个故事吧</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
+        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AWS/" style="font-size: 10px;">AWS</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Weisk/" style="font-size: 10px;">Weisk</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
     </div>
 </div>
 
@@ -934,25 +996,6 @@
         <h3 class="menu-label">
             Recent
         </h3>
-        
-        <article class="media">
-            
-            <a href="/2018/10/14/sdnedrletremfdrltmertedd/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="何余生说要感谢身边所有美好的人">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-14T08:48:47.000Z">2018-10-14</time></div>
-                    <a href="/2018/10/14/sdnedrletremfdrltmertedd/" class="has-link-black-ter is-size-6">何余生说要感谢身边所有美好的人</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/似水年华/">似水年华</a>
-                    </p>
-                </div>
-            </div>
-        </article>
         
         <article class="media">
             
@@ -1030,6 +1073,25 @@
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
+                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1041,17 +1103,6 @@
             Archives
         </h3>
         <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2018/05/">
@@ -1147,7 +1198,7 @@
                     <span class="level-item">April 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1180,7 +1231,7 @@
                     <span class="level-item">January 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1191,7 +1242,7 @@
                     <span class="level-item">December 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1202,7 +1253,7 @@
                     <span class="level-item">November 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1213,7 +1264,7 @@
                     <span class="level-item">October 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1224,7 +1275,7 @@
                     <span class="level-item">September 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1235,7 +1286,7 @@
                     <span class="level-item">August 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1246,7 +1297,7 @@
                     <span class="level-item">July 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -1290,51 +1341,7 @@
                     <span class="level-item">March 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2016/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2016</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/06/">
-                <span class="level-start">
-                    <span class="level-item">June 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/04/">
-                <span class="level-start">
-                    <span class="level-item">April 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -1615,27 +1622,6 @@
                     <a class="tags has-addons" href="/tags/iOS/">
                         <span class="tag">iOS</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/似水年华/">
-                        <span class="tag">似水年华</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/何余生/">
-                        <span class="tag">何余生</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/我给你讲个故事吧/">
-                        <span class="tag">我给你讲个故事吧</span>
-                        <span class="tag is-grey">13</span>
                     </a>
                 </div>
                 
@@ -1671,25 +1657,6 @@
         
         <article class="media">
             
-            <a href="/2018/10/14/sdnedrletremfdrltmertedd/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="何余生说要感谢身边所有美好的人">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-14T08:48:47.000Z">2018-10-14</time></div>
-                    <a href="/2018/10/14/sdnedrletremfdrltmertedd/" class="has-link-black-ter is-size-6">何余生说要感谢身边所有美好的人</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/似水年华/">似水年华</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2018/05/03/unlink_weisk_with_thirdpart_weixin/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="解除微信公众平台对微上客的授权">
@@ -1764,6 +1731,25 @@
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
+                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1775,17 +1761,6 @@
             Archives
         </h3>
         <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2018/05/">
@@ -1881,7 +1856,7 @@
                     <span class="level-item">April 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1914,7 +1889,7 @@
                     <span class="level-item">January 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1925,7 +1900,7 @@
                     <span class="level-item">December 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1936,7 +1911,7 @@
                     <span class="level-item">November 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1947,7 +1922,7 @@
                     <span class="level-item">October 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1958,7 +1933,7 @@
                     <span class="level-item">September 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1969,7 +1944,7 @@
                     <span class="level-item">August 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1980,7 +1955,7 @@
                     <span class="level-item">July 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -2024,51 +1999,7 @@
                     <span class="level-item">March 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2016/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2016</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/06/">
-                <span class="level-start">
-                    <span class="level-item">June 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2015/04/">
-                <span class="level-start">
-                    <span class="level-item">April 2015</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -2349,27 +2280,6 @@
                     <a class="tags has-addons" href="/tags/iOS/">
                         <span class="tag">iOS</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/似水年华/">
-                        <span class="tag">似水年华</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/何余生/">
-                        <span class="tag">何余生</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/我给你讲个故事吧/">
-                        <span class="tag">我给你讲个故事吧</span>
-                        <span class="tag is-grey">13</span>
                     </a>
                 </div>
                 
