@@ -156,6 +156,53 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-03-06T01:44:47.000Z">2017-03-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/CentOS/">CentOS</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 237 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/03/06/howto-install-zoomdata/">HowTo install Zoomdata</a>
+            
+        </h1>
+        <div class="content">
+            <p>Zoomdata是一个大数据可视化展示的工具，由ZoomData企业创建，是为数不多的同时支持移动端的数据分析公司，Zoomdata的可视化可将大数据流转化为触屏友好的，艺术感十足的三维形态，Zoomdata的定位是非ETL(传统的提取、转换和加载的数据处理过程)工具，Zoomdata支持多种数据源，包括社交媒体等，其中应用最主流是大数据平台的展示工具，并且Zoomdata对Cloudera Impala做了很好的支持，所以我们做了Zoomdata+Cloudera技术实施。<a href="这是一个示意的文档">^1</a></p>
+<h4 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a><strong>系统要求</strong></h4><p>Zoomdata最新版是v2.4，支持常见主流的操作系统，并且有非常友好的安装帮助，但是Zoomdata不支持安装在32位的操作系统之上<br><br><br>|biaoti|biaoti|baiiti|<br>|——|——|——|<br>|list|file|china|<br>|letian|zhong|hongkong|</p>
+<p><br></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-03-04T02:57:02.000Z">2017-03-04</time>
                 
                 <div class="level-item">
@@ -528,88 +575,15 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-02-09T10:29:50.000Z">2017-02-09</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    6 minutes read (About 966 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/02/09/mysql-index/">MySQL(7) 索引创建、删除和查看</a>
-            
-        </h1>
-        <div class="content">
-            <h4 id="1-索引的作用"><a href="#1-索引的作用" class="headerlink" title="1. 索引的作用"></a><strong>1. 索引的作用</strong></h4><p>   在索引列上，数据库利用各种各样的快速定位技术，能够大大的提高查询效率，特别是当数据量非常大和查询设计到多个表时，索引的利用能够将效率提高成千上万倍，当然要合理的利用索引。</p>
-<h4 id="2-创建索引"><a href="#2-创建索引" class="headerlink" title="2. 创建索引"></a><strong>2. 创建索引</strong></h4><p>​    在执行CREATE TABLE时可以创建索引，也可以在之后单独使用CREATE INDEX或ALTER TABLE来为表增加索引。</p>
-<h6 id="2-1-ALTER-TABLE"><a href="#2-1-ALTER-TABLE" class="headerlink" title="2.1 ALTER TABLE"></a>2.1 ALTER TABLE</h6><p>​    ALTER TABLE用来创建普通索引、UNIQUE索引或PRIMARY KEY索引。</p>
-<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> tb_name <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">INDEX</span> index_Name (column_list);</span><br><span class="line"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> tb_name <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">UNIQUE</span> (column_list);</span><br><span class="line"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> tb_name <span class="hljs-keyword">ADD</span> PRIMARY <span class="hljs-keyword">KEY</span> (column_list);</span><br></pre></td></tr></table></figure>
-<p>​    tb_name 是要增加索引的表名，column_list 是要增加索引的列，多列用逗号隔开，index_Name 是可选，缺省为第一个索引列赋名称，ALTER TABLE允许在单个语句中更改多个表，因此可以也可以同时创建多个索引。</p>
-<h6 id="2-2-CREATE-INDEX"><a href="#2-2-CREATE-INDEX" class="headerlink" title="2.2 CREATE INDEX"></a>2.2 CREATE INDEX</h6><p>​    CREATE INDEX 可对表增加普通索引或者UNIQUE索引。</p>
-<figure class="highlight n1ql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">INDEX</span> index_Name <span class="hljs-keyword">ON</span> tb_name(column_list);</span><br><span class="line"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">UNIQUE</span> <span class="hljs-keyword">INDEX</span> index_Name <span class="hljs-keyword">ON</span> tb_name(column_list);</span><br></pre></td></tr></table></figure>
-<p>​    tb_name、index_Name和column_list具有ALTER TABLE语句中相同的含义，索引名称不可自定义，也不能创建PRIMARY KEY。</p>
-<h4 id="3-索引类型"><a href="#3-索引类型" class="headerlink" title="3. 索引类型"></a><strong>3. 索引类型</strong></h4><p>​    在创建索引时，可以规定索引能否包含重复的值，如果不包含，则索引应该为PRIMARY KEY或UNIQUE索引，对于单列唯一索引，这能保证单列不包含重复的值，对于多列唯一索引，保证多值的组合不重复。</p>
-<p>​    PRIMAY KEY索引与UNIQUE索引非常类似，实际上PRIMAY KEY索引仅是一个具有名称PRIMAY的UNIQUE索引，这表示一个表只能包含一个PRIMAY KEY索引，因为一个表中不可能具有两个同名的索引。</p>
-<h4 id="4-删除索引"><a href="#4-删除索引" class="headerlink" title="4. 删除索引"></a><strong>4. 删除索引</strong></h4><p>​    可以使用ALTER TABLE或DROP INDEX语句来删除索引：</p>
-<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">INDEX</span> index_Name <span class="hljs-keyword">On</span> tb_name;</span><br><span class="line"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> tb_Name <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> index_Name;</span><br><span class="line"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> tb_Name <span class="hljs-keyword">DROP</span> PRIMAY <span class="hljs-keyword">KEY</span>;</span><br></pre></td></tr></table></figure>
-<p>​    第一条和第二条作用是一样的，删除tb_Name中index_Name索引；第三条仅适用于删除PRIMAY KEY时，因为一个只可能有一个PRIMAY KEY索引。</p>
-<p>​    另外，如果在表中删除了某列，则索引会受到影响，对于多列组合的索引，如果删除其中某列，则该列也会在索引中删除，如果删除所有列，则该索引也会被删除。</p>
-<h4 id="5-查看索引"><a href="#5-查看索引" class="headerlink" title="5. 查看索引"></a><strong>5. 查看索引</strong></h4><figure class="highlight q hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="hljs-built_in">show</span> index <span class="hljs-keyword">from</span> tb_name;</span><br><span class="line">mysql&gt; <span class="hljs-built_in">show</span> <span class="hljs-built_in">keys</span> <span class="hljs-keyword">from</span> tb_name;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Table : 表名</li>
-<li>Non_unique： 如果索引不能包含重复值为0，如果可以为1</li>
-<li>Key_name： 索引的名称</li>
-<li>Seq_in_index：索引中列的序号，从1开始</li>
-<li>Column_name： 列的名称</li>
-<li>Collation：列以什么方式存储在索引中，在MySQL中有值‘A’(升序)和NULL(无分类)</li>
-<li>Cardinality： 索引中唯一值的数量估计值，通过运行ANALYZE TABLE或者 myisamchk -a 可以更新，基数根据被存储的整数的统计数据来计数，所以，即使对于小型表，该值也没有必要是精确的，基数越大，当进行联合时，MySQL使用该索引的机会就越大。</li>
-<li>Sub_part： 如果列只是被部分编入，则为编入索引的字符数目，如果整列被编入索引，则为NULL</li>
-<li>Packed：关键字如何被压缩，没有压缩为NULL</li>
-<li>Null： 如果列含有NULL为YES，如果没有则为NO</li>
-<li>Index_type： 用过的索引方法，BTREE，FULLTEXT，HASH，RTREE</li>
-<li>Comment： 备注</li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/page/3/">Previous</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/3/">Anterior</a>
         </div>
         <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/page/5/">Next</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/5/">Siguiente</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
             
@@ -670,17 +644,17 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        Entradas
                     </p>
                     <p class="title has-text-weight-normal">
-                        92
+                        93
                     </p>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        Categorias
                     </p>
                     <p class="title has-text-weight-normal">
                         24
@@ -690,7 +664,7 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        Etiquetas
                     </p>
                     <p class="title has-text-weight-normal">
                         38
@@ -700,7 +674,7 @@ var _hmt = _hmt || [];
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/SAMZONG" target="_blank">
-                Follow</a>
+                SEGUIR</a>
         </div>
         
         
@@ -787,7 +761,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                Categorias
             </h3>
             <ul class="menu-list">
             <li>
@@ -892,7 +866,7 @@ var _hmt = _hmt || [];
                 <span class="level-item">MySQL</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">14</span>
+                <span class="level-item tag">15</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/OpenStack/">
@@ -992,7 +966,7 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            Nube de etiquetas
         </h3>
         <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Weisk/" style="font-size: 10px;">Weisk</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
     </div>
@@ -1006,8 +980,27 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Recientes
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/07/03/sdertfvdsrt222/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MySQL 命令行辅助 mycli">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-03T05:17:04.000Z">2019-07-03</time></div>
+                    <a href="/2019/07/03/sdertfvdsrt222/" class="has-link-black-ter is-size-6">MySQL 命令行辅助 mycli</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1085,25 +1078,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
-                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1112,9 +1086,20 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2018/05/">
@@ -1367,7 +1352,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1514,7 +1499,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MySQL/">
                         <span class="tag">MySQL</span>
-                        <span class="tag is-grey">14</span>
+                        <span class="tag is-grey">15</span>
                     </a>
                 </div>
                 
@@ -1657,8 +1642,27 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Recientes
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/07/03/sdertfvdsrt222/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MySQL 命令行辅助 mycli">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-03T05:17:04.000Z">2019-07-03</time></div>
+                    <a href="/2019/07/03/sdertfvdsrt222/" class="has-link-black-ter is-size-6">MySQL 命令行辅助 mycli</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1736,25 +1740,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
-                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1763,9 +1748,20 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2018/05/">
@@ -2018,7 +2014,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -2165,7 +2161,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MySQL/">
                         <span class="tag">MySQL</span>
-                        <span class="tag is-grey">14</span>
+                        <span class="tag is-grey">15</span>
                     </a>
                 </div>
                 
@@ -2463,10 +2459,10 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
+                POSTS: 'Entradas',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',
