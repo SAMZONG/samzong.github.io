@@ -156,58 +156,6 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-08-02T08:04:48.000Z">2016-08-02</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/CentOS/">CentOS</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 minutes read (About 372 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/08/02/install-openfire/">HowTo Install Openfire  on CentOS</a>
-            
-        </h1>
-        <div class="content">
-            <h4 id="Install-Centos-6-x-x86-64"><a href="#Install-Centos-6-x-x86-64" class="headerlink" title="Install Centos 6.x x86_64"></a>Install Centos 6.x x86_64</h4><p>  <em>略.</em></p>
-<h4 id="安装依赖软件"><a href="#安装依赖软件" class="headerlink" title="安装依赖软件"></a>安装依赖软件</h4><figure class="highlight mipsasm hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y <span class="hljs-keyword">install </span>wget <span class="hljs-keyword">java </span>glibc.i686</span><br></pre></td></tr></table></figure>
-<h4 id="下载openfire-3-8-到本地"><a href="#下载openfire-3-8-到本地" class="headerlink" title="下载openfire 3.8 到本地"></a>下载openfire 3.8 到本地</h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http:<span class="hljs-regexp">//</span>download.igniterealtime.org<span class="hljs-regexp">/openfire/</span>openfire-<span class="hljs-number">3.8</span>.<span class="hljs-number">1</span>-<span class="hljs-number">1</span>.i386.rpm</span><br></pre></td></tr></table></figure>
-<h4 id="安装openfire-3-8"><a href="#安装openfire-3-8" class="headerlink" title="安装openfire 3.8"></a>安装openfire 3.8</h4><figure class="highlight cmake hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y <span class="hljs-keyword">install</span> ./openfire*rpm</span><br></pre></td></tr></table></figure>
-<h4 id="设置服务开启自启动"><a href="#设置服务开启自启动" class="headerlink" title="设置服务开启自启动"></a>设置服务开启自启动</h4><figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig openfire <span class="hljs-keyword">on</span></span><br></pre></td></tr></table></figure>
-<h4 id="Yum-Install-mysql-server"><a href="#Yum-Install-mysql-server" class="headerlink" title="Yum Install mysql-server"></a>Yum Install mysql-server</h4><p>详见： <a href="http://blog.ultraera.org/how-to-install-mysql-5-6-on-centos/" target="_blank" rel="noopener">How to Install MySQL 5.5/6/7 on RHEL/CentOS 5/6/7</a></p>
-<h4 id="创建openfire数据库"><a href="#创建openfire数据库" class="headerlink" title="创建openfire数据库"></a>创建openfire数据库</h4><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">create</span> <span class="hljs-keyword">database</span> openfire <span class="hljs-built_in">character</span> <span class="hljs-keyword">set</span> utf8;</span><br><span class="line"><span class="hljs-keyword">grant</span> all <span class="hljs-keyword">privileges</span> <span class="hljs-keyword">on</span> openfire.* <span class="hljs-keyword">to</span> <span class="hljs-string">'openfire'</span>@<span class="hljs-string">'127.0.0.1'</span> <span class="hljs-keyword">identified</span> <span class="hljs-keyword">by</span> <span class="hljs-string">'openfire'</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">grant</span> <span class="hljs-keyword">option</span>;</span><br></pre></td></tr></table></figure>
-<h4 id="启动openfire"><a href="#启动openfire" class="headerlink" title="启动openfire"></a>启动openfire</h4><figure class="highlight dts hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-symbol">http:</span><span class="hljs-comment">//Host:9090</span></span><br></pre></td></tr></table></figure>
-<h4 id="之后的初始化步骤，请根据实际操作，注意设定数据库地址用户名和密码时不要出错"><a href="#之后的初始化步骤，请根据实际操作，注意设定数据库地址用户名和密码时不要出错" class="headerlink" title="之后的初始化步骤，请根据实际操作，注意设定数据库地址用户名和密码时不要出错"></a>之后的初始化步骤，请根据实际操作，注意设定数据库地址用户名和密码时不要出错</h4><h4 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h4><p>openfire安装完毕后无法登录控制台<br><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">报错：Login failed:make sure your username and password are correct and that you’re an admin or moderator</span><br><span class="line"></span><br><span class="line">解决方案如下：</span><br><span class="line">1.使用Mysql查看工具进入数据库，进入表“ofuser”，将该表清空，然后执行该SQL</span><br><span class="line"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> ofUser (username, plainPassword, <span class="hljs-keyword">name</span>, email, creationDate, modificationDate)</span><br><span class="line">    <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">'admin'</span>, <span class="hljs-string">'admin'</span>, <span class="hljs-string">'Administrator'</span>, <span class="hljs-string">'admin@example.com'</span>, <span class="hljs-string">'0'</span>, <span class="hljs-string">'0'</span>);</span><br><span class="line"></span><br><span class="line">2.关闭openfire服务，就是从其控制台<span class="hljs-keyword">stop</span>然后再<span class="hljs-keyword">start</span>，再用用户名：<span class="hljs-keyword">admin</span>,密码：<span class="hljs-keyword">admin</span>登录即可</span><br></pre></td></tr></table></figure></p>
-<p>openfire 进程无法启动<br><figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">报错：nohup: failed <span class="hljs-keyword">to</span> <span class="hljs-built_in">run</span> command `/opt/openfire/jre/bin/java': No such <span class="hljs-built_in">file</span> <span class="hljs-keyword">or</span> directory</span><br><span class="line"></span><br><span class="line">解决方案如下：</span><br><span class="line">经检查是由于openfire未能正确识别jre环境变量导致，安装时自带的jre是<span class="hljs-number">32</span>位，但操作系统却是<span class="hljs-number">64</span>位操作平台。</span><br><span class="line">，故在/etc/init.d/openfire的启动脚本修改，</span><br><span class="line">JAVA_HOME=<span class="hljs-string">"/usr/lib/jvm/jre-$VERSION.x86_64"</span></span><br></pre></td></tr></table></figure></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2016-08-02T07:44:20.000Z">2016-08-02</time>
                 
                 <div class="level-item">
@@ -544,6 +492,51 @@ var _hmt = _hmt || [];
 
 
 
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-07-24T13:42:01.000Z">2016-07-24</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 minutes read (About 689 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/07/24/pokemongo/">HowTo Play Pokemon GO in China</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="Installtions"><a href="#Installtions" class="headerlink" title="Installtions"></a>Installtions</h3><ul>
+<li><a href="http://www.tutuapp.cn" target="_blank" rel="noopener">TuTuAPP</a></li>
+<li><a href="https://shadowsocks.biz/?ref=518" target="_blank" rel="noopener">VPN</a></li>
+<li><a href="https://accounts.google.com" target="_blank" rel="noopener">Google Account ID</a></li>
+</ul>
+<p></p><p>&emsp;&emsp;最近看到身边朋友都在玩Pokemon GO, 心痒难耐，于是跟同事请教琢磨了，终于在自己的手机上玩起来了，由于我的手机是iPhone 5s，身边朋友也都是iPhone，所以不确定是Android是否可以玩耍，想来应该是没有问题话，Android平台做破解等操作一直以来比iPhone更加方便。<br></p><p></p>
+<div align="center"><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/07/pokemongo1.jpg"><br></div><br>&emsp;&emsp;1. 点击上面的TuTuAPP，可以打开兔兔助手的网站，用手机扫描首页的二维码(可以用微信等，带有二维码扫描的都可以)，注意如果你的iPhone已经越狱，请切换标签页到越狱版本。<br><br>&emsp;&emsp;2. 安装时注意按照提示添加信任，等待兔兔助手安装完成之后，打开软件，在Search栏输入“精灵宝可梦GO”，请下载美区版，有两个版本：懒人版与移动版；懒人版有移动按钮，可以不需要走动躺在床上玩耍，移动版是需要人走动才能玩耍，我下载的移动版，你根据自己的喜欢选择，选择完成后，按提示按钮安装即可。<br><br>&emsp;&emsp;3. 安装完成Pokemon GO之后也需要设定信任，请按照提示操作；好了， 到这一步，Pokemon GO已经安装在你的手机上了，下一步就是怎么登录玩耍。<br><br>&emsp;&emsp;4. 到这里及一下的步骤能继续下去的前提是，你有一个美国的VPN节点。打开你手机App Store，搜索VPN，列表中会有很多的免费应用，因为我一直用的是付费VPN，所以对这些不是很清楚，朋友推荐<strong>ArkVPN</strong>，如果你没有付费VPN，可以试试这个，注意VPN节点要选择US，如果你也要使付费VPN的，我推荐Shadowsocks＋Potatso( App)<br><br>&emsp;&emsp;5. 注册Google Account ID，<a href="https://account.google.com" target="_blank" rel="noopener">点击</a><br><div align="center"><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/07/pokemongo2.jpg" width="360" height="640"><br></div><br>&emsp;&emsp;6. 进入游戏，登录Google ID，然后授权，进入游戏。<br><div align="center"><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/07/pokemongo3.png" width="360" height="640"><br></div><br>&emsp;&emsp;7. 开始捕捉你的小精灵吧，手动微笑。<br><br>&gt; Tips：这款游戏会大量耗电发热，因为打开摄像头捕捉小精灵；另外很容易入迷，在室外玩耍时一定要注意安全。<br><br>&emsp;&emsp;8. 注意：如果看到了GPS signal not found，说明是GPS信息丢失，这是根据GPS定位的游戏，所以这很重要，记得选择美国的VPN代理。<br><div align="center"><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/07/pokemongo4.png" width="360" height="640"><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/07/pokemongo5.png" width="360" height="640"><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/07/pokemongo6.png" width="360" height="640"><br></div>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -616,7 +609,7 @@ var _hmt = _hmt || [];
                         Articles
                     </p>
                     <p class="title has-text-weight-normal">
-                        93
+                        92
                     </p>
                 </div>
             </div>
@@ -636,7 +629,7 @@ var _hmt = _hmt || [];
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        38
+                        37
                     </p>
                 </div>
             </div>
@@ -937,7 +930,7 @@ var _hmt = _hmt || [];
         <h3 class="menu-label">
             Nuage de tags
         </h3>
-        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Weisk/" style="font-size: 10px;">Weisk</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
+        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
     </div>
 </div>
 
@@ -966,25 +959,6 @@ var _hmt = _hmt || [];
                     <a href="/2019/07/03/sdertfvdsrt222/" class="has-link-black-ter is-size-6">MySQL 命令行辅助 mycli</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/05/03/unlink_weisk_with_thirdpart_weixin/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="解除微信公众平台对微上客的授权">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-05-03T01:50:32.000Z">2018-05-03</time></div>
-                    <a href="/2018/05/03/unlink_weisk_with_thirdpart_weixin/" class="has-link-black-ter is-size-6">解除微信公众平台对微上客的授权</a>
-                    <p class="is-size-7 is-uppercase">
-                        
                     </p>
                 </div>
             </div>
@@ -1047,6 +1021,25 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
+                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1063,17 +1056,6 @@ var _hmt = _hmt || [];
             <a class="level is-marginless" href="/archives/2019/07/">
                 <span class="level-start">
                     <span class="level-item">July 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/05/">
-                <span class="level-start">
-                    <span class="level-item">May 2018</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
@@ -1546,13 +1528,6 @@ var _hmt = _hmt || [];
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
                         <span class="tag is-grey">5</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Weisk/">
-                        <span class="tag">Weisk</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1635,25 +1610,6 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
-            <a href="/2018/05/03/unlink_weisk_with_thirdpart_weixin/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="解除微信公众平台对微上客的授权">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-05-03T01:50:32.000Z">2018-05-03</time></div>
-                    <a href="/2018/05/03/unlink_weisk_with_thirdpart_weixin/" class="has-link-black-ter is-size-6">解除微信公众平台对微上客的授权</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2017/12/26/Install_redmine3.4_rbuy2.4.1_passenger_nginx_mysql_ubuntu16.04/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Howto Install Redmine on Ubuntu 16.04">
@@ -1709,6 +1665,25 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
+                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1725,17 +1700,6 @@ var _hmt = _hmt || [];
             <a class="level is-marginless" href="/archives/2019/07/">
                 <span class="level-start">
                     <span class="level-item">July 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/05/">
-                <span class="level-start">
-                    <span class="level-item">May 2018</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
@@ -2208,13 +2172,6 @@ var _hmt = _hmt || [];
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
                         <span class="tag is-grey">5</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Weisk/">
-                        <span class="tag">Weisk</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

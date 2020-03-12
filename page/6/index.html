@@ -156,65 +156,6 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-12-03T10:41:13.000Z">2016-12-03</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Tomcat/">Tomcat</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 minutes read (About 548 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/12/03/tomcat-keytool-https/">Tomcat(2) 利用JDK自身keytool实现HTTPS</a>
-            
-        </h1>
-        <div class="content">
-            <p>因为一个偶然机会，想把自己的webserver通过https加密访问，这里就采用JDK自带的keytool工具实现，tomcat官方也推荐这种方式，英文好的同学走这里：<a href="https://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html" target="_blank" rel="noopener">官方配置</a></p>
-<blockquote>
-<p>demo: CentOS 6.6 &amp; Tomcat 7 &amp; JDK 1.7</p>
-</blockquote>
-<h4 id="1-生成-keystore"><a href="#1-生成-keystore" class="headerlink" title="1. 生成 keystore"></a>1. 生成 keystore</h4><figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@test conf]<span class="hljs-comment"># keytool -genkey -v -alias tomcat -keyalg RSA -keystore mykeystore</span></span><br><span class="line">Enter keystore password:              <span class="hljs-comment">#设置密码</span></span><br><span class="line">Re-enter new password:                <span class="hljs-comment">#重复一次</span></span><br><span class="line">What <span class="hljs-keyword">is</span> your <span class="hljs-keyword">first</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">last</span> <span class="hljs-built_in">name</span>?</span><br><span class="line">  [Unknown]:  Alex Lu                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">of</span> your organizational unit?</span><br><span class="line">  [Unknown]:  visionet                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">of</span> your organization?</span><br><span class="line">  [Unknown]:  visionet                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">of</span> your City <span class="hljs-keyword">or</span> Locality?</span><br><span class="line">  [Unknown]:  SH                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">of</span> your State <span class="hljs-keyword">or</span> Province?</span><br><span class="line">  [Unknown]:  SH                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> two-letter country code <span class="hljs-keyword">for</span> this unit?</span><br><span class="line">  [Unknown]:  ZH                <span class="hljs-comment">#随便填</span></span><br><span class="line">Is CN=Alex Lu, OU=visionet, O=visionet, L=SH, ST=SH, C=ZH correct?</span><br><span class="line">  [no]:  Y                    <span class="hljs-comment">#这里要Y，确认前面信息。</span></span><br><span class="line"></span><br><span class="line">Generating <span class="hljs-number">2</span>,<span class="hljs-number">048</span> bit RSA key pair <span class="hljs-keyword">and</span> self-signed certificate (SHA256withRSA) <span class="hljs-keyword">with</span> a validity <span class="hljs-keyword">of</span> <span class="hljs-number">90</span> days</span><br><span class="line">    <span class="hljs-keyword">for</span>: CN=Alex Lu, OU=visionet, O=visionet, L=SH, ST=SH, C=ZH</span><br><span class="line">Enter key password <span class="hljs-keyword">for</span> &lt;tomcat&gt;</span><br><span class="line">    (RETURN <span class="hljs-keyword">if</span> same <span class="hljs-keyword">as</span> keystore password):        <span class="hljs-comment">#默认回车即可，不需要设置太多密码</span></span><br><span class="line">[Storing mykeystore]</span><br><span class="line">[root@test conf]<span class="hljs-comment"># ls</span></span><br><span class="line">Catalina  catalina.policy  catalina.properties  context.xml  logging.properties  mykeystore  server.xml  tomcat-users.xml  web.xml</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p> 注意：-keystore是用来指定keystore保存位置，如果不加参数默认保存的当前用户家目录为~/.keystore<br>       -validity 可以用来指定证书有效期，单位为天，缺省值为90天。</p>
-</blockquote>
-<h4 id="2-备份-tomcatdir-conf-server-xml"><a href="#2-备份-tomcatdir-conf-server-xml" class="headerlink" title="2. 备份$tomcatdir/conf/server.xml"></a>2. 备份$tomcatdir/conf/server.xml</h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp <span class="hljs-variable">$tomcatdir</span><span class="hljs-regexp">/conf/</span>server.xml <span class="hljs-variable">$tomcatdir</span><span class="hljs-regexp">/conf/</span>server.xml</span><br></pre></td></tr></table></figure>
-<h4 id="3-修改server-xml"><a href="#3-修改server-xml" class="headerlink" title="3. 修改server.xml"></a>3. 修改server.xml</h4><h6 id="a-注释以下：（tomcat注释用：-lt-XXXX-）-如何也想保留http访问，可以不注释"><a href="#a-注释以下：（tomcat注释用：-lt-XXXX-）-如何也想保留http访问，可以不注释" class="headerlink" title="a. 注释以下：（tomcat注释用：&lt;!-- XXXX --> ）,如何也想保留http访问，可以不注释"></a>a. 注释以下：（tomcat注释用：&lt;!-- XXXX --> ）,如何也想保留http访问，可以不注释</h6><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">&lt;!--</span></span><br><span class="line"><span class="hljs-comment">&lt;Connector executor="tomcatThreadPool"</span></span><br><span class="line"><span class="hljs-comment">                port="80" protocol="HTTP/1.1"</span></span><br><span class="line"><span class="hljs-comment">                connectionTimeout="20000"</span></span><br><span class="line"><span class="hljs-comment">                redirectPort="8443" /&gt;</span></span><br><span class="line"><span class="hljs-comment">--&gt;</span></span><br></pre></td></tr></table></figure>
-<h6 id="b-取消下面注释"><a href="#b-取消下面注释" class="headerlink" title="b. 取消下面注释"></a>b. 取消下面注释</h6><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector <span class="hljs-attribute">port</span>=<span class="hljs-string">"443"</span> <span class="hljs-attribute">protocol</span>=<span class="hljs-string">"HTTP/1.1"</span> <span class="hljs-attribute">SSLEnabled</span>=<span class="hljs-string">"true"</span></span><br><span class="line">                <span class="hljs-attribute">maxThreads</span>=<span class="hljs-string">"150"</span> <span class="hljs-attribute">scheme</span>=<span class="hljs-string">"https"</span> <span class="hljs-attribute">secure</span>=<span class="hljs-string">"true"</span></span><br><span class="line">                <span class="hljs-attribute">clientAuth</span>=<span class="hljs-string">"false"</span> <span class="hljs-attribute">sslProtocol</span>=<span class="hljs-string">"TLS"</span> /&gt;</span><br></pre></td></tr></table></figure>
-<h6 id="c-增加keystoreFile和keystorePass"><a href="#c-增加keystoreFile和keystorePass" class="headerlink" title="c. 增加keystoreFile和keystorePass"></a>c. 增加keystoreFile和keystorePass</h6><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector <span class="hljs-attribute">port</span>=<span class="hljs-string">"443"</span> <span class="hljs-attribute">protocol</span>=<span class="hljs-string">"HTTP/1.1"</span> <span class="hljs-attribute">SSLEnabled</span>=<span class="hljs-string">"true"</span></span><br><span class="line">               <span class="hljs-attribute">maxThreads</span>=<span class="hljs-string">"150"</span> <span class="hljs-attribute">scheme</span>=<span class="hljs-string">"https"</span> <span class="hljs-attribute">secure</span>=<span class="hljs-string">"true"</span></span><br><span class="line">               <span class="hljs-attribute">clientAuth</span>=<span class="hljs-string">"false"</span> <span class="hljs-attribute">sslProtocol</span>=<span class="hljs-string">"TLS"</span></span><br><span class="line">               <span class="hljs-attribute">keystoreFile</span>=<span class="hljs-string">"conf/mykeystore"</span> <span class="hljs-attribute">keystorePass</span>=<span class="hljs-string">"123456"</span>/&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>keystoreFile=跟keystore文件位置<br>keystorePass=跟当时keytool命令执行时输入的密码</p>
-</blockquote>
-<h4 id="4-重启tomcat"><a href="#4-重启tomcat" class="headerlink" title="4. 重启tomcat"></a>4. 重启tomcat</h4><figure class="highlight x86asm hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@<span class="hljs-keyword">test</span> conf]# ../bin/catalina.sh stop &amp;&amp; ../bin/catalina.sh start</span><br><span class="line">Using CATALINA_BASE:   /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span></span><br><span class="line">Using CATALINA_HOME:   /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span></span><br><span class="line">Using CATALINA_TMPDIR: /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span>/temp</span><br><span class="line">Using JRE_HOME:        /home/pms/jdk1<span class="hljs-meta">.7</span><span class="hljs-meta">.0_65</span></span><br><span class="line">Using CLASSPATH:       /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span>/bin/bootstrap.jar</span><br><span class="line">Using CATALINA_BASE:   /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span></span><br><span class="line">Using CATALINA_HOME:   /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span></span><br><span class="line">Using CATALINA_TMPDIR: /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span>/temp</span><br><span class="line">Using JRE_HOME:        /home/pms/jdk1<span class="hljs-meta">.7</span><span class="hljs-meta">.0_65</span></span><br><span class="line">Using CLASSPATH:       /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span>/bin/bootstrap.jar</span><br><span class="line">[root@<span class="hljs-keyword">test</span> conf]# netstat -ntlup | grep -e <span class="hljs-string">"80\|443"</span></span><br><span class="line">tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:<span class="hljs-number">80</span>         <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:*          LISTEN      <span class="hljs-number">21960</span>/java</span><br><span class="line">tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:<span class="hljs-number">443</span>        <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:*          LISTEN      <span class="hljs-number">21960</span>/java</span><br><span class="line">tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">127.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.1</span>:<span class="hljs-number">8005</span>     <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:*          LISTEN      <span class="hljs-number">21960</span>/java</span><br><span class="line">tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:<span class="hljs-number">8009</span>       <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:*          LISTEN      <span class="hljs-number">21960</span>/java</span><br><span class="line">[root@<span class="hljs-keyword">test</span> conf]#</span><br></pre></td></tr></table></figure>
-<p>OK !</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2016-11-30T15:45:54.000Z">2016-11-30</time>
                 
                 
@@ -537,6 +478,56 @@ var _hmt = _hmt || [];
 
 
 
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-11-09T18:53:13.000Z">2016-11-10</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 minutes read (About 703 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/11/10/lwuswahg/">MySQL(5) 清空表命令之：truncate与delete区别</a>
+            
+        </h1>
+        <div class="content">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在实际工作中，有时我们会想要去清空一张表的所有数据，常用的命令有delete和truncate这两个命令。</p>
+<h3 id="1-delete"><a href="#1-delete" class="headerlink" title="1. delete"></a>1. delete</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在很多情况，我们对于delete的应用更多，因为它支持更多的匹配模式，我们可以使用where条件语句，清理一些特定的数据，关于delete的操作，这里不做过多解释，有空就专门写写delete的使用和原理。delete 在清空表时，如果表内有自增ID的设定，那么在delete清空之后，再插入数据时，自增ID不会从1开始，默认会继续增加; 除非我们使用OPTIMIZE TABLE，重置表属性；<br><figure class="highlight n1ql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> piwik_tmp;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-truncate"><a href="#2-truncate" class="headerlink" title="2. truncate"></a>2. truncate</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;truncate 在清空表时，会同时将自增ID重置，再插入新数据时会从1开始，而且truncate在清空表时，不关心表的行数，所以执行效率会高于delete；</p>
+<figure class="highlight excel hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; truncate table piwik_tmp;</span><br><span class="line">Query OK, <span class="hljs-number">0</span> <span class="hljs-built_in">rows</span> affected (<span class="hljs-number">0.01</span> <span class="hljs-built_in">sec</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="3-释放表空间"><a href="#3-释放表空间" class="headerlink" title="3. 释放表空间"></a>3. 释放表空间</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但是在truncate清空表数据时，myisam的表和innodb的表在使用上有一定的区别；myisam表会清空所有数据，并释放表空间，即硬盘空间会得到释放。innodb表也会清空所有数据，但不释放表空间。Innodb数据库对于已经删除的数据只是标记为删除，并不真正释放所占用的磁盘空间，这就导致InnoDB数据库文件不断增长。如果想彻底释放这些已经删除的数据，需要把数据库导出，删除InnoDB数据库文件，然后再导入。<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 备份数据库：</span></span><br><span class="line">mysqldump -u -p --quick --force --all-databases &gt; mysqldump.sql</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 停止数据库</span></span><br><span class="line">service mysqld stop</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 删除这些大文件</span></span><br><span class="line">rm /usr/local/mysql/var/ibdata1</span><br><span class="line">rm /usr/local/mysql/var/ib_logfile*</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 手动删除除Mysql之外所有数据库文件夹，然后启动数据库</span></span><br><span class="line">service mysqld start</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 还原数据</span></span><br><span class="line">mysql -uroot -proot &lt; mysqldump.sql</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-innodb-file-per-table"><a href="#4-innodb-file-per-table" class="headerlink" title="4. innodb_file_per_table"></a>4. innodb_file_per_table</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;还有一种方式是在创建数据库的时候设置innodb_file_per_table，这样InnoDB会对每个表创建一个数据文件，然后只需要运行OPTIMIZE TABLE 命令就可以释放所有已经删除的磁盘空间。</p>
+<h4 id="4-1-修改mysql默认配置文件。"><a href="#4-1-修改mysql默认配置文件。" class="headerlink" title="4.1 修改mysql默认配置文件。"></a>4.1 修改mysql默认配置文件。</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编辑my.ini或my.cnf 在innodb段中加入 innodb_file_per_table=1 # 1为启用，0为禁用</p>
+<h4 id="4-2-查看修改结果"><a href="#4-2-查看修改结果" class="headerlink" title="4.2 查看修改结果"></a>4.2 查看修改结果</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过mysql语句可以查看该变量的值：<br><figure class="highlight gams hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show <span class="hljs-keyword">variables</span> like <span class="hljs-comment">'%per_table%'</span>;</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -609,7 +600,7 @@ var _hmt = _hmt || [];
                         Articles
                     </p>
                     <p class="title has-text-weight-normal">
-                        93
+                        92
                     </p>
                 </div>
             </div>
@@ -629,7 +620,7 @@ var _hmt = _hmt || [];
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        38
+                        37
                     </p>
                 </div>
             </div>
@@ -930,7 +921,7 @@ var _hmt = _hmt || [];
         <h3 class="menu-label">
             Nuage de tags
         </h3>
-        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Weisk/" style="font-size: 10px;">Weisk</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
+        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
     </div>
 </div>
 
@@ -959,25 +950,6 @@ var _hmt = _hmt || [];
                     <a href="/2019/07/03/sdertfvdsrt222/" class="has-link-black-ter is-size-6">MySQL 命令行辅助 mycli</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/05/03/unlink_weisk_with_thirdpart_weixin/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="解除微信公众平台对微上客的授权">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-05-03T01:50:32.000Z">2018-05-03</time></div>
-                    <a href="/2018/05/03/unlink_weisk_with_thirdpart_weixin/" class="has-link-black-ter is-size-6">解除微信公众平台对微上客的授权</a>
-                    <p class="is-size-7 is-uppercase">
-                        
                     </p>
                 </div>
             </div>
@@ -1040,6 +1012,25 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
+                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1056,17 +1047,6 @@ var _hmt = _hmt || [];
             <a class="level is-marginless" href="/archives/2019/07/">
                 <span class="level-start">
                     <span class="level-item">July 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/05/">
-                <span class="level-start">
-                    <span class="level-item">May 2018</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
@@ -1539,13 +1519,6 @@ var _hmt = _hmt || [];
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
                         <span class="tag is-grey">5</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Weisk/">
-                        <span class="tag">Weisk</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1628,25 +1601,6 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
-            <a href="/2018/05/03/unlink_weisk_with_thirdpart_weixin/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="解除微信公众平台对微上客的授权">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-05-03T01:50:32.000Z">2018-05-03</time></div>
-                    <a href="/2018/05/03/unlink_weisk_with_thirdpart_weixin/" class="has-link-black-ter is-size-6">解除微信公众平台对微上客的授权</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2017/12/26/Install_redmine3.4_rbuy2.4.1_passenger_nginx_mysql_ubuntu16.04/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Howto Install Redmine on Ubuntu 16.04">
@@ -1702,6 +1656,25 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
+                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1718,17 +1691,6 @@ var _hmt = _hmt || [];
             <a class="level is-marginless" href="/archives/2019/07/">
                 <span class="level-start">
                     <span class="level-item">July 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/05/">
-                <span class="level-start">
-                    <span class="level-item">May 2018</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
@@ -2201,13 +2163,6 @@ var _hmt = _hmt || [];
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
                         <span class="tag is-grey">5</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Weisk/">
-                        <span class="tag">Weisk</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

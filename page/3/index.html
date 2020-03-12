@@ -156,60 +156,6 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-05-23T06:30:55.000Z">2017-05-23</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 minutes read (About 259 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/05/23/fix-pip-install-timeout-inChina/">使用国内pypi源加速pip安装</a>
-            
-        </h1>
-        <div class="content">
-            <p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/mxb19.png" alt></p>
-<p>在解决将AWS Cloudwatch的监控信息展示在Zabbix上时，需要安装AWS的一个python 工具包boto3，但是在安装过程中，碰到了如上图的错误信息；问题是由于国内网络问题导致连接python库超时，所以将库改为国内</p>
-<h4 id="国内pypi源站点"><a href="#国内pypi源站点" class="headerlink" title="国内pypi源站点"></a>国内pypi源站点</h4><ul>
-<li><a href="http://pypi.douban.com/simple" target="_blank" rel="noopener">http://pypi.douban.com/simple</a>  豆瓣</li>
-<li><a href="http://pypi.hustunique.com/simple" target="_blank" rel="noopener">http://pypi.hustunique.com/simple</a>  华中理工大学</li>
-<li><a href="http://pypi.sdutlinux.org/simple" target="_blank" rel="noopener">http://pypi.sdutlinux.org/simple</a>  山东理工大学</li>
-<li><a href="http://pypi.mirrors.ustc.edu.cn/simple" target="_blank" rel="noopener">http://pypi.mirrors.ustc.edu.cn/simple</a>  中国科学技术大学</li>
-</ul>
-<h4 id="Windows-修改"><a href="#Windows-修改" class="headerlink" title="Windows 修改"></a>Windows 修改</h4><p>编辑 %HOMEPATH%\pip\pip.ini<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = http://pypi.douban.com/simple</span><br></pre></td></tr></table></figure></p>
-<h4 id="Linux-修改"><a href="#Linux-修改" class="headerlink" title="Linux 修改"></a>Linux 修改</h4><p>编辑 ~/.pip/pip.conf ， 如果文件不存在，可以先创建<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = http://pypi.douban.com/simple</span><br></pre></td></tr></table></figure></p>
-<h4 id="修改easy-install-源"><a href="#修改easy-install-源" class="headerlink" title="修改easy_install 源"></a>修改easy_install 源</h4><p>编辑 ~/.pydistutils.cfg<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = http://pypi.douban.com/simple</span><br></pre></td></tr></table></figure></p>
-<h4 id="临时使用"><a href="#临时使用" class="headerlink" title="临时使用"></a>临时使用</h4><p>如果你不想修改源，只是临时使用的话，可以在pip安装时使用-i参数临时指定源站点<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip -i http://pypi.douban.com/simple install boto3</span><br></pre></td></tr></table></figure></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-05-20T11:08:45.000Z">2017-05-20</time>
                 
                 <div class="level-item">
@@ -657,6 +603,51 @@ var _hmt = _hmt || [];
 
 
 
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-03-06T01:44:47.000Z">2017-03-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/CentOS/">CentOS</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 237 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/03/06/howto-install-zoomdata/">HowTo install Zoomdata</a>
+            
+        </h1>
+        <div class="content">
+            <p>Zoomdata是一个大数据可视化展示的工具，由ZoomData企业创建，是为数不多的同时支持移动端的数据分析公司，Zoomdata的可视化可将大数据流转化为触屏友好的，艺术感十足的三维形态，Zoomdata的定位是非ETL(传统的提取、转换和加载的数据处理过程)工具，Zoomdata支持多种数据源，包括社交媒体等，其中应用最主流是大数据平台的展示工具，并且Zoomdata对Cloudera Impala做了很好的支持，所以我们做了Zoomdata+Cloudera技术实施。<a href="这是一个示意的文档">^1</a></p>
+<h4 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a><strong>系统要求</strong></h4><p>Zoomdata最新版是v2.4，支持常见主流的操作系统，并且有非常友好的安装帮助，但是Zoomdata不支持安装在32位的操作系统之上<br><br><br>|biaoti|biaoti|baiiti|<br>|——|——|——|<br>|list|file|china|<br>|letian|zhong|hongkong|</p>
+<p><br></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -727,7 +718,7 @@ var _hmt = _hmt || [];
                         Articles
                     </p>
                     <p class="title has-text-weight-normal">
-                        93
+                        92
                     </p>
                 </div>
             </div>
@@ -747,7 +738,7 @@ var _hmt = _hmt || [];
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        38
+                        37
                     </p>
                 </div>
             </div>
@@ -1048,7 +1039,7 @@ var _hmt = _hmt || [];
         <h3 class="menu-label">
             Nuage de tags
         </h3>
-        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Weisk/" style="font-size: 10px;">Weisk</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
+        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
     </div>
 </div>
 
@@ -1077,25 +1068,6 @@ var _hmt = _hmt || [];
                     <a href="/2019/07/03/sdertfvdsrt222/" class="has-link-black-ter is-size-6">MySQL 命令行辅助 mycli</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/05/03/unlink_weisk_with_thirdpart_weixin/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="解除微信公众平台对微上客的授权">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-05-03T01:50:32.000Z">2018-05-03</time></div>
-                    <a href="/2018/05/03/unlink_weisk_with_thirdpart_weixin/" class="has-link-black-ter is-size-6">解除微信公众平台对微上客的授权</a>
-                    <p class="is-size-7 is-uppercase">
-                        
                     </p>
                 </div>
             </div>
@@ -1158,6 +1130,25 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
+                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1174,17 +1165,6 @@ var _hmt = _hmt || [];
             <a class="level is-marginless" href="/archives/2019/07/">
                 <span class="level-start">
                     <span class="level-item">July 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/05/">
-                <span class="level-start">
-                    <span class="level-item">May 2018</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
@@ -1657,13 +1637,6 @@ var _hmt = _hmt || [];
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
                         <span class="tag is-grey">5</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Weisk/">
-                        <span class="tag">Weisk</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1746,25 +1719,6 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
-            <a href="/2018/05/03/unlink_weisk_with_thirdpart_weixin/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="解除微信公众平台对微上客的授权">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-05-03T01:50:32.000Z">2018-05-03</time></div>
-                    <a href="/2018/05/03/unlink_weisk_with_thirdpart_weixin/" class="has-link-black-ter is-size-6">解除微信公众平台对微上客的授权</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2017/12/26/Install_redmine3.4_rbuy2.4.1_passenger_nginx_mysql_ubuntu16.04/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Howto Install Redmine on Ubuntu 16.04">
@@ -1820,6 +1774,25 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
+                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1836,17 +1809,6 @@ var _hmt = _hmt || [];
             <a class="level is-marginless" href="/archives/2019/07/">
                 <span class="level-start">
                     <span class="level-item">July 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/05/">
-                <span class="level-start">
-                    <span class="level-item">May 2018</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
@@ -2319,13 +2281,6 @@ var _hmt = _hmt || [];
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
                         <span class="tag is-grey">5</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Weisk/">
-                        <span class="tag">Weisk</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
