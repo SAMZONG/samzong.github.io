@@ -2,7 +2,7 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-<title>Category: MySQL - SAMZONG</title>
+<title>Categoria: MySQL - SAMZONG</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
@@ -162,7 +162,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
-            <li><a href="/categories">Categories</a></li>
+            <li><a href="/categories">Categorias</a></li>
             
             <li class="is-active"><a href="#" aria-current="page">MySQL</a></li>
         </ul>
@@ -370,252 +370,15 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-02-09T10:29:50.000Z">2017-02-09</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    6 minutes read (About 966 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/02/09/mysql-index/">MySQL(7) 索引创建、删除和查看</a>
-            
-        </h1>
-        <div class="content">
-            <h4 id="1-索引的作用"><a href="#1-索引的作用" class="headerlink" title="1. 索引的作用"></a><strong>1. 索引的作用</strong></h4><p>   在索引列上，数据库利用各种各样的快速定位技术，能够大大的提高查询效率，特别是当数据量非常大和查询设计到多个表时，索引的利用能够将效率提高成千上万倍，当然要合理的利用索引。</p>
-<h4 id="2-创建索引"><a href="#2-创建索引" class="headerlink" title="2. 创建索引"></a><strong>2. 创建索引</strong></h4><p>​    在执行CREATE TABLE时可以创建索引，也可以在之后单独使用CREATE INDEX或ALTER TABLE来为表增加索引。</p>
-<h6 id="2-1-ALTER-TABLE"><a href="#2-1-ALTER-TABLE" class="headerlink" title="2.1 ALTER TABLE"></a>2.1 ALTER TABLE</h6><p>​    ALTER TABLE用来创建普通索引、UNIQUE索引或PRIMARY KEY索引。</p>
-<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> tb_name <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">INDEX</span> index_Name (column_list);</span><br><span class="line"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> tb_name <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">UNIQUE</span> (column_list);</span><br><span class="line"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> tb_name <span class="hljs-keyword">ADD</span> PRIMARY <span class="hljs-keyword">KEY</span> (column_list);</span><br></pre></td></tr></table></figure>
-<p>​    tb_name 是要增加索引的表名，column_list 是要增加索引的列，多列用逗号隔开，index_Name 是可选，缺省为第一个索引列赋名称，ALTER TABLE允许在单个语句中更改多个表，因此可以也可以同时创建多个索引。</p>
-<h6 id="2-2-CREATE-INDEX"><a href="#2-2-CREATE-INDEX" class="headerlink" title="2.2 CREATE INDEX"></a>2.2 CREATE INDEX</h6><p>​    CREATE INDEX 可对表增加普通索引或者UNIQUE索引。</p>
-<figure class="highlight n1ql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">INDEX</span> index_Name <span class="hljs-keyword">ON</span> tb_name(column_list);</span><br><span class="line"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">UNIQUE</span> <span class="hljs-keyword">INDEX</span> index_Name <span class="hljs-keyword">ON</span> tb_name(column_list);</span><br></pre></td></tr></table></figure>
-<p>​    tb_name、index_Name和column_list具有ALTER TABLE语句中相同的含义，索引名称不可自定义，也不能创建PRIMARY KEY。</p>
-<h4 id="3-索引类型"><a href="#3-索引类型" class="headerlink" title="3. 索引类型"></a><strong>3. 索引类型</strong></h4><p>​    在创建索引时，可以规定索引能否包含重复的值，如果不包含，则索引应该为PRIMARY KEY或UNIQUE索引，对于单列唯一索引，这能保证单列不包含重复的值，对于多列唯一索引，保证多值的组合不重复。</p>
-<p>​    PRIMAY KEY索引与UNIQUE索引非常类似，实际上PRIMAY KEY索引仅是一个具有名称PRIMAY的UNIQUE索引，这表示一个表只能包含一个PRIMAY KEY索引，因为一个表中不可能具有两个同名的索引。</p>
-<h4 id="4-删除索引"><a href="#4-删除索引" class="headerlink" title="4. 删除索引"></a><strong>4. 删除索引</strong></h4><p>​    可以使用ALTER TABLE或DROP INDEX语句来删除索引：</p>
-<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">INDEX</span> index_Name <span class="hljs-keyword">On</span> tb_name;</span><br><span class="line"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> tb_Name <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> index_Name;</span><br><span class="line"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> tb_Name <span class="hljs-keyword">DROP</span> PRIMAY <span class="hljs-keyword">KEY</span>;</span><br></pre></td></tr></table></figure>
-<p>​    第一条和第二条作用是一样的，删除tb_Name中index_Name索引；第三条仅适用于删除PRIMAY KEY时，因为一个只可能有一个PRIMAY KEY索引。</p>
-<p>​    另外，如果在表中删除了某列，则索引会受到影响，对于多列组合的索引，如果删除其中某列，则该列也会在索引中删除，如果删除所有列，则该索引也会被删除。</p>
-<h4 id="5-查看索引"><a href="#5-查看索引" class="headerlink" title="5. 查看索引"></a><strong>5. 查看索引</strong></h4><figure class="highlight q hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="hljs-built_in">show</span> index <span class="hljs-keyword">from</span> tb_name;</span><br><span class="line">mysql&gt; <span class="hljs-built_in">show</span> <span class="hljs-built_in">keys</span> <span class="hljs-keyword">from</span> tb_name;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Table : 表名</li>
-<li>Non_unique： 如果索引不能包含重复值为0，如果可以为1</li>
-<li>Key_name： 索引的名称</li>
-<li>Seq_in_index：索引中列的序号，从1开始</li>
-<li>Column_name： 列的名称</li>
-<li>Collation：列以什么方式存储在索引中，在MySQL中有值‘A’(升序)和NULL(无分类)</li>
-<li>Cardinality： 索引中唯一值的数量估计值，通过运行ANALYZE TABLE或者 myisamchk -a 可以更新，基数根据被存储的整数的统计数据来计数，所以，即使对于小型表，该值也没有必要是精确的，基数越大，当进行联合时，MySQL使用该索引的机会就越大。</li>
-<li>Sub_part： 如果列只是被部分编入，则为编入索引的字符数目，如果整列被编入索引，则为NULL</li>
-<li>Packed：关键字如何被压缩，没有压缩为NULL</li>
-<li>Null： 如果列含有NULL为YES，如果没有则为NO</li>
-<li>Index_type： 用过的索引方法，BTREE，FULLTEXT，HASH，RTREE</li>
-<li>Comment： 备注</li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-01-15T00:12:55.000Z">2017-01-15</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 minutes read (About 393 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/01/15/sdertfvdsrt/">每日备份MySQL单表数据</a>
-            
-        </h1>
-        <div class="content">
-            <p>最近愈近年底，客户业务涉及对账操作，所以同事提出需求需要单独备份某张表数据，并且每日备份；思考之后解决办法如下：</p>
-<ol>
-<li>mysqldump导出单张表的表结构及数据</li>
-<li>新增数据库，专做临时每日数据备份库</li>
-<li>导入该表数据到新增数据库内</li>
-<li>重命名导入的表名（预防计划任务下次导入时数据覆盖）</li>
-<li>编写脚本，添加Linux计划任务</li>
-</ol>
-<h4 id="1-mysqldump导出但张表的表结构及数据"><a href="#1-mysqldump导出但张表的表结构及数据" class="headerlink" title="1. mysqldump导出但张表的表结构及数据"></a>1. mysqldump导出但张表的表结构及数据</h4><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -h dbServer -PdbServerPort -u db_user -<span class="hljs-selector-tag">p</span> -d dbName tbName &gt; tbName.sql</span><br></pre></td></tr></table></figure>
-<h4 id="2-新增数据库，专做临时每日数据备份库"><a href="#2-新增数据库，专做临时每日数据备份库" class="headerlink" title="2. 新增数据库，专做临时每日数据备份库"></a>2. 新增数据库，专做临时每日数据备份库</h4><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> loginTo your DBserver</span></span><br><span class="line"><span class="hljs-meta">mysql&gt;</span><span class="hljs-bash"> create database bakdbName character <span class="hljs-built_in">set</span> utf8;</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-导入该表数据到新增数据库内"><a href="#3-导入该表数据到新增数据库内" class="headerlink" title="3. 导入该表数据到新增数据库内"></a>3. 导入该表数据到新增数据库内</h4><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -h dbServer -P dbServerPort -u db_user -<span class="hljs-selector-tag">p</span> bakdbName &lt; tbName.sql</span><br></pre></td></tr></table></figure>
-<h4 id="4-重命名导入的表名"><a href="#4-重命名导入的表名" class="headerlink" title="4 . 重命名导入的表名"></a>4 . 重命名导入的表名</h4><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u db_user -p -e "<span class="hljs-keyword">rename</span> <span class="hljs-keyword">table</span> bakdbName.tbName <span class="hljs-keyword">to</span> bakdbName.tbName_$<span class="hljs-built_in">DATE</span><span class="hljs-string">"</span></span><br></pre></td></tr></table></figure>
-<h4 id="5-编写脚本"><a href="#5-编写脚本" class="headerlink" title="5. 编写脚本"></a>5. 编写脚本</h4><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">[root@testServer01 ~]# cat /usr/local/bin/bakTable.sh</span><br><span class="line"><span class="hljs-comment">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#Create by SAMZONG</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-attribute">DATE</span>=`date +%Y%m%d`</span><br><span class="line"><span class="hljs-attribute">TMPDIR</span>=/tmp/baksql</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># modify your DB configure</span></span><br><span class="line"><span class="hljs-attribute">DBSERVER1</span>=localhost</span><br><span class="line"><span class="hljs-attribute">DBSERVER1_PORT</span>=3306</span><br><span class="line"><span class="hljs-attribute">DBSERVER1_USER</span>=root</span><br><span class="line"><span class="hljs-attribute">DBSERVER1_PASSWORD</span>=password</span><br><span class="line"><span class="hljs-attribute">MASTER_DBNAME</span>=zabbix</span><br><span class="line"><span class="hljs-attribute">MASTER_TBNAME</span>=users</span><br><span class="line"></span><br><span class="line"><span class="hljs-attribute">DBSERVER2</span>=localhost</span><br><span class="line"><span class="hljs-attribute">DBSERVER2_PORT</span>=3306</span><br><span class="line"><span class="hljs-attribute">DBSERVER2_USER</span>=root</span><br><span class="line"><span class="hljs-attribute">DBSERVER2_PASSWORD</span>=password</span><br><span class="line"><span class="hljs-attribute">BAKDBNAME</span>=z3</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># creat tmp folder</span></span><br><span class="line"><span class="hljs-keyword">if</span> [ ! -d <span class="hljs-variable">$TMPDIR</span> ]; then</span><br><span class="line">	mkdir <span class="hljs-variable">$TMPDIR</span></span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># dump tbName</span></span><br><span class="line">mysqldump -h <span class="hljs-variable">$DBSERVER1</span> -P <span class="hljs-variable">$DBSERVER1_PORT</span> -u <span class="hljs-variable">$DBSERVER1_USER</span> -p<span class="hljs-string">"<span class="hljs-variable">$DBSERVER1_PASSWORD</span>"</span> -d <span class="hljs-variable">$MASTER_DBNAME</span>  <span class="hljs-variable">$MASTER_TBNAME</span> &gt; <span class="hljs-variable">$TMPDIR</span>/<span class="hljs-variable">$MASTER_TBNAME</span>.sql</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># insert tbNAME to bakdbName</span></span><br><span class="line"><span class="hljs-keyword">if</span> [ $? -eq 0  ]; then</span><br><span class="line">	mysql -h <span class="hljs-variable">$DBSERVER2</span> -P <span class="hljs-variable">$DBSERVER2_PORT</span> -u <span class="hljs-variable">$DBSERVER2_USER</span> -p<span class="hljs-string">"<span class="hljs-variable">$DBSERVER2_PASSWORD</span>"</span> <span class="hljs-variable">$BAKDBNAME</span> &lt; <span class="hljs-variable">$TMPDIR</span>/<span class="hljs-variable">$MASTER_TBNAME</span>.sql</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">if</span> [ $? -eq 0 ]; then</span><br><span class="line">		# rename tbName</span><br><span class="line">		mysql -h <span class="hljs-variable">$DBSERVER2</span> -P <span class="hljs-variable">$DBSERVER2_PORT</span> -u <span class="hljs-variable">$DBSERVER2_USER</span> -p<span class="hljs-string">"<span class="hljs-variable">$DBSERVER2_PASSWORD</span>"</span> -e <span class="hljs-string">"rename table "</span><span class="hljs-variable">$BAKDBNAME</span><span class="hljs-string">"."</span><span class="hljs-variable">$MASTER_TBNAME</span><span class="hljs-string">" to "</span><span class="hljs-variable">$BAKDBNAME</span><span class="hljs-string">"."</span><span class="hljs-variable">$MASTER_TBNAME</span><span class="hljs-string">"_"</span><span class="hljs-variable">$DATE</span><span class="hljs-string">";"</span></span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<h4 id="6-添加到Linux计划任务"><a href="#6-添加到Linux计划任务" class="headerlink" title="6. 添加到Linux计划任务"></a>6. 添加到Linux计划任务</h4><figure class="highlight basic hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-symbol">00 </span><span class="hljs-number">00</span> * * * /<span class="hljs-keyword">usr</span>/local/bin/bakTable.sh</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-12-04T01:57:23.000Z">2016-12-04</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 minutes read (About 376 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/12/04/wrbpvpam/">HowTo Reset MySQL Root Password</a>
-            
-        </h1>
-        <div class="content">
-            <h4 id="1-处理的状态"><a href="#1-处理的状态" class="headerlink" title="1. 处理的状态"></a>1. 处理的状态</h4><p> 首先确认服务器出于安全的状态，也就是没有人能够任意地连接MySQL数据库。<br>因为在重新设置MySQL的root密码的期间，MySQL数据库完全出于没有密码保护的<br>状态下，其他的用户也可以任意地登录和修改MySQL的信息。可以采用将MySQL对<br>外的端口封闭，并且停止Apache以及所有的用户进程的方法实现服务器的准安全<br>状态。最安全的状态是到服务器的Console上面操作，并且拔掉网线。</p>
-<h4 id="2-重置密码"><a href="#2-重置密码" class="headerlink" title="2. 重置密码"></a>2. 重置密码</h4><ol>
-<li><p>修改mysql配置文件，增加skip-grant-tables</p>
-<figure class="highlight cs hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="hljs-meta">root@demo ~</span>]<span class="hljs-meta"># vim /etc/my.cnf</span></span><br><span class="line">[<span class="hljs-meta">mysqld</span>]</span><br><span class="line">skip-grant-tables</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重启mysqld</p>
-<figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@demo ~]#<span class="hljs-built_in"> service </span>mysqld restart</span><br><span class="line">Stopping mysqld:                                           [  OK  ]</span><br><span class="line">Starting mysqld:                                           [  OK  ]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>登录mysql，并修改root密码.</p>
-<figure class="highlight livescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@demo ~]<span class="hljs-comment"># mysql -u root</span></span><br><span class="line">Welcome <span class="hljs-keyword">to</span> the MySQL monitor.  Commands end <span class="hljs-keyword">with</span> ; <span class="hljs-keyword">or</span> <span class="hljs-string">\g.</span></span><br><span class="line">Your MySQL connection id <span class="hljs-keyword">is</span> <span class="hljs-number">3</span></span><br><span class="line">Server version: <span class="hljs-number">5.5</span>.<span class="hljs-number">53</span> MySQL Community Server (GPL)</span><br><span class="line"></span><br><span class="line">Copyright (c) <span class="hljs-number">2000</span>, <span class="hljs-number">2016</span>, Oracle <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle <span class="hljs-keyword">is</span> a registered trademark <span class="hljs-keyword">of</span> Oracle Corporation <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> its</span><br><span class="line">affiliates. Other names may be trademarks <span class="hljs-keyword">of</span> their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type <span class="hljs-string">'help;'</span> <span class="hljs-keyword">or</span> <span class="hljs-string">'\h'</span> <span class="hljs-keyword">for</span> help. Type <span class="hljs-string">'\c'</span> <span class="hljs-keyword">to</span> clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt; use mysql</span><br><span class="line">Reading table information <span class="hljs-keyword">for</span> completion <span class="hljs-keyword">of</span> table <span class="hljs-keyword">and</span> column names</span><br><span class="line">You can turn <span class="hljs-literal">off</span> <span class="hljs-keyword">this</span> feature <span class="hljs-keyword">to</span> get a quicker startup <span class="hljs-keyword">with</span> -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; update user set password=password(<span class="hljs-string">'new-pass'</span>) where user=<span class="hljs-string">'root'</span>;</span><br><span class="line">Query OK, <span class="hljs-number">5</span> rows affected (<span class="hljs-number">0.00</span> sec)</span><br><span class="line">Rows matched: <span class="hljs-number">5</span>  Changed: <span class="hljs-number">5</span>  Warnings: <span class="hljs-number">0</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置文件去除skip-grant-tables，并重启服务器.</p>
-<figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@demo ~]# vim /etc/my.cnf</span><br><span class="line">[root@demo ~]#<span class="hljs-built_in"> service </span>mysqld restart</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用新密码登录到mysql</p>
-<figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="hljs-symbol">@demo</span> ~]<span class="hljs-meta"># mysql -h localhost -u root -p</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-11-09T18:53:13.000Z">2016-11-10</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 minutes read (About 703 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/11/10/lwuswahg/">MySQL(5) 清空表命令之：truncate与delete区别</a>
-            
-        </h1>
-        <div class="content">
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在实际工作中，有时我们会想要去清空一张表的所有数据，常用的命令有delete和truncate这两个命令。</p>
-<h3 id="1-delete"><a href="#1-delete" class="headerlink" title="1. delete"></a>1. delete</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在很多情况，我们对于delete的应用更多，因为它支持更多的匹配模式，我们可以使用where条件语句，清理一些特定的数据，关于delete的操作，这里不做过多解释，有空就专门写写delete的使用和原理。delete 在清空表时，如果表内有自增ID的设定，那么在delete清空之后，再插入数据时，自增ID不会从1开始，默认会继续增加; 除非我们使用OPTIMIZE TABLE，重置表属性；<br><figure class="highlight n1ql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> piwik_tmp;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-truncate"><a href="#2-truncate" class="headerlink" title="2. truncate"></a>2. truncate</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;truncate 在清空表时，会同时将自增ID重置，再插入新数据时会从1开始，而且truncate在清空表时，不关心表的行数，所以执行效率会高于delete；</p>
-<figure class="highlight excel hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; truncate table piwik_tmp;</span><br><span class="line">Query OK, <span class="hljs-number">0</span> <span class="hljs-built_in">rows</span> affected (<span class="hljs-number">0.01</span> <span class="hljs-built_in">sec</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="3-释放表空间"><a href="#3-释放表空间" class="headerlink" title="3. 释放表空间"></a>3. 释放表空间</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但是在truncate清空表数据时，myisam的表和innodb的表在使用上有一定的区别；myisam表会清空所有数据，并释放表空间，即硬盘空间会得到释放。innodb表也会清空所有数据，但不释放表空间。Innodb数据库对于已经删除的数据只是标记为删除，并不真正释放所占用的磁盘空间，这就导致InnoDB数据库文件不断增长。如果想彻底释放这些已经删除的数据，需要把数据库导出，删除InnoDB数据库文件，然后再导入。<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 备份数据库：</span></span><br><span class="line">mysqldump -u -p --quick --force --all-databases &gt; mysqldump.sql</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 停止数据库</span></span><br><span class="line">service mysqld stop</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 删除这些大文件</span></span><br><span class="line">rm /usr/local/mysql/var/ibdata1</span><br><span class="line">rm /usr/local/mysql/var/ib_logfile*</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 手动删除除Mysql之外所有数据库文件夹，然后启动数据库</span></span><br><span class="line">service mysqld start</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 还原数据</span></span><br><span class="line">mysql -uroot -proot &lt; mysqldump.sql</span><br></pre></td></tr></table></figure></p>
-<h3 id="4-innodb-file-per-table"><a href="#4-innodb-file-per-table" class="headerlink" title="4. innodb_file_per_table"></a>4. innodb_file_per_table</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;还有一种方式是在创建数据库的时候设置innodb_file_per_table，这样InnoDB会对每个表创建一个数据文件，然后只需要运行OPTIMIZE TABLE 命令就可以释放所有已经删除的磁盘空间。</p>
-<h4 id="4-1-修改mysql默认配置文件。"><a href="#4-1-修改mysql默认配置文件。" class="headerlink" title="4.1 修改mysql默认配置文件。"></a>4.1 修改mysql默认配置文件。</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编辑my.ini或my.cnf 在innodb段中加入 innodb_file_per_table=1 # 1为启用，0为禁用</p>
-<h4 id="4-2-查看修改结果"><a href="#4-2-查看修改结果" class="headerlink" title="4.2 查看修改结果"></a>4.2 查看修改结果</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过mysql语句可以查看该变量的值：<br><figure class="highlight gams hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show <span class="hljs-keyword">variables</span> like <span class="hljs-comment">'%per_table%'</span>;</span><br></pre></td></tr></table></figure></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <div class="pagination-previous is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/categories/MySQL/page/0/">Previous</a>
+            <a class="is-flex-grow has-text-black-ter" href="/categories/MySQL/page/0/">Anterior</a>
         </div>
         <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/categories/MySQL/page/2/">Next</a>
+            <a class="is-flex-grow has-text-black-ter" href="/categories/MySQL/page/2/">Siguiente</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
             
@@ -623,7 +386,9 @@ var _hmt = _hmt || [];
             
             <li><a class="pagination-link has-text-black-ter" href="/categories/MySQL/page/2/">2</a></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/categories/MySQL/page/3/">3</a></li>
+            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/categories/MySQL/page/5/">5</a></li>
             
         </ul>
     </nav>
@@ -664,7 +429,7 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        Entradas
                     </p>
                     <p class="title has-text-weight-normal">
                         92
@@ -674,7 +439,7 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        Categorias
                     </p>
                     <p class="title has-text-weight-normal">
                         24
@@ -684,7 +449,7 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        Etiquetas
                     </p>
                     <p class="title has-text-weight-normal">
                         37
@@ -694,7 +459,7 @@ var _hmt = _hmt || [];
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/SAMZONG" target="_blank">
-                Follow</a>
+                SEGUIR</a>
         </div>
         
         
@@ -781,7 +546,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                Categorias
             </h3>
             <ul class="menu-list">
             <li>
@@ -986,7 +751,7 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            Nube de etiquetas
         </h3>
         <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
     </div>
@@ -1000,7 +765,7 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Recientes
         </h3>
         
         <article class="media">
@@ -1106,7 +871,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -1361,7 +1126,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1644,7 +1409,7 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Recientes
         </h3>
         
         <article class="media">
@@ -1750,7 +1515,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -2005,7 +1770,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -2443,10 +2208,10 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
+                POSTS: 'Entradas',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',

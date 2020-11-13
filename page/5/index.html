@@ -165,265 +165,7 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-01-18T15:28:44.000Z">2017-01-18</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Zabbix/">Zabbix</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    11 minutes read (About 1593 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/01/18/zabbix01-monitor-tomcat-head-memory-jmx/">HowTo Monitor Tomcat Head-Memory for Zabbix</a>
-            
-        </h1>
-        <div class="content">
-            <p>最近项目上由于BUG问题导致Tomcat程序在运行过程中经常内存泄漏,而本身监控系统之中没有更好的检测到Tomcat堆空间(Head Memory)的使用情况导致报警频发，这篇文章主要讲述，如何在Zabbix之中调用jmx监控服务器上Tomcat堆空间的使用情况并增加对应报警功能。</p>
-<blockquote>
-<p>测试环境: <br><br>CentOS 6.8 <br><br>Zabbix 2.4 <br><br>Tomcat 7.0 <br></p>
-</blockquote>
-<p>实验前提默认是各位已经安装Zabbix Server服务器，并且至少有一台Zabbix agent服务器正常监控。关于如何搭建Zabbix监控集群，会有专门文章描述。</p>
-<h4 id="zabbix-java-gateway的工作机制"><a href="#zabbix-java-gateway的工作机制" class="headerlink" title="zabbix-java-gateway的工作机制"></a>zabbix-java-gateway的工作机制</h4><ul>
-<li>首先我们需要配置我们的Tomcat服务启用监控服务，这个是默认不启用的</li>
-<li>之后需要在Zabbix的管理页面添加对应Tomcat服务器的jmx监控接口</li>
-<li>最后zabbix端会自动获取zabbix-java-gateway的数据并根据相应模板进行展<br>示</li>
-<li>工作流: [Zabbix-Server]–&gt;(port:10053 on zabbix server)–&gt; [zabbix-java-gateway] –(port:12345 on tomcatserver)–&gt; [JMX enabled]</li>
-</ul>
-<h4 id="1-Install-zabbix-java-gateway-on-Zabbix-Server"><a href="#1-Install-zabbix-java-gateway-on-Zabbix-Server" class="headerlink" title="1. Install zabbix-java-gateway on Zabbix Server"></a>1. Install zabbix-java-gateway on Zabbix Server</h4><p>因为我的zabbix是使用zabbix 2.4官方源安装，所以只需要用yum在安装即可:<br><figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="hljs-symbol">@6</span> ~]<span class="hljs-meta"># sudo  yum install -y zabbix-java-gateway</span></span><br></pre></td></tr></table></figure></p>
-<p>如果你没有官方源可能先安装该源，注意我的服务器zabbix版本是2.4 如果你是不同的版本，请到[<a href="http://repo.zabbix.com/zabbix/" target="_blank" rel="noopener">这里</a>]查找对应版本。<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 查看zabbix server版本</span></span><br><span class="line">[root@6 ~]# zabbix_server --version</span><br><span class="line">Zabbix<span class="hljs-built_in"> server </span>v2.4.8 (revision 59539) (20 April 2016)</span><br><span class="line">Compilation time: May  4 2016 01:32:12</span><br></pre></td></tr></table></figure></p>
-<p>在使用yum安装zabbix-java-gateway源时,会自动关联安装openjdk，尽管这段程序没多大影响，如果你想保证系统JAVA环境不受到改变的话，可以在/etc/profile文件最后，增加如下内容:<br><figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># add follows to the end</span></span><br><span class="line">export JAVA_HOME=<span class="hljs-regexp">/usr/java</span><span class="hljs-regexp">/default</span></span><br><span class="line"><span class="hljs-regexp">export PATH=$PATH:$JAVA_HOME/bin</span></span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/jre/<span class="hljs-class"><span class="hljs-keyword">lib</span>:$<span class="hljs-title">JAVA_HOME</span>/<span class="hljs-title">lib</span>:$<span class="hljs-title">JAVA_HOME</span>/<span class="hljs-title">lib</span>/<span class="hljs-title">tools</span>.<span class="hljs-title">jar</span></span></span><br></pre></td></tr></table></figure></p>
-<h4 id="2-Confiure-Tomcat-host-with-enable-jmx"><a href="#2-Confiure-Tomcat-host-with-enable-jmx" class="headerlink" title="2. Confiure Tomcat host with enable jmx"></a>2. Confiure Tomcat host with enable jmx</h4><p>首先在$tomcatdir/bin/catalina.sh文件开头处增加如下：<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">CATALINA_OPTS=<span class="hljs-string">"-Dcom.sun.management.jmxremote \</span></span><br><span class="line"><span class="hljs-string">-Dcom.sun.management.jmxremote.authenticate=false \</span></span><br><span class="line"><span class="hljs-string">-Dcom.sun.management.jmxremote.ssl=false \</span></span><br><span class="line"><span class="hljs-string">-Dcom.sun.management.jmxremote.port=12345"</span></span><br></pre></td></tr></table></figure></p>
-<p>然后,启动Tomcat，你会发现多了一个12345端口，这就是jmx的监听端口，请保证zabbix-java-gateway可以访问到这台服务器。<br><figure class="highlight jboss-cli hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@6 ~]<span class="hljs-comment"># /tomcat7/bin/startup.sh</span></span><br><span class="line">Starting Tomcat7:</span><br><span class="line">Using CATALINA_BASE:   <span class="hljs-string">/tomcat7</span></span><br><span class="line">Using CATALINA_HOME:   <span class="hljs-string">/tomcat7</span></span><br><span class="line">Using CATALINA_TMPDIR: <span class="hljs-string">/tomcat7/temp</span></span><br><span class="line">Using JRE_HOME:        <span class="hljs-string">/usr</span></span><br><span class="line">Using CLASSPATH:       <span class="hljs-string">/tomcat7/bin/bootstrap.jar</span>:<span class="hljs-string">/tomcat7/bin/tomcat-juli.jar</span></span><br><span class="line">Tomcat started.</span><br><span class="line"></span><br><span class="line">[root@6 ~]<span class="hljs-comment"># netstat -ntlp | grep 12345</span></span><br><span class="line">tcp  0      0 ::<span class="hljs-function">:12345</span>   :::*     LISTEN      8793/java</span><br><span class="line">[root@6 ~]<span class="hljs-comment">#</span></span><br></pre></td></tr></table></figure></p>
-<p><hr></p>
-<h4 id="fix-1-zabbix-agent与server存在复杂网络环境"><a href="#fix-1-zabbix-agent与server存在复杂网络环境" class="headerlink" title="==fix 1 == : zabbix agent与server存在复杂网络环境"></a>==<em>fix 1</em> == : zabbix agent与server存在复杂网络环境</h4><p>这里疏忽了1个问题，如果您的zabbix server与agent端之间有防火墙规则，而按照我上面的所述只是增加了12345这个端口，那么很可能，您在/var/log/zabbix/zabbix_java_gateway.log 中会看到“No route to host”的报错，这是因为JMX不光开启了12345端口，还开启了另外两个随机端口，而在获取监控数据时会使用到其中一个，这就导致了无法通过固定的防火墙规则来开放该端口。其实有另外一个替代方式来使该监听端口固定下来——使用Tomcat提供的额外组件 catalina-jmx-remote.jar，这个组件是需要另外下载的：</p>
-<figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 查看当前Tomcat版本.</span></span><br><span class="line">[root@<span class="hljs-number">6</span> bin]<span class="hljs-comment"># ./catalina.sh version</span></span><br><span class="line">Using <span class="hljs-symbol">CATALINA_BASE:</span>   /tomcat7</span><br><span class="line">Using <span class="hljs-symbol">CATALINA_HOME:</span>   /tomcat7</span><br><span class="line">Using <span class="hljs-symbol">CATALINA_TMPDIR:</span> /tomcat7/temp</span><br><span class="line">Using <span class="hljs-symbol">JRE_HOME:</span>        /usr</span><br><span class="line">Using <span class="hljs-symbol">CLASSPATH:</span>       /tomcat7/bin/bootstrap.<span class="hljs-symbol">jar:</span>/tomcat7/bin/tomcat-juli.jar</span><br><span class="line">Server <span class="hljs-symbol">version:</span> Apache Tomcat/<span class="hljs-number">7.0</span>.<span class="hljs-number">64</span></span><br><span class="line">Server <span class="hljs-symbol">built:</span>   Aug <span class="hljs-number">19</span> <span class="hljs-number">2015</span> <span class="hljs-number">17</span>:<span class="hljs-number">18</span>:<span class="hljs-number">06</span> UTC</span><br><span class="line">Server <span class="hljs-symbol">number:</span>  <span class="hljs-number">7.0</span>.<span class="hljs-number">64.0</span></span><br><span class="line">OS <span class="hljs-symbol">Name:</span>        Linux</span><br><span class="line">OS <span class="hljs-symbol">Version:</span>     <span class="hljs-number">2.6</span>.<span class="hljs-number">32</span>-<span class="hljs-number">642.11</span>.<span class="hljs-number">1</span>.el6.x86_64</span><br><span class="line"><span class="hljs-symbol">Architecture:</span>   amd64</span><br><span class="line">JVM <span class="hljs-symbol">Version:</span>    <span class="hljs-number">1.8</span>.<span class="hljs-number">0_111</span>-b15</span><br><span class="line">JVM <span class="hljs-symbol">Vendor:</span>     Oracle Corporation</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 下载 catalina-jmx-remote.jar # 请注意下载版本不要高于当前tomcat版本.</span></span><br><span class="line">wget <span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/mirror.bit.edu.cn/apache</span><span class="hljs-regexp">/tomcat/tomcat</span>-<span class="hljs-number">7</span>/v7.<span class="hljs-number">0.57</span>/bin/extras/catalina-jmx-remote.jar -O <span class="hljs-class"><span class="hljs-keyword">lib</span>/<span class="hljs-title">catalina</span>-<span class="hljs-title">jmx</span>-<span class="hljs-title">remote</span>.<span class="hljs-title">jar</span></span></span><br></pre></td></tr></table></figure>
-<p>增加如下内容，在conf/server.xml中：<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Listener <span class="hljs-attribute">className</span>=<span class="hljs-string">"org.apache.catalina.mbeans.JmxRemoteLifecycleListener"</span></span><br><span class="line">          <span class="hljs-attribute">rmiRegistryPortPlatform</span>=<span class="hljs-string">"12345"</span> <span class="hljs-attribute">rmiServerPortPlatform</span>=<span class="hljs-string">"12346"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
-<p>因为我们已经在conf/server.xml定义了rmiRegistryPortPlatform，所以要将bin/catalina.sh中CATALINA_OPTS的com.sun.management.jmxremote.port去掉，否则会因为jmxremote.port配置有优先级更高而导致配置失效。<br><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">CATALINA_OPTS</span>=<span class="hljs-string">"-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"</span></span><br></pre></td></tr></table></figure></p>
-<p>完成之后，重启tomcat这时会发现jmx默认端口已经固定为12345何12346，而server依然可以正常获取监控数据.</p>
-<p><hr></p>
-<h4 id="3-Configure-Zabbix-Server"><a href="#3-Configure-Zabbix-Server" class="headerlink" title="3. Configure Zabbix Server"></a>3. Configure Zabbix Server</h4><p>首先需要修改zabbix_server.conf启用zabbix-java-gateway，让zabbix可以检测到服务,修改如下:<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">### Option: JavaGateway</span></span><br><span class="line"> #      <span class="hljs-built_in"> IP address </span>(<span class="hljs-keyword">or</span> hostname) of Zabbix Java gateway.</span><br><span class="line"> #       Only required <span class="hljs-keyword">if</span> Java pollers are started.</span><br><span class="line"> #</span><br><span class="line"> # Mandatory: <span class="hljs-literal">no</span></span><br><span class="line"> # Default:</span><br><span class="line"><span class="hljs-attribute">JavaGateway</span>=10.211.55.4 # 设置为你的zabbixsever IP</span><br><span class="line"></span><br><span class="line"> ### Option: JavaGatewayPort</span><br><span class="line"> #      <span class="hljs-built_in"> Port </span>that Zabbix Java gateway listens on.</span><br><span class="line"> #</span><br><span class="line"> # Mandatory: <span class="hljs-literal">no</span></span><br><span class="line"> # Range: 1024-32767</span><br><span class="line"> # Default:</span><br><span class="line"> <span class="hljs-attribute">JavaGatewayPort</span>=10053 # 设置服务端监听接口</span><br><span class="line"></span><br><span class="line"> ### Option: StartJavaPollers</span><br><span class="line"> #       Number of pre-forked instances of Java pollers.</span><br><span class="line"> #</span><br><span class="line"> # Mandatory: <span class="hljs-literal">no</span></span><br><span class="line"> # Range: 0-1000</span><br><span class="line"> # Default:</span><br><span class="line"> <span class="hljs-attribute">StartJavaPollers</span>=5 # 设置多线程启动</span><br></pre></td></tr></table></figure></p>
-<p>然后修改zabbix_java_gateway.conf 配置如下:<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"><span class="hljs-comment">## Option: zabbix.listenIP</span></span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash">       IP address to listen on.</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"></span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Mandatory: no</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Default:</span></span><br><span class="line"> LISTEN_IP="10.211.55.4" # 配置监听IP</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"><span class="hljs-comment">## Option: zabbix.listenPort</span></span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash">       Port to listen on.</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"></span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Mandatory: no</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Range: 1024-32767</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Default:</span></span><br><span class="line"> LISTEN_PORT=10053 # 配置监听端口</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"><span class="hljs-comment">## Option: zabbix.pidFile</span></span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash">       Name of PID file.</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash">       If omitted, Zabbix Java Gateway is started as a console application.</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"></span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Mandatory: no</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Default:</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> PID_FILE=</span></span><br><span class="line"></span><br><span class="line"> PID_FILE="/var/run/zabbix/zabbix_java.pid"</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"><span class="hljs-comment">## Option: zabbix.startPollers</span></span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash">       Number of worker threads to start.</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"></span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Mandatory: no</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Range: 1-1000</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Default:</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 不能大于zabbix_server.conf的值，否则可能导致当连接Java gateway时没有多余的线程进行处理</span></span><br><span class="line"> START_POLLERS=5</span><br></pre></td></tr></table></figure></p>
-<p>最后启动启动zabbix-java-gateway，并重启zabbix-server<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@6 ~]#<span class="hljs-built_in"> service </span>zabbix-java-gateway start</span><br><span class="line">Starting zabbix java gateway:              [  OK  ]</span><br><span class="line">[root@6 ~]#<span class="hljs-built_in"> service </span>zabbix-server restart</span><br><span class="line">Stopping zabbix server:              [  OK  ]</span><br><span class="line">Starting zabbix server:              [  OK  ]</span><br></pre></td></tr></table></figure></p>
-<p>我在尝试重启发现一问题，zabbix-java-gateway通过service命令管理stop不能删除pid文件导致服务无法启动，如果你也碰到，解决办法如下:<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@6 zabbix]# vim /etc/rc.d/init.d/zabbix-java-gateway</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> line 97, 注释修改为如下：</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">       <span class="hljs-built_in">kill</span> `cat <span class="hljs-variable">$PID_FILE</span>` &amp;&amp; rm <span class="hljs-variable">$PID_FILE</span></span></span><br><span class="line">        rm -f $PID_FILE</span><br></pre></td></tr></table></figure></p>
-<h4 id="4-Adding-jmx-host-on-Zabbix-Web-consloe"><a href="#4-Adding-jmx-host-on-Zabbix-Web-consloe" class="headerlink" title="4. Adding jmx host on Zabbix Web consloe"></a>4. Adding jmx host on Zabbix Web consloe</h4><p>首先，上传Template Tomcat Head Memory模板，这个我做了一个简单的模板，只针对了堆内存空间的监控，并针对使用率超过60%以及80%，不同的警报。需要的同学可以直接从我这里下载，然后在Configuration-Templates导入到zabbix模板库内。<br><br>下载请点击:<a href="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/12/zbx_template_app_tomcat_head_memory.xml" target="_blank" rel="noopener">Template App Tomcat Head Memory</a></p>
-<p>然后，增加服务器的jmx监控<br><br><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/12/zabbix-jmx-settings.png" alt><br><br><br>关联模板<br><br><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/12/zabbix-host-select-template.png" alt></p>
-<h4 id="5-View-the-Head-Memory-Monitoring"><a href="#5-View-the-Head-Memory-Monitoring" class="headerlink" title="5. View the Head Memory Monitoring."></a>5. View the Head Memory Monitoring.</h4><p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/12/zabbix-view-monitor.png" alt></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-01-15T00:12:55.000Z">2017-01-15</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 minutes read (About 393 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/01/15/sdertfvdsrt/">每日备份MySQL单表数据</a>
-            
-        </h1>
-        <div class="content">
-            <p>最近愈近年底，客户业务涉及对账操作，所以同事提出需求需要单独备份某张表数据，并且每日备份；思考之后解决办法如下：</p>
-<ol>
-<li>mysqldump导出单张表的表结构及数据</li>
-<li>新增数据库，专做临时每日数据备份库</li>
-<li>导入该表数据到新增数据库内</li>
-<li>重命名导入的表名（预防计划任务下次导入时数据覆盖）</li>
-<li>编写脚本，添加Linux计划任务</li>
-</ol>
-<h4 id="1-mysqldump导出但张表的表结构及数据"><a href="#1-mysqldump导出但张表的表结构及数据" class="headerlink" title="1. mysqldump导出但张表的表结构及数据"></a>1. mysqldump导出但张表的表结构及数据</h4><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -h dbServer -PdbServerPort -u db_user -<span class="hljs-selector-tag">p</span> -d dbName tbName &gt; tbName.sql</span><br></pre></td></tr></table></figure>
-<h4 id="2-新增数据库，专做临时每日数据备份库"><a href="#2-新增数据库，专做临时每日数据备份库" class="headerlink" title="2. 新增数据库，专做临时每日数据备份库"></a>2. 新增数据库，专做临时每日数据备份库</h4><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> loginTo your DBserver</span></span><br><span class="line"><span class="hljs-meta">mysql&gt;</span><span class="hljs-bash"> create database bakdbName character <span class="hljs-built_in">set</span> utf8;</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-导入该表数据到新增数据库内"><a href="#3-导入该表数据到新增数据库内" class="headerlink" title="3. 导入该表数据到新增数据库内"></a>3. 导入该表数据到新增数据库内</h4><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -h dbServer -P dbServerPort -u db_user -<span class="hljs-selector-tag">p</span> bakdbName &lt; tbName.sql</span><br></pre></td></tr></table></figure>
-<h4 id="4-重命名导入的表名"><a href="#4-重命名导入的表名" class="headerlink" title="4 . 重命名导入的表名"></a>4 . 重命名导入的表名</h4><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u db_user -p -e "<span class="hljs-keyword">rename</span> <span class="hljs-keyword">table</span> bakdbName.tbName <span class="hljs-keyword">to</span> bakdbName.tbName_$<span class="hljs-built_in">DATE</span><span class="hljs-string">"</span></span><br></pre></td></tr></table></figure>
-<h4 id="5-编写脚本"><a href="#5-编写脚本" class="headerlink" title="5. 编写脚本"></a>5. 编写脚本</h4><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">[root@testServer01 ~]# cat /usr/local/bin/bakTable.sh</span><br><span class="line"><span class="hljs-comment">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#Create by SAMZONG</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-attribute">DATE</span>=`date +%Y%m%d`</span><br><span class="line"><span class="hljs-attribute">TMPDIR</span>=/tmp/baksql</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># modify your DB configure</span></span><br><span class="line"><span class="hljs-attribute">DBSERVER1</span>=localhost</span><br><span class="line"><span class="hljs-attribute">DBSERVER1_PORT</span>=3306</span><br><span class="line"><span class="hljs-attribute">DBSERVER1_USER</span>=root</span><br><span class="line"><span class="hljs-attribute">DBSERVER1_PASSWORD</span>=password</span><br><span class="line"><span class="hljs-attribute">MASTER_DBNAME</span>=zabbix</span><br><span class="line"><span class="hljs-attribute">MASTER_TBNAME</span>=users</span><br><span class="line"></span><br><span class="line"><span class="hljs-attribute">DBSERVER2</span>=localhost</span><br><span class="line"><span class="hljs-attribute">DBSERVER2_PORT</span>=3306</span><br><span class="line"><span class="hljs-attribute">DBSERVER2_USER</span>=root</span><br><span class="line"><span class="hljs-attribute">DBSERVER2_PASSWORD</span>=password</span><br><span class="line"><span class="hljs-attribute">BAKDBNAME</span>=z3</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># creat tmp folder</span></span><br><span class="line"><span class="hljs-keyword">if</span> [ ! -d <span class="hljs-variable">$TMPDIR</span> ]; then</span><br><span class="line">	mkdir <span class="hljs-variable">$TMPDIR</span></span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># dump tbName</span></span><br><span class="line">mysqldump -h <span class="hljs-variable">$DBSERVER1</span> -P <span class="hljs-variable">$DBSERVER1_PORT</span> -u <span class="hljs-variable">$DBSERVER1_USER</span> -p<span class="hljs-string">"<span class="hljs-variable">$DBSERVER1_PASSWORD</span>"</span> -d <span class="hljs-variable">$MASTER_DBNAME</span>  <span class="hljs-variable">$MASTER_TBNAME</span> &gt; <span class="hljs-variable">$TMPDIR</span>/<span class="hljs-variable">$MASTER_TBNAME</span>.sql</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># insert tbNAME to bakdbName</span></span><br><span class="line"><span class="hljs-keyword">if</span> [ $? -eq 0  ]; then</span><br><span class="line">	mysql -h <span class="hljs-variable">$DBSERVER2</span> -P <span class="hljs-variable">$DBSERVER2_PORT</span> -u <span class="hljs-variable">$DBSERVER2_USER</span> -p<span class="hljs-string">"<span class="hljs-variable">$DBSERVER2_PASSWORD</span>"</span> <span class="hljs-variable">$BAKDBNAME</span> &lt; <span class="hljs-variable">$TMPDIR</span>/<span class="hljs-variable">$MASTER_TBNAME</span>.sql</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">if</span> [ $? -eq 0 ]; then</span><br><span class="line">		# rename tbName</span><br><span class="line">		mysql -h <span class="hljs-variable">$DBSERVER2</span> -P <span class="hljs-variable">$DBSERVER2_PORT</span> -u <span class="hljs-variable">$DBSERVER2_USER</span> -p<span class="hljs-string">"<span class="hljs-variable">$DBSERVER2_PASSWORD</span>"</span> -e <span class="hljs-string">"rename table "</span><span class="hljs-variable">$BAKDBNAME</span><span class="hljs-string">"."</span><span class="hljs-variable">$MASTER_TBNAME</span><span class="hljs-string">" to "</span><span class="hljs-variable">$BAKDBNAME</span><span class="hljs-string">"."</span><span class="hljs-variable">$MASTER_TBNAME</span><span class="hljs-string">"_"</span><span class="hljs-variable">$DATE</span><span class="hljs-string">";"</span></span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<h4 id="6-添加到Linux计划任务"><a href="#6-添加到Linux计划任务" class="headerlink" title="6. 添加到Linux计划任务"></a>6. 添加到Linux计划任务</h4><figure class="highlight basic hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-symbol">00 </span><span class="hljs-number">00</span> * * * /<span class="hljs-keyword">usr</span>/local/bin/bakTable.sh</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-01-07T07:32:23.000Z">2017-01-07</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Docker/">Docker</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 minutes read (About 252 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/01/07/docker-hub-guo-nei-jia-su/">Docker Hub 国内加速</a>
-            
-        </h1>
-        <div class="content">
-            <p>因为Docker Hub没有在国内部署站点或者增加了国内的CDN，这导致国内的开发者在使用docker pull 获取images的时候速度非常的慢，甚至于因为网络的原因会失败。</p>
-<p>但是Docker Hub有着非常丰富的镜像资源，所以我这一直是个问题困扰着我，一次偶然机会发现了<a href="https://www.daocloud.io" target="_blank" rel="noopener">DaoCloud</a>提供了国内镜像加速服务，并且提供的Docker Hub Mirror详细的文档。</p>
-<h4 id="1-注册DaoCloud账号"><a href="#1-注册DaoCloud账号" class="headerlink" title="1. 注册DaoCloud账号"></a>1. 注册DaoCloud账号</h4><p>首先，你需要到一DaoCloud账号，注册很方便，点击地址：<a href="https://account.daocloud.io/signup" target="_blank" rel="noopener">signup</a><br><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/o6wh3.jpg" alt></p>
-<h4 id="2-登录到你的DaoCloud账号内，然后入下图操作"><a href="#2-登录到你的DaoCloud账号内，然后入下图操作" class="headerlink" title="2. 登录到你的DaoCloud账号内，然后入下图操作"></a>2. 登录到你的DaoCloud账号内，然后入下图操作</h4><p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/n9mt7.jpg" alt></p>
-<h4 id="3-查看你的DaoCloud加速器地址"><a href="#3-查看你的DaoCloud加速器地址" class="headerlink" title="3. 查看你的DaoCloud加速器地址"></a>3. 查看你的DaoCloud加速器地址</h4><p><a href="https://www.daocloud.io/mirror#accelerator-doc" target="_blank" rel="noopener">链接</a></p>
-<p>选择你相对应平台的的加速器设置<br><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/4wuea.jpg" alt></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-12-19T22:17:08.000Z">2016-12-20</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/AliCloud/">AliCloud</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 minutes read (About 1099 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/12/20/alicloud-oss-ecs-mount/">HowTo Mount OSS Bucket On ECS</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>From <a href="https://github.com/aliyun/ossfs" target="_blank" rel="noopener">阿里云官方Github</a></p>
-<p>Demo: CentOS 6.8 on ECS</p>
-</blockquote>
-<p>ossfs 是通过磁盘挂载的形式，将oss存储挂载到linux、类unix等操作系统，而且不仅仅可以挂载阿里云内的ECS上，理论上所有网络能到达oss的都可以挂载，但还是要以实际问题为准。</p>
-<h5 id="1-Download-amp-Install"><a href="#1-Download-amp-Install" class="headerlink" title="1.Download &amp; Install"></a>1.Download &amp; Install</h5><p><a href="https://github.com/aliyun/ossfs/releases" target="_blank" rel="noopener">官方版本发布页面</a>，请根据你的系统类型进行选择，我这演示的环境是CentOS 6.8；ossfs目前最新的版本是v1.79.9，您可以根据自己当时版本进行选择，建议选择最新版本。<br><figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 请先将包上传到服务器上</span><br><span class="line"> <span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">yum</span> <span class="hljs-selector-tag">localinstall</span> <span class="hljs-selector-tag">ossfs_1</span><span class="hljs-selector-class">.79</span><span class="hljs-selector-class">.9_centos6</span><span class="hljs-selector-class">.5_x86_64</span><span class="hljs-selector-class">.rpm</span></span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>注意使用localinstall，因为在安装过程，yum 可以很好的解决依赖关系，会节省我们很多时间</p>
-</blockquote>
-<h5 id="2-OSS-amp-Bucket"><a href="#2-OSS-amp-Bucket" class="headerlink" title="2. OSS &amp; Bucket"></a>2. OSS &amp; Bucket</h5><p> 需要获取以下信息，在后面我们都会用到的：<br></p>
-<ol>
-<li>Bucket 名称<br><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/11/QQ20161111-0.jpg" alt><br><br></li>
-<li>Access Key ID</li>
-<li>Access Key Secret<br><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/11/0256A9CB-A0FA-43BC-82AF-4DE17D4852B6.png" alt></li>
-</ol>
-<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/11/QQ20161111-2.jpg" alt><br><br></p>
-<ol>
-<li>Location，这需要注意点，不要加上Bucket的名字，区域对应表如下，注意你的Bucket所在区域:<br><div><table><thead><tr><th style="color:green">Region中文名称</th><th style="text-align:left;color: green;">Region英文表示</th><th style="text-align:left;color: green;">外网Endpoint</th><th style="text-align:left;color: green;">ECS访问的内网Endpoint</th></tr></thead><tbody><tr><td>华东 1</td><td style="text-align:left">oss-cn-hangzhou</td><td style="text-align:left">oss-cn-hangzhou.aliyuncs.com</td><td style="text-align:left">oss-cn-hangzhou-internal.aliyuncs.com</td></tr><tr><td>华东 2</td><td style="text-align:left">oss-cn-shanghai</td><td style="text-align:left">oss-cn-shanghai.aliyuncs.com</td><td style="text-align:left">oss-cn-shanghai-internal.aliyuncs.com</td></tr><tr><td>华北 1</td><td style="text-align:left">oss-cn-qingdao</td><td style="text-align:left">oss-cn-qingdao.aliyuncs.com</td><td style="text-align:left">oss-cn-qingdao-internal.aliyuncs.com</td></tr><tr><td>华北 2</td><td style="text-align:left">oss-cn-beijing</td><td style="text-align:left">oss-cn-beijing.aliyuncs.com</td><td style="text-align:left">oss-cn-beijing-internal.aliyuncs.com</td></tr><tr><td>华南 1</td><td style="text-align:left">oss-cn-shenzhen</td><td style="text-align:left">oss-cn-shenzhen.aliyuncs.com</td><td style="text-align:left">oss-cn-shenzhen-internal.aliyuncs.com</td></tr><tr><td>香港数据中心</td><td style="text-align:left">oss-cn-hongkong</td><td style="text-align:left">oss-cn-hongkong.aliyuncs.com</td><td style="text-align:left">oss-cn-hongkong-internal.aliyuncs.com</td></tr><tr><td>美国硅谷数据中心</td><td style="text-align:left">oss-us-west-1</td><td style="text-align:left">oss-us-west-1.aliyuncs.com</td><td style="text-align:left">oss-us-west-1-internal.aliyuncs.com</td></tr><tr><td>美国弗吉尼亚数据中心</td><td style="text-align:left">oss-us-east-1</td><td style="text-align:left">oss-us-east-1.aliyuncs.com</td><td style="text-align:left">oss-us-east-1-internal.aliyuncs.com</td></tr><tr><td>亚太（新加坡）数据中心</td><td style="text-align:left">oss-ap-southeast-1</td><td style="text-align:left">oss-ap-southeast-1.aliyuncs.com</td><td style="text-align:left">oss-ap-southeast-1-internal.aliyuncs.com</td></tr><tr><td>亚太东北 1（日本）数据中心</td><td style="text-align:left">oss-ap-northeast-1</td><td style="text-align:left">oss-ap-northeast-1.aliyuncs.com</td><td style="text-align:left">oss-ap-northeast-1-internal.aliyuncs.com</td></tr></tbody></table></div><figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 设置bucket/access key/id的信息，将其存放在/etc/passwd-ossfs 文件中</span></span><br><span class="line"><span class="hljs-comment"># 注意这个文件的权限必须正确设置，建议设为640</span></span><br><span class="line">sudo echo <span class="hljs-keyword">my</span>-bucket:<span class="hljs-keyword">my</span>-access-key-<span class="hljs-built_in">id</span>:<span class="hljs-keyword">my</span>-access-key-secret &gt; /etc/passwd-ossfs</span><br><span class="line">sudo chmod <span class="hljs-number">640</span> /etc/passwd-ossfs</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><br></p>
-<h5 id="3-Mount-amp-Uasge"><a href="#3-Mount-amp-Uasge" class="headerlink" title="3. Mount &amp; Uasge"></a>3. Mount &amp; Uasge</h5><p>将oss bucket mount到指定目录:<br><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 我碰到安装后找不到ossfs命令，查看下因为ossfs没有x权限，目录路径为/usr/local/bin，如果您也碰到这个问题，可以增加x权限后再测试</span></span><br><span class="line">sudo ossfs my-bucket <span class="hljs-regexp">/mnt/</span>ossdir -ourl=http:<span class="hljs-regexp">//</span>oss-location.aliyuncs.com</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 如果使用ossfs的机器是阿里云ECS，可以使用内网域名来避免流量收费和 提高速度：</span></span><br><span class="line">sudo ossfs my-bucket <span class="hljs-regexp">/tmp/</span>ossfs -ourl=http:<span class="hljs-regexp">//</span>oss-location-internal.aliyuncs.com</span><br></pre></td></tr></table></figure></p>
-<p>磁盘空间达到上百T：<br><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/11/0B78E099-5488-4839-AE48-09A074E7415D.png" alt><br><br></p>
-<p> umount：<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 注意用户身份</span></span><br><span class="line">umount /tmp/ossfs # root user</span><br><span class="line">sudo fusermount -u /tmp/ossfs # non-root user</span><br></pre></td></tr></table></figure></p>
-<p><br></p>
-<h5 id="4-Debug-amp-FAQ"><a href="#4-Debug-amp-FAQ" class="headerlink" title="4. Debug &amp; FAQ"></a>4. Debug &amp; FAQ</h5><p>当遇到错误的时候，可以试着打开Debug日志信息，然后分析问题原因：<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 使用 -o dbglevel=debug -f -d参数打印日志信息</span></span><br><span class="line">sudo ossfs my-bucket /tmp/ossfs <span class="hljs-attribute">-ourl</span>=http://oss-location-internal.aliyuncs.com -o <span class="hljs-attribute">dbglevel</span>=debug -f -d &gt; /mnt/ossfs.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure></p>
-<p>更多的问题，请移步查看<a href="https://github.com/aliyun/ossfs/wiki/FAQ" target="_blank" rel="noopener">官方的FAQ文档</a>。</p>
-<p><br></p>
-<h5 id="5-About"><a href="#5-About" class="headerlink" title="5. About"></a>5. About</h5><p>ossfs提供的功能和性能和本地文件系统相比，具有一些局限性。具体包括：</p>
-<ul>
-<li>随机或者追加写文件会导致整个文件的重写。</li>
-<li>元数据操作，例如list directory，性能较差，因为需要远程访问oss服务器。</li>
-<li>文件/文件夹的rename操作不是原子的。</li>
-<li>多个客户端挂载同一个oss bucket时，依赖用户自行协调各个客户端的行为。例如避免多个客户端写同一个文件等等。</li>
-<li>不支持hard link。</li>
-<li>不适合用在高并发读/写的场景，这样会让系统的load升高</li>
-</ul>
-<blockquote>
-<p>另外，ossfs的稳定性很大一部分依赖于网络环境，建议的使用场景更多是作为临时数据迁移或定期备份，虽然ossfs挂载到系统中会有着几百TB的空间，但是稳定性并不高。</p>
-</blockquote>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-12-08T12:12:37.000Z">2016-12-08</time>
+                <time class="level-item has-text-grey" datetime="2017-06-02T04:00:16.000Z">2017-06-02</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/Python/">Python</a>
@@ -433,7 +175,7 @@ var _hmt = _hmt || [];
                 <span class="level-item has-text-grey">
                     
                     
-                    4 minutes read (About 566 words)
+                    12 minutes read (About 1742 words)
                 </span>
                 
                 
@@ -442,32 +184,57 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/12/08/installing-python3-on-centos-6/">HowTo Install Python3 on CentOS 6.x</a>
+                <a class="has-link-black-ter" href="/2017/06/02/howto-install-bypy/">bypy-百度网盘Python客户端</a>
             
         </h1>
         <div class="content">
-            <p>接触过Python2.x与Python3.x的应该知道，它们二者的区别也是蛮大的，而随着Python3.x的盛行，越来越多的应用运行与Python3.x的环境之上，但是我们的CentOS的系列，目前都默认安装时Python2.x（CentOS 7.x也是），所以不得不我们需要自己行动手安装Python 3.x的环境。</p>
-<p>Mirosoft平台与Mac平台，不在考虑范围，他们都有相应的软件包与图形化安装工具，可以很好的解决这个问题，所以今天我们的环境是在CentOS 6.x系列上进行。</p>
+            <p>最近在GitHub上发现一个有趣的项目，<a href="https://github.com/houtianze/bypy" target="_blank" rel="noopener">百度网盘Python客户端</a>(bypy)，主要使用在Linux命令行下，这样很大的一个好处是可以利用到百度云盘2TB的存储空间(如果你是会员有6TB)；你可以在任何服务器上，利用自动化脚本实现一些数据文件、日志文件等等备份操作，同时也提供丰富的文件列表、上传、下载、对比、同步以及批量操作等。</p>
 <blockquote>
-<p>Demo ：CentOS 6.8</p>
+<p>虽然百度网盘Python客户端提供很大的便利，但是我强烈不建议将一些重要数据放到百度云盘</p>
 </blockquote>
-<h4 id="Method-1-Build-amp-Install-From-Source-File"><a href="#Method-1-Build-amp-Install-From-Source-File" class="headerlink" title="Method 1. Build &amp; Install From Source-File"></a>Method 1. Build &amp; Install From Source-File</h4><ol>
-<li>Python3.x 源码文件下载，请选择适合的版本。 <a href="https://www.python.org/ftp/python/" target="_blank" rel="noopener">下载页面</a></li>
-<li><p>我这里使用版本 Python 3.5</p>
-<figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[cent<span class="hljs-variable">@demo</span> ~]<span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/www.python.org/ftp</span><span class="hljs-regexp">/python/</span><span class="hljs-number">3.5</span>.<span class="hljs-number">0</span>/Python-<span class="hljs-number">3.5</span>.<span class="hljs-number">0</span>.tgz</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装系统基本工具：</p>
-<figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># yum-utils</span></span><br><span class="line">[cent<span class="hljs-variable">@demo</span> ~]<span class="hljs-variable">$ </span>sudo yum install -y yum-utils</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 构建python 编译环境</span></span><br><span class="line">[cent<span class="hljs-variable">@demo</span> ~]<span class="hljs-variable">$ </span>sudo yum-builddep python</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>开始编译 &amp; 安装<br>并且源码安装的同时，会将pip3与setuptools一同安装.</p>
-<figure class="highlight d hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="hljs-built_in">cent</span><span class="hljs-keyword">@demo</span> ~]$ tar xf Python-<span class="hljs-number">3.5</span>.0.tgz</span><br><span class="line">[<span class="hljs-built_in">cent</span><span class="hljs-keyword">@demo</span> ~]$ cd Python-<span class="hljs-number">3.5</span>.0</span><br><span class="line">[<span class="hljs-built_in">cent</span><span class="hljs-keyword">@demo</span> ~]$ ./configure</span><br><span class="line">[<span class="hljs-built_in">cent</span><span class="hljs-keyword">@demo</span> ~]$ make</span><br><span class="line">[<span class="hljs-built_in">cent</span><span class="hljs-keyword">@demo</span> ~]$ sudo make install</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>检查版本</p>
-<figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[cent<span class="hljs-variable">@demo</span> ~]<span class="hljs-variable">$ </span>python3 -V</span><br><span class="line">Python <span class="hljs-number">3.5</span>.<span class="hljs-number">0</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 如果希望系统默认为Python3</span></span><br><span class="line">[cent<span class="hljs-variable">@demo</span> ~]<span class="hljs-variable">$ </span><span class="hljs-keyword">alias</span> python=<span class="hljs-string">'usr/bin/python3.5'</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h4 id="Method-2-Install-From-EPEL-repos"><a href="#Method-2-Install-From-EPEL-repos" class="headerlink" title="Method 2. Install From EPEL repos"></a>Method 2. Install From EPEL repos</h4><p>也许有的同学会说，编译安装，那是上古时期的做法了，yum在线安装才是王道，当然这种说法也有可取之处，所以接下来讲下如何使用yum安装，需要注意的是yum安装是需要时间测试和增加到相应的源仓库，一般会稍慢于源码安装的方式，这里采用EPEL源，这是一个非常棒的第三方源仓库，之前的文章中也多次提到，这里就不做过多描述，请看下面的命令：<br><figure class="highlight dsconfig hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[<span class="hljs-string">cent@</span><span class="hljs-string">demo </span>~]$ <span class="hljs-string">sudo </span><span class="hljs-string">yum </span><span class="hljs-string">install </span>-y <span class="hljs-string">epel-release</span></span><br><span class="line"><span class="hljs-string">[</span><span class="hljs-string">cent@</span><span class="hljs-string">demo </span>~]$ <span class="hljs-string">sudo </span><span class="hljs-string">yum </span><span class="hljs-string">install </span>-y <span class="hljs-string">python34</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">#</span> 因为<span class="hljs-string">yum安</span>装时没能同时安装<span class="hljs-string">pip与</span><span class="hljs-string">setuptools，</span>所以我们要手动安装，这里采用拿第三方包解决问题</span><br><span class="line"></span><br><span class="line">[<span class="hljs-string">cent@</span><span class="hljs-string">demo </span>~]$ <span class="hljs-string">curl </span>-O <span class="hljs-string">https:</span>//<span class="hljs-string">bootstrap.</span><span class="hljs-string">pypa.</span><span class="hljs-string">io/</span><span class="hljs-built_in">get-pip.py</span></span><br><span class="line"><span class="hljs-built_in">[cent@demo</span> ~]$ <span class="hljs-string">sudo </span><span class="hljs-string">python3 </span><span class="hljs-built_in">get-pip.py</span></span><br><span class="line"><span class="hljs-built_in"></span></span><br><span class="line"><span class="hljs-built_in">[cent@demo</span> ~]$  <span class="hljs-string">python3 </span>-V</span><br><span class="line"><span class="hljs-string">Python </span>3.4.3</span><br></pre></td></tr></table></figure></p>
-
+<h4 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h4><p>数据库备份文件自动上传到百度网盘</p>
+<h4 id="环境依赖"><a href="#环境依赖" class="headerlink" title="环境依赖"></a>环境依赖</h4><ul>
+<li>Python 2.7 or 3.0 以上</li>
+<li>Encoding UTF-8</li>
+</ul>
+<h4 id="Python-环境"><a href="#Python-环境" class="headerlink" title="Python 环境"></a>Python 环境</h4><p>首先使用<code>python -V</code>检查你的Python版本，如果你的版本是2.7或以上，那么就不需要做任何操作，可以直接安装bypy，但是如果你像我一样多数是CentOS 6.x 那么就需要先升级Python版本。我这里是将Python升级到2.7。</p>
+<h5 id="Install-Python-2-7"><a href="#Install-Python-2-7" class="headerlink" title="Install Python 2.7"></a>Install Python 2.7</h5><figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Check current Python version</span></span><br><span class="line">➜  ~ python -V</span><br><span class="line">Python 2.6.6</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Download python 2.7.13 or new packge.</span></span><br><span class="line">➜  ~ wget http://www.python.org/ftp/python/2.7.13/Python-2.7.13.tar.xz</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Extract and change in</span></span><br><span class="line">➜  ~ tar xf Python-2.7.13.tar.xz</span><br><span class="line">➜  ~ <span class="hljs-built_in">cd</span> Python-2.7.13</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Run the configure:</span></span><br><span class="line">➜  Python-2.7.13 ./configure --prefix=/usr/<span class="hljs-built_in">local</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Compile and install it:</span></span><br><span class="line">➜  Python-2.7.13 make &amp;&amp; make altinstall</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Check Python Version</span></span><br><span class="line">➜  Python-2.7.13 python2.7 -V</span><br><span class="line">Python 2.7.13</span><br></pre></td></tr></table></figure>
+<p>虽然Python2.7已经安装成功了，但是默认的Python仍然是2.6版本，所以我们要替换默认Python命令指到2.7</p>
+<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Update bin python to python2.7</span></span><br><span class="line">➜  ~ ll /usr/bin/python /usr/<span class="hljs-built_in">local</span>/bin/python2.7</span><br><span class="line">➜  ~ ll /usr/bin/python-config /usr/<span class="hljs-built_in">local</span>/bin/python2.7-config</span><br><span class="line">➜  ~ python -V</span><br><span class="line">Python 2.7.13</span><br></pre></td></tr></table></figure>
+<h5 id="Can-not-use-Yum"><a href="#Can-not-use-Yum" class="headerlink" title="Can not use Yum ?"></a>Can not use Yum ?</h5><p>因为<code>yum</code>必须要使用Python2.6 ，所以当升级成功之后，发现yum无法使用，这时我们要稍微修改下：</p>
+<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ <span class="hljs-built_in">which</span>-command yum</span><br><span class="line">/usr/bin/yum</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#Update frist line "#!/usr/bin/python" to "#!/usr/bin/python2.6"</span></span><br><span class="line">➜  ~ vim /usr/bin/yum</span><br></pre></td></tr></table></figure>
+<h4 id="安装bypy"><a href="#安装bypy" class="headerlink" title="安装bypy"></a>安装<code>bypy</code></h4><h5 id="Install-Setuptools-amp-requests"><a href="#Install-Setuptools-amp-requests" class="headerlink" title="Install Setuptools &amp; requests"></a>Install Setuptools &amp; requests</h5><figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ wget --no-check-certificate https://pypi.python.org/packages/<span class="hljs-built_in">source</span>/s/setuptools/setuptools-1.4.2.tar.gz</span><br><span class="line">tar xf setuptools-1.4.2.tar.gz</span><br><span class="line">➜  ~ python setup.py install</span><br><span class="line"></span><br><span class="line">➜  ~ pip2.7 install requests</span><br></pre></td></tr></table></figure>
+<h5 id="Clone-amp-Install"><a href="#Clone-amp-Install" class="headerlink" title="Clone &amp;  Install"></a>Clone &amp;  Install</h5><figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ git <span class="hljs-built_in">clone</span> https://github.com/houtianze/bypy.git</span><br><span class="line">➜  ~ <span class="hljs-built_in">cd</span> bypy</span><br><span class="line">➜  bypy git:(master) python setup.py install</span><br></pre></td></tr></table></figure>
+<p>如果安装失败，注意看报错，是否缺少Python依赖包，或者版本不对</p>
+<h4 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h4><p>在成功安装完成之后，以下需要注意：</p>
+<h5 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h5><p>首次安装之后，需要进行授权，只需要运行任何一个命令都可以，例如<code>bypy info</code>，然后根据提示，打开网页登录你的百度网盘账号，取得授权码，即可。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/2grhz.png" alt></p>
+<p>复制上图中的链接到你的浏览器中，打开可以看到百度API授权页面，如下图，将授权码粘贴到命令行，然后回车等待验证通过即可。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/9zhdm.png" alt></p>
+<p>然后再次运行命令时，就不需要进行身份验证了</p>
+<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bypy]<span class="hljs-comment"># bypy info</span></span><br><span class="line">Quota: 6.103TB</span><br><span class="line">Used: 180.074GB</span><br></pre></td></tr></table></figure>
+<p>你可以看到我的百度网盘有6.103TB的空间，已经使用了180.074GB</p>
+<h5 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h5><p>由于百度PCS API权限限制，程序只能存取百度云端/apps/bypy目录下面的文件和目录。通过以下链接可以打开你的bypy默认路径：</p>
+<p> <a href="https://pan.baidu.com/disk/home#list/vmode=list&amp;path=%2Fapps%2Fbypy" target="_blank" rel="noopener">https://pan.baidu.com/disk/home#list/vmode=list&amp;path=%2Fapps%2Fbypy</a> </p>
+<h6 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h6><p>我在百度网盘内增加了一个v6的文件夹，对应我服务器名称，这是我在服务器内利用命令即可看到。</p>
+<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bypy]<span class="hljs-comment"># bypy list</span></span><br><span class="line">/apps/bypy (<span class="hljs-variable">$t</span> <span class="hljs-variable">$f</span> <span class="hljs-variable">$s</span> <span class="hljs-variable">$m</span> <span class="hljs-variable">$d</span>):</span><br><span class="line">D v6 0 2017-06-02, 10:28:41</span><br></pre></td></tr></table></figure>
+<h6 id="创建文件夹"><a href="#创建文件夹" class="headerlink" title="创建文件夹"></a>创建文件夹</h6><figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="hljs-comment"># bypy mkdir v6/bypy</span></span><br><span class="line">[root@localhost ~]<span class="hljs-comment"># bypy list v6</span></span><br><span class="line">/apps/bypy/v6 (<span class="hljs-variable">$t</span> <span class="hljs-variable">$f</span> <span class="hljs-variable">$s</span> <span class="hljs-variable">$m</span> <span class="hljs-variable">$d</span>):</span><br><span class="line">D bypy 0 2017-06-02, 10:35:53</span><br></pre></td></tr></table></figure>
+<h6 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h6><figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="hljs-comment"># bypy upload bypy.tgz</span></span><br><span class="line">[root@localhost ~]<span class="hljs-comment"># bypy list</span></span><br><span class="line">/apps/bypy (<span class="hljs-variable">$t</span> <span class="hljs-variable">$f</span> <span class="hljs-variable">$s</span> <span class="hljs-variable">$m</span> <span class="hljs-variable">$d</span>):</span><br><span class="line">D v6 0 2017-06-02, 10:28:41</span><br><span class="line">D v6_1 0 2017-06-02, 10:34:52</span><br><span class="line">F bypy.tgz 2867963 2017-06-02, 10:37:30 aa4160cdbf2f4eca9baf0fcd395241fe</span><br></pre></td></tr></table></figure>
+<h6 id="本地同步到百度网盘"><a href="#本地同步到百度网盘" class="headerlink" title="本地同步到百度网盘"></a>本地同步到百度网盘</h6><p>使用<code>syncup</code>参数将本地目录文件同步到百度网盘</p>
+<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="hljs-comment"># bypy syncup ./bypy v6/bypy</span></span><br><span class="line">[root@localhost ~]<span class="hljs-comment"># bypy list v6/bypy</span></span><br><span class="line">/apps/bypy/v6/bypy (<span class="hljs-variable">$t</span> <span class="hljs-variable">$f</span> <span class="hljs-variable">$s</span> <span class="hljs-variable">$m</span> <span class="hljs-variable">$d</span>):</span><br><span class="line">D .git 0 2017-06-02, 10:45:31</span><br><span class="line">D baidudoc 0 2017-06-02, 10:44:50</span><br><span class="line">D build 0 2017-06-02, 10:45:11</span><br><span class="line">D bypy 0 2017-06-02, 10:45:54</span><br><span class="line">D bypy.egg-info 0 2017-06-02, 10:45:00</span><br><span class="line">D dist 0 2017-06-02, 10:44:54</span><br><span class="line">D update 0 2017-06-02, 10:45:08</span><br><span class="line">F .editorconfig 277 2017-06-02, 10:45:08 d9f71b00f908626ae68da571ca47cbe2</span><br><span class="line">F .gitignore 484 2017-06-02, 10:45:00 833d8511a69044a1f1c6e0fe4b3c3117</span><br><span class="line">F .travis.yml 628 2017-06-02, 10:44:58 9f377251309ced0a55548c18896ebd7a</span><br><span class="line">F CONTRIBUTING.md 683 2017-06-02, 10:44:52 f5e8a568937039e5853613ff0fe296ee</span><br><span class="line">F genrst.py 129 2017-06-02, 10:45:30 4565eddf226c2e8bed73d2c30dfae9f3</span><br><span class="line">F HISTORY.md 2542 2017-06-02, 10:45:11 16605670a55a3dd9768d4c862543eac4</span><br><span class="line">F HISTORY.rst 2639 2017-06-02, 10:44:57 7215fbd0a3be667fd7f9fda14f06c1a9</span><br><span class="line">F LICENSE 1078 2017-06-02, 10:44:59 ebd1a0c53ea3046f505b995629faf8fb</span><br><span class="line">F MANIFEST.in 116 2017-06-02, 10:44:50 c98e18e65329b318f13abd031a4397c4</span><br><span class="line">F README.md 6276 2017-06-02, 10:46:15 d4b88fd543d93c6b63863d28f5c4e716</span><br><span class="line">F release.sh 1795 2017-06-02, 10:45:53 c086eb283e9554bbcd23daf0888e2819</span><br><span class="line">F requirements.txt 42 2017-06-02, 10:44:54 28b314f2f2d2ed79957a7a7e6d3f7c17</span><br><span class="line">F setup.cfg 70 2017-06-02, 10:45:11 b23579970dcedbcaeaaa00636d601335</span><br><span class="line">F setup.py 2377 2017-06-02, 10:44:58 34d63d5143ab02d3db7808321a7f9df4</span><br><span class="line">[root@localhost ~]<span class="hljs-comment"># bypy syncup ./bypy v6/bypy</span></span><br><span class="line">[root@localhost ~]<span class="hljs-comment">#</span></span><br></pre></td></tr></table></figure>
+<h6 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h6><p><code>bypy</code> 同样支持搜索，根据文件名检索，自动递归所有目录</p>
+<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="hljs-comment"># bypy search release.sh</span></span><br><span class="line">Found:</span><br><span class="line">F /apps/bypy/v6/bypy/release.sh 1795 2017-06-02, 10:45:53 2017-06-02, 10:45:53 c086eb283e9554bbcd23daf0888e2819</span><br></pre></td></tr></table></figure>
+<h6 id="比较本地与百度网盘"><a href="#比较本地与百度网盘" class="headerlink" title="比较本地与百度网盘"></a>比较本地与百度网盘</h6><figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 先删除本地一个文件</span></span><br><span class="line">[root@localhost ~]<span class="hljs-comment"># rm ./bypy/release.sh</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 对比</span></span><br><span class="line">[root@localhost ~]<span class="hljs-comment"># bypy compare v6/bypy ./bypy</span></span><br><span class="line">==== Same files ===</span><br><span class="line">F - MANIFEST.in</span><br><span class="line">... omit ...</span><br><span class="line">F - bypy/monkey.py</span><br><span class="line">F - README.md</span><br><span class="line">==== Different files ===</span><br><span class="line">==== Local only ====</span><br><span class="line">==== Remote only ====</span><br><span class="line">F - release.sh</span><br><span class="line"></span><br><span class="line">Statistics:</span><br><span class="line">--------------------------------</span><br><span class="line">Same: 131</span><br><span class="line">Different: 0</span><br><span class="line">Local only: 0</span><br><span class="line">Remote only: 1</span><br></pre></td></tr></table></figure>
+<p>通过以上可以看到，相同文件131，远程目录多了一个文件。</p>
+<h6 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h6><p><code>bypy</code>支持的操作很多，使用<code>bypy help</code>即可以看到，若要调试，使用以下参数可以打开对应调试信息：</p>
+<ul>
+<li>运行时添加<code>-v</code>参数，会显示进度详情。</li>
+<li>运行时添加<code>-d</code>，会显示一些调试信息。</li>
+<li>运行时添加<code>-ddd</code>，还会会显示HTTP通讯信息（<strong>警告：非常多</strong>）</li>
+</ul>
+<h4 id="数据库备份自动上传到百度网盘"><a href="#数据库备份自动上传到百度网盘" class="headerlink" title="数据库备份自动上传到百度网盘"></a>数据库备份自动上传到百度网盘</h4><p>之前也写过很多关于Mysql备份的文章，如果要详细查看，请打开以下链接：<a href="https://samzong.me/categories/MySQL/">分类MySQL</a></p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> create back script.</span></span><br><span class="line">[root@localhost ~]# touch mysql_back.sh</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> add executable permissions</span></span><br><span class="line">[root@localhost ~]# chmod +x mysql_back.sh</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# vim mysql_back.sh</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/bin/bash</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">  </span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> backup mysqldump file to baidu yunPan</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> filepath: /usr/<span class="hljs-built_in">local</span>/bin/mysql_back.sh</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> Author: samzong</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"></span></span><br><span class="line"></span><br><span class="line">function upload_file()&#123;</span><br><span class="line">        TIME=`date "+%Y%m%d%H%M%S"`</span><br><span class="line">        folder="/mysqlbak"</span><br><span class="line">        filename="db_$TIME.sql"</span><br><span class="line">        filePath=$folder/$filename</span><br><span class="line"></span><br><span class="line">        if [ ! -f $filePath ]; then</span><br><span class="line">                echo "[ERROR]["`date +%Y-%m-%d' '%H:%M:%S`"] $folder/$filename not found."</span><br><span class="line">        else</span><br><span class="line">                echo "[INFO]["`date +%Y-%m-%d' '%H:%M:%S`"] $folder/$filename has been found. Start uploading ......"</span><br><span class="line">                bypy upload "$filePath" "v6/mysql_backup/$filename"</span><br><span class="line">                echo "[INFO]["`date +%Y-%m-%d' '%H:%M:%S`"] Uploading end."</span><br><span class="line">        fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">  <span class="hljs-built_in">set</span> TIME variable</span></span><br><span class="line">TIME=`date "+%Y%m%d%H%M%S"`</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> backup db ghost to /mysqlbak/</span></span><br><span class="line">mysqldump --single-transaction -h localhost -u ghost_backuser -pbackupPass ghost  &gt; /mysqlbak/db_$TIME.sql</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> tar sql file</span></span><br><span class="line">tar czvf /mysqlbak/ghost_$TIME.sql.tgz /mysqlbak/ghost_$TIME.sql --remove-files</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> upload sql file to baidu yunPan.</span></span><br><span class="line">upload_file;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> send mial to admin<span class="hljs-string">'mial</span></span></span><br><span class="line">if [ $? -eq 0 ]; then</span><br><span class="line">    echo "ghost SQL dump is successfully. At time: `date` " | mail -s ghost-dump-successfully  samzong.lu@gmail.com</span><br><span class="line">else</span><br><span class="line">    echo " Error Error ghost SQL dump is Error. At time: `date` " | mail -s ghost-dump-error samzong.lu@gmail.com</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h4 id="添加计划任务"><a href="#添加计划任务" class="headerlink" title="添加计划任务"></a>添加计划任务</h4><figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> ~ crontab -e</span><br><span class="line">00 00 * * * sh /usr/<span class="hljs-built_in">local</span>/bin/mysql_back.sh</span><br></pre></td></tr></table></figure>
         </div>
         
         
@@ -486,17 +253,17 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-12-04T01:57:23.000Z">2016-12-04</time>
+                <time class="level-item has-text-grey" datetime="2017-05-23T06:30:55.000Z">2017-05-23</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
+                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    3 minutes read (About 376 words)
+                    2 minutes read (About 259 words)
                 </span>
                 
                 
@@ -505,28 +272,22 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/12/04/wrbpvpam/">HowTo Reset MySQL Root Password</a>
+                <a class="has-link-black-ter" href="/2017/05/23/fix-pip-install-timeout-inChina/">使用国内pypi源加速pip安装</a>
             
         </h1>
         <div class="content">
-            <h4 id="1-处理的状态"><a href="#1-处理的状态" class="headerlink" title="1. 处理的状态"></a>1. 处理的状态</h4><p> 首先确认服务器出于安全的状态，也就是没有人能够任意地连接MySQL数据库。<br>因为在重新设置MySQL的root密码的期间，MySQL数据库完全出于没有密码保护的<br>状态下，其他的用户也可以任意地登录和修改MySQL的信息。可以采用将MySQL对<br>外的端口封闭，并且停止Apache以及所有的用户进程的方法实现服务器的准安全<br>状态。最安全的状态是到服务器的Console上面操作，并且拔掉网线。</p>
-<h4 id="2-重置密码"><a href="#2-重置密码" class="headerlink" title="2. 重置密码"></a>2. 重置密码</h4><ol>
-<li><p>修改mysql配置文件，增加skip-grant-tables</p>
-<figure class="highlight cs hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="hljs-meta">root@demo ~</span>]<span class="hljs-meta"># vim /etc/my.cnf</span></span><br><span class="line">[<span class="hljs-meta">mysqld</span>]</span><br><span class="line">skip-grant-tables</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重启mysqld</p>
-<figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@demo ~]#<span class="hljs-built_in"> service </span>mysqld restart</span><br><span class="line">Stopping mysqld:                                           [  OK  ]</span><br><span class="line">Starting mysqld:                                           [  OK  ]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>登录mysql，并修改root密码.</p>
-<figure class="highlight livescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@demo ~]<span class="hljs-comment"># mysql -u root</span></span><br><span class="line">Welcome <span class="hljs-keyword">to</span> the MySQL monitor.  Commands end <span class="hljs-keyword">with</span> ; <span class="hljs-keyword">or</span> <span class="hljs-string">\g.</span></span><br><span class="line">Your MySQL connection id <span class="hljs-keyword">is</span> <span class="hljs-number">3</span></span><br><span class="line">Server version: <span class="hljs-number">5.5</span>.<span class="hljs-number">53</span> MySQL Community Server (GPL)</span><br><span class="line"></span><br><span class="line">Copyright (c) <span class="hljs-number">2000</span>, <span class="hljs-number">2016</span>, Oracle <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle <span class="hljs-keyword">is</span> a registered trademark <span class="hljs-keyword">of</span> Oracle Corporation <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> its</span><br><span class="line">affiliates. Other names may be trademarks <span class="hljs-keyword">of</span> their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type <span class="hljs-string">'help;'</span> <span class="hljs-keyword">or</span> <span class="hljs-string">'\h'</span> <span class="hljs-keyword">for</span> help. Type <span class="hljs-string">'\c'</span> <span class="hljs-keyword">to</span> clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt; use mysql</span><br><span class="line">Reading table information <span class="hljs-keyword">for</span> completion <span class="hljs-keyword">of</span> table <span class="hljs-keyword">and</span> column names</span><br><span class="line">You can turn <span class="hljs-literal">off</span> <span class="hljs-keyword">this</span> feature <span class="hljs-keyword">to</span> get a quicker startup <span class="hljs-keyword">with</span> -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; update user set password=password(<span class="hljs-string">'new-pass'</span>) where user=<span class="hljs-string">'root'</span>;</span><br><span class="line">Query OK, <span class="hljs-number">5</span> rows affected (<span class="hljs-number">0.00</span> sec)</span><br><span class="line">Rows matched: <span class="hljs-number">5</span>  Changed: <span class="hljs-number">5</span>  Warnings: <span class="hljs-number">0</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置文件去除skip-grant-tables，并重启服务器.</p>
-<figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@demo ~]# vim /etc/my.cnf</span><br><span class="line">[root@demo ~]#<span class="hljs-built_in"> service </span>mysqld restart</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用新密码登录到mysql</p>
-<figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="hljs-symbol">@demo</span> ~]<span class="hljs-meta"># mysql -h localhost -u root -p</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+            <p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/mxb19.png" alt></p>
+<p>在解决将AWS Cloudwatch的监控信息展示在Zabbix上时，需要安装AWS的一个python 工具包boto3，但是在安装过程中，碰到了如上图的错误信息；问题是由于国内网络问题导致连接python库超时，所以将库改为国内</p>
+<h4 id="国内pypi源站点"><a href="#国内pypi源站点" class="headerlink" title="国内pypi源站点"></a>国内pypi源站点</h4><ul>
+<li><a href="http://pypi.douban.com/simple" target="_blank" rel="noopener">http://pypi.douban.com/simple</a>  豆瓣</li>
+<li><a href="http://pypi.hustunique.com/simple" target="_blank" rel="noopener">http://pypi.hustunique.com/simple</a>  华中理工大学</li>
+<li><a href="http://pypi.sdutlinux.org/simple" target="_blank" rel="noopener">http://pypi.sdutlinux.org/simple</a>  山东理工大学</li>
+<li><a href="http://pypi.mirrors.ustc.edu.cn/simple" target="_blank" rel="noopener">http://pypi.mirrors.ustc.edu.cn/simple</a>  中国科学技术大学</li>
+</ul>
+<h4 id="Windows-修改"><a href="#Windows-修改" class="headerlink" title="Windows 修改"></a>Windows 修改</h4><p>编辑 %HOMEPATH%\pip\pip.ini<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = http://pypi.douban.com/simple</span><br></pre></td></tr></table></figure></p>
+<h4 id="Linux-修改"><a href="#Linux-修改" class="headerlink" title="Linux 修改"></a>Linux 修改</h4><p>编辑 ~/.pip/pip.conf ， 如果文件不存在，可以先创建<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = http://pypi.douban.com/simple</span><br></pre></td></tr></table></figure></p>
+<h4 id="修改easy-install-源"><a href="#修改easy-install-源" class="headerlink" title="修改easy_install 源"></a>修改easy_install 源</h4><p>编辑 ~/.pydistutils.cfg<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = http://pypi.douban.com/simple</span><br></pre></td></tr></table></figure></p>
+<h4 id="临时使用"><a href="#临时使用" class="headerlink" title="临时使用"></a>临时使用</h4><p>如果你不想修改源，只是临时使用的话，可以在pip安装时使用-i参数临时指定源站点<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip -i http://pypi.douban.com/simple install boto3</span><br></pre></td></tr></table></figure></p>
 
         </div>
         
@@ -546,10 +307,10 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-12-03T10:41:13.000Z">2016-12-03</time>
+                <time class="level-item has-text-grey" datetime="2017-05-20T11:08:45.000Z">2017-05-20</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Tomcat/">Tomcat</a>
+                <a class="has-link-grey -link" href="/categories/Git/">Git</a>
                 </div>
                 
                 
@@ -565,27 +326,29 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/12/03/tomcat-keytool-https/">Tomcat(2) 利用JDK自身keytool实现HTTPS</a>
+                <a class="has-link-black-ter" href="/2017/05/20/sourcetree-skipAuth-for-windows/">HowTo-Skip-Atlassian-Auth-for-SourceTree</a>
             
         </h1>
         <div class="content">
-            <p>因为一个偶然机会，想把自己的webserver通过https加密访问，这里就采用JDK自带的keytool工具实现，tomcat官方也推荐这种方式，英文好的同学走这里：<a href="https://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html" target="_blank" rel="noopener">官方配置</a></p>
+            <h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/eaxem.png" alt></p>
+<p>因为国内的网络的原因，导致我们在首次打开SourceTree时需要验证Atlassian账号，但是Atlassian的注册页面使用requirejs是用了Google的CDN服务，所以无法正常通过验证，如果你有翻墙工具，那么这就没有问题，下面我要讲的方法是在不翻墙的情况下跳过初始化验证。</p>
 <blockquote>
-<p>demo: CentOS 6.6 &amp; Tomcat 7 &amp; JDK 1.7</p>
+<p>目前我解决的是在Windows平台上的问题，关于Mac平台，我稍后会更新到文档中。</p>
 </blockquote>
-<h4 id="1-生成-keystore"><a href="#1-生成-keystore" class="headerlink" title="1. 生成 keystore"></a>1. 生成 keystore</h4><figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@test conf]<span class="hljs-comment"># keytool -genkey -v -alias tomcat -keyalg RSA -keystore mykeystore</span></span><br><span class="line">Enter keystore password:              <span class="hljs-comment">#设置密码</span></span><br><span class="line">Re-enter new password:                <span class="hljs-comment">#重复一次</span></span><br><span class="line">What <span class="hljs-keyword">is</span> your <span class="hljs-keyword">first</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">last</span> <span class="hljs-built_in">name</span>?</span><br><span class="line">  [Unknown]:  Alex Lu                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">of</span> your organizational unit?</span><br><span class="line">  [Unknown]:  visionet                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">of</span> your organization?</span><br><span class="line">  [Unknown]:  visionet                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">of</span> your City <span class="hljs-keyword">or</span> Locality?</span><br><span class="line">  [Unknown]:  SH                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">of</span> your State <span class="hljs-keyword">or</span> Province?</span><br><span class="line">  [Unknown]:  SH                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> two-letter country code <span class="hljs-keyword">for</span> this unit?</span><br><span class="line">  [Unknown]:  ZH                <span class="hljs-comment">#随便填</span></span><br><span class="line">Is CN=Alex Lu, OU=visionet, O=visionet, L=SH, ST=SH, C=ZH correct?</span><br><span class="line">  [no]:  Y                    <span class="hljs-comment">#这里要Y，确认前面信息。</span></span><br><span class="line"></span><br><span class="line">Generating <span class="hljs-number">2</span>,<span class="hljs-number">048</span> bit RSA key pair <span class="hljs-keyword">and</span> self-signed certificate (SHA256withRSA) <span class="hljs-keyword">with</span> a validity <span class="hljs-keyword">of</span> <span class="hljs-number">90</span> days</span><br><span class="line">    <span class="hljs-keyword">for</span>: CN=Alex Lu, OU=visionet, O=visionet, L=SH, ST=SH, C=ZH</span><br><span class="line">Enter key password <span class="hljs-keyword">for</span> &lt;tomcat&gt;</span><br><span class="line">    (RETURN <span class="hljs-keyword">if</span> same <span class="hljs-keyword">as</span> keystore password):        <span class="hljs-comment">#默认回车即可，不需要设置太多密码</span></span><br><span class="line">[Storing mykeystore]</span><br><span class="line">[root@test conf]<span class="hljs-comment"># ls</span></span><br><span class="line">Catalina  catalina.policy  catalina.properties  context.xml  logging.properties  mykeystore  server.xml  tomcat-users.xml  web.xml</span><br></pre></td></tr></table></figure>
+<h4 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h4><p>我的想法是通过增加<code>account</code>信息，让<code>SourceTree</code>跳过验证；经过测试<code>2.0.19</code>及以下版本都支持，但是SourceTree在最新版本2.0.20时可能修订验证方式，所以导致我的这个方式不适用，大家可以在我的百度云盘共享中下载2.0.19，功能上并没发生多少变化。</p>
+<p>链接: <a href="https://pan.baidu.com/s/1qYsHKWs" target="_blank" rel="noopener">https://pan.baidu.com/s/1qYsHKWs</a> 密码: wnc3</p>
+<h4 id="解决步骤"><a href="#解决步骤" class="headerlink" title="解决步骤"></a>解决步骤</h4><h5 id="NET-4-5-2"><a href="#NET-4-5-2" class="headerlink" title=".NET 4.5.2"></a>.NET 4.5.2</h5><p>SourceTree 依赖的.NET环境最低是4.5.2，当然在你安装的过程中，会提示你下载安装，你只需要确认即可，不过这样下载会比较慢，所以建议你使用Offline的形式安装，下面是微软官方下载地址：</p>
+<p><a href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=42642" target="_blank" rel="noopener">https://www.microsoft.com/en-us/download/confirmation.aspx?id=42642</a></p>
+<h5 id="SourceTree"><a href="#SourceTree" class="headerlink" title="SourceTree"></a>SourceTree</h5><p>安装过程中，默认一路“Next”即可，在安装完成之后，我们需要找到SourceTree在LocalAppData中的路径，请打开资源管理窗口，然后输入以下地址：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%LocalAppData%\Atlassian\SourceTree\</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p> 注意：-keystore是用来指定keystore保存位置，如果不加参数默认保存的当前用户家目录为~/.keystore<br>       -validity 可以用来指定证书有效期，单位为天，缺省值为90天。</p>
+<p>如果路径不存在，创建目录即可</p>
 </blockquote>
-<h4 id="2-备份-tomcatdir-conf-server-xml"><a href="#2-备份-tomcatdir-conf-server-xml" class="headerlink" title="2. 备份$tomcatdir/conf/server.xml"></a>2. 备份$tomcatdir/conf/server.xml</h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp <span class="hljs-variable">$tomcatdir</span><span class="hljs-regexp">/conf/</span>server.xml <span class="hljs-variable">$tomcatdir</span><span class="hljs-regexp">/conf/</span>server.xml</span><br></pre></td></tr></table></figure>
-<h4 id="3-修改server-xml"><a href="#3-修改server-xml" class="headerlink" title="3. 修改server.xml"></a>3. 修改server.xml</h4><h6 id="a-注释以下：（tomcat注释用：-lt-XXXX-）-如何也想保留http访问，可以不注释"><a href="#a-注释以下：（tomcat注释用：-lt-XXXX-）-如何也想保留http访问，可以不注释" class="headerlink" title="a. 注释以下：（tomcat注释用：&lt;!-- XXXX --> ）,如何也想保留http访问，可以不注释"></a>a. 注释以下：（tomcat注释用：&lt;!-- XXXX --> ）,如何也想保留http访问，可以不注释</h6><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">&lt;!--</span></span><br><span class="line"><span class="hljs-comment">&lt;Connector executor="tomcatThreadPool"</span></span><br><span class="line"><span class="hljs-comment">                port="80" protocol="HTTP/1.1"</span></span><br><span class="line"><span class="hljs-comment">                connectionTimeout="20000"</span></span><br><span class="line"><span class="hljs-comment">                redirectPort="8443" /&gt;</span></span><br><span class="line"><span class="hljs-comment">--&gt;</span></span><br></pre></td></tr></table></figure>
-<h6 id="b-取消下面注释"><a href="#b-取消下面注释" class="headerlink" title="b. 取消下面注释"></a>b. 取消下面注释</h6><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector <span class="hljs-attribute">port</span>=<span class="hljs-string">"443"</span> <span class="hljs-attribute">protocol</span>=<span class="hljs-string">"HTTP/1.1"</span> <span class="hljs-attribute">SSLEnabled</span>=<span class="hljs-string">"true"</span></span><br><span class="line">                <span class="hljs-attribute">maxThreads</span>=<span class="hljs-string">"150"</span> <span class="hljs-attribute">scheme</span>=<span class="hljs-string">"https"</span> <span class="hljs-attribute">secure</span>=<span class="hljs-string">"true"</span></span><br><span class="line">                <span class="hljs-attribute">clientAuth</span>=<span class="hljs-string">"false"</span> <span class="hljs-attribute">sslProtocol</span>=<span class="hljs-string">"TLS"</span> /&gt;</span><br></pre></td></tr></table></figure>
-<h6 id="c-增加keystoreFile和keystorePass"><a href="#c-增加keystoreFile和keystorePass" class="headerlink" title="c. 增加keystoreFile和keystorePass"></a>c. 增加keystoreFile和keystorePass</h6><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector <span class="hljs-attribute">port</span>=<span class="hljs-string">"443"</span> <span class="hljs-attribute">protocol</span>=<span class="hljs-string">"HTTP/1.1"</span> <span class="hljs-attribute">SSLEnabled</span>=<span class="hljs-string">"true"</span></span><br><span class="line">               <span class="hljs-attribute">maxThreads</span>=<span class="hljs-string">"150"</span> <span class="hljs-attribute">scheme</span>=<span class="hljs-string">"https"</span> <span class="hljs-attribute">secure</span>=<span class="hljs-string">"true"</span></span><br><span class="line">               <span class="hljs-attribute">clientAuth</span>=<span class="hljs-string">"false"</span> <span class="hljs-attribute">sslProtocol</span>=<span class="hljs-string">"TLS"</span></span><br><span class="line">               <span class="hljs-attribute">keystoreFile</span>=<span class="hljs-string">"conf/mykeystore"</span> <span class="hljs-attribute">keystorePass</span>=<span class="hljs-string">"123456"</span>/&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>keystoreFile=跟keystore文件位置<br>keystorePass=跟当时keytool命令执行时输入的密码</p>
-</blockquote>
-<h4 id="4-重启tomcat"><a href="#4-重启tomcat" class="headerlink" title="4. 重启tomcat"></a>4. 重启tomcat</h4><figure class="highlight x86asm hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@<span class="hljs-keyword">test</span> conf]# ../bin/catalina.sh stop &amp;&amp; ../bin/catalina.sh start</span><br><span class="line">Using CATALINA_BASE:   /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span></span><br><span class="line">Using CATALINA_HOME:   /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span></span><br><span class="line">Using CATALINA_TMPDIR: /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span>/temp</span><br><span class="line">Using JRE_HOME:        /home/pms/jdk1<span class="hljs-meta">.7</span><span class="hljs-meta">.0_65</span></span><br><span class="line">Using CLASSPATH:       /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span>/bin/bootstrap.jar</span><br><span class="line">Using CATALINA_BASE:   /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span></span><br><span class="line">Using CATALINA_HOME:   /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span></span><br><span class="line">Using CATALINA_TMPDIR: /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span>/temp</span><br><span class="line">Using JRE_HOME:        /home/pms/jdk1<span class="hljs-meta">.7</span><span class="hljs-meta">.0_65</span></span><br><span class="line">Using CLASSPATH:       /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span>/bin/bootstrap.jar</span><br><span class="line">[root@<span class="hljs-keyword">test</span> conf]# netstat -ntlup | grep -e <span class="hljs-string">"80\|443"</span></span><br><span class="line">tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:<span class="hljs-number">80</span>         <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:*          LISTEN      <span class="hljs-number">21960</span>/java</span><br><span class="line">tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:<span class="hljs-number">443</span>        <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:*          LISTEN      <span class="hljs-number">21960</span>/java</span><br><span class="line">tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">127.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.1</span>:<span class="hljs-number">8005</span>     <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:*          LISTEN      <span class="hljs-number">21960</span>/java</span><br><span class="line">tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:<span class="hljs-number">8009</span>       <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:*          LISTEN      <span class="hljs-number">21960</span>/java</span><br><span class="line">[root@<span class="hljs-keyword">test</span> conf]#</span><br></pre></td></tr></table></figure>
-<p>OK !</p>
+<p>然后将之前百度云盘的文件<code>accounts.json</code>复制到这个位置，它的路径应该是：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%LocalAppData%\Atlassian\SourceTree\accounts.json</span><br></pre></td></tr></table></figure>
+<p>文件内容：</p>
+<figure class="highlight json hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="hljs-attr">"$id"</span>: <span class="hljs-string">"1"</span>,</span><br><span class="line">    <span class="hljs-attr">"$type"</span>: <span class="hljs-string">"SourceTree.Api.Host.Identity.Model.IdentityAccount, SourceTree.Api.Host.Identity"</span>,</span><br><span class="line">    <span class="hljs-attr">"Authenticate"</span>: <span class="hljs-literal">true</span>,</span><br><span class="line">    <span class="hljs-attr">"HostInstance"</span>: &#123;</span><br><span class="line">      <span class="hljs-attr">"$id"</span>: <span class="hljs-string">"2"</span>,</span><br><span class="line">      <span class="hljs-attr">"$type"</span>: <span class="hljs-string">"SourceTree.Host.Atlassianaccount.AtlassianAccountInstance, SourceTree.Host.AtlassianAccount"</span>,</span><br><span class="line">      <span class="hljs-attr">"Host"</span>: &#123;</span><br><span class="line">        <span class="hljs-attr">"$id"</span>: <span class="hljs-string">"3"</span>,</span><br><span class="line">        <span class="hljs-attr">"$type"</span>: <span class="hljs-string">"SourceTree.Host.Atlassianaccount.AtlassianAccountHost, SourceTree.Host.AtlassianAccount"</span>,</span><br><span class="line">        <span class="hljs-attr">"Id"</span>: <span class="hljs-string">"atlassian account"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="hljs-attr">"BaseUrl"</span>: <span class="hljs-string">"https://id.atlassian.com/"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="hljs-attr">"Credentials"</span>: &#123;</span><br><span class="line">      <span class="hljs-attr">"$id"</span>: <span class="hljs-string">"4"</span>,</span><br><span class="line">      <span class="hljs-attr">"$type"</span>: <span class="hljs-string">"SourceTree.Model.BasicAuthCredentials, SourceTree.Api.Account"</span>,</span><br><span class="line">      <span class="hljs-attr">"Username"</span>: <span class="hljs-string">""</span>,</span><br><span class="line">      <span class="hljs-attr">"Email"</span>: <span class="hljs-literal">null</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="hljs-attr">"IsDefault"</span>: <span class="hljs-literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>添加完成之后，启动SourceTree即可发现已经跳过了验证界面。</p>
 
         </div>
         
@@ -604,10 +367,10 @@ var _hmt = _hmt || [];
 <div class="card card-transparent">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/page/4/">Previous</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/4/">Anterior</a>
         </div>
         <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/page/6/">Next</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/6/">Siguiente</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
             
@@ -623,7 +386,7 @@ var _hmt = _hmt || [];
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/14/">14</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/31/">31</a></li>
             
         </ul>
     </nav>
@@ -664,7 +427,7 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        Entradas
                     </p>
                     <p class="title has-text-weight-normal">
                         92
@@ -674,7 +437,7 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        Categorias
                     </p>
                     <p class="title has-text-weight-normal">
                         24
@@ -684,7 +447,7 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        Etiquetas
                     </p>
                     <p class="title has-text-weight-normal">
                         37
@@ -694,7 +457,7 @@ var _hmt = _hmt || [];
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/SAMZONG" target="_blank">
-                Follow</a>
+                SEGUIR</a>
         </div>
         
         
@@ -781,7 +544,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                Categorias
             </h3>
             <ul class="menu-list">
             <li>
@@ -986,7 +749,7 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            Nube de etiquetas
         </h3>
         <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
     </div>
@@ -1000,7 +763,7 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Recientes
         </h3>
         
         <article class="media">
@@ -1106,7 +869,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -1361,7 +1124,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1644,7 +1407,7 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Recientes
         </h3>
         
         <article class="media">
@@ -1750,7 +1513,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -2005,7 +1768,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -2443,10 +2206,10 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
+                POSTS: 'Entradas',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',

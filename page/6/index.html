@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html  lang="zh">
-<head>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
 <title>SAMZONG</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
@@ -104,7 +104,7 @@ var _hmt = _hmt || [];
 
 
 <link rel="stylesheet" href="/css/style.css">
-<meta name="referrer" content="no-referrer" />
+<meta name="referrer" content="no-referrer">
 
 </head>
 <body class="is-3-column">
@@ -121,20 +121,15 @@ var _hmt = _hmt || [];
             
             <div class="navbar-start">
                 
-                <a class="navbar-item"
-                href="/">Home</a>
+                <a class="navbar-item" href="/">Home</a>
                 
-                <a class="navbar-item"
-                href="/archives">Archives</a>
+                <a class="navbar-item" href="/archives">Archives</a>
                 
-                <a class="navbar-item"
-                href="/categories">Categories</a>
+                <a class="navbar-item" href="/categories">Categories</a>
                 
-                <a class="navbar-item"
-                href="/tags">Tags</a>
+                <a class="navbar-item" href="/tags">Tags</a>
                 
-                <a class="navbar-item"
-                href="/about">About</a>
+                <a class="navbar-item" href="/about">About</a>
                 
             </div>
             
@@ -170,335 +165,7 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-11-30T15:45:54.000Z">2016-11-30</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    10 minutes read (About 1510 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/11/30/aws-s3-s3cmd-linux/">AWS(1) Use s3cmd命令行管理S3存储</a>
-            
-        </h1>
-        <div class="content">
-            <p>S3 是AWS公有云服务提供的云存储服务，提供海量数据存储服务，同时基于AWS S3提供的一系列网络服务接口，也有大量已经开发完成的工具供我们使用，以利用起AWS庞大的存储资源，这篇文章的目录选取了其中一个用Linux命令行工具<a href="http://s3tools.org" target="_blank" rel="noopener">s3cmd</a>来管理AWS S3云存储其中的数据。</p>
-<p>s3cmd 是非常优秀的S3命令行管理工具，用python编写，支持python 2.6 &amp; 2.7 ，但是尚不支持python3，但是目前绝大多数的Linux发行版默认都是python2.x 系列。</p>
-<blockquote>
-<p>Demo CentOS 6.x</p>
-</blockquote>
-<h3 id="Install-s3cmd"><a href="#Install-s3cmd" class="headerlink" title="Install s3cmd"></a><strong>Install s3cmd</strong></h3><h5 id="1-无论是Denbian系还是Rehat系列，软件仓库内已经加入了s3cmd："><a href="#1-无论是Denbian系还是Rehat系列，软件仓库内已经加入了s3cmd：" class="headerlink" title="1. 无论是Denbian系还是Rehat系列，软件仓库内已经加入了s3cmd："></a>1. 无论是Denbian系还是Rehat系列，软件仓库内已经加入了s3cmd：</h5><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 1.1 Ubuntu &amp; Debian</span></span><br><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> sudo apt-get install -y s3cmd</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 1.2 RHEL &amp; CentOS</span></span><br><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> sudo yum install s3cmd</span></span><br></pre></td></tr></table></figure>
-<h5 id="2-如果您的系统比较特殊，软件仓库内找不到s3cmd，还有s3cmd的Github上去获取相关安装信息：链接"><a href="#2-如果您的系统比较特殊，软件仓库内找不到s3cmd，还有s3cmd的Github上去获取相关安装信息：链接" class="headerlink" title="2. 如果您的系统比较特殊，软件仓库内找不到s3cmd，还有s3cmd的Github上去获取相关安装信息：链接"></a>2. 如果您的系统比较特殊，软件仓库内找不到s3cmd，还有s3cmd的Github上去获取相关安装信息：<a href="https://github.com/s3tools/s3cmd" target="_blank" rel="noopener">链接</a></h5><h3 id="Configure-s3cmd"><a href="#Configure-s3cmd" class="headerlink" title="Configure s3cmd"></a><strong>Configure s3cmd</strong></h3><h5 id="1-第一次运行s3cmd-需要首先预配置相关s3信息"><a href="#1-第一次运行s3cmd-需要首先预配置相关s3信息" class="headerlink" title="1. 第一次运行s3cmd 需要首先预配置相关s3信息:"></a>1. 第一次运行s3cmd 需要首先预配置相关s3信息:</h5><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> s3cmd --configure</span></span><br></pre></td></tr></table></figure>
-<p>它会问你一系列问题：</p>
-<ul>
-<li>AWS S3 中IAM账户的Access Key以及Secret Key (建议单独创建IAM)</li>
-<li>对AWS S3双向传输的加密密码 （自行设定不要忘记）</li>
-<li>为加密数据设定GPG程序的路径（默认即可）</li>
-<li>是否使用https协议 （默认即可）</li>
-<li>如果不是https协议，需要设定名字和端口<br>配置完成之后，配置信息以普通文本保存在~/.s3cfg<h5 id="2-China-与Global-的区别"><a href="#2-China-与Global-的区别" class="headerlink" title="2. China 与Global 的区别"></a>2. China 与Global 的区别</h5>笔者在第一次运行时，始终无法添加成功，报错信息如下：<figure class="highlight subunit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">ERROR: Test</span> failed: 403 (InvalidAccessKeyId): The AWS Accecc Key Id you provided does not exist in our records.</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>起初以为是Access Key 不对，在经过多次测试之后，才发现问题，这是因为s3cmd 内置s3的Domain为Global的信息，而中国与Global是独立存在的所以查找不到我们的Access Key。所以，如果你使用的Global AWS那么上面一步应该已经配置好了你的s3cmd，如果你是AWS China的用户，那么你要做以下操作。</p>
-<ul>
-<li>在Retry configuration? [Y/n]选择“n”</li>
-<li>Save settings? [y/N] 选择“y”</li>
-<li>保存设置之后，编辑配置文件（~/.s3cfg ) 修改其中的如下字段，并将其中%(bucket)s用您实际的某一个存储桶名字代替掉<figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">bucket_location</span> = %(location)</span><br><span class="line"><span class="hljs-attr">host_base</span> = s3.cn-north-<span class="hljs-number">1</span>.amazonaws.com.cn</span><br><span class="line"><span class="hljs-attr">host_bucket</span> = %(bucket)s.s3.cn-north-<span class="hljs-number">1</span>.amazonaws.com.cn</span><br><span class="line"><span class="hljs-attr">website_endpoint</span> = http://%(bucket)s.s3-website-%(location)s.amazonaws.com.cn/</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>例如，你的存储桶的名字为s3chinatest: 地域为北京。<br><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bucket_location = cn-north-<span class="hljs-number">1</span></span><br><span class="line">host_base = s3<span class="hljs-selector-class">.cn-north-1</span><span class="hljs-selector-class">.amazonaws</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.cn</span></span><br><span class="line">host_bucket = s3chinatest<span class="hljs-selector-class">.s3</span><span class="hljs-selector-class">.cn-north-1</span><span class="hljs-selector-class">.amazonaws</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.cn</span></span><br><span class="line">website_endpoint = http:<span class="hljs-comment">//s3chinatest.s3-website.amazonaws.com.cn/</span></span><br></pre></td></tr></table></figure></p>
-<h5 id="3-保存配置文件，然后用命令测试一下，确认s3cmd可以正常工作。"><a href="#3-保存配置文件，然后用命令测试一下，确认s3cmd可以正常工作。" class="headerlink" title="3. 保存配置文件，然后用命令测试一下，确认s3cmd可以正常工作。"></a>3. 保存配置文件，然后用命令测试一下，确认s3cmd可以正常工作。</h5><figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ s3cmd ls</span><br><span class="line"><span class="hljs-number">2016</span><span class="hljs-number">-11</span><span class="hljs-number">-18</span> <span class="hljs-number">22</span>:<span class="hljs-number">30</span> <span class="hljs-string">s3:</span><span class="hljs-comment">//s3chinatest</span></span><br><span class="line"><span class="hljs-number">2016</span><span class="hljs-number">-10</span><span class="hljs-number">-29</span> <span class="hljs-number">00</span>:<span class="hljs-number">14</span> <span class="hljs-string">s3:</span><span class="hljs-comment">//bucket2</span></span><br></pre></td></tr></table></figure>
-<h3 id="s3cmd-的基本使用"><a href="#s3cmd-的基本使用" class="headerlink" title="s3cmd 的基本使用"></a><strong>s3cmd 的基本使用</strong></h3><h5 id="1-查看当前账户下所有现有的桶-bucket-："><a href="#1-查看当前账户下所有现有的桶-bucket-：" class="headerlink" title="1. 查看当前账户下所有现有的桶(bucket)："></a>1. 查看当前账户下所有现有的桶(bucket)：</h5><figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ s3cmd ls</span><br><span class="line"><span class="hljs-number">2016</span><span class="hljs-number">-11</span><span class="hljs-number">-18</span> <span class="hljs-number">22</span>:<span class="hljs-number">30</span> <span class="hljs-string">s3:</span><span class="hljs-comment">//s3chinatest</span></span><br><span class="line"><span class="hljs-number">2016</span><span class="hljs-number">-10</span><span class="hljs-number">-29</span> <span class="hljs-number">00</span>:<span class="hljs-number">14</span> <span class="hljs-string">s3:</span><span class="hljs-comment">//bucket2</span></span><br></pre></td></tr></table></figure>
-<h5 id="2-创建新的bucket："><a href="#2-创建新的bucket：" class="headerlink" title="2. 创建新的bucket："></a>2. 创建新的bucket：</h5><figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ s3cmd mb <span class="hljs-string">s3:</span><span class="hljs-comment">//s3chinatest2</span></span><br><span class="line"></span><br><span class="line">Bucket ’<span class="hljs-string">s3:</span><span class="hljs-comment">//s3chinatest2/’ created</span></span><br></pre></td></tr></table></figure>
-<h5 id="3-上传文件到bucket"><a href="#3-上传文件到bucket" class="headerlink" title="3. 上传文件到bucket:"></a>3. 上传文件到bucket:</h5><figure class="highlight clean hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ s3cmd put file1.txt file2.txt file3.txt s3:<span class="hljs-comment">//s3chinatest2</span></span><br><span class="line">upload: <span class="hljs-string">'file1.txt'</span> -&gt; <span class="hljs-string">'s3://s3chinatest2/file1.txt'</span>  [<span class="hljs-number">1</span> <span class="hljs-keyword">of</span> <span class="hljs-number">3</span>]</span><br><span class="line"> <span class="hljs-number">2432</span> <span class="hljs-keyword">of</span> <span class="hljs-number">2432</span>   <span class="hljs-number">100</span>% <span class="hljs-keyword">in</span>    <span class="hljs-number">0</span>s    <span class="hljs-number">43.27</span> kB/s  done</span><br><span class="line">upload: <span class="hljs-string">'file2.txt'</span> -&gt; <span class="hljs-string">'s3://s3chinatest2/file2.txt'</span>  [<span class="hljs-number">2</span> <span class="hljs-keyword">of</span> <span class="hljs-number">3</span>]</span><br><span class="line"> <span class="hljs-number">2432</span> <span class="hljs-keyword">of</span> <span class="hljs-number">2432</span>   <span class="hljs-number">100</span>% <span class="hljs-keyword">in</span>    <span class="hljs-number">0</span>s    <span class="hljs-number">59.83</span> kB/s  done</span><br><span class="line">upload: <span class="hljs-string">'file3.txt'</span> -&gt; <span class="hljs-string">'s3://s3chinatest2/file3.txt'</span>  [<span class="hljs-number">3</span> <span class="hljs-keyword">of</span> <span class="hljs-number">3</span>]</span><br><span class="line"> <span class="hljs-number">2432</span> <span class="hljs-keyword">of</span> <span class="hljs-number">2432</span>   <span class="hljs-number">100</span>% <span class="hljs-keyword">in</span>    <span class="hljs-number">0</span>s    <span class="hljs-number">58.93</span> kB/s  done</span><br><span class="line"></span><br><span class="line"> $ s3cmd ls s3:<span class="hljs-comment">//s3chinatest2</span></span><br><span class="line"> <span class="hljs-number">2016</span><span class="hljs-number">-11</span><span class="hljs-number">-18</span> <span class="hljs-number">15</span>:<span class="hljs-number">11</span>      <span class="hljs-number">2432</span>   s3:<span class="hljs-comment">//s3chinatest2/file1.txt</span></span><br><span class="line"><span class="hljs-number">2016</span><span class="hljs-number">-11</span><span class="hljs-number">-18</span> <span class="hljs-number">15</span>:<span class="hljs-number">11</span>      <span class="hljs-number">2432</span>   s3:<span class="hljs-comment">//s3chinatest2/file2.txt</span></span><br><span class="line"><span class="hljs-number">2016</span><span class="hljs-number">-11</span><span class="hljs-number">-18</span> <span class="hljs-number">15</span>:<span class="hljs-number">11</span>      <span class="hljs-number">2432</span>   s3:<span class="hljs-comment">//s3chinatest2/file3.txt</span></span><br></pre></td></tr></table></figure>
-<p>上传的文件默认访问权限为私有(private)，只能用户自己可以访问，使用正确的访问和安全密码即可。<br><br>如果要上传公开访问权限的文件，需要添加 –acl-public 参数.<br><figure class="highlight clean hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ s3cmd put  --acl-public file4.txt s3:<span class="hljs-comment">//s3chinatest2</span></span><br><span class="line">upload: <span class="hljs-string">'file4.txt'</span> -&gt; <span class="hljs-string">'s3://s3chinatest2/file1.txt'</span>  [<span class="hljs-number">1</span> <span class="hljs-keyword">of</span> <span class="hljs-number">1</span>]</span><br><span class="line"> <span class="hljs-number">2432</span> <span class="hljs-keyword">of</span> <span class="hljs-number">2432</span>   <span class="hljs-number">100</span>% <span class="hljs-keyword">in</span>    <span class="hljs-number">0</span>s    <span class="hljs-number">43.27</span> kB/s  done</span><br></pre></td></tr></table></figure></p>
-<h5 id="4-下载bucket内的文件"><a href="#4-下载bucket内的文件" class="headerlink" title="4. 下载bucket内的文件:"></a>4. 下载bucket内的文件:</h5><figure class="highlight clean hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ s3cmd get s3:<span class="hljs-comment">//s3chinatest2/file1.txt</span></span><br><span class="line">download: <span class="hljs-string">'s3://s3chinatest2/file1.txt'</span> -&gt; <span class="hljs-string">'./file1.txt'</span>  [<span class="hljs-number">1</span> <span class="hljs-keyword">of</span> <span class="hljs-number">1</span>]</span><br><span class="line"> <span class="hljs-number">2432</span> <span class="hljs-keyword">of</span> <span class="hljs-number">2432</span>   <span class="hljs-number">100</span>% <span class="hljs-keyword">in</span>    <span class="hljs-number">0</span>s    <span class="hljs-number">27.65</span> kB/s  done</span><br><span class="line"></span><br><span class="line"> # 支持 <span class="hljs-string">" * "</span>匹配任意字符</span><br><span class="line"> $ s3cmd get s3:<span class="hljs-comment">//s3chinatest2/file*.txt</span></span><br><span class="line">download: <span class="hljs-string">'s3://s3chinatest2/file1.txt'</span> -&gt; <span class="hljs-string">'./file1.txt'</span>  [<span class="hljs-number">1</span> <span class="hljs-keyword">of</span> <span class="hljs-number">3</span>]</span><br><span class="line"> <span class="hljs-number">2432</span> <span class="hljs-keyword">of</span> <span class="hljs-number">2432</span>   <span class="hljs-number">100</span>% <span class="hljs-keyword">in</span>    <span class="hljs-number">0</span>s    <span class="hljs-number">48.11</span> kB/s  done</span><br><span class="line">download: <span class="hljs-string">'s3://s3chinatest2/file2.txt'</span> -&gt; <span class="hljs-string">'./file2.txt'</span>  [<span class="hljs-number">2</span> <span class="hljs-keyword">of</span> <span class="hljs-number">3</span>]</span><br><span class="line"> <span class="hljs-number">2432</span> <span class="hljs-keyword">of</span> <span class="hljs-number">2432</span>   <span class="hljs-number">100</span>% <span class="hljs-keyword">in</span>    <span class="hljs-number">0</span>s    <span class="hljs-number">84.76</span> kB/s  done</span><br><span class="line">download: <span class="hljs-string">'s3://s3chinatest2/file3.txt'</span> -&gt; <span class="hljs-string">'./file3.txt'</span>  [<span class="hljs-number">3</span> <span class="hljs-keyword">of</span> <span class="hljs-number">3</span>]</span><br><span class="line"> <span class="hljs-number">2432</span> <span class="hljs-keyword">of</span> <span class="hljs-number">2432</span>   <span class="hljs-number">100</span>% <span class="hljs-keyword">in</span>    <span class="hljs-number">0</span>s    <span class="hljs-number">75.28</span> kB/s  done</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意若当前目录有相同文件时，可以使用–skip-existing 参数跳过这些文件。</p>
-<h5 id="5-删除bucket内的文件"><a href="#5-删除bucket内的文件" class="headerlink" title="5. 删除bucket内的文件:"></a>5. 删除bucket内的文件:</h5><figure class="highlight arduino hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta"># del 与 rm 都可以使用.</span></span><br><span class="line">$ s3cmd del s3:<span class="hljs-comment">//s3chinatest2/file1.txt</span></span><br><span class="line"><span class="hljs-keyword">delete</span>: <span class="hljs-string">'s3://s3chinatest2/file1.txt'</span></span><br></pre></td></tr></table></figure>
-</blockquote>
-<h5 id="6-获取当前bucket-信息-："><a href="#6-获取当前bucket-信息-：" class="headerlink" title="6. 获取当前bucket 信息 ："></a>6. 获取当前bucket 信息 ：</h5><figure class="highlight yaml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># bucket的存储位置及访问权限设置</span></span><br><span class="line"><span class="hljs-string">s3cmd</span> <span class="hljs-string">info</span> <span class="hljs-attr">s3://s3chinatest2</span></span><br><span class="line"><span class="hljs-attr">s3:</span><span class="hljs-string">//s3chinatest2/</span> <span class="hljs-string">(bucket):</span></span><br><span class="line"><span class="hljs-attr">   Location:</span>  <span class="hljs-string">cn-north-1</span></span><br><span class="line"><span class="hljs-attr">   Payer:</span>     <span class="hljs-string">BucketOwner</span></span><br><span class="line">   <span class="hljs-string">Expiration</span> <span class="hljs-attr">Rule:</span> <span class="hljs-string">none</span></span><br><span class="line"><span class="hljs-attr">   policy:</span>    <span class="hljs-string">none</span></span><br><span class="line"><span class="hljs-attr">   cors:</span>      <span class="hljs-string">none</span></span><br><span class="line"><span class="hljs-attr">   ACL:</span>       <span class="hljs-number">2</span><span class="hljs-attr">fe63da8137b85d9868d240869945287b285a58b5d7e07e21ac813b486dcabea:</span> <span class="hljs-string">FULL_CONTROL</span></span><br></pre></td></tr></table></figure>
-<h5 id="7-上传文件到bucket时加密"><a href="#7-上传文件到bucket时加密" class="headerlink" title="7. 上传文件到bucket时加密"></a>7. 上传文件到bucket时加密</h5><p>当用s3cmd下载一个加密过的文件时，它会自动检测加密并在下载过程解密，因此下载和访问加密文件时，就像通常所做的一样：<br><figure class="highlight clean hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ s3cmd -e put t_result.java s3:<span class="hljs-comment">//s3chinatest2</span></span><br><span class="line">upload: <span class="hljs-string">'/tmp/tmpfile-S9lUXERAEUdnNaz5zHba'</span> -&gt; <span class="hljs-string">'s3://s3chinatest2/t_result.java'</span>  [<span class="hljs-number">1</span> <span class="hljs-keyword">of</span> <span class="hljs-number">1</span>]</span><br><span class="line"> <span class="hljs-number">3355</span> <span class="hljs-keyword">of</span> <span class="hljs-number">3355</span>   <span class="hljs-number">100</span>% <span class="hljs-keyword">in</span>    <span class="hljs-number">0</span>s    <span class="hljs-number">39.25</span> kB/s  done</span><br></pre></td></tr></table></figure></p>
-<h5 id="8-查看bucket使用情况"><a href="#8-查看bucket使用情况" class="headerlink" title="8. 查看bucket使用情况"></a>8. 查看bucket使用情况</h5><figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ s3cmd du <span class="hljs-string">s3:</span><span class="hljs-comment">//s3chinatest2</span></span><br><span class="line"><span class="hljs-number">8219</span>     <span class="hljs-number">3</span> objects <span class="hljs-string">s3:</span><span class="hljs-comment">//s3chinatest2/</span></span><br></pre></td></tr></table></figure>
-<h5 id="9-删除一个bucket"><a href="#9-删除一个bucket" class="headerlink" title="9. 删除一个bucket"></a>9. 删除一个bucket</h5><figure class="highlight gauss hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ s3cmd rb s3:<span class="hljs-comment">//s3chinatest2</span></span><br><span class="line"><span class="hljs-built_in">ERROR</span>: S3 <span class="hljs-built_in">error</span>: <span class="hljs-number">409</span> (BucketNotEmpty): The bucket you tried to <span class="hljs-keyword">delete</span> is <span class="hljs-keyword">not</span> empty</span><br><span class="line"><span class="hljs-meta"># 默认不能删除非空的bucket，所以要先清空存储桶内数据</span></span><br><span class="line"></span><br><span class="line">$ s3cmd rm s3:<span class="hljs-comment">//s3chinatest2/*</span></span><br><span class="line"><span class="hljs-keyword">delete</span>: 's3:<span class="hljs-comment">//s3chinatest2/file2.txt'</span></span><br><span class="line"><span class="hljs-keyword">delete</span>: 's3:<span class="hljs-comment">//s3chinatest2/file3.txt'</span></span><br><span class="line"><span class="hljs-keyword">delete</span>: 's3:<span class="hljs-comment">//s3chinatest2/t_result.java'</span></span><br><span class="line"></span><br><span class="line">$ s3cmd rb s3:<span class="hljs-comment">//s3chinatest2</span></span><br><span class="line">Bucket 's3:<span class="hljs-comment">//s3chinatest2/' removed</span></span><br></pre></td></tr></table></figure>
-<h3 id="Other"><a href="#Other" class="headerlink" title="Other"></a><em>Other</em></h3><ol>
-<li>关于s3cmd 还有非常多的功能，这里只是列举简单的一部分，有兴趣的同学，可以使用man s3cmd 查看详细的帮助文档.</li>
-<li>s3cmd 适用的场景主要利用脚本做cron任务，例如定时备份，然后推送到s3，降低成本，持久保存.</li>
-<li>Windows平台也支持s3cmd哦，有兴趣的同学可以去研究下。</li>
-</ol>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-11-28T18:19:38.000Z">2016-11-29</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Tomcat/">Tomcat</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 minutes read (About 440 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/11/29/tomcat-error-java-lang-outofmemoryerror/">Tomcat(1) java.lang.OutOfMemoryError</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="1-什么是-PermGen-space"><a href="#1-什么是-PermGen-space" class="headerlink" title="1. 什么是 PermGen space ?"></a>1. 什么是 <em>PermGen space</em> ?</h3><p>PermGen space的全称是Permanent Generation space，是指内存的永久保存区域，这块内存主要是被JVM存放Class和Meta信息的，Class在被Loader时就会被放到PermGen space中，它和存放类实例(Instance)的Heap区域不同，GC(Garbage Collection)不会在主程序运行期对PermGen space进行清理，所以如果你的应用中有很CLASS的话，就很可能出现PermGen space错误，这种错误常见在web服务器对JSP进行pre compile的时候。如果你的WEB APP下都用了大量的第三方jar，其大小超过了jvm默认的大小(4M)那么就会产生此错误信息了。</p>
-<h3 id="2-解决方法"><a href="#2-解决方法" class="headerlink" title="2. 解决方法"></a>2. 解决方法</h3><h5 id="2-1-手动设置MaxPermSize大小"><a href="#2-1-手动设置MaxPermSize大小" class="headerlink" title="2.1 手动设置MaxPermSize大小"></a>2.1 手动设置MaxPermSize大小</h5><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 修改<span class="hljs-variable">$TOMCAT_HOME</span>/bin/catalina.sh，在“<span class="hljs-built_in">echo</span> <span class="hljs-string">"Using CATALINA_BASE:   <span class="hljs-variable">$CATALINA_BASE</span>"</span>”上面加入以下行：</span></span><br><span class="line">JAVA_OPTS="-server -Xms256m -Xmx512m -XX:PermSize=64M -XX:MaxPermSize=128m"</span><br></pre></td></tr></table></figure>
-<h3 id="3-Java-heap-space"><a href="#3-Java-heap-space" class="headerlink" title="3. Java heap space"></a>3. Java heap space</h3><h4 id="解释："><a href="#解释：" class="headerlink" title="解释："></a>解释：</h4><p>Heap size 设置<br>JVM堆的设置是指java程序运行过程中JVM可以调配使用的内存空间的设置.JVM在启动的时候会自动设置Heap size的值，其初始空间(即-Xms)是物理内存的1/64，最大空间(-Xmx)是物理内存的1/4。可以利用JVM提供的-Xmn -Xms -Xmx等选项可进行设置。Heap size 的大小是Young Generation 和Tenured Generaion 之和。</p>
-<ul>
-<li>提示：在JVM中如果98％的时间是用于GC且可用的Heap size 不足2％的时候将抛出此异常信息。</li>
-<li>提示：Heap Size 最大不要超过可用物理内存的80％，一般的要将-Xms和-Xmx选项设置为相同，而-Xmn为1/4的-Xmx值。</li>
-</ul>
-<blockquote>
-<p>修改设置方法如PermGen space</p>
-</blockquote>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-11-28T02:33:09.000Z">2016-11-28</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/CentOS/">CentOS</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 minutes read (About 996 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/11/28/centos6-6-yum-install-lamp/">HowTo Install LNMP on CentOS 6.x</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>egrep -v “^ <em>#|^ </em>$”     去除所有以#号开头的文件</p>
-</blockquote>
-<h4 id="Demo-system"><a href="#Demo-system" class="headerlink" title="Demo system"></a>Demo system</h4><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[Alex@Test01 ~]$ uname -a</span><br><span class="line">Linux Test01 2.6.32-504.el6.x86_64 #1 SMP Wed Oct 15 04:27:16 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux</span><br><span class="line">[Alex@Test01 ~]$<span class="hljs-built_in"> ip </span>addr | grep eth0</span><br><span class="line">2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000</span><br><span class="line">    inet 10.0.2.128/24 brd 10.0.2.255 scope global eth0</span><br></pre></td></tr></table></figure>
-<h4 id="Install-httpd"><a href="#Install-httpd" class="headerlink" title="Install httpd"></a>Install httpd</h4><figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Alex<span class="hljs-variable">@Test01</span> yum.repos.d]<span class="hljs-variable">$ </span>sudo yum install -y httpd</span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> ~]<span class="hljs-variable">$ </span>rpm -qa | grep httpd</span><br><span class="line">httpd-<span class="hljs-number">2.2</span>.<span class="hljs-number">15</span>-<span class="hljs-number">39</span>.el6.centos.x86_64</span><br><span class="line">httpd-tools-<span class="hljs-number">2.2</span>.<span class="hljs-number">15</span>-<span class="hljs-number">39</span>.el6.centos.x86_64</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># remove welcome page</span></span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> yum.repos.d]<span class="hljs-variable">$ </span>sudo rm -f /etc/httpd/conf.d/welcome.conf</span><br><span class="line"><span class="hljs-comment"># remove default error page</span></span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> yum.repos.d]<span class="hljs-variable">$ </span>sudo rm -f /var/www/error/noindex.html</span><br></pre></td></tr></table></figure>
-<h4 id="Configure-httpd-Replace-the-server-name-to-you-own-one"><a href="#Configure-httpd-Replace-the-server-name-to-you-own-one" class="headerlink" title="Configure httpd . Replace the server name to you own one."></a>Configure httpd . Replace the server name to you own one.</h4><figure class="highlight cs hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[<span class="hljs-meta">Alex@Test01 ~</span>]<span class="hljs-meta"># sudo vi /etc/httpd/conf/httpd.conf</span></span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 44: change</span></span><br><span class="line"> ServerTokens Prod</span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 76: change to ON</span></span><br><span class="line"> KeepAlive On</span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 262: Admin's address</span></span><br><span class="line"> ServerAdmin luchuanjia@msn.com</span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 338: change</span></span><br><span class="line"> AllowOverride All</span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 276: change to your server's name</span></span><br><span class="line"> ServerName www.ultraera.org:<span class="hljs-number">80</span></span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 402: add file name that it can access only with directory's name</span></span><br><span class="line"> DirectoryIndex index.html index.htm</span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 536: change</span></span><br><span class="line"> ServerSignature Off</span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 759: comment out</span></span><br><span class="line"><span class="hljs-meta"># AddDefaultCharset UTF-8</span></span><br><span class="line">[<span class="hljs-meta">Alex@Test01 ~</span>]<span class="hljs-meta"># sudo /etc/init.d/httpd start</span></span><br><span class="line"> Starting httpd:[  OK  ]</span><br><span class="line">[<span class="hljs-meta">Alex@Test01 ~</span>]<span class="hljs-meta"># sudo chkconfig httpd on     # set httpd start with system.</span></span><br></pre></td></tr></table></figure>
-<h4 id="create-a-HTML-test-page"><a href="#create-a-HTML-test-page" class="headerlink" title="create a HTML test page"></a>create a HTML test page</h4><figure class="highlight livescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[Alex@Test01 ~]<span class="hljs-comment"># sudo vi /var/www/html/index.html</span></span><br><span class="line"><span class="hljs-literal">it</span><span class="hljs-string">'s ok.</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://s3.51cto.com/wyfs02/M00/70/DE/wKioL1XAUfuQoFfwAACC5LJWQgg039.jpg" alt></p>
-<h4 id="Install-PHP"><a href="#Install-PHP" class="headerlink" title="Install PHP."></a>Install PHP.</h4><figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[Alex<span class="hljs-variable">@Test01</span> ~]<span class="hljs-variable">$ </span>sudo yum install -y php php-mbstring php-pear</span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> ~]<span class="hljs-variable">$ </span>rpm -qa | grep php</span><br><span class="line">php-common-<span class="hljs-number">5.3</span>.<span class="hljs-number">3</span>-<span class="hljs-number">46</span>.el6_6.x86_64</span><br><span class="line">php-<span class="hljs-number">5.3</span>.<span class="hljs-number">3</span>-<span class="hljs-number">46</span>.el6_6.x86_64</span><br><span class="line">php-mbstring-<span class="hljs-number">5.3</span>.<span class="hljs-number">3</span>-<span class="hljs-number">46</span>.el6_6.x86_64</span><br><span class="line">php-cli-<span class="hljs-number">5.3</span>.<span class="hljs-number">3</span>-<span class="hljs-number">46</span>.el6_6.x86_64</span><br><span class="line">php-pear-<span class="hljs-number">1.9</span>.<span class="hljs-number">4</span>-<span class="hljs-number">4</span>.el6.noarch</span><br><span class="line"></span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> ~]<span class="hljs-variable">$ </span>sudo vi /etc/httpd/conf/httpd.conf</span><br><span class="line"><span class="hljs-comment"># line 402 add file name that it can access only with directory's name</span></span><br><span class="line">  DirectoryIndex index.html index.htm index.php</span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> ~]<span class="hljs-variable">$ </span>sudo vi /etc/php.ini</span><br><span class="line"><span class="hljs-comment"># line 946 set your timezone</span></span><br><span class="line">date.timezone = <span class="hljs-string">"Asia/Shanghai"</span></span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> ~]<span class="hljs-variable">$ </span>sudo /etc/init.d/httpd restart</span><br><span class="line"> Stopping <span class="hljs-symbol">httpd:</span>[  OK  ]</span><br><span class="line"> Starting <span class="hljs-symbol">httpd:</span>[  OK  ]</span><br></pre></td></tr></table></figure>
-<h4 id="create-a-php-test-page"><a href="#create-a-php-test-page" class="headerlink" title="create a php test page."></a>create a php test page.</h4><figure class="highlight ruby hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[Alex@Test01 ~]<span class="hljs-comment"># sudo vi /var/www/html/index.php</span></span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">    phpinfo();</span><br><span class="line"><span class="hljs-meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://s3.51cto.com/wyfs02/M02/70/DE/wKioL1XAUguwJCl2AARE16t4hyw682.jpg" alt></p>
-<h4 id="Install-MySQL"><a href="#Install-MySQL" class="headerlink" title="Install MySQL"></a>Install MySQL</h4><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">[Alex@Test01 ~]$ sudo -y <span class="hljs-keyword">install</span> mysql-<span class="hljs-keyword">server</span></span><br><span class="line">[Alex@Test01 ~]$ rpm -qa | grep mysql-<span class="hljs-keyword">server</span></span><br><span class="line">mysql-<span class="hljs-keyword">server</span><span class="hljs-number">-5.1</span><span class="hljs-number">.73</span><span class="hljs-number">-5.</span>el6_6.x86_64</span><br><span class="line"></span><br><span class="line">[Alex@Test01 ~]$ sudo vi /etc/my.cnf</span><br><span class="line">[mysqld]</span><br><span class="line">datadir=/<span class="hljs-keyword">var</span>/lib/mysql</span><br><span class="line">socket=/<span class="hljs-keyword">var</span>/lib/mysql/mysql.sock</span><br><span class="line"><span class="hljs-keyword">user</span>=mysql</span><br><span class="line"># Disabling symbolic-links <span class="hljs-keyword">is</span> recommended <span class="hljs-keyword">to</span> prevent assorted <span class="hljs-keyword">security</span> risks</span><br><span class="line">symbolic-links=<span class="hljs-number">0</span></span><br><span class="line"># <span class="hljs-keyword">add</span></span><br><span class="line"><span class="hljs-built_in">character</span>-<span class="hljs-keyword">set</span>-<span class="hljs-keyword">server</span>=utf8</span><br><span class="line"></span><br><span class="line">[Alex@Test01 ~]$ sudo /etc/rc.d/init.d/mysqld <span class="hljs-keyword">start</span></span><br><span class="line"></span><br><span class="line">Initializing MySQL <span class="hljs-keyword">database</span>:  <span class="hljs-keyword">WARNING</span>: The host <span class="hljs-string">'www.ultraera.org'</span> could <span class="hljs-keyword">not</span> be looked up <span class="hljs-keyword">with</span> resolveip.</span><br><span class="line">This probably means that your libc libraries <span class="hljs-keyword">are</span> <span class="hljs-keyword">not</span> <span class="hljs-number">100</span> % compatible</span><br><span class="line"><span class="hljs-keyword">with</span> this <span class="hljs-built_in">binary</span> MySQL version. The MySQL daemon, mysqld, should <span class="hljs-keyword">work</span></span><br><span class="line">normally <span class="hljs-keyword">with</span> the <span class="hljs-keyword">exception</span> that host <span class="hljs-keyword">name</span> resolving will <span class="hljs-keyword">not</span> work.</span><br><span class="line">This means that you should <span class="hljs-keyword">use</span> IP addresses instead <span class="hljs-keyword">of</span> hostnames</span><br><span class="line"><span class="hljs-keyword">when</span> specifying MySQL <span class="hljs-keyword">privileges</span> !</span><br><span class="line">Installing MySQL <span class="hljs-keyword">system</span> tables...</span><br><span class="line">OK</span><br><span class="line">Filling <span class="hljs-keyword">help</span> tables...</span><br><span class="line">OK</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">You can <span class="hljs-keyword">test</span> the MySQL daemon <span class="hljs-keyword">with</span> mysql-<span class="hljs-keyword">test</span>-run.pl</span><br><span class="line">cd /usr/mysql-<span class="hljs-keyword">test</span> ; perl mysql-test-run.pl</span><br><span class="line"></span><br><span class="line">Please report any problems with the /usr/bin/mysqlbug script!</span><br><span class="line"></span><br><span class="line">                                              [  OK  ]</span><br><span class="line">Starting mysqld:                      [  OK  ]</span><br><span class="line">[Alex@Test01 ~]$ sudo chkconfig mysqld on</span><br></pre></td></tr></table></figure>
-<h4 id="Initial-settings-for-MySQL"><a href="#Initial-settings-for-MySQL" class="headerlink" title="Initial settings for MySQL"></a>Initial settings for MySQL</h4><figure class="highlight vbnet hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]<span class="hljs-meta">#mysql_secure_installation</span></span><br><span class="line">NOTE: RUNNING ALL PARTS <span class="hljs-keyword">OF</span> THIS SCRIPT <span class="hljs-keyword">IS</span> RECOMMENDED <span class="hljs-keyword">FOR</span> ALL MySQL</span><br><span class="line">      SERVERS <span class="hljs-keyword">IN</span> PRODUCTION USE!  PLEASE READ <span class="hljs-keyword">EACH</span> <span class="hljs-keyword">STEP</span> CAREFULLY!</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">In</span> <span class="hljs-keyword">order</span> <span class="hljs-keyword">to</span> log <span class="hljs-keyword">into</span> MySQL <span class="hljs-keyword">to</span> secure it, we<span class="hljs-comment">'ll need the current</span></span><br><span class="line">password <span class="hljs-keyword">for</span> the root user.  <span class="hljs-keyword">If</span> you<span class="hljs-comment">'ve just installed MySQL, and</span></span><br><span class="line">you haven<span class="hljs-comment">'t set the root password yet, the password will be blank,</span></span><br><span class="line">so you should just press enter here.</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># Enter</span></span><br><span class="line"> Enter current password <span class="hljs-keyword">for</span> root (enter <span class="hljs-keyword">for</span> none):</span><br><span class="line">OK, successfully used password, moving <span class="hljs-keyword">on</span>...</span><br><span class="line"></span><br><span class="line">Setting the root password ensures that nobody can log <span class="hljs-keyword">into</span> the MySQL</span><br><span class="line">root user without the proper authorisation.</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># set root password</span></span><br><span class="line"> <span class="hljs-keyword">Set</span> root password? [Y/n]y</span><br><span class="line"> <span class="hljs-keyword">New</span> password:    <span class="hljs-meta"># input any password</span></span><br><span class="line"> Re-enter <span class="hljs-keyword">new</span> password:</span><br><span class="line">Password updated successfully!</span><br><span class="line">Reloading privilege tables..</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">By</span> <span class="hljs-keyword">default</span>, a MySQL installation has an anonymous user, allowing anyone</span><br><span class="line"><span class="hljs-keyword">to</span> log <span class="hljs-keyword">into</span> MySQL without having <span class="hljs-keyword">to</span> have a user account created <span class="hljs-keyword">for</span></span><br><span class="line">them.  This <span class="hljs-keyword">is</span> intended only <span class="hljs-keyword">for</span> testing, <span class="hljs-keyword">and</span> <span class="hljs-keyword">to</span> make the installation</span><br><span class="line">go a bit smoother.  You should remove them before moving <span class="hljs-keyword">into</span> a</span><br><span class="line">production environment.</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># remove anonymous users</span></span><br><span class="line"> Remove anonymous users? [Y/n]y</span><br><span class="line"></span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Normally, root should only be allowed <span class="hljs-keyword">to</span> connect <span class="hljs-keyword">from</span> <span class="hljs-comment">'localhost'.  This</span></span><br><span class="line">ensures that someone cannot guess at the root password <span class="hljs-keyword">from</span> the network.</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># disallow root login remotely</span></span><br><span class="line"> Disallow root login remotely? [Y/n]y</span><br><span class="line"></span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">By</span> <span class="hljs-keyword">default</span>, MySQL comes <span class="hljs-keyword">with</span> a database named <span class="hljs-comment">'test' that anyone can</span></span><br><span class="line">access.  This <span class="hljs-keyword">is</span> also intended only <span class="hljs-keyword">for</span> testing, <span class="hljs-keyword">and</span> should be removed</span><br><span class="line">before moving <span class="hljs-keyword">into</span> a production environment.</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># remove test database</span></span><br><span class="line"> Remove test database <span class="hljs-keyword">and</span> access <span class="hljs-keyword">to</span> it? [Y/n]y</span><br><span class="line"></span><br><span class="line"> - Dropping test database...</span><br><span class="line"> ... Success!</span><br><span class="line"> - Removing privileges <span class="hljs-keyword">on</span> test database...</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Reloading the privilege tables will ensure that all changes made so far</span><br><span class="line">will <span class="hljs-keyword">take</span> effect immediately.</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># reload privilege tables</span></span><br><span class="line"> Reload privilege tables now? [Y/n]y</span><br><span class="line"></span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Cleaning up...</span><br><span class="line"></span><br><span class="line">All done!  <span class="hljs-keyword">If</span> you<span class="hljs-comment">'ve completed all of the above steps, your MySQL</span></span><br><span class="line">installation should now be secure.</span><br><span class="line"></span><br><span class="line">Thanks <span class="hljs-keyword">for</span> <span class="hljs-keyword">using</span> MySQL!</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># try to connect with root</span></span><br><span class="line"> [root@www ~]<span class="hljs-meta">#mysql -u root -p</span></span><br><span class="line"> Enter password:<span class="hljs-meta"># MySQL root password</span></span><br><span class="line">Welcome <span class="hljs-keyword">to</span> the MySQL monitor.  Commands <span class="hljs-keyword">end</span> <span class="hljs-keyword">with</span> ; <span class="hljs-keyword">or</span> \g.</span><br><span class="line">Your MySQL connection id <span class="hljs-keyword">is</span> <span class="hljs-number">10</span></span><br><span class="line">Server version: <span class="hljs-number">5.1</span><span class="hljs-number">.73</span> Source distribution</span><br><span class="line"></span><br><span class="line">Copyright (c) <span class="hljs-number">2000</span>, <span class="hljs-number">2013</span>, Oracle <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle <span class="hljs-keyword">is</span> a registered trademark <span class="hljs-keyword">of</span> Oracle Corporation <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> its</span><br><span class="line">affiliates. Other names may be trademarks <span class="hljs-keyword">of</span> their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type <span class="hljs-comment">'help;' or '\h' for help. Type '\c' to clear the current input statement.</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># display user list</span></span><br><span class="line"> mysql&gt;<span class="hljs-keyword">select</span> user,host,password <span class="hljs-keyword">from</span> mysql.user;</span><br><span class="line">+------+-----------+-------------------------------------------+</span><br><span class="line">| user | host      | password                                  |</span><br><span class="line">+------+-----------+-------------------------------------------+</span><br><span class="line">| root | localhost | ***************************************** |</span><br><span class="line">| root | <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> | ***************************************** |</span><br><span class="line">+------+-----------+-------------------------------------------+</span><br><span class="line"><span class="hljs-number">2</span> rows <span class="hljs-keyword">in</span> <span class="hljs-keyword">set</span> (<span class="hljs-number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># display database list</span></span><br><span class="line"> mysql&gt;show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">+--------------------+</span><br><span class="line"><span class="hljs-number">2</span> rows <span class="hljs-keyword">in</span> <span class="hljs-keyword">set</span> (<span class="hljs-number">0.00</span> sec)</span><br><span class="line">mysql&gt;<span class="hljs-keyword">exit</span></span><br><span class="line">Bye</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-11-23T08:24:40.000Z">2016-11-23</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/CentOS/">CentOS</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 minutes read (About 682 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/11/23/denyhosts-linux/">Denyhosts增加服务器SSH黑名单机制</a>
-            
-        </h1>
-        <div class="content">
-            <h5 id="查看当前服务器失败登录的统计："><a href="#查看当前服务器失败登录的统计：" class="headerlink" title="查看当前服务器失败登录的统计："></a>查看当前服务器失败登录的统计：</h5><figure class="highlight stata hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">cat</span> /<span class="hljs-keyword">var</span>/<span class="hljs-keyword">log</span>/secure | awk '/Failed/&#123;<span class="hljs-keyword">print</span> $(NF-3)&#125;' | <span class="hljs-keyword">sort</span> | uniq -c | <span class="hljs-keyword">sort</span> -<span class="hljs-keyword">n</span> |  awk '&#123;<span class="hljs-keyword">print</span> <span class="hljs-variable">$2</span><span class="hljs-string">" = "</span><span class="hljs-variable">$1&#125;</span>'</span><br></pre></td></tr></table></figure>
-<h5 id="Install-denyhosts"><a href="#Install-denyhosts" class="headerlink" title="Install denyhosts"></a>Install denyhosts</h5><figure class="highlight cmake hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 需要预先安装epel源</span></span><br><span class="line">sudo yum <span class="hljs-keyword">install</span> -y epel-release</span><br><span class="line">sudo yum <span class="hljs-keyword">install</span> -y denyhosts</span><br></pre></td></tr></table></figure>
-<h5 id="配置文件解析"><a href="#配置文件解析" class="headerlink" title="配置文件解析"></a>配置文件解析</h5><p>默认配置文件/etc/denyhosts。<br><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 查看的sshd日志文件</span></span><br><span class="line"><span class="hljs-attr">SECURE_LOG</span> = /var/log/secure</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 将阻止IP写入的配置文件</span></span><br><span class="line"><span class="hljs-attr">HOSTS_DENY</span> = /etc/hosts.deny</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 过多久之后清除，其中w代表周，d代表天，h代表小时，s代表秒，m代表分钟。</span></span><br><span class="line"><span class="hljs-attr">PURGE_DENY</span> = <span class="hljs-number">4</span>h</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 阻止的服务名称</span></span><br><span class="line"><span class="hljs-attr">BLOCK_SERVICE</span>  = sshd</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 允许无效用户（在/etc/passwd未列出）登录失败次数,允许无效用户登录失败的次数.</span></span><br><span class="line"><span class="hljs-attr">DENY_THRESHOLD_INVALID</span> = <span class="hljs-number">1</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 允许普通用户登录失败的次数</span></span><br><span class="line"><span class="hljs-attr">DENY_THRESHOLD_VALID</span> = <span class="hljs-number">5</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 允许root登录失败的次数</span></span><br><span class="line"><span class="hljs-attr">DENY_THRESHOLD_ROOT</span> = <span class="hljs-number">2</span></span><br><span class="line"><span class="hljs-attr">DENY_THRESHOLD_RESTRICTED</span> = <span class="hljs-number">1</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 设定 deny host 写入到该资料夹</span></span><br><span class="line"><span class="hljs-attr">WORK_DIR</span> = /var/lib/denyhosts</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 将deny的host或ip纪录到Work_dir中</span></span><br><span class="line"><span class="hljs-attr">SUSPICIOUS_LOGIN_REPORT_ALLOWED_HOSTS</span>=<span class="hljs-literal">YES</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 是否做域名反解</span></span><br><span class="line"><span class="hljs-attr">HOSTNAME_LOOKUP</span>=<span class="hljs-literal">YES</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 将DenyHOts启动的pid纪录到LOCK_FILE中，已确保服务正确启动，防止同时启动多个服务。</span></span><br><span class="line"><span class="hljs-attr">LOCK_FILE</span> = /var/lock/subsys/denyhosts</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 设置管理员邮件地址</span></span><br><span class="line"><span class="hljs-attr">ADMIN_EMAIL</span> = luchuanjia@msn.com</span><br><span class="line"><span class="hljs-attr">SMTP_HOST</span> = localhost</span><br><span class="line"><span class="hljs-attr">SMTP_PORT</span> = <span class="hljs-number">25</span></span><br><span class="line"><span class="hljs-attr">SMTP_FROM</span> = DenyHosts &lt;nobody@localhost&gt;</span><br><span class="line"><span class="hljs-attr">SMTP_SUBJECT</span> = DenyHosts Report from $[HOSTNAME]</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 有效用户登录失败计数归零的时间</span></span><br><span class="line"><span class="hljs-attr">AGE_RESET_VALID</span>=<span class="hljs-number">1</span>d</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># root用户登录失败计数归零的时间</span></span><br><span class="line"><span class="hljs-attr">AGE_RESET_ROOT</span>=<span class="hljs-number">25</span>d</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 用户的失败登录计数重置为0的时间(/usr/share/denyhosts/data/restricted-usernames)</span></span><br><span class="line"><span class="hljs-attr">AGE_RESET_RESTRICTED</span>=<span class="hljs-number">25</span>d</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 无效用户登录失败计数归零的时间</span></span><br><span class="line"><span class="hljs-attr">AGE_RESET_INVALID</span>=<span class="hljs-number">10</span>d</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># denyhosts的日志文件位置</span></span><br><span class="line"><span class="hljs-attr">DAEMON_LOG</span> = /var/log/denyhosts</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># denyhosts的轮询时间</span></span><br><span class="line"><span class="hljs-attr">DAEMON_SLEEP</span> = <span class="hljs-number">30</span>s</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 该项与PURGE_DENY 设置一样，也是清除hosts.deny中 ssh用户的时间</span></span><br><span class="line"><span class="hljs-attr">DAEMON_PURGE</span> = <span class="hljs-number">1</span>h</span><br></pre></td></tr></table></figure></p>
-<h5 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h5><ol>
-<li>如果想删除一个已经禁止的主机IP，并加入到允许主机例表，只在 /etc/hosts.deny 删除是没用的,还需要以下：<figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/var/<span class="hljs-class"><span class="hljs-keyword">lib</span>/<span class="hljs-title">denyhosts</span> 目录，进入以下操作：</span></span><br><span class="line"><span class="hljs-comment"># 停止denyhosts服务</span></span><br><span class="line">sudo service denyhosts stop</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 进入denyhosts的目录</span></span><br><span class="line">cd /var/<span class="hljs-class"><span class="hljs-keyword">lib</span>/<span class="hljs-title">denyhosts</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 查看哪些文件添加了ssh限制,将IP_addr替换成你的IP</span></span><br><span class="line">sudo grep IP_addr /usr/share/denyhosts/data/*</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 然后一个个删除文件中你想取消的主机IP所在的行:</span></span><br><span class="line">/usr/share/denyhosts/data/hosts</span><br><span class="line">/usr/share/denyhosts/data/hosts-restricted</span><br><span class="line">/usr/share/denyhosts/data/hosts-root</span><br><span class="line">/usr/share/denyhosts/data/hosts-valid</span><br><span class="line">/usr/share/denyhosts/data/users-hosts</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 添加你想允许的主机IP地址到allowed-hosts:</span></span><br><span class="line">sudo echo IP_addr &gt;&gt;<span class="hljs-regexp">/usr/share</span><span class="hljs-regexp">/denyhosts/data</span><span class="hljs-regexp">/allowed-hostsps</span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp"># 启动 DenyHosts服务：</span></span><br><span class="line"><span class="hljs-regexp"> service denyhosts start</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h5 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h5><ul>
-<li>尽量是用key验证登录服务器</li>
-<li>尽量从固定IP点登录服务器，然后将该地址加入白名单</li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-11-18T04:09:13.000Z">2016-11-18</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Ghost/">Ghost</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 minutes read (About 765 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/11/18/ghostzeng-jia-ping-lun-mo-kuai/">Ghost(2) 增加评论模块</a>
-            
-        </h1>
-        <div class="content">
-            <p>Ghost作为一个更加纯粹的博客平台，并没有打算为其开发内置的文章评论功能。而是将评论功能托管给第三方，好处也是让用户更有精力集中于网站内容的建设。实现的办法也很简单，只需要向Ghost主题的模板Handlebars(.hbs)插入第三方评论组件的JavaScript代码来为Ghost博客增加评论功能。 </p><br><p><em>国内最常用的多说评论框，支持国内常见的社交网络一键注册登录、盖楼讨论和分享而且对新用户上手简单。而Disqus功能强大、完善的社交网络和多国语言支持并且为其插件启用全球CDN加速。总的来说两个插件各有所长。</em></p><br><p>基于默认主题Casper的安装指南：</p><br><ul><br><li><a href="index.html#comments.hbs">创建一个模板</a></li><br><li><a href="index.html#Duoshuo">安装多说评论系统</a></li><br><li><a href="index.html#Disqus">安装Disqus</a></li><br></ul><br><hr><br><h4 id="comments.hbs">创建一个模板</h4><br><p>为了在需要评论框代码的时候方便引用，我选择事先在主题文件夹<code>content\themes\casper\partials</code>下面创建一个叫做<strong>comments.hbs</strong>的模板文件，也就是评论框的专属模板。</p><br><p>现在我只需要在我的Casper主题下面的post.hbs模板中的</p><br><pre><code>            &lt;/section&gt;<br><br>        &lt;/footer&gt;<br>    &lt;/article&gt;<br>&lt;/main&gt;<br></code></pre><br><p>前面部分添加一句<code>{{&gt; comments}}</code>就可以展示评论框了。</p><br><p>添加后就像这样：</p><br><pre><code>            &lt;/section&gt;<br>            {{&gt; comments}}<br>        &lt;/footer&gt;<br>    &lt;/article&gt;<br>&lt;/main&gt;<br></code></pre><br><p>这样以来的好处就可以在任何主题中轻松移植评论框代码。</p><br><p>开始之前：对评论框Html代码进行简要说明。</p><br><ul><br><li><code>&lt;section class=”post-comments”&gt;…&lt;/section&gt;</code>用于展示评论框</li><br><li><code>&lt;script type=”text/javascript”&gt;…&lt;/script&gt;</code>评论框公共代码</li><br><li><code>{{slug}}</code> 引用文章短名作为第三方社交平台识别文章的特征标志</li><br><li><code>{{title}}</code> 引用文章标题</li><br><li><code>{{url absolute="true"}}</code> 获取永久链接</li><br></ul><br><hr><br><h4 id="Duoshuo">安装多说评论框</h4><br><p>1.将下面的评论框代码插入<strong>comments.hbs</strong>文件。 <br><br>多说评论框：</p><br><pre><code>&lt;section class=”post-comments”&gt;<br>    &lt;div class=”ds-thread” data-thread-key=”{{slug}}“ data-title=”{{title}}“ data-url=”{{url absolute="true"}}“&gt;&lt;/div&gt;<br>    &lt;!– 务必插入多说公共JS代码 –&gt;<br>&lt;/section&gt;<br></code></pre><br><p>2.如何获取多说公共JS代码？</p><br><p>登录多说 &gt; 点击“我要安装”&gt; 创建站点 &gt; 获取公共代码（如图）</p><br><p><img src="https://www.binarization.com/content/images/2015/02/duoshuo-javascript.PNG" alt="多说公共JS代码"></p><br><hr><br><h4 id="Disqus">安装Disqus评论框</h4><br><p>1.将下面的评论框代码插入<strong>comments.hbs</strong>文件。 <br><br>Disqus评论框评论框：</p><br><pre><code>  &lt;section class=”post-comments”&gt;&lt;div id=”disqus_thread”&gt;&lt;/div&gt;<br>      &lt;!– 务必插入Disqus公共JS代码 –&gt;<br>  &lt;/section&gt;<br></code></pre><br><p>2.获取Disqus的公共JS代码</p><br><p>注册Disqus &gt; 安装平台选则 Universal Code &gt; 直接复制代码</p><br><p>3.添加完毕后，重新启动Ghost博客。</p><br><p>4.Disqus不能成功加载的时候可以在JavaScript中强制使用HTTPS以链接Disqus服务器。具体方法就是在<code>s.src</code>的提供的URL中加入<code>https://</code>。 </p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-11-10T16:32:13.000Z">2016-11-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    22 minutes read (About 3299 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/11/11/python-lesson-1/">Python(1) 基础</a>
-            
-        </h1>
-        <div class="content">
-            <p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;<br>&lt;!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” “<a href="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;" target="_blank" rel="noopener">http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</a></p>
-<html><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="exporter-version" content="Evernote Mac 6.10 (454269)"><meta name="author" content="Alex LU"><meta name="created" content="2016-09-29 02:27:16 +0000"><meta name="source" content="desktop.mac"><meta name="updated" content="2016-09-29 06:27:40 +0000"><title>Python学习笔记(1) –Python基础</title></head><body><br><ol><br><li>输出： print<br><ol><br><li>python2：print ‘Hello Python’</li><br><li>python3: print(‘Hello Python’)</li><br><li>python(‘10+20=‘,10+20)</li><br></ol><br></li><br><li>输入：<br><ol><br><li>python2：raw<em>input()</em></li><br><li>python3: input()</li><br></ol><br></li><br><li>python的语法比较简单，采用缩进的方式：</li><br></ol><br><div style="-en-codeblock: true; box-sizing: border-box; padding: 8px; font-family: Monaco, Menlo, Consolas, &quot;Courier New&quot;, monospace; font-size: 12px; color: rgb(51, 51, 51); border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(251, 250, 248); border: 1px solid rgba(0, 0, 0, 0.14902); background-position: initial initial; background-repeat: initial initial;"><br><div>a = 100</div><br><div>if a &gt;= 0:</div><br><div>     print(a)</div><br><div>else:</div><br><div>     print(-a)</div><br><div><br></div><br><div>&amp; diff &amp;</div><br><div>a = 100</div><br><div>if a &gt;=0:</div><br><div>print(a)</div><br><div>else:</div><br><div>print(-a)</div><br></div><br><ol start="4"><br><li># 开头为注释；: 结尾，缩进的语句视为代码块；Python大小写是敏感的，约定俗成：4个空格的缩进，可以吧tab设置为4个空格。</li><br><li>Python 的数据类型<br><ol><br><li>整数：python可以处理任意大小的整数</li><br><li>浮点数：也就是小数，之所以称之为浮点数，因为按照科学计数法表示时，一个浮点数的小数点位置是可变的</li><br><li>字符串：字符串是以’’和”” 包括起来的任意文本，例如’abc’,”xyz”；如果字符内部同时包含’和”，可以使用\转义字符来标识。<br><ol><br><li>如果字符串内部有很多换行，用\n不好阅读，python支持使用’’’…’’’ 的格式表示多行‘</li><br><li>r’…’  python可以使用r’’表示’’以内的字符不转义;多行: r’’’…’’’</li><br></ol><br></li><br><li>布尔值：布尔值和布尔代数表示的完全一致，一个布尔值只有True和False，python支持直接使用True和False表示布尔值，注意大小写，另外最好不要生命变量时使用True等，布尔值，经常用于在条件判断之中。<br><ol><br><li>and : 与运算，所有运算结果都是True，and的结果才是True</li><br><li>or：或运算，只有1个运算结果为True，or的结果就是True</li><br><li>not：他是一个单目运算符，取相反的值</li><br></ol><br></li><br><li>空值：python里的一个特殊值，用None表示，注意None不能理解为0，因为0是有意义的，而None是一个特殊的空值</li><br></ol><br></li><br><li>python的变量<br><ol><br><li>命名规则：必须是大小写英文，数字和的组合，且不能用数字开头；</li><br><li>赋值符号：’=’；等于的符号是’==’</li><br><li>动态语言：变量本身类型不固定的语言称之为动态语言，反之是静态语言，静态语言在定义变量时必须制定变量的数据类型，如果赋值的时候类型不匹配，就会报错；</li><br><li>变量在计算机内存中的表示：a=1,指的是python在内存中创建了整数1，然后在内存创建了变量a，并把它指向了整数1</li><br></ol><br></li><br><li>python的常量<br><ol><br><li>定义：常量就是不能改变的变量，在python中，通常使用全部大写的变量名表示常量</li><br><li>整数的除法是精确的，因为除法计算结果是浮点数，例如 9/3 结果为3.0 ; 另外一种除法是’//‘ 地板除，两个整数的除法任然是整数；余数运算’%’</li><br></ol><br></li><br><li>字符编码：字符串是一种数据类型，但是字符串还涉及到一个编码问题，Python3的字符串是支持多语言的<br><ol><br><li>ord(‘’)函数 获取字符的整数表示；</li><br><li>chr(‘’)函数 把编码转换成对应的字符；</li><br><li>python的字符串类型是str，在内存中以Unicode表示，一个字符对应若干字节，但是如果要在网络传输或者保存到磁盘，就要把str转化为单位的bytes；<br><ol><br><li>python对于bytes的数据类型用带b前缀的单引号或双引号表示：</li><br><li>另外，Unicode表示的str可用encode()函数，指定编码为bytes。 ‘ABC’ .encode(‘utf-8’)</li><br><li>decode() 可以吧bytes转变为str。b’ABC’ .decode(‘ascii’)</li><br><li>要计算str包含了多少个字符使用 len()函数： len(‘hello’) ,结果为5</li><br></ol><br></li><br><li style="-en-codeblock: true; box-sizing: border-box; padding: 8px; font-family: Monaco, Menlo, Consolas, &quot;Courier New&quot;, monospace; font-size: 12px; color: rgb(51, 51, 51); border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(251, 250, 248); border: 1px solid rgba(0, 0, 0, 0.14902); background-position: initial initial; background-repeat: initial initial;">#!/usr/bin/env python3<br><br># -<em>- coding: utf-8 -</em>-</li><br></ol><br></li><br><li>格式化： 如何处理格式化输出字符串，在python中使用的格式化方式和C语言是一致的，用’%’实现：<br><ol><br><li>%d 表示整数</li><br><li>%f 表示浮点数</li><br><li>%s 表示字符串，如果不确定用什么，用%s，它会把任何数据类型转换为字符串</li><br><li>%x 表示十六进制整数</li><br><li>%% 表示一个普通的%</li><br></ol><br></li><br><li>数据类型list和tuple<br><ol><br><li>list是python内置的一种数据类型：列表，list是一个有序的集合，可以随时添加和删除其中元素。<br><ol><br><li>classmates = [‘Michael’,’Bob’,’Tracy’]， 可以用len()函数获取这个list的元素的个数</li><br><li>可以用索引来访问list中的每一个位置的元素，记住索引的第一个位置是0：</li><br><li>当索引超出范围的时候，python会报出IndexError错误，记得最后一个索引是len(classmates) -1</li><br><li>如果直接取出最后一个索引可用classmates[-1],以此类推</li><br></ol><br></li><br><li>list是一个可变的有序列表，所以可以去追加，插入指定位置，删除，替换等操作，支持不同数据类型，支持嵌套list<br><ol><br><li>追加: classmates.append(‘Adam’)</li><br><li>插入指定位置: classmates.insert(2,’Jack’)</li><br><li>删除list末尾的元素： classmates.pop()</li><br><li>删除指定位置的元素: classmates.pop(1)</li><br><li>替换元素：classmates[1]=‘Sarch’ ， 直接给相应位置的元素重新赋值即可</li><br><li>list的元素支持不同的数据类型, L = [‘abc’,23,23.4]</li><br><li>list的元素支持嵌套另外一个list： s = [‘abc’,123,[‘XYZ’,2.34]]，注意这个时候len(s)的元素是3个</li><br><li>list也可以没有元素，就是一个空的list，它的长度为0</li><br></ol><br></li><br><li>tuple：元组，也是一种有序列表，但是tuple一旦初始化就不能修改，他没有append()也没有insert()，这样的方法，其他获取元素的方式和list一样，也不能赋值成为另外的元素：<br><ol><br><li>classmates = (‘Michael’,’Bob’,’Tracy’) 注意list用的是’[]’，而tuple用的是’()’</li><br><li>tuple 有个问题，当你定义1个元素的时候，tuple的()和数学公式中的小括号混淆 ，因此python规定，这种情况下面，当定义只有1个tuple时必须增加一个逗号’,’来消除歧义。</li><br><li>tuple的元素也可以为list或者tuple，tuple的元素不会改变，但是list是一个可以改变的有序数列，所以当tuple中包含list时，这个tuple是’可变的’</li><br></ol><br></li><br><li>取出特定元素： L[[‘Apple’,’Google’,’Microsoft’],[‘Java’,’Python’,’C’]] ; L[1][1] = ‘Python’</li><br></ol><br></li><br><li>条件判断<br><ol><br><li>if：根据python的缩进规则，如果if语句的判断是True，就会执行下面的语句，否则什么都不做</li><br><li>else：也可以个if添加else，意思就是，如果if的判断是false，不要执行if的内容，执行else的内容</li><br><li>elif：如果要嵌套多级判断条件的话，使用elif，elif 是else if的缩写</li><br><li>if语句执行有个特点，它是自上而下的判断，如果某个判断的结果是True，那么执行该判断对应的语句，就会忽略掉剩下的所有elif和else，if判断条件还可以简写: if x: 只要x是非零数值、非空字符串、非空list等，就判断为True，</li><br></ol><br></li><br><li>iput(): 需要注意的地方，默认input的返回类型是str，由于str不能直接整数比较，所以在碰到明明输入200，但是不能和201对比时，记住先要把str转化为整数，python提供了int()函数, 转化数据类型为int类型，但是如果输入’abc’则会得到1个ValueError的错误</li><br><li>循环<br><ol><br><li>for…in ： 依次把list或者tuple的每个元素迭代出来，for x in … ：循环就是把每个元素带入变量x，然后执行缩进的语句：</li><br><li>range()函数：用来生成一个整数序列，再通过list()函数转换为list，例如range(5)生成：0,1,2,3,4<br><ol><br><li>list(range(5)) = [0,1,2,3,4]</li><br><li>计算1+…+100的结果： for x in range(101): sum = sum +x</li><br></ol><br></li><br><li>while 循环： 只要条件满足，就不断循环，条件不足时退出循环：<br><ol><br><li>计算100以内所有奇数之和： sum = 0,n = 99, while n &gt; 0: sum =sum +n; n = n-2</li><br></ol><br></li><br><li>break: 在循环中，break语句可以提前退出循环，当程序执行满足break条件的时候，就会退出循环</li><br><li>continue: 在循环过程中，也可以通过continue语句，跳过当前的这次循环。</li><br><li>注意：循环是让计算机做重复任务的有效方法，break语句可以在循环过程总直接退出循环，continue语句可以提前结束本轮循环，并直接进入下一轮循环，这两个语句通常必须配合if语句使用，但是尽量不要滥用这两个语句，因为当break和continue使用过多会导致代码执行逻辑分支过多，容易出错。</li><br></ol><br></li><br><li>dict和set<br><ol><br><li>dict： python内置了字典：dict的支持，全称：dictionary，在其他语言中也称之为map，使用键值存储，具有极快的查找速度。</li><br><li>对比list处理方式：会过滤整个list的元素，这导致list越长，耗时越长；dict实现时，只需要创建key-values对应表，直接根据名字查找，无论这个表有多大，查找速度都不会变慢，但是内存消耗会大，典型用性能(内存空间)换时间。</li><br><li>dict的初始化: d {‘Michael’:95,’Bob’:75,’Tracy’:85}  # 注意dict使用的是大括号’{}‘</li><br><li>dict的数据插入： d [‘Adam’] = 67 </li><br><li>由于dict是根据key检索，所以key是固定的，一个key只能对应1个value,所以当对1个key多次放入value时，后面的值会把前面的值冲掉： （类似变量）</li><br><li>但是如果查询的key不存在,dict会报错，KeyError，可以用in 判断key是否存在: ‘key’ in d  : True/False</li><br><li>通过dict的get方法，如果key不存在，可以返回None，或者自己指定的值，d.get(‘Key’) , d.get(‘key’,-1)</li><br><li>d.pop(‘key’): 删除1个key，注意当key被删除是，相应的value也会被删除。</li><br><li>另外注意：dict内部存放的顺序和key放入的顺序是没有关系的：</li><br><li>dict应在需要高速查找的地方，正确使用dict非常重要，要牢记1点，dict的key必须是不可变的对象，因为dict是根据key来计算value的位置，如果每次计算相同的key得到的结果不一样，那么dict内部就完全混乱了，这个通过key计算位置的算法称之为Hash算法。</li><br><li>要保证hash的准确性，作为key的对象就不能改变，在python中，字符串·整数等都是不可变的，但是list是可以变的所以不能作为key</li><br><li>set： set和dict类似，也是一组key的集合，但是不存储value，由于key不能重复，所以，在set中，没有重复的key值。</li><br><li>要创建一个set，需要提供一个list作为输入集合。 s = set([1,2,3])   : s = {1,2,3}</li><br><li>注意set也不是有序的，而且重复在set存在的元素会被自动过滤： s = set([1,2,3,1,2,3,1,2,3])  s = {1,2,3}</li><br><li>通过s.add(key) 可以增加元素到set中，可以重复添加，但是不会有效果</li><br><li>通过s.remove(key) 可以删除元素</li><br><li>set 可以看成数学意义上的无序和无重复元素的集合，因此两个set可以做数学意义上的交集、并集能操作：<br><ol><br><li>s1 = set([1,2,3]), s2 = set([2,3,4]) ,交集： s1 &amp; s2 = {2,3} ; s1 | s2 = {1,2,3,4}</li><br></ol><br></li><br><li>set和dict的区别仅在于有没有存储对应的value，但是set和dict的原理是一样的，所以，同样不可以放置可变对象，因为无法判断两个对象是否相等，也就无法保证set内部的不会重复元素</li><br><li>不可变对象：str是不变对象，list是可变对象；对于可变对象，例如list，对list进行操作，list的内部会发生变化</li><br><li>a = ‘abc’ , a.replace(‘a’,’A’) # 这个操作是把所有小写的a替换成大写的A，但是注意a的值并没有发生改变，要牢记a是变量，’abc’才是字符对象。</li><br></ol><br></li><br></ol><br></body><br></html>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-11-09T18:53:13.000Z">2016-11-10</time>
+                <time class="level-item has-text-grey" datetime="2017-05-17T10:12:42.000Z">2017-05-17</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
@@ -508,7 +175,7 @@ var _hmt = _hmt || [];
                 <span class="level-item has-text-grey">
                     
                     
-                    5 minutes read (About 703 words)
+                    13 minutes read (About 1915 words)
                 </span>
                 
                 
@@ -517,21 +184,219 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/11/10/lwuswahg/">MySQL(5) 清空表命令之：truncate与delete区别</a>
+                <a class="has-link-black-ter" href="/2017/05/17/howto-automatic-easyback-mysql-with-crontab/">HowTo-Automatic-EasyBackup-MysqlDB</a>
             
         </h1>
         <div class="content">
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在实际工作中，有时我们会想要去清空一张表的所有数据，常用的命令有delete和truncate这两个命令。</p>
-<h3 id="1-delete"><a href="#1-delete" class="headerlink" title="1. delete"></a>1. delete</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在很多情况，我们对于delete的应用更多，因为它支持更多的匹配模式，我们可以使用where条件语句，清理一些特定的数据，关于delete的操作，这里不做过多解释，有空就专门写写delete的使用和原理。delete 在清空表时，如果表内有自增ID的设定，那么在delete清空之后，再插入数据时，自增ID不会从1开始，默认会继续增加; 除非我们使用OPTIMIZE TABLE，重置表属性；<br><figure class="highlight n1ql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> piwik_tmp;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-truncate"><a href="#2-truncate" class="headerlink" title="2. truncate"></a>2. truncate</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;truncate 在清空表时，会同时将自增ID重置，再插入新数据时会从1开始，而且truncate在清空表时，不关心表的行数，所以执行效率会高于delete；</p>
-<figure class="highlight excel hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; truncate table piwik_tmp;</span><br><span class="line">Query OK, <span class="hljs-number">0</span> <span class="hljs-built_in">rows</span> affected (<span class="hljs-number">0.01</span> <span class="hljs-built_in">sec</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="3-释放表空间"><a href="#3-释放表空间" class="headerlink" title="3. 释放表空间"></a>3. 释放表空间</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但是在truncate清空表数据时，myisam的表和innodb的表在使用上有一定的区别；myisam表会清空所有数据，并释放表空间，即硬盘空间会得到释放。innodb表也会清空所有数据，但不释放表空间。Innodb数据库对于已经删除的数据只是标记为删除，并不真正释放所占用的磁盘空间，这就导致InnoDB数据库文件不断增长。如果想彻底释放这些已经删除的数据，需要把数据库导出，删除InnoDB数据库文件，然后再导入。<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 备份数据库：</span></span><br><span class="line">mysqldump -u -p --quick --force --all-databases &gt; mysqldump.sql</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 停止数据库</span></span><br><span class="line">service mysqld stop</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 删除这些大文件</span></span><br><span class="line">rm /usr/local/mysql/var/ibdata1</span><br><span class="line">rm /usr/local/mysql/var/ib_logfile*</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 手动删除除Mysql之外所有数据库文件夹，然后启动数据库</span></span><br><span class="line">service mysqld start</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 还原数据</span></span><br><span class="line">mysql -uroot -proot &lt; mysqldump.sql</span><br></pre></td></tr></table></figure></p>
-<h3 id="4-innodb-file-per-table"><a href="#4-innodb-file-per-table" class="headerlink" title="4. innodb_file_per_table"></a>4. innodb_file_per_table</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;还有一种方式是在创建数据库的时候设置innodb_file_per_table，这样InnoDB会对每个表创建一个数据文件，然后只需要运行OPTIMIZE TABLE 命令就可以释放所有已经删除的磁盘空间。</p>
-<h4 id="4-1-修改mysql默认配置文件。"><a href="#4-1-修改mysql默认配置文件。" class="headerlink" title="4.1 修改mysql默认配置文件。"></a>4.1 修改mysql默认配置文件。</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编辑my.ini或my.cnf 在innodb段中加入 innodb_file_per_table=1 # 1为启用，0为禁用</p>
-<h4 id="4-2-查看修改结果"><a href="#4-2-查看修改结果" class="headerlink" title="4.2 查看修改结果"></a>4.2 查看修改结果</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过mysql语句可以查看该变量的值：<br><figure class="highlight gams hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show <span class="hljs-keyword">variables</span> like <span class="hljs-comment">'%per_table%'</span>;</span><br></pre></td></tr></table></figure></p>
+            <p>mysql是一个免费、开源中一款非常优秀关系型数据库，在现在的互联网中使用的非常广泛，无论是大型IT项目还是个人开发者的小项目，mysql都能很好的协助人们处理数据库相关的工作，同时数据库对于我们来说是非常重要，所以经常备份数据库是一个基本的操作，这会为你或者你的团队，减少非常多不必要的麻烦。</p>
+<p><code>mysqldump</code>是一个简单而且非常流行的mysql全量备份方式，配合<code>crontab</code>添加自动备份任务，很好的完成了我们针对数据库备份的需求，下面我会通过一个例子来说明如何完成这项操作。</p>
+<blockquote>
+<p>mysqldump是mysql自带的备份工具，所以只要你安装mysql应用包，就无需单独安装mysqldump</p>
+</blockquote>
+<h4 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h4><p>我搭建了一个Ghost博客环境，数据库采用是的Mysql，接下来我想在每天00:00执行数据库备份操作，并在备份完成之后，告诉我是否备份成功。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tKfTcgy1ffogclgk9dj30f00cq3zf.jpg" alt></p>
+<p>所以我们的步骤应该：</p>
+<ol>
+<li>测试备份命令是否可以正常执行</li>
+<li>安装测试命令行邮件工具mailx</li>
+<li>安装计划任务工具Crontab</li>
+<li>编写备份脚本</li>
+<li>添加计划任务</li>
+</ol>
+<h4 id="测试备份命令"><a href="#测试备份命令" class="headerlink" title="测试备份命令"></a>测试备份命令</h4><p>首先你要获得你要备份的数据库对应的select权限，仅需要select权限即可，mysql在管理方面，应该坚持只赋予必须权限的原则。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; grant select on ghost.* to &apos;ghost_backuser&apos;@&apos;localhost&apos; identified by &apos;backupPass&apos;;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>因为我只在本地执行备份操作，所以我只赋予了<code>localhost</code>的权限，你的权限应该要是执行备份工作的服务器主机信息。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 创建仅授权本地访问的用户</span><br><span class="line">mysql&gt; create user dbackuser@&apos;localhost&apos;;</span><br><span class="line"># 创建授权所有来源地址的用户</span><br><span class="line">mysql&gt; create user dbackuser@&apos;%&apos;;</span><br><span class="line"># 创建仅授权从特定IP的用户</span><br><span class="line">mysql&gt; create user dbackuser@&apos;192.168.0.230&apos;;</span><br><span class="line"># 创建仅授权从特定IP段访问的用户</span><br><span class="line">mysql&gt; create user dbackuser@&apos;192.168.0.0/23&apos;;</span><br><span class="line"># 创建仅授权从特定域名来访问的用户</span><br><span class="line">mysql&gt; create user dbackuser@&apos;samzong.me&apos;;</span><br></pre></td></tr></table></figure>
+<p>好了，接下来我们测试对应用户是否有权限。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ mysql -u ghost_backuser -pbackupPass</span><br><span class="line">Warning: Using a password on the command line interface can be insecure.</span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 7</span><br><span class="line">Server version: 5.6.35 MySQL Community Server (GPL)</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type &apos;help;&apos; or &apos;\h&apos; for help. Type &apos;\c&apos; to clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| ghost              |</span><br><span class="line">+--------------------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; use ghost;</span><br><span class="line">Reading table information for completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line">mysql&gt; select name from users;</span><br><span class="line">+------+</span><br><span class="line">| name |</span><br><span class="line">+------+</span><br><span class="line">| ALEX |</span><br><span class="line">+------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>测试<code>mysqldump</code>备份命令，注意mysqldump备份会锁表，但对于正在工作的数据库，锁表会影响到正常业务，所以我们可以使用<code>–single-transaction</code>参数，不锁表备份。</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ mysqldump -u ghost_backuser -pbackupPass ghost &gt; ghost.bak.sql</span><br><span class="line">Warning: Using a password on the command line interface can be insecure.</span><br><span class="line">mysqldump: Got error: 1044: Access denied for user 'ghost_backuser'@'localhost' to database 'ghost' when using LOCK TABLES</span><br><span class="line">➜  ~ mysqldump -u ghost_backuser -pbackupPass --single-transaction ghost &gt; ghost.bak.sql</span><br><span class="line">Warning: Using a password on the command line interface can be insecure.</span><br><span class="line">➜  ~ ls -lh</span><br><span class="line">total 780K</span><br><span class="line">-rw-r--r-- 1 root   root  780K May 17 16:24 ghost.bak.sql</span><br><span class="line">➜  ~</span><br></pre></td></tr></table></figure>
+<h4 id="安装命令行邮件工具mailx"><a href="#安装命令行邮件工具mailx" class="headerlink" title="安装命令行邮件工具mailx"></a>安装命令行邮件工具mailx</h4><p>安装mailx 在CentOS/RehHat:</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ yum install -y mailx</span><br></pre></td></tr></table></figure>
+<p>测试发送邮件：</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ echo "test" | mail -s "this a test email" samzong.lu@gmail.com</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww2.sinaimg.cn/large/006tKfTcgy1ffogc7wksdj30ms03t3ym.jpg" alt></p>
+<h4 id="安装计划任务工具Crontab"><a href="#安装计划任务工具Crontab" class="headerlink" title="安装计划任务工具Crontab"></a>安装计划任务工具Crontab</h4><p>crontab命令常见于Unix和类Unix的操作系统之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中。通常，crontab储存的指令被守护进程激活， crond常常在后台运行，每一分钟检查是否有预定的作业需要执行。这类作业一般称为cron jobs。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ yum install vixie-cron</span><br><span class="line">➜  ~ yum install crontabs</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>vixie-cron软件包是cron的主程序；</p>
+<p>crontabs软件包是用来安装、卸装、或列举用来驱动 cron 守护进程的表格的程序。</p>
+</blockquote>
+<p>启动crond并设置为开机自启动：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ service crond start</span><br><span class="line">Starting crond:                                            [  OK  ]</span><br><span class="line">➜  ~ chkconfig crond on</span><br></pre></td></tr></table></figure>
+<p>crontab 基础命令：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">语　　法：crontab [-u &lt;用户名称&gt;][配置文件] 或 crontab [-u &lt;用户名称&gt;][-elr]</span><br><span class="line"></span><br><span class="line">补充说明：cron是一个常驻服务，它提供计时器的功能，让用户在特定的时间得以执行预设的指令或程序。只要用户会编辑计时器的配置文件，就可以使用计时器的功能。</span><br><span class="line"></span><br><span class="line">配置文件格式：Minute Hour Day Month DayOFWeek Command</span><br><span class="line"></span><br><span class="line">参　　数：</span><br><span class="line">-e 　编辑该用户的计时器设置。</span><br><span class="line">-l 　列出该用户的计时器设置。</span><br><span class="line">-r 　删除该用户的计时器设置。</span><br><span class="line">-u&lt;用户名称&gt; 　指定要设定计时器的用户名称。</span><br></pre></td></tr></table></figure>
+<p>crontab 配置的基本格式：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">*     * 　 *　  *　  *　　<span class="hljs-built_in">command</span></span><br><span class="line">分　  时　 日　 月　 周　  命令</span><br><span class="line"></span><br><span class="line"> 第1列表示分钟1～59 每分钟用*或者 */1表示</span><br><span class="line"> 第2列表示小时1～23（0表示0点）</span><br><span class="line"> 第3列表示日期1～31</span><br><span class="line"> 第4列表示月份1～12</span><br><span class="line"> 第5列标识号星期0～6（0表示星期天）</span><br><span class="line"> 第6列要运行的命令</span><br></pre></td></tr></table></figure>
+<p>crontab 的一些例子：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">#每晚的21:30 重启apache</span></span><br><span class="line">30 21 * * * /usr/<span class="hljs-built_in">local</span>/etc/rc.d/lighttpd restart</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#每月1、10、22日的4 : 45重启apache</span></span><br><span class="line">45 4 1,10,22 * * /usr/<span class="hljs-built_in">local</span>/etc/rc.d/lighttpd restart</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#每周六、周日的1 : 10重启apache</span></span><br><span class="line">10 1 * * 6,0 /usr/<span class="hljs-built_in">local</span>/etc/rc.d/lighttpd restart</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#每天18 : 00至23 : 00之间每隔30分钟重启apache</span></span><br><span class="line">0,30 18-23 * * * /usr/<span class="hljs-built_in">local</span>/etc/rc.d/lighttpd restart</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#每星期六的11 : 00 pm重启apache</span></span><br><span class="line">0 23 * * 6 /usr/<span class="hljs-built_in">local</span>/etc/rc.d/lighttpd restart</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#晚上11点到早上7点之间，每隔一小时重启apache</span></span><br><span class="line">* 23-7/1 * * * /usr/<span class="hljs-built_in">local</span>/etc/rc.d/lighttpd restart</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#每一小时重启apache</span></span><br><span class="line">* */1 * * * /usr/<span class="hljs-built_in">local</span>/etc/rc.d/lighttpd restart</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#每月的4号与每周一到周三的11点重启apache</span></span><br><span class="line">0 11 4 * mon-wed /usr/<span class="hljs-built_in">local</span>/etc/rc.d/lighttpd restart</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#一月一号的4点重启apache</span></span><br><span class="line">0 4 1 jan * /usr/<span class="hljs-built_in">local</span>/etc/rc.d/lighttpd restart</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#每半小时同步一下时间</span></span><br><span class="line">*/30 * * * * /usr/sbin/ntpdate 210.72.145.44</span><br></pre></td></tr></table></figure>
+<h4 id="编写备份脚本"><a href="#编写备份脚本" class="headerlink" title="编写备份脚本"></a>编写备份脚本</h4><p>好了，以上我们测试需要用到的各个模块，下面我们要编写备份脚本：</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/bin/bash</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">  mysqldump scripts.</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> filepath: /usr/<span class="hljs-built_in">local</span>/bin/ghost_sqldump.sh</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> Author: samzong</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">  <span class="hljs-built_in">set</span> TIME variable</span></span><br><span class="line">TIME=`date "+%Y%m%d%H%M%S"`</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> backup db ghost to /mysqlbak/</span></span><br><span class="line">mysqldump --single-transaction -h localhost -u ghost_backuser -pbackupPass ghost  &gt; /mysqlbak/ghost_$TIME.sql</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> tar sql files.</span></span><br><span class="line">tar czvf /mysqlbak/ghost_$TIME.sql.tgz /mysqlbak/ghost_$TIME.sql --remove-files</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> remove over 7 days sql files.</span></span><br><span class="line">find /mysqlbak/ -mtime +7 -exec rm -f &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> send mial to admin<span class="hljs-string">'mial</span></span></span><br><span class="line">if [ $? -eq 0 ]</span><br><span class="line">then</span><br><span class="line">	echo "ghost SQL dump is successfully. At time: `date` " | mail -s ghost-dump-successfully  samzong.lu@gmail.com</span><br><span class="line">else</span><br><span class="line">	echo " Error Error ghost SQL dump is Error. At time: `date` " | mail -s ghost-dump-error samzong.lu@gmail.com</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>注意脚本中的以下内容要根据你的实际情况修改:</p>
+<ul>
+<li>-h “ “     这是数据库所在的主机</li>
+<li>-u “ “       这是数据库可备份的用户名</li>
+<li>-p” “        备份用户的密码</li>
+</ul>
+<h4 id="添加计划任务"><a href="#添加计划任务" class="headerlink" title="添加计划任务"></a>添加计划任务</h4><p>经过以上测试，已经很好的完成备份脚本，接下来将脚本添加到crontab内，并设置自动执行的时间：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ crontab -e</span><br><span class="line">00 00 * * * sh /usr/<span class="hljs-built_in">local</span>/bin/ghost_sqldump.sh</span><br></pre></td></tr></table></figure>
+<p>重启crontab服务，并确认crontab已经设置为开机自启动</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ service crond restart</span><br><span class="line">Stopping crond:                                            [  OK  ]</span><br><span class="line">Starting crond:                                            [  OK  ]</span><br><span class="line">➜  ~ chkconfig --list | grep crond</span><br><span class="line">crond          	0:off	1:off	2:on	3:on	4:on	5:on	6:off</span><br></pre></td></tr></table></figure>
 
         </div>
         
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-05-15T03:05:23.000Z">2017-05-15</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Windows/">Windows</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 minutes read (About 1387 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/05/15/fix-Wannacry/">Wannacry蠕虫病毒事件及修复方案</a>
+            
+        </h1>
+        <div class="content">
+            <p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/3d0jo.png" alt></p>
+<h3 id="事件背景"><a href="#事件背景" class="headerlink" title="事件背景"></a>事件背景</h3><p>5月12日晚， WannaCry 蠕虫病毒在全球大肆爆发。据BBC、CNN等媒体报道，恶意攻击者利用 NSA（美国国家安全局）泄露的 Windows 0day 利用工具对99个国家实施了超过75000次攻击，主要影响SMB和RDP服务，主要影响了137、138、139、445端口。</p>
+<p>目前已知已知的Windows版本包括但不限于一下都受影响：</p>
+<ul>
+<li>Windows NT</li>
+<li>Windows 2000</li>
+<li>Windows XP</li>
+<li>Windows 2003</li>
+<li>Windows Vista</li>
+<li>Windows 7</li>
+<li>Windows 8</li>
+<li>Windows 10</li>
+<li>Windows 2008</li>
+<li>Windows 2008 R2</li>
+<li>Windows Server 2012 SP0</li>
+</ul>
+<p>勒索者源头来自暗网，攻击具备兼容性、多语言支持，多个行业受到影响，国内高校网络系统沦为感染重灾区。据有关机构统计，目前国内每天有数万台机器遭到该蠕虫病毒袭击，国内的ATM机、火车站、自助终端、邮政、医院、政府办事终端、视频监控都可能遭受攻击。据报道，今日全国多地的中石油加油站无法进行网络支付，只能进行现金支付。中石油有关负责人表示，怀疑受到病毒攻击，具体情况还在核查。而截至目前，一些公安系统已经遭到入侵。</p>
+<p>如果你也遇到了这样的问题，请不要担心，我在下面给出了如何修复这个漏洞的建议。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/9y7cc.jpg" alt></p>
+<h3 id="什么是比特币蠕虫病毒？"><a href="#什么是比特币蠕虫病毒？" class="headerlink" title="什么是比特币蠕虫病毒？"></a>什么是比特币蠕虫病毒？</h3><p>这次攻击的始作俑者是一款名为“WannaCry”（中文名：想哭）的勒索病毒，带有加密功能，它利用 Windows 在 445 端口的安全漏洞潜入电脑并对多种文件类型加密并添加后缀(.onion)使用户无法打开，用户电脑存在文档被加密的情况，攻击者称需支付比特币解锁。(比特币是一种全球通用的互联网加密货币)</p>
+<h3 id="漏洞验证"><a href="#漏洞验证" class="headerlink" title="漏洞验证"></a>漏洞验证</h3><ol>
+<li><p>使用<code>Win</code>+<code>R</code>按键打开运行窗口，输入cmd，进入命令行工具，然后输入<code>netstat -an</code> 查看是否开放了对应的端口。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/3m1jm.png" alt></p>
+<p>上图中的服务器就是开放了445端口，这有很大的风险可能会WannaCry 蠕虫病毒被攻击到，所以我们应该关掉对应端口，并修复漏洞。</p>
+<h3 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h3><ol>
+<li>目前微软已发布补丁MS17-010修复了“永恒之蓝”攻击的系统漏洞，请尽快为电脑安装此补丁，网址为<a href="https://laod.cn/go.php?url=https://technet.microsoft.com/zh-cn/library/security/MS17-010" target="_blank" rel="noopener">https://technet.microsoft.com/zh-cn/library/security/MS17-010</a></li>
+<li>对于XP、2003等微软已不再提供安全更新的机器，推荐使用360“NSA武器库免疫工具”检测系统是否存在漏洞，并关闭受到漏洞影响的端口，可以避免遭到勒索软件等病毒的侵害，可以在360电脑安全管家中找到。</li>
+<li>开启系统防火墙，利用系统防火墙的“高级设置”阻止外部对 445 端口进的访问（存在一定影响，该操作会影响使用 445 端口的服务）。</li>
+</ol>
+</li>
+</ol>
+<h3 id="修复脚本"><a href="#修复脚本" class="headerlink" title="修复脚本"></a>修复脚本</h3><p>如果以上方式都不能修复漏洞，大家可以使用我以下的批处理脚本文件来尝试关闭端口及服务，批处理禁用该漏洞可能利用到的端口，全版本通用，右键管理员启动即可，注意这需要打开Windows的防火墙。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">net stop SCardSvr</span><br><span class="line">net stop SCPolicySvc</span><br><span class="line">sc config SCardSvr start=disabled</span><br><span class="line">sc config SCPolicySvc start=disabled</span><br><span class="line">net start MpsSvc</span><br><span class="line">sc config MpsSvc start=auto</span><br><span class="line">netsh advfirewall <span class="hljs-built_in">set</span> allprofiles state on</span><br><span class="line">netsh advfirewall firewall add rule name=<span class="hljs-string">"deny udp 137"</span> dir=<span class="hljs-keyword">in</span> protocol=udp localport=137 action=block</span><br><span class="line">netsh advfirewall firewall add rule name=<span class="hljs-string">"deny tcp 137"</span> dir=<span class="hljs-keyword">in</span> protocol=tcp localport=137 action=block</span><br><span class="line">netsh advfirewall firewall add rule name=<span class="hljs-string">"deny udp 138"</span> dir=<span class="hljs-keyword">in</span> protocol=udp localport=138 action=block</span><br><span class="line">netsh advfirewall firewall add rule name=<span class="hljs-string">"deny tcp 138"</span> dir=<span class="hljs-keyword">in</span> protocol=tcp localport=138 action=block</span><br><span class="line">netsh advfirewall firewall add rule name=<span class="hljs-string">"deny udp 139"</span> dir=<span class="hljs-keyword">in</span> protocol=udp localport=139 action=block</span><br><span class="line">netsh advfirewall firewall add rule name=<span class="hljs-string">"deny tcp 139"</span> dir=<span class="hljs-keyword">in</span> protocol=tcp localport=139 action=block</span><br><span class="line">netsh advfirewall firewall add rule name=<span class="hljs-string">"deny udp 445"</span> dir=<span class="hljs-keyword">in</span> protocol=udp localport=445 action=block</span><br><span class="line">netsh advfirewall firewall add rule name=<span class="hljs-string">"deny tcp 445"</span> dir=<span class="hljs-keyword">in</span> protocol=tcp localport=445 action=block</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>我已经将脚本上传到百度云盘中，大家可以自行下载运行，注意解压缩Zip包之后的fix_WannaCry.bat</p>
+<p>下载链接：<a href="https://pan.baidu.com/s/1gfceNRH" target="_blank" rel="noopener">https://pan.baidu.com/s/1gfceNRH</a></p>
+<h3 id="添加防火规则"><a href="#添加防火规则" class="headerlink" title="添加防火规则"></a>添加防火规则</h3><ol>
+<li><p>打开控制面板中的Windows防火墙，并保证防火墙处于启用状态；</p>
+</li>
+<li><p>打开防火墙的高级设置；</p>
+</li>
+<li><p>在“入站规则”中新建一条规则，本地端口号选择445，操作选择阻止连接。</p>
+<p><img src="https://pic3.zhimg.com/v2-85f14330cdba1fbf89369b26b9e48f52_b.png" alt></p>
+<p><img src="https://pic2.zhimg.com/v2-1bbe08395ec8ef8d0e2028cbccb01055_b.png" alt></p>
+</li>
+</ol>
+<h3 id="手动导入安全策略"><a href="#手动导入安全策略" class="headerlink" title="手动导入安全策略"></a>手动导入安全策略</h3><p>下载策略文件</p>
+<p><a href="https://share.weiyun.com/15b7bbd3f86c493a66721dd948a81c54" target="_blank" rel="noopener">https://share.weiyun.com/15b7bbd3f86c493a66721dd948a81c54</a></p>
+<p>打开控制面板–管理工具-本地安全策略–IP安全策略 –&gt;所有任务–&gt;导入策略：</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/hj9f4.jpg" alt></p>
+<p>或者，通过<code>Win</code>+<code>R</code>，输入<code>gpedit.msc</code></p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/9vsqx.jpg" alt></p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/tosjk.jpg" alt></p>
+<p><img src="/Users/Alex/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/573578678/QQ/Temp.db/539E3FA1-2A85-4B41-95BC-C32B82A5DA0D.png" alt="539E3FA1-2A85-4B41-95BC-C32B82A5DA0D"></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-04-18T09:48:57.000Z">2017-04-18</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/CentOS/">CentOS</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 minutes read (About 984 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/04/18/qvfwlg9yq/">CentOS增加新硬盘给根文件系统扩容</a>
+            
+        </h1>
+        <div class="content">
+            <p>由于刚开始做磁盘空间规划时，失误给根分区分配磁盘较小，导致后续实验环境无法进行，所以在经过研究后，决定尝试增加根分区的磁盘空间，注意这仅适用于创建在LVM上的文件系统。</p>
+<h3 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h3><ul>
+<li>Parallels Desktop 12</li>
+<li>CentOS 6.9</li>
+<li>根分区空间 6.5GB</li>
+<li>已使用 5.8GB</li>
+<li>预计 增加12G 磁盘空间</li>
+</ul>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2017/04/18/qvfwlg9yq/#more">Read More</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -547,10 +412,10 @@ var _hmt = _hmt || [];
 <div class="card card-transparent">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/page/5/">Previous</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/5/">Anterior</a>
         </div>
         <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/page/7/">Next</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/7/">Siguiente</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
             
@@ -566,7 +431,7 @@ var _hmt = _hmt || [];
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/14/">14</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/31/">31</a></li>
             
         </ul>
     </nav>
@@ -607,7 +472,7 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        Entradas
                     </p>
                     <p class="title has-text-weight-normal">
                         92
@@ -617,7 +482,7 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        Categorias
                     </p>
                     <p class="title has-text-weight-normal">
                         24
@@ -627,7 +492,7 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        Etiquetas
                     </p>
                     <p class="title has-text-weight-normal">
                         37
@@ -637,42 +502,37 @@ var _hmt = _hmt || [];
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/SAMZONG" target="_blank">
-                Follow</a>
+                SEGUIR</a>
         </div>
         
         
         <div class="level is-mobile">
             
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Github" href="https://github.com/SAMZONG">
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/SAMZONG">
                 
                 <i class="fab fa-github"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Facebook" href="https://facebook.com">
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
                 
                 <i class="fab fa-facebook"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Twitter" href="https://twitter.com">
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
                 
                 <i class="fab fa-twitter"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Dribbble" href="https://dribbble.com">
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
                 
                 <i class="fab fa-dribbble"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="RSS" href="/">
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
                 
                 <i class="fas fa-rss"></i>
                 
@@ -729,7 +589,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                Categorias
             </h3>
             <ul class="menu-list">
             <li>
@@ -934,7 +794,7 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            Nube de etiquetas
         </h3>
         <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
     </div>
@@ -948,7 +808,7 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Recientes
         </h3>
         
         <article class="media">
@@ -1054,7 +914,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -1309,7 +1169,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1592,7 +1452,7 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Recientes
         </h3>
         
         <article class="media">
@@ -1698,7 +1558,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -1953,7 +1813,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -2238,8 +2098,7 @@ var _hmt = _hmt || [];
                 </a>
                 <p class="is-size-7">
                 &copy; 2020 SAMZONG&nbsp;
-                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
-                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>
             </div>
@@ -2380,7 +2239,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -2392,10 +2251,10 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
+                POSTS: 'Entradas',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',

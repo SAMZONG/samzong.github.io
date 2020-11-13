@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh">
-<head><meta name="generator" content="Hexo 3.9.0">
+<html  lang="zh">
+<head>
     <meta charset="utf-8">
 <title>SAMZONG</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
 
@@ -104,7 +104,7 @@ var _hmt = _hmt || [];
 
 
 <link rel="stylesheet" href="/css/style.css">
-<meta name="referrer" content="no-referrer">
+<meta name="referrer" content="no-referrer" />
 
 </head>
 <body class="is-3-column">
@@ -121,15 +121,20 @@ var _hmt = _hmt || [];
             
             <div class="navbar-start">
                 
-                <a class="navbar-item" href="/">Home</a>
+                <a class="navbar-item"
+                href="/">Home</a>
                 
-                <a class="navbar-item" href="/archives">Archives</a>
+                <a class="navbar-item"
+                href="/archives">Archives</a>
                 
-                <a class="navbar-item" href="/categories">Categories</a>
+                <a class="navbar-item"
+                href="/categories">Categories</a>
                 
-                <a class="navbar-item" href="/tags">Tags</a>
+                <a class="navbar-item"
+                href="/tags">Tags</a>
                 
-                <a class="navbar-item" href="/about">About</a>
+                <a class="navbar-item"
+                href="/about">About</a>
                 
             </div>
             
@@ -165,17 +170,17 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-03-18T06:52:13.000Z">2016-03-18</time>
+                <time class="level-item has-text-grey" datetime="2016-11-18T04:09:13.000Z">2016-11-18</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                <a class="has-link-grey -link" href="/categories/Ghost/">Ghost</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    34 minutes read (About 5124 words)
+                    5 minutes read (About 765 words)
                 </span>
                 
                 
@@ -184,77 +189,105 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/03/18/lfs/">理解 Linux 的硬链接与软链接</a>
+                <a class="has-link-black-ter" href="/2016/11/18/ghostzeng-jia-ping-lun-mo-kuai/">Ghost(2) 增加评论模块</a>
             
         </h1>
         <div class="content">
-            <h2> 从inode了解Linux文件系统</h2>
+            <p>Ghost作为一个更加纯粹的博客平台，并没有打算为其开发内置的文章评论功能。而是将评论功能托管给第三方，好处也是让用户更有精力集中于网站内容的建设。实现的办法也很简单，只需要向Ghost主题的模板Handlebars(.hbs)插入第三方评论组件的JavaScript代码来为Ghost博客增加评论功能。 </p><br><p><em>国内最常用的多说评论框，支持国内常见的社交网络一键注册登录、盖楼讨论和分享而且对新用户上手简单。而Disqus功能强大、完善的社交网络和多国语言支持并且为其插件启用全球CDN加速。总的来说两个插件各有所长。</em></p><br><p>基于默认主题Casper的安装指南：</p><br><ul><br><li><a href="index.html#comments.hbs">创建一个模板</a></li><br><li><a href="index.html#Duoshuo">安装多说评论系统</a></li><br><li><a href="index.html#Disqus">安装Disqus</a></li><br></ul><br><hr><br><h4 id="comments.hbs">创建一个模板</h4><br><p>为了在需要评论框代码的时候方便引用，我选择事先在主题文件夹<code>content\themes\casper\partials</code>下面创建一个叫做<strong>comments.hbs</strong>的模板文件，也就是评论框的专属模板。</p><br><p>现在我只需要在我的Casper主题下面的post.hbs模板中的</p><br><pre><code>            &lt;/section&gt;<br><br>        &lt;/footer&gt;<br>    &lt;/article&gt;<br>&lt;/main&gt;<br></code></pre><br><p>前面部分添加一句<code>{{&gt; comments}}</code>就可以展示评论框了。</p><br><p>添加后就像这样：</p><br><pre><code>            &lt;/section&gt;<br>            {{&gt; comments}}<br>        &lt;/footer&gt;<br>    &lt;/article&gt;<br>&lt;/main&gt;<br></code></pre><br><p>这样以来的好处就可以在任何主题中轻松移植评论框代码。</p><br><p>开始之前：对评论框Html代码进行简要说明。</p><br><ul><br><li><code>&lt;section class=”post-comments”&gt;…&lt;/section&gt;</code>用于展示评论框</li><br><li><code>&lt;script type=”text/javascript”&gt;…&lt;/script&gt;</code>评论框公共代码</li><br><li><code>{{slug}}</code> 引用文章短名作为第三方社交平台识别文章的特征标志</li><br><li><code>{{title}}</code> 引用文章标题</li><br><li><code>{{url absolute="true"}}</code> 获取永久链接</li><br></ul><br><hr><br><h4 id="Duoshuo">安装多说评论框</h4><br><p>1.将下面的评论框代码插入<strong>comments.hbs</strong>文件。 <br><br>多说评论框：</p><br><pre><code>&lt;section class=”post-comments”&gt;<br>    &lt;div class=”ds-thread” data-thread-key=”{{slug}}“ data-title=”{{title}}“ data-url=”{{url absolute="true"}}“&gt;&lt;/div&gt;<br>    &lt;!– 务必插入多说公共JS代码 –&gt;<br>&lt;/section&gt;<br></code></pre><br><p>2.如何获取多说公共JS代码？</p><br><p>登录多说 &gt; 点击“我要安装”&gt; 创建站点 &gt; 获取公共代码（如图）</p><br><p><img src="https://www.binarization.com/content/images/2015/02/duoshuo-javascript.PNG" alt="多说公共JS代码"></p><br><hr><br><h4 id="Disqus">安装Disqus评论框</h4><br><p>1.将下面的评论框代码插入<strong>comments.hbs</strong>文件。 <br><br>Disqus评论框评论框：</p><br><pre><code>  &lt;section class=”post-comments”&gt;&lt;div id=”disqus_thread”&gt;&lt;/div&gt;<br>      &lt;!– 务必插入Disqus公共JS代码 –&gt;<br>  &lt;/section&gt;<br></code></pre><br><p>2.获取Disqus的公共JS代码</p><br><p>注册Disqus &gt; 安装平台选则 Universal Code &gt; 直接复制代码</p><br><p>3.添加完毕后，重新启动Ghost博客。</p><br><p>4.Disqus不能成功加载的时候可以在JavaScript中强制使用HTTPS以链接Disqus服务器。具体方法就是在<code>s.src</code>的提供的URL中加入<code>https://</code>。 </p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;硬链接与软链接是 Linux 文件系统中的一个重要概念，其涉及文件系统中的索引节点 (index node 又称 inode)，而索引节点对象是 Linux 虚拟文件系统 (VFS) 的四个基本概念之一。通过剖析硬链接与软链接的联系与区别，我们可更好的了解 Linux 中 VFS 这一通用文件模型。并让 Linux 普通用户和系统管理员正确使用硬链接与软链接，帮助文件系统开发者获取 inode 的相关知识。</p>
-<p></p><h3> Linux的文件系统与目录 </h3><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现代操作系统为解决信息能独立于进程之外被长期存储引入了文件，文件作为进程创建信息的逻辑单元可被多个进程并发使用。在 UNIX 系统中，操作系统为磁盘上的文本与图像、鼠标与键盘等输入设备及网络交互等 I/O 操作设计了一组通用 API，使他们被处理时均可统一使用字节流方式。换言之，UNIX 系统中除进程之外的一切皆是文件，而 Linux 保持了这一特性。为了便于文件的管理，Linux 还引入了目录（有时亦被称为文件夹）这一概念。目录使文件可被分类管理，且目录的引入使 Linux 的文件系统形成一个层级结构的目录树。<a href="#list1">清单1.</a>所示的是普通 Linux 系统的顶层目录结构，其中 /dev 是存放了设备相关文件的目录。<p></p>
- <h4 id="list1"> 清单 1. Linux系统的顶层目录结构</h4>
+        </div>
+        
+        
+        
+    </div>
+</div>
 
-<figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> /              根目录</span><br><span class="line">├── bin     存放用户二进制文件</span><br><span class="line">├── boot    存放内核引导配置文件</span><br><span class="line">├── dev     存放设备文件</span><br><span class="line">├── etc     存放系统配置文件</span><br><span class="line">├── home    用户主目录</span><br><span class="line">├── <span class="hljs-class"><span class="hljs-keyword">lib</span>     动态共享库</span></span><br><span class="line">├── lost+found 	文件系统恢复时的恢复文件</span><br><span class="line">├── media   可卸载存储介质挂载点</span><br><span class="line">├── mnt     文件系统临时挂载点</span><br><span class="line">├── opt     附加的应用程序包</span><br><span class="line">├── proc    系统内存的映射目录，提供内核与进程信息</span><br><span class="line">├── root    root 用户主目录</span><br><span class="line">├── sbin    存放系统二进制文件</span><br><span class="line">├── srv     存放服务相关数据</span><br><span class="line">├── sys     sys 虚拟文件系统挂载点</span><br><span class="line">├── tmp     存放临时文件</span><br><span class="line">├── usr     存放用户应用程序</span><br><span class="line">└── var     存放邮件、系统日志等变化文件</span><br></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linux 将设备当做文件进行处理，<a href="#list2">清单 2.</a>展示了如何打开设备文件 /dev/input/event5 并读取文件内容。文件 event5 表示一种输入设备，其可能是鼠标或键盘等。查看文件 /proc/bus/input/devices 可知 event5 对应设备的类型。设备文件 /dev/input/event5 使用 read() 以字符流的方式被读取。结构体 input_event 被定义在内核头文件 linux/input.h 中。</p>
-<h4 id="list2"> 清单 2.  打开并读取设备文件 </h4>
 
-<figure class="highlight lisp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int fd<span class="hljs-comment">;</span></span><br><span class="line">struct input_event ie<span class="hljs-comment">;</span></span><br><span class="line">fd = open(<span class="hljs-string">"/dev/input/event5"</span>, O_RDONLY)<span class="hljs-comment">;</span></span><br><span class="line">read(<span class="hljs-name">fd</span>, <span class="hljs-symbol">&amp;ie</span>, sizeof(<span class="hljs-name">struct</span> input_event))<span class="hljs-comment">;</span></span><br><span class="line">printf(<span class="hljs-string">"type = %d  code = %d  value = %d\n"</span>,</span><br><span class="line">		 ie.type, ie.code, ie.value)<span class="hljs-comment">;</span></span><br><span class="line">close(<span class="hljs-name">fd</span>)<span class="hljs-comment">;</span></span><br></pre></td></tr></table></figure>
-<p><br></p>
-<h3 id="硬链接与软链接的联系与区别"><a href="#硬链接与软链接的联系与区别" class="headerlink" title="硬链接与软链接的联系与区别"></a>硬链接与软链接的联系与区别</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们知道文件都有文件名与数据，这在 Linux 上被分成两个部分：用户数据 (user data) 与元数据 (metadata)。用户数据，即文件数据块 (data block)，数据块是记录文件真实内容的地方；而元数据则是文件的附加属性，如文件大小、创建时间、所有者等信息。在 Linux 中，元数据中的 inode 号（inode 是文件元数据的一部分但其并不包含文件名，inode 号即索引节点号）才是文件的唯一标识而非文件名。文件名仅是为了方便人们的记忆和使用，系统或程序通过 inode 号寻找正确的文件数据块。<a href="#p1">图 1.</a>展示了程序通过文件名获取文件内容的过程。</p>
-<h4 id="p1"> 图 1. 通过文件名打开文件 </h4><br><img src="http://120.24.251.209/content/images/2016/03/image001.jpg" alt><br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在Linux 系统中查看 inode号可使用命令stat 或 ls -i（若是 AIX 系统，则使用命令 istat）。<a href="#list3">清单 3.</a>中使用命令 mv 移动并重命名文件 glibc-2.16.0.tar.xz，其结果不影响文件的用户数据及 inode 号，文件移动前后 inode 号均为：2485677。<br><br><h4 id="list3"> 清单 3.  移动或重命名文件 </h4><br><figure class="highlight yaml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># stat /home/harris/source/glibc-2.16.0.tar.xz</span></span><br><span class="line"><span class="hljs-attr">  File:</span> <span class="hljs-string">`/home/harris/source/glibc-2.16.0.tar.xz'</span></span><br><span class="line"><span class="hljs-attr">  Size:</span> <span class="hljs-number">9990512</span>   	 <span class="hljs-attr">Blocks:</span> <span class="hljs-number">19520</span>      <span class="hljs-string">IO</span> <span class="hljs-attr">Block:</span> <span class="hljs-number">4096</span>   <span class="hljs-string">regular</span> <span class="hljs-string">file</span></span><br><span class="line"><span class="hljs-attr"> Device:</span> <span class="hljs-number">807</span><span class="hljs-string">h/2055d</span> 	 <span class="hljs-attr">Inode:</span> <span class="hljs-number">2485677</span>     <span class="hljs-attr">Links:</span> <span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr"> Access:</span> <span class="hljs-string">(0600/-rw-------)</span>  <span class="hljs-attr">Uid:</span> <span class="hljs-string">(</span> <span class="hljs-number">1000</span><span class="hljs-string">/</span>  <span class="hljs-string">harris)</span>   <span class="hljs-attr">Gid:</span> <span class="hljs-string">(</span> <span class="hljs-number">1000</span><span class="hljs-string">/</span>  <span class="hljs-string">harris)</span></span><br><span class="line"> <span class="hljs-string">...</span></span><br><span class="line"> <span class="hljs-string">...</span></span><br><span class="line"><span class="hljs-string">//</span> <span class="hljs-string">经网友指出，使用mv移动时不跨磁盘inode号不变，如果跨磁盘inode会改变。</span></span><br><span class="line"> <span class="hljs-comment"># mv /home/harris/source/glibc-2.16.0.tar.xz /home/harris/Desktop/glibc.tar.xz</span></span><br><span class="line"> <span class="hljs-comment"># ls -i -F /home/harris/Desktop/glibc.tar.xz</span></span><br><span class="line"> <span class="hljs-number">2485677</span> <span class="hljs-string">/home/harris/Desktop/glibc.tar.xz</span></span><br></pre></td></tr></table></figure><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为解决文件的共享使用，Linux 系统引入了两种链接：硬链接 (hard link) 与软链接（又称符号链接，即 soft link 或 symbolic link）。链接为 Linux 系统解决了文件的共享使用，还带来了隐藏文件路径、增加权限安全及节省存储等好处。若一个 inode 号对应多个文件名，则称这些文件为硬链接。换言之，硬链接就是同一个文件使用了多个别名（见 <a href="#p2">图 2.</a>hard link 就是 file 的一个别名，他们有共同的 inode）。硬链接可由命令 link 或 ln 创建。如下是对文件 oldfile 创建硬链接。<br><br><figure class="highlight haxe hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">link oldfile <span class="hljs-keyword">new</span><span class="hljs-type">file</span></span><br><span class="line"><span class="hljs-type">ln</span> oldfile <span class="hljs-keyword">new</span><span class="hljs-type">file</span></span><br></pre></td></tr></table></figure><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于硬链接是有着相同 inode 号仅文件名不同的文件，因此硬链接存在以下几点特性：<br><br><em> 文件有相同的 inode 及 data block；
-</em> 只能对已存在的文件进行创建；<br><em> 不能交叉文件系统进行硬链接的创建；
-</em> 不能对目录进行创建，只可对文件创建；<br>* 删除一个硬链接文件并不影响其他有相同 inode 号的文件。<br><br><h4 id="list4"> 清单 4.  硬链接特性展示 </h4>
 
-<figure class="highlight stata hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"># <span class="hljs-keyword">ls</span> -<span class="hljs-keyword">li</span></span><br><span class="line"> <span class="hljs-keyword">total</span> 0</span><br><span class="line"></span><br><span class="line"> <span class="hljs-comment">// 只能对已存在的文件创建硬连接</span></span><br><span class="line"> # link old.<span class="hljs-keyword">file</span> hard.link</span><br><span class="line"> link: cannot create link `hard.link' to `old.<span class="hljs-keyword">file</span>': <span class="hljs-keyword">No</span> such <span class="hljs-keyword">file</span> or directory</span><br><span class="line"></span><br><span class="line"> # echo <span class="hljs-string">"This is an original file"</span> &gt; old.<span class="hljs-keyword">file</span></span><br><span class="line"> # <span class="hljs-keyword">cat</span> old.<span class="hljs-keyword">file</span></span><br><span class="line"> This is <span class="hljs-keyword">an</span> original <span class="hljs-keyword">file</span></span><br><span class="line"> # stat old.<span class="hljs-keyword">file</span></span><br><span class="line">  <span class="hljs-keyword">File</span>: `old.<span class="hljs-keyword">file</span>'</span><br><span class="line">  Size: 25        	 Blocks: 8          IO Block: 4096   regular <span class="hljs-keyword">file</span></span><br><span class="line"> Device: 807h/2055d 	 Inode: 660650      Links: 2</span><br><span class="line"> Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)</span><br><span class="line"> ...</span><br><span class="line"> <span class="hljs-comment">// 文件有相同的 inode 号以及 data block</span></span><br><span class="line"> # link old.<span class="hljs-keyword">file</span> hard.link | <span class="hljs-keyword">ls</span> -<span class="hljs-keyword">li</span></span><br><span class="line"> <span class="hljs-keyword">total</span> 8</span><br><span class="line"> 660650 -rw-r--r-- 2 root root 25 Sep  1 17:44 hard.link</span><br><span class="line"> 660650 -rw-r--r-- 2 root root 25 Sep  1 17:44 old.<span class="hljs-keyword">file</span></span><br><span class="line"></span><br><span class="line"> <span class="hljs-comment">// 不能交叉文件系统</span></span><br><span class="line"> # ln /dev/<span class="hljs-keyword">input</span>/event5 /root/bfile.txt</span><br><span class="line"> ln: failed to create hard link `/root/bfile.txt' =&gt; `/dev/<span class="hljs-keyword">input</span>/event5':</span><br><span class="line"> Invalid <span class="hljs-keyword">cross</span>-device link</span><br><span class="line"></span><br><span class="line"> <span class="hljs-comment">// 不能对目录进行创建硬连接</span></span><br><span class="line"> # <span class="hljs-keyword">mkdir</span> -p old.<span class="hljs-keyword">dir</span>/<span class="hljs-keyword">test</span></span><br><span class="line"> # ln old.<span class="hljs-keyword">dir</span>/ hardlink.<span class="hljs-keyword">dir</span></span><br><span class="line"> ln: `old.<span class="hljs-keyword">dir</span>/': hard link not allowed <span class="hljs-keyword">for</span> directory</span><br><span class="line"> # <span class="hljs-keyword">ls</span> -<span class="hljs-keyword">iF</span></span><br><span class="line"> 660650 hard.link  657948 old.<span class="hljs-keyword">dir</span>/  660650 old.<span class="hljs-keyword">file</span></span><br></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件 old.file 与 hard.link 有着相同的 inode 号：660650 及文件权限，inode 是随着文件的存在而存在，因此只有当文件存在时才可创建硬链接，即当 inode 存在且链接计数器（link count）不为 0 时。inode 号仅在各文件系统下是唯一的，当 Linux 挂载多个文件系统后将出现 inode 号重复的现象（如<a href="#list5">清单 5.</a>所示，文件 t3.jpg、sync 及 123.txt 并无关联，却有着相同的 inode 号），因此硬链接创建时不可跨文件系统。设备文件目录 /dev 使用的文件系统是 devtmpfs，而 /root（与根目录 / 一致）使用的是磁盘文件系统 ext4。<a href="#list5">清单 5.</a>展示了使用命令 df 查看当前系统中挂载的文件系统类型、各文件系统 inode 使用情况及文件系统挂载点。</p>
-<h4 id="list5"> 清单 5.  查找有相同 inode 号的文件 </h4><br><figure class="highlight lsl hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># df -i --print-type</span><br><span class="line"> Filesystem     Type       Inodes  IUsed    IFree IUse% Mounted on</span><br><span class="line"> /dev/sda7      ext4      <span class="hljs-number">3147760</span> <span class="hljs-number">283483</span>  <span class="hljs-number">2864277</span>   <span class="hljs-number">10</span>% /</span><br><span class="line"> udev           devtmpfs   <span class="hljs-number">496088</span>    <span class="hljs-number">553</span>   <span class="hljs-number">495535</span>    <span class="hljs-number">1</span>% /dev</span><br><span class="line"> tmpfs          tmpfs      <span class="hljs-number">499006</span>    <span class="hljs-number">491</span>   <span class="hljs-number">498515</span>    <span class="hljs-number">1</span>% /run</span><br><span class="line"> none           tmpfs      <span class="hljs-number">499006</span>      <span class="hljs-number">3</span>   <span class="hljs-number">499003</span>    <span class="hljs-number">1</span>% /run/lock</span><br><span class="line"> none           tmpfs      <span class="hljs-number">499006</span>     <span class="hljs-number">15</span>   <span class="hljs-number">498991</span>    <span class="hljs-number">1</span>% /run/shm</span><br><span class="line"> /dev/sda6      fuseblk  <span class="hljs-number">74383900</span>   <span class="hljs-number">4786</span> <span class="hljs-number">74379114</span>    <span class="hljs-number">1</span>% /media/DiskE</span><br><span class="line"> /dev/sda8      fuseblk  <span class="hljs-number">29524592</span>  <span class="hljs-number">19939</span> <span class="hljs-number">29504653</span>    <span class="hljs-number">1</span>% /media/DiskF</span><br><span class="line"></span><br><span class="line"> # find / -inum <span class="hljs-number">1114</span></span><br><span class="line"> /media/DiskE/Pictures/t3.jpg</span><br><span class="line"> /media/DiskF/<span class="hljs-number">123.</span>txt</span><br><span class="line"> /bin/sync</span><br></pre></td></tr></table></figure><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;值得一提的是，Linux 系统存在 inode 号被用完但磁盘空间还有剩余的情况。我们创建一个 5M 大小的 ext4 类型的 mo.img 文件，并将其挂载至目录 /mnt。然后我们使用一个 shell 脚本将挂载在 /mnt 下 ext4 文件系统的 indoe 耗尽（见<a href="#list6">清单 6.</a>）。<br><br><h4 id="list6"> 清单 6.  测试文件系统 inode 耗尽但仍有磁盘空间的情景 </h4>
 
-<figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># dd if=/dev/zero of=mo.img bs=5120k count=1</span></span><br><span class="line"><span class="hljs-comment"># ls -lh mo.img</span></span><br><span class="line">-rw-r--r-- 1 root root 5.0M Sep  1 17:54 mo.img</span><br><span class="line"><span class="hljs-comment"># mkfs -t ext4  -F ./mo.img</span></span><br><span class="line"><span class="hljs-built_in">..</span>.</span><br><span class="line">OS type: Linux</span><br><span class="line">Block <span class="hljs-attribute">size</span>=1024 (<span class="hljs-attribute">log</span>=0)</span><br><span class="line">Fragment <span class="hljs-attribute">size</span>=1024 (<span class="hljs-attribute">log</span>=0)</span><br><span class="line"><span class="hljs-attribute">Stride</span>=0 blocks, Stripe <span class="hljs-attribute">width</span>=0 blocks</span><br><span class="line">1280 inodes, 5120 blocks</span><br><span class="line">256 blocks (5.00%) reserved <span class="hljs-keyword">for</span> the super user</span><br><span class="line"><span class="hljs-built_in">..</span>.</span><br><span class="line"><span class="hljs-built_in">..</span>.</span><br><span class="line">Writing superblocks <span class="hljs-keyword">and</span> filesystem<span class="hljs-built_in"> accounting </span>information: done</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># mount -o loop ./mo.img /mnt</span></span><br><span class="line"><span class="hljs-comment"># cat /mnt/inode_test.sh</span></span><br><span class="line"><span class="hljs-comment">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">for</span> ((i = 1; ; i++))</span><br><span class="line"><span class="hljs-keyword">do</span></span><br><span class="line">   <span class="hljs-keyword">if</span> [ $? -eq 0 ]; then</span><br><span class="line">       echo  <span class="hljs-string">"This is file_<span class="hljs-variable">$i</span>"</span> &gt; file_<span class="hljs-variable">$i</span></span><br><span class="line">   <span class="hljs-keyword">else</span></span><br><span class="line">       exit 0</span><br><span class="line">   fi</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># ./inode_test.sh</span></span><br><span class="line">./inode_test.sh: line 6: file_1269: <span class="hljs-literal">No</span> space left on device</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># df -iT /mnt/; du -sh /mnt/</span></span><br><span class="line">Filesystem    <span class="hljs-built_in"> Type </span>Inodes IUsed IFree IUse% Mounted on</span><br><span class="line">/dev/loop0     ext4   1280  1280     0  100% /mnt</span><br><span class="line">1.3M 	 /mnt/</span><br></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;硬链接不能对目录创建是受限于文件系统的设计（见 <a href="#list4">清单 4.</a>对目录创建硬链接将失败）。现 Linux 文件系统中的目录均隐藏了两个个特殊的目录：当前目录（.）与父目录（..）。查看这两个特殊目录的 inode 号可知其实这两目录就是两个硬链接（注意目录 /mnt/lost+found/ 的 inode 号）。若系统允许对目录创建硬链接，则会产生目录环。</p>
-<figure class="highlight yaml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># ls -aliF /mnt/lost+found</span></span><br><span class="line"><span class="hljs-string">total</span> <span class="hljs-number">44</span></span><br><span class="line"><span class="hljs-number">11</span> <span class="hljs-string">drwx------</span> <span class="hljs-number">2</span> <span class="hljs-string">root</span> <span class="hljs-string">root</span> <span class="hljs-number">12288</span> <span class="hljs-string">Sep</span>  <span class="hljs-number">1</span> <span class="hljs-number">17</span><span class="hljs-string">:54</span> <span class="hljs-string">./</span></span><br><span class="line"><span class="hljs-number">2</span> <span class="hljs-string">drwxr-xr-x</span> <span class="hljs-number">3</span> <span class="hljs-string">root</span> <span class="hljs-string">root</span> <span class="hljs-number">31744</span> <span class="hljs-string">Sep</span>  <span class="hljs-number">1</span> <span class="hljs-number">17</span><span class="hljs-string">:57</span> <span class="hljs-string">../</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># stat  /mnt/lost+found/</span></span><br><span class="line"><span class="hljs-attr"> File:</span> <span class="hljs-string">`/mnt/lost+found/'</span></span><br><span class="line"><span class="hljs-attr"> Size:</span> <span class="hljs-number">12288</span>     	 <span class="hljs-attr">Blocks:</span> <span class="hljs-number">24</span>         <span class="hljs-string">IO</span> <span class="hljs-attr">Block:</span> <span class="hljs-number">1024</span>   <span class="hljs-string">directory</span></span><br><span class="line"><span class="hljs-attr">Device:</span> <span class="hljs-number">700</span><span class="hljs-string">h/1792d</span> 	 <span class="hljs-attr">Inode:</span> <span class="hljs-number">11</span>          <span class="hljs-attr">Links:</span> <span class="hljs-number">2</span></span><br><span class="line"><span class="hljs-attr">Access:</span> <span class="hljs-string">(0700/drwx------)</span>  <span class="hljs-attr">Uid:</span> <span class="hljs-string">(</span>    <span class="hljs-number">0</span><span class="hljs-string">/</span>    <span class="hljs-string">root)</span>   <span class="hljs-attr">Gid:</span> <span class="hljs-string">(</span>    <span class="hljs-number">0</span><span class="hljs-string">/</span>    <span class="hljs-string">root)</span></span><br><span class="line"><span class="hljs-attr">Access:</span> <span class="hljs-number">2012</span><span class="hljs-bullet">-09</span><span class="hljs-bullet">-01</span> <span class="hljs-number">17</span><span class="hljs-string">:57:17.000000000</span> <span class="hljs-string">+0800</span></span><br><span class="line"><span class="hljs-attr">Modify:</span> <span class="hljs-number">2012</span><span class="hljs-bullet">-09</span><span class="hljs-bullet">-01</span> <span class="hljs-number">17</span><span class="hljs-string">:54:49.000000000</span> <span class="hljs-string">+0800</span></span><br><span class="line"><span class="hljs-attr">Change:</span> <span class="hljs-number">2012</span><span class="hljs-bullet">-09</span><span class="hljs-bullet">-01</span> <span class="hljs-number">17</span><span class="hljs-string">:54:49.000000000</span> <span class="hljs-string">+0800</span></span><br><span class="line"><span class="hljs-attr">Birth:</span> <span class="hljs-bullet">-</span></span><br></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;软链接与硬链接不同，若文件用户数据块中存放的内容是另一文件的路径名的指向，则该文件就是软连接。软链接就是一个普通文件，只是数据块内容有点特殊。软链接有着自己的 inode 号以及用户数据块（见 <a href="#p2">图 2.</a>）。因此软链接的创建与使用没有类似硬链接的诸多限制：</p>
-<ul>
-<li>软链接有自己的文件属性及权限等；</li>
-<li>可对不存在的文件或目录创建软链接；</li>
-<li>软链接可交叉文件系统；</li>
-<li>软链接可对文件或目录创建；</li>
-<li>创建软链接时，链接计数 i_nlink 不会增加；</li>
-<li>删除软链接并不影响被指向的文件，但若被指向的原文件被删除，则相关软连接被称为死链接（即 dangling link，若被指向路径文件被重新创建，死链接可恢复为正常的软链接）。</li>
-</ul>
-<h4 id="p2">  图 2. 软链接的访问 </h4><br><img src="http://120.24.251.209/content/images/2016/03/image002.jpg" alt><br><br><h4 id="list7"> 清单 7. 软链接特性展示 </h4>
 
-<figure class="highlight stata hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># <span class="hljs-keyword">ls</span> -<span class="hljs-keyword">li</span></span><br><span class="line"> <span class="hljs-keyword">total</span> 0</span><br><span class="line"></span><br><span class="line"> <span class="hljs-comment">// 可对不存在的文件创建软链接</span></span><br><span class="line"> # ln -s old.<span class="hljs-keyword">file</span> soft.link</span><br><span class="line"> # <span class="hljs-keyword">ls</span> -liF</span><br><span class="line"> <span class="hljs-keyword">total</span> 0</span><br><span class="line"> 789467 lrwxrwxrwx 1 root root 8 Sep  1 18:00 soft.link -&gt; old.<span class="hljs-keyword">file</span></span><br><span class="line"></span><br><span class="line"> <span class="hljs-comment">// 由于被指向的文件不存在，此时的软链接 soft.link 就是死链接</span></span><br><span class="line"> # <span class="hljs-keyword">cat</span> soft.link</span><br><span class="line"> <span class="hljs-keyword">cat</span>: soft.link: <span class="hljs-keyword">No</span> such <span class="hljs-keyword">file</span> or directory</span><br><span class="line"></span><br><span class="line"> <span class="hljs-comment">// 创建被指向的文件 old.file，soft.link 恢复成正常的软链接</span></span><br><span class="line"> # echo <span class="hljs-string">"This is an original file_A"</span> &gt;&gt; old.<span class="hljs-keyword">file</span></span><br><span class="line"> # <span class="hljs-keyword">cat</span> soft.link</span><br><span class="line"> This is <span class="hljs-keyword">an</span> original file_A</span><br><span class="line"></span><br><span class="line"> <span class="hljs-comment">// 对不存在的目录创建软链接</span></span><br><span class="line"> # ln -s old.<span class="hljs-keyword">dir</span> soft.link.<span class="hljs-keyword">dir</span></span><br><span class="line"> # <span class="hljs-keyword">mkdir</span> -p old.<span class="hljs-keyword">dir</span>/<span class="hljs-keyword">test</span></span><br><span class="line"> # tree . -F --inodes</span><br><span class="line"> .</span><br><span class="line">├── [ 789497]  old.<span class="hljs-keyword">dir</span>/</span><br><span class="line">│   └── [ 789498]  <span class="hljs-keyword">test</span>/</span><br><span class="line">├── [ 789495]  old.<span class="hljs-keyword">file</span></span><br><span class="line">├── [ 789495]  soft.link -&gt; old.<span class="hljs-keyword">file</span></span><br><span class="line">└── [ 789497]  soft.link.<span class="hljs-keyword">dir</span> -&gt; old.<span class="hljs-keyword">dir</span>/</span><br></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当然软链接的用户数据也可以是另一个软链接的路径，其解析过程是递归的。但需注意：软链接创建时原文件的路径指向使用绝对路径较好。使用相对路径创建的软链接被移动后该软链接文件将成为一个死链接（如下所示的软链接 a 使用了相对路径，因此不宜被移动），因为链接数据块中记录的亦是相对路径指向。</p>
-<figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ls -li</span><br><span class="line">total <span class="hljs-number">2136</span></span><br><span class="line"><span class="hljs-number">656627</span> lrwxrwxrwx <span class="hljs-number">1</span> harris harris       <span class="hljs-number">8</span> Sep  <span class="hljs-number">1</span> <span class="hljs-number">14</span>:<span class="hljs-number">37</span> <span class="hljs-selector-tag">a</span> -&gt; data.txt</span><br><span class="line"><span class="hljs-number">656662</span> lrwxrwxrwx <span class="hljs-number">1</span> harris harris       <span class="hljs-number">1</span> Sep  <span class="hljs-number">1</span> <span class="hljs-number">14</span>:<span class="hljs-number">37</span> <span class="hljs-selector-tag">b</span> -&gt; a</span><br><span class="line"><span class="hljs-number">656228</span> -rw------- <span class="hljs-number">1</span> harris harris <span class="hljs-number">2186738</span> Sep  <span class="hljs-number">1</span> <span class="hljs-number">14</span>:<span class="hljs-number">37</span> data<span class="hljs-selector-class">.txt</span> <span class="hljs-number">6</span></span><br></pre></td></tr></table></figure>
-<h3 id="链接相关的命令"><a href="#链接相关的命令" class="headerlink" title="链接相关的命令"></a>链接相关的命令</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在 Linux 中查看当前系统已挂着的文件系统类型，除上述使用的命令 df，还可使用命令 mount 或查看文件 /proc/mounts。</p>
-<figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># mount</span></span><br><span class="line">/dev/sda7 on /<span class="hljs-built_in"> type </span>ext4 (rw,<span class="hljs-attribute">errors</span>=remount-ro)</span><br><span class="line">proc on /proc<span class="hljs-built_in"> type </span>proc (rw,noexec,nosuid,nodev)</span><br><span class="line">sysfs on /sys<span class="hljs-built_in"> type </span>sysfs (rw,noexec,nosuid,nodev)</span><br><span class="line"><span class="hljs-built_in">..</span>.</span><br><span class="line"><span class="hljs-built_in">..</span>.</span><br><span class="line">none on /run/shm<span class="hljs-built_in"> type </span>tmpfs (rw,nosuid,nodev)</span><br></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;命令 ls 或 stat 可帮助我们区分软链接与其他文件并查看文件 inode 号，但较好的方式还是使用 find 命令，其不仅可查找某文件的软链接，还可以用于查找相同 inode 的所有硬链接。（见 <a href="#list8">清单 8.</a>）</p>
-<h4 id="list8"> 清单 8. 使用命令 find 查找软链接与硬链接 </h4>
 
-<figure class="highlight dts hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 查找在路径 /home 下的文件 data.txt 的软链接</span></span><br><span class="line"> <span class="hljs-meta"># find /home -lname data.txt</span></span><br><span class="line"> <span class="hljs-meta-keyword">/home/</span>harris<span class="hljs-meta-keyword">/debug/</span>test2/a</span><br><span class="line"></span><br><span class="line"> <span class="hljs-comment">// 查看路径 /home 有相同 inode 的所有硬链接</span></span><br><span class="line"> <span class="hljs-meta"># find /home -samefile /home/harris/debug/test3/old.file</span></span><br><span class="line"> <span class="hljs-meta-keyword">/home/</span>harris<span class="hljs-meta-keyword">/debug/</span>test3/hard.link</span><br><span class="line"> <span class="hljs-meta-keyword">/home/</span>harris<span class="hljs-meta-keyword">/debug/</span>test3/old.file</span><br><span class="line"></span><br><span class="line"> <span class="hljs-meta"># find /home -inum 660650</span></span><br><span class="line"> <span class="hljs-meta-keyword">/home/</span>harris<span class="hljs-meta-keyword">/debug/</span>test3/hard.link</span><br><span class="line"> <span class="hljs-meta-keyword">/home/</span>harris<span class="hljs-meta-keyword">/debug/</span>test3/old.file</span><br><span class="line"></span><br><span class="line"> <span class="hljs-comment">// 列出路径 /home/harris/debug/ 下的所有软链接文件</span></span><br><span class="line"> <span class="hljs-meta"># find /home/harris/debug/ -type l -ls</span></span><br><span class="line"> <span class="hljs-number">656662</span> <span class="hljs-number">0</span> lrwxrwxrwx <span class="hljs-number">1</span> harris harris <span class="hljs-number">1</span> Sep <span class="hljs-number">1</span> <span class="hljs-number">14</span>:<span class="hljs-number">37</span> <span class="hljs-meta-keyword">/home/</span>harris<span class="hljs-meta-keyword">/debug/</span>test2/b -&gt; a</span><br><span class="line"> <span class="hljs-number">656627</span> <span class="hljs-number">0</span> lrwxrwxrwx <span class="hljs-number">1</span> harris harris <span class="hljs-number">8</span> Sep <span class="hljs-number">1</span> <span class="hljs-number">14</span>:<span class="hljs-number">37</span> <span class="hljs-meta-keyword">/home/</span>harris<span class="hljs-meta-keyword">/debug/</span>test2/a -&gt;</span><br><span class="line"> data.txt</span><br><span class="line"> <span class="hljs-number">789467</span> <span class="hljs-number">0</span> lrwxrwxrwx <span class="hljs-number">1</span> root root <span class="hljs-number">8</span> Sep <span class="hljs-number">1</span> <span class="hljs-number">18</span>:<span class="hljs-number">00</span> <span class="hljs-meta-keyword">/home/</span>harris<span class="hljs-meta-keyword">/debug/</span>test/soft.link -&gt;</span><br><span class="line"> old.file</span><br><span class="line"> <span class="hljs-number">789496</span>    <span class="hljs-number">0</span> lrwxrwxrwx   <span class="hljs-number">1</span> root     root            <span class="hljs-number">7</span> Sep  <span class="hljs-number">1</span> <span class="hljs-number">18</span>:<span class="hljs-number">01</span></span><br><span class="line"> <span class="hljs-meta-keyword">/home/</span>harris<span class="hljs-meta-keyword">/debug/</span>test/soft.link.dir -&gt; old.dir</span><br></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;系统根据磁盘的大小默认设定了 inode 的值（见<a href="#list9">清单 9.</a>），如若必要，可在格式文件系统前对该值进行修改。如键入命令 mkfs -t ext4 -I 512/dev/sda4，将使磁盘设备 /dev/sda4 格式成 inode 大小是 512 字节的 ext4 文件系统。</p>
-<h4 id="list9"> 清单 9. 查看系统的 inode 值 </h4>
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-11-10T16:32:13.000Z">2016-11-11</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    22 minutes read (About 3299 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/11/11/python-lesson-1/">Python(1) 基础</a>
+            
+        </h1>
+        <div class="content">
+            <p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;<br>&lt;!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” “<a href="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;" target="_blank" rel="noopener">http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</a></p>
+<html><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="exporter-version" content="Evernote Mac 6.10 (454269)"><meta name="author" content="Alex LU"><meta name="created" content="2016-09-29 02:27:16 +0000"><meta name="source" content="desktop.mac"><meta name="updated" content="2016-09-29 06:27:40 +0000"><title>Python学习笔记(1) –Python基础</title></head><body><br><ol><br><li>输出： print<br><ol><br><li>python2：print ‘Hello Python’</li><br><li>python3: print(‘Hello Python’)</li><br><li>python(‘10+20=‘,10+20)</li><br></ol><br></li><br><li>输入：<br><ol><br><li>python2：raw<em>input()</em></li><br><li>python3: input()</li><br></ol><br></li><br><li>python的语法比较简单，采用缩进的方式：</li><br></ol><br><div style="-en-codeblock: true; box-sizing: border-box; padding: 8px; font-family: Monaco, Menlo, Consolas, &quot;Courier New&quot;, monospace; font-size: 12px; color: rgb(51, 51, 51); border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(251, 250, 248); border: 1px solid rgba(0, 0, 0, 0.14902); background-position: initial initial; background-repeat: initial initial;"><br><div>a = 100</div><br><div>if a &gt;= 0:</div><br><div>     print(a)</div><br><div>else:</div><br><div>     print(-a)</div><br><div><br></div><br><div>&amp; diff &amp;</div><br><div>a = 100</div><br><div>if a &gt;=0:</div><br><div>print(a)</div><br><div>else:</div><br><div>print(-a)</div><br></div><br><ol start="4"><br><li># 开头为注释；: 结尾，缩进的语句视为代码块；Python大小写是敏感的，约定俗成：4个空格的缩进，可以吧tab设置为4个空格。</li><br><li>Python 的数据类型<br><ol><br><li>整数：python可以处理任意大小的整数</li><br><li>浮点数：也就是小数，之所以称之为浮点数，因为按照科学计数法表示时，一个浮点数的小数点位置是可变的</li><br><li>字符串：字符串是以’’和”” 包括起来的任意文本，例如’abc’,”xyz”；如果字符内部同时包含’和”，可以使用\转义字符来标识。<br><ol><br><li>如果字符串内部有很多换行，用\n不好阅读，python支持使用’’’…’’’ 的格式表示多行‘</li><br><li>r’…’  python可以使用r’’表示’’以内的字符不转义;多行: r’’’…’’’</li><br></ol><br></li><br><li>布尔值：布尔值和布尔代数表示的完全一致，一个布尔值只有True和False，python支持直接使用True和False表示布尔值，注意大小写，另外最好不要生命变量时使用True等，布尔值，经常用于在条件判断之中。<br><ol><br><li>and : 与运算，所有运算结果都是True，and的结果才是True</li><br><li>or：或运算，只有1个运算结果为True，or的结果就是True</li><br><li>not：他是一个单目运算符，取相反的值</li><br></ol><br></li><br><li>空值：python里的一个特殊值，用None表示，注意None不能理解为0，因为0是有意义的，而None是一个特殊的空值</li><br></ol><br></li><br><li>python的变量<br><ol><br><li>命名规则：必须是大小写英文，数字和的组合，且不能用数字开头；</li><br><li>赋值符号：’=’；等于的符号是’==’</li><br><li>动态语言：变量本身类型不固定的语言称之为动态语言，反之是静态语言，静态语言在定义变量时必须制定变量的数据类型，如果赋值的时候类型不匹配，就会报错；</li><br><li>变量在计算机内存中的表示：a=1,指的是python在内存中创建了整数1，然后在内存创建了变量a，并把它指向了整数1</li><br></ol><br></li><br><li>python的常量<br><ol><br><li>定义：常量就是不能改变的变量，在python中，通常使用全部大写的变量名表示常量</li><br><li>整数的除法是精确的，因为除法计算结果是浮点数，例如 9/3 结果为3.0 ; 另外一种除法是’//‘ 地板除，两个整数的除法任然是整数；余数运算’%’</li><br></ol><br></li><br><li>字符编码：字符串是一种数据类型，但是字符串还涉及到一个编码问题，Python3的字符串是支持多语言的<br><ol><br><li>ord(‘’)函数 获取字符的整数表示；</li><br><li>chr(‘’)函数 把编码转换成对应的字符；</li><br><li>python的字符串类型是str，在内存中以Unicode表示，一个字符对应若干字节，但是如果要在网络传输或者保存到磁盘，就要把str转化为单位的bytes；<br><ol><br><li>python对于bytes的数据类型用带b前缀的单引号或双引号表示：</li><br><li>另外，Unicode表示的str可用encode()函数，指定编码为bytes。 ‘ABC’ .encode(‘utf-8’)</li><br><li>decode() 可以吧bytes转变为str。b’ABC’ .decode(‘ascii’)</li><br><li>要计算str包含了多少个字符使用 len()函数： len(‘hello’) ,结果为5</li><br></ol><br></li><br><li style="-en-codeblock: true; box-sizing: border-box; padding: 8px; font-family: Monaco, Menlo, Consolas, &quot;Courier New&quot;, monospace; font-size: 12px; color: rgb(51, 51, 51); border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(251, 250, 248); border: 1px solid rgba(0, 0, 0, 0.14902); background-position: initial initial; background-repeat: initial initial;">#!/usr/bin/env python3<br><br># -<em>- coding: utf-8 -</em>-</li><br></ol><br></li><br><li>格式化： 如何处理格式化输出字符串，在python中使用的格式化方式和C语言是一致的，用’%’实现：<br><ol><br><li>%d 表示整数</li><br><li>%f 表示浮点数</li><br><li>%s 表示字符串，如果不确定用什么，用%s，它会把任何数据类型转换为字符串</li><br><li>%x 表示十六进制整数</li><br><li>%% 表示一个普通的%</li><br></ol><br></li><br><li>数据类型list和tuple<br><ol><br><li>list是python内置的一种数据类型：列表，list是一个有序的集合，可以随时添加和删除其中元素。<br><ol><br><li>classmates = [‘Michael’,’Bob’,’Tracy’]， 可以用len()函数获取这个list的元素的个数</li><br><li>可以用索引来访问list中的每一个位置的元素，记住索引的第一个位置是0：</li><br><li>当索引超出范围的时候，python会报出IndexError错误，记得最后一个索引是len(classmates) -1</li><br><li>如果直接取出最后一个索引可用classmates[-1],以此类推</li><br></ol><br></li><br><li>list是一个可变的有序列表，所以可以去追加，插入指定位置，删除，替换等操作，支持不同数据类型，支持嵌套list<br><ol><br><li>追加: classmates.append(‘Adam’)</li><br><li>插入指定位置: classmates.insert(2,’Jack’)</li><br><li>删除list末尾的元素： classmates.pop()</li><br><li>删除指定位置的元素: classmates.pop(1)</li><br><li>替换元素：classmates[1]=‘Sarch’ ， 直接给相应位置的元素重新赋值即可</li><br><li>list的元素支持不同的数据类型, L = [‘abc’,23,23.4]</li><br><li>list的元素支持嵌套另外一个list： s = [‘abc’,123,[‘XYZ’,2.34]]，注意这个时候len(s)的元素是3个</li><br><li>list也可以没有元素，就是一个空的list，它的长度为0</li><br></ol><br></li><br><li>tuple：元组，也是一种有序列表，但是tuple一旦初始化就不能修改，他没有append()也没有insert()，这样的方法，其他获取元素的方式和list一样，也不能赋值成为另外的元素：<br><ol><br><li>classmates = (‘Michael’,’Bob’,’Tracy’) 注意list用的是’[]’，而tuple用的是’()’</li><br><li>tuple 有个问题，当你定义1个元素的时候，tuple的()和数学公式中的小括号混淆 ，因此python规定，这种情况下面，当定义只有1个tuple时必须增加一个逗号’,’来消除歧义。</li><br><li>tuple的元素也可以为list或者tuple，tuple的元素不会改变，但是list是一个可以改变的有序数列，所以当tuple中包含list时，这个tuple是’可变的’</li><br></ol><br></li><br><li>取出特定元素： L[[‘Apple’,’Google’,’Microsoft’],[‘Java’,’Python’,’C’]] ; L[1][1] = ‘Python’</li><br></ol><br></li><br><li>条件判断<br><ol><br><li>if：根据python的缩进规则，如果if语句的判断是True，就会执行下面的语句，否则什么都不做</li><br><li>else：也可以个if添加else，意思就是，如果if的判断是false，不要执行if的内容，执行else的内容</li><br><li>elif：如果要嵌套多级判断条件的话，使用elif，elif 是else if的缩写</li><br><li>if语句执行有个特点，它是自上而下的判断，如果某个判断的结果是True，那么执行该判断对应的语句，就会忽略掉剩下的所有elif和else，if判断条件还可以简写: if x: 只要x是非零数值、非空字符串、非空list等，就判断为True，</li><br></ol><br></li><br><li>iput(): 需要注意的地方，默认input的返回类型是str，由于str不能直接整数比较，所以在碰到明明输入200，但是不能和201对比时，记住先要把str转化为整数，python提供了int()函数, 转化数据类型为int类型，但是如果输入’abc’则会得到1个ValueError的错误</li><br><li>循环<br><ol><br><li>for…in ： 依次把list或者tuple的每个元素迭代出来，for x in … ：循环就是把每个元素带入变量x，然后执行缩进的语句：</li><br><li>range()函数：用来生成一个整数序列，再通过list()函数转换为list，例如range(5)生成：0,1,2,3,4<br><ol><br><li>list(range(5)) = [0,1,2,3,4]</li><br><li>计算1+…+100的结果： for x in range(101): sum = sum +x</li><br></ol><br></li><br><li>while 循环： 只要条件满足，就不断循环，条件不足时退出循环：<br><ol><br><li>计算100以内所有奇数之和： sum = 0,n = 99, while n &gt; 0: sum =sum +n; n = n-2</li><br></ol><br></li><br><li>break: 在循环中，break语句可以提前退出循环，当程序执行满足break条件的时候，就会退出循环</li><br><li>continue: 在循环过程中，也可以通过continue语句，跳过当前的这次循环。</li><br><li>注意：循环是让计算机做重复任务的有效方法，break语句可以在循环过程总直接退出循环，continue语句可以提前结束本轮循环，并直接进入下一轮循环，这两个语句通常必须配合if语句使用，但是尽量不要滥用这两个语句，因为当break和continue使用过多会导致代码执行逻辑分支过多，容易出错。</li><br></ol><br></li><br><li>dict和set<br><ol><br><li>dict： python内置了字典：dict的支持，全称：dictionary，在其他语言中也称之为map，使用键值存储，具有极快的查找速度。</li><br><li>对比list处理方式：会过滤整个list的元素，这导致list越长，耗时越长；dict实现时，只需要创建key-values对应表，直接根据名字查找，无论这个表有多大，查找速度都不会变慢，但是内存消耗会大，典型用性能(内存空间)换时间。</li><br><li>dict的初始化: d {‘Michael’:95,’Bob’:75,’Tracy’:85}  # 注意dict使用的是大括号’{}‘</li><br><li>dict的数据插入： d [‘Adam’] = 67 </li><br><li>由于dict是根据key检索，所以key是固定的，一个key只能对应1个value,所以当对1个key多次放入value时，后面的值会把前面的值冲掉： （类似变量）</li><br><li>但是如果查询的key不存在,dict会报错，KeyError，可以用in 判断key是否存在: ‘key’ in d  : True/False</li><br><li>通过dict的get方法，如果key不存在，可以返回None，或者自己指定的值，d.get(‘Key’) , d.get(‘key’,-1)</li><br><li>d.pop(‘key’): 删除1个key，注意当key被删除是，相应的value也会被删除。</li><br><li>另外注意：dict内部存放的顺序和key放入的顺序是没有关系的：</li><br><li>dict应在需要高速查找的地方，正确使用dict非常重要，要牢记1点，dict的key必须是不可变的对象，因为dict是根据key来计算value的位置，如果每次计算相同的key得到的结果不一样，那么dict内部就完全混乱了，这个通过key计算位置的算法称之为Hash算法。</li><br><li>要保证hash的准确性，作为key的对象就不能改变，在python中，字符串·整数等都是不可变的，但是list是可以变的所以不能作为key</li><br><li>set： set和dict类似，也是一组key的集合，但是不存储value，由于key不能重复，所以，在set中，没有重复的key值。</li><br><li>要创建一个set，需要提供一个list作为输入集合。 s = set([1,2,3])   : s = {1,2,3}</li><br><li>注意set也不是有序的，而且重复在set存在的元素会被自动过滤： s = set([1,2,3,1,2,3,1,2,3])  s = {1,2,3}</li><br><li>通过s.add(key) 可以增加元素到set中，可以重复添加，但是不会有效果</li><br><li>通过s.remove(key) 可以删除元素</li><br><li>set 可以看成数学意义上的无序和无重复元素的集合，因此两个set可以做数学意义上的交集、并集能操作：<br><ol><br><li>s1 = set([1,2,3]), s2 = set([2,3,4]) ,交集： s1 &amp; s2 = {2,3} ; s1 | s2 = {1,2,3,4}</li><br></ol><br></li><br><li>set和dict的区别仅在于有没有存储对应的value，但是set和dict的原理是一样的，所以，同样不可以放置可变对象，因为无法判断两个对象是否相等，也就无法保证set内部的不会重复元素</li><br><li>不可变对象：str是不变对象，list是可变对象；对于可变对象，例如list，对list进行操作，list的内部会发生变化</li><br><li>a = ‘abc’ , a.replace(‘a’,’A’) # 这个操作是把所有小写的a替换成大写的A，但是注意a的值并没有发生改变，要牢记a是变量，’abc’才是字符对象。</li><br></ol><br></li><br></ol><br></body><br></html>
 
-<figure class="highlight gradle hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 查看磁盘分区 /dev/sda7 上的 inode 值</span></span><br><span class="line"># dumpe2fs -h <span class="hljs-regexp">/dev/</span>sda7 | <span class="hljs-keyword">grep</span> <span class="hljs-string">"Inode size"</span></span><br><span class="line">dumpe2fs <span class="hljs-number">1.42</span> (<span class="hljs-number">29</span>-Nov-<span class="hljs-number">2011</span>)</span><br><span class="line">Inode <span class="hljs-keyword">size</span>: 	          <span class="hljs-number">256</span></span><br><span class="line"></span><br><span class="line"># tune2fs -l <span class="hljs-regexp">/dev/</span>sda7 | <span class="hljs-keyword">grep</span> <span class="hljs-string">"Inode size"</span></span><br><span class="line">Inode <span class="hljs-keyword">size</span>: 	          <span class="hljs-number">256</span></span><br></pre></td></tr></table></figure>
-<h3 id="Linux-VFS"><a href="#Linux-VFS" class="headerlink" title="Linux VFS"></a>Linux VFS</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linux 有着极其丰富的文件系统，大体上可分如下几类：</p>
-<ol>
-<li>网络文件系统，如 nfs、cifs 等；</li>
-<li>磁盘文件系统，如 ext4、ext3 等；</li>
-<li>特殊文件系统，如 proc、sysfs、ramfs、tmpfs 等。</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实现以上这些文件系统并在 Linux 下共存的基础就是 Linux VFS（Virtual File System 又称 Virtual Filesystem Switch），即虚拟文件系统。VFS 作为一个通用的文件系统，抽象了文件系统的四个基本概念：文件、目录项 (dentry)、索引节点 (inode) 及挂载点，其在内核中为用户空间层的文件系统提供了相关的接口（见 <a href="#p3">图 3.</a>所示 VFS 在 Linux 系统的架构）。VFS 实现了 open()、read() 等系统调并使得 cp 等用户空间程序可跨文件系统。VFS 真正实现了上述内容中：在 Linux 中除进程之外一切皆是文件。</p>
-<h4 id="p3"> 图 3. VFS 在系统中的架构 </h4><br><img src="http://120.24.251.209/content/images/2016/03/image003.jpg" alt><br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linux VFS 存在四个基本对象：超级块对象 (superblock object)、索引节点对象 (inode object)、目录项对象 (dentry object) 及文件对象 (file object)。超级块对象代表一个已安装的文件系统；索引节点对象代表一个文件；目录项对象代表一个目录项，如设备文件 event5 在路径 /dev/input/event5 中，其存在四个目录项对象：/ 、dev/ 、input/ 及 event5。文件对象代表由进程打开的文件。这四个对象与进程及磁盘文件间的关系如<a href="#p4">图 4.</a> 所示，其中 d_inode 即为硬链接。为文件路径的快速解析，Linux VFS 设计了目录项缓存（Directory Entry Cache，即 dcache）。<br><br><h4 id="p4"> 图 4. VFS 的对象之间的处理 </h4><br><img src="http://120.24.251.209/content/images/2016/03/image004.jpg" alt><br><br><br>### Linux 文件系统中的 inode<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在 Linux 中，索引节点结构存在于系统内存及磁盘，其可区分成 VFS inode 与实际文件系统的 inode。VFS inode 作为实际文件系统中 inode 的抽象，定义了结构体 inode 与其相关的操作 inode_operations（见内核源码 include/linux/fs.h）。<br><br><h4 id="list10"> 清单 10. VFS 中的 inode 与 inode_operations 结构体 </h4>
+        </div>
+        
+        
+        
+    </div>
+</div>
 
-<figure class="highlight rust hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">inode</span></span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="hljs-keyword">const</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">inode_operations</span></span>   *i_op; <span class="hljs-comment">// 索引节点操作</span></span><br><span class="line">    unsigned long           i_ino;      <span class="hljs-comment">// 索引节点号</span></span><br><span class="line">    atomic_t                i_count;    <span class="hljs-comment">// 引用计数器</span></span><br><span class="line">    unsigned int            i_nlink;    <span class="hljs-comment">// 硬链接数目</span></span><br><span class="line">    ...</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">inode_operations</span></span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    int (*create) (<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">inode</span></span> *,<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">dentry</span></span> *,int, <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">nameidata</span></span> *);</span><br><span class="line">    int (*link) (<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">dentry</span></span> *,<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">inode</span></span> *,<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">dentry</span></span> *);</span><br><span class="line">    int (*unlink) (<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">inode</span></span> *,<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">dentry</span></span> *);</span><br><span class="line">    int (*symlink) (<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">inode</span></span> *,<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">dentry</span></span> *,<span class="hljs-keyword">const</span> <span class="hljs-built_in">char</span> *);</span><br><span class="line">    int (*mkdir) (<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">inode</span></span> *,<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">dentry</span></span> *,int);</span><br><span class="line">    int (*rmdir) (<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">inode</span></span> *,<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">dentry</span></span> *);</span><br><span class="line">    ...</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如<a href="#list10">清单 10.</a> 所见，每个文件存在两个计数器：i_count 与 i_nlink，即引用计数与硬链接计数。结构体 inode 中的 i_count 用于跟踪文件被访问的数量，而 i_nlink 则是上述使用 ls -l 等命令查看到的文件硬链接数。或者说 i_count 跟踪文件在内存中的情况，而 i_nlink 则是磁盘计数器。当文件被删除时，则 i_nlink 先被设置成 0。文件的这两个计数器使得 Linux 系统升级或程序更新变的容易。系统或程序可在不关闭的情况下（即文件 i_count 不为 0），将新文件以同样的文件名进行替换，新文件有自己的 inode 及 data block，旧文件会在相关进程关闭后被完整的删除。</p>
-<h4 id="list11"> 清单 11. 文件系统 ext4 中的 inode </h4>
 
-<figure class="highlight sqf hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">struct ext4_inode &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="hljs-variable">__le32</span>  i_atime;        <span class="hljs-comment">// 文件内容最后一次访问时间</span></span><br><span class="line">    <span class="hljs-variable">__le32</span>  i_ctime;        <span class="hljs-comment">// inode 修改时间</span></span><br><span class="line">    <span class="hljs-variable">__le32</span>  i_mtime;        <span class="hljs-comment">// 文件内容最后一次修改时间</span></span><br><span class="line">    <span class="hljs-variable">__le16</span>  i_links_count;  <span class="hljs-comment">// 硬链接计数</span></span><br><span class="line">    <span class="hljs-variable">__le32</span>  i_blocks_lo;    <span class="hljs-comment">// Block 计数</span></span><br><span class="line">    <span class="hljs-variable">__le32</span>  i_block[EXT4_N_BLOCKS];  <span class="hljs-comment">// 指向具体的 block</span></span><br><span class="line">    ...</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#list11">清单 11.</a> 展示的是文件系统 ext4 中对 inode 的定义（见内核源码 fs/ext4/ext4.h）。其中三个时间的定义可对应与命令 stat 中查看到三个时间。i_links_count 不仅用于文件的硬链接计数，也用于目录的子目录数跟踪（目录并不显示硬链接数，命令 ls -ld 查看到的是子目录数）。由于文件系统 ext3 对 i_links_count 有限制，其最大数为：32000（该限制在 ext4 中被取消）。尝试在 ext3 文件系统上验证目录子目录及普通文件硬链接最大数可见 <a href="#list12">清单 12.</a>的错误信息。因此实际文件系统的 inode 之间及与 VFS inode 相较是有差异的。</p>
-<h4 id="list12"> 清单 12. 文件系统 ext3 中 i_links_count 的限制 </h4>
 
-<figure class="highlight vbnet hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta"># ./dirtest.sh</span></span><br><span class="line">mkdir: cannot create directory `dir_31999<span class="hljs-comment">': Too many links</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># ./linkcount.sh</span></span><br><span class="line">ln: failed <span class="hljs-keyword">to</span> create hard link <span class="hljs-keyword">to</span> `old.file<span class="hljs-comment">': Too many links</span></span><br></pre></td></tr></table></figure>
-<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本文最初描述了 Linux 系统中文件与目录被引入的原因及 Linux 处理文件的方式，然后我们通过区分硬链接与软链接的不同，了解 Linux 中的索引节点的相关知识，并以此引出了 inode 的结构体。索引节点结构体存在在于 Linux VFS 以及实际文件系统中，VFS 作为通用文件模型是 Linux 中“一切皆是文件”实现的基础。文章并未深入 Linux VFS，也没涉及实际文件系统的实现，文章只是从 inode 了解 Linux 的文件系统的相关内容。若想深入文件系统的内容，查看内核文档 Documentation/filesystems/ 是一个不错的方式。</p>
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-11-09T18:53:13.000Z">2016-11-10</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 minutes read (About 703 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/11/10/lwuswahg/">MySQL(5) 清空表命令之：truncate与delete区别</a>
+            
+        </h1>
+        <div class="content">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在实际工作中，有时我们会想要去清空一张表的所有数据，常用的命令有delete和truncate这两个命令。</p>
+<h3 id="1-delete"><a href="#1-delete" class="headerlink" title="1. delete"></a>1. delete</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在很多情况，我们对于delete的应用更多，因为它支持更多的匹配模式，我们可以使用where条件语句，清理一些特定的数据，关于delete的操作，这里不做过多解释，有空就专门写写delete的使用和原理。delete 在清空表时，如果表内有自增ID的设定，那么在delete清空之后，再插入数据时，自增ID不会从1开始，默认会继续增加; 除非我们使用OPTIMIZE TABLE，重置表属性；<br><figure class="highlight n1ql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> piwik_tmp;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-truncate"><a href="#2-truncate" class="headerlink" title="2. truncate"></a>2. truncate</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;truncate 在清空表时，会同时将自增ID重置，再插入新数据时会从1开始，而且truncate在清空表时，不关心表的行数，所以执行效率会高于delete；</p>
+<figure class="highlight excel hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; truncate table piwik_tmp;</span><br><span class="line">Query OK, <span class="hljs-number">0</span> <span class="hljs-built_in">rows</span> affected (<span class="hljs-number">0.01</span> <span class="hljs-built_in">sec</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="3-释放表空间"><a href="#3-释放表空间" class="headerlink" title="3. 释放表空间"></a>3. 释放表空间</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但是在truncate清空表数据时，myisam的表和innodb的表在使用上有一定的区别；myisam表会清空所有数据，并释放表空间，即硬盘空间会得到释放。innodb表也会清空所有数据，但不释放表空间。Innodb数据库对于已经删除的数据只是标记为删除，并不真正释放所占用的磁盘空间，这就导致InnoDB数据库文件不断增长。如果想彻底释放这些已经删除的数据，需要把数据库导出，删除InnoDB数据库文件，然后再导入。<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 备份数据库：</span></span><br><span class="line">mysqldump -u -p --quick --force --all-databases &gt; mysqldump.sql</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 停止数据库</span></span><br><span class="line">service mysqld stop</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 删除这些大文件</span></span><br><span class="line">rm /usr/local/mysql/var/ibdata1</span><br><span class="line">rm /usr/local/mysql/var/ib_logfile*</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 手动删除除Mysql之外所有数据库文件夹，然后启动数据库</span></span><br><span class="line">service mysqld start</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 还原数据</span></span><br><span class="line">mysql -uroot -proot &lt; mysqldump.sql</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-innodb-file-per-table"><a href="#4-innodb-file-per-table" class="headerlink" title="4. innodb_file_per_table"></a>4. innodb_file_per_table</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;还有一种方式是在创建数据库的时候设置innodb_file_per_table，这样InnoDB会对每个表创建一个数据文件，然后只需要运行OPTIMIZE TABLE 命令就可以释放所有已经删除的磁盘空间。</p>
+<h4 id="4-1-修改mysql默认配置文件。"><a href="#4-1-修改mysql默认配置文件。" class="headerlink" title="4.1 修改mysql默认配置文件。"></a>4.1 修改mysql默认配置文件。</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编辑my.ini或my.cnf 在innodb段中加入 innodb_file_per_table=1 # 1为启用，0为禁用</p>
+<h4 id="4-2-查看修改结果"><a href="#4-2-查看修改结果" class="headerlink" title="4.2 查看修改结果"></a>4.2 查看修改结果</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过mysql语句可以查看该变量的值：<br><figure class="highlight gams hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show <span class="hljs-keyword">variables</span> like <span class="hljs-comment">'%per_table%'</span>;</span><br></pre></td></tr></table></figure></p>
 
         </div>
         
@@ -273,10 +306,10 @@ var _hmt = _hmt || [];
 <div class="card card-transparent">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/page/13/">Previous</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/13/">Anterior</a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/page/15/">Next</a>
+        <div class="pagination-next">
+            <a class="is-flex-grow has-text-black-ter" href="/page/15/">Siguiente</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
             
@@ -287,6 +320,12 @@ var _hmt = _hmt || [];
             <li><a class="pagination-link has-text-black-ter" href="/page/13/">13</a></li>
             
             <li><a class="pagination-link is-current" href="/page/14/">14</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/15/">15</a></li>
+            
+            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/31/">31</a></li>
             
         </ul>
     </nav>
@@ -327,7 +366,7 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        Entradas
                     </p>
                     <p class="title has-text-weight-normal">
                         92
@@ -337,7 +376,7 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        Categorias
                     </p>
                     <p class="title has-text-weight-normal">
                         24
@@ -347,7 +386,7 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        Etiquetas
                     </p>
                     <p class="title has-text-weight-normal">
                         37
@@ -357,37 +396,42 @@ var _hmt = _hmt || [];
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/SAMZONG" target="_blank">
-                Follow</a>
+                SEGUIR</a>
         </div>
         
         
         <div class="level is-mobile">
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/SAMZONG">
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/SAMZONG">
                 
                 <i class="fab fa-github"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com">
                 
                 <i class="fab fa-facebook"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com">
                 
                 <i class="fab fa-twitter"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Dribbble" href="https://dribbble.com">
                 
                 <i class="fab fa-dribbble"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
                 
                 <i class="fas fa-rss"></i>
                 
@@ -444,7 +488,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                Categorias
             </h3>
             <ul class="menu-list">
             <li>
@@ -649,7 +693,7 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            Nube de etiquetas
         </h3>
         <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
     </div>
@@ -663,7 +707,7 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Recientes
         </h3>
         
         <article class="media">
@@ -769,7 +813,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -1024,7 +1068,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1307,7 +1351,7 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Recientes
         </h3>
         
         <article class="media">
@@ -1413,7 +1457,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -1668,7 +1712,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1953,7 +1997,8 @@ var _hmt = _hmt || [];
                 </a>
                 <p class="is-size-7">
                 &copy; 2020 SAMZONG&nbsp;
-                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>
             </div>
@@ -2094,7 +2139,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -2106,10 +2151,10 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
+                POSTS: 'Entradas',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',
