@@ -165,6 +165,87 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-11-30T15:45:54.000Z">2016-11-30</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    10 minutes read (About 1510 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/11/30/aws-s3-s3cmd-linux/">AWS(1) Use s3cmd命令行管理S3存储</a>
+            
+        </h1>
+        <div class="content">
+            <p>S3 是AWS公有云服务提供的云存储服务，提供海量数据存储服务，同时基于AWS S3提供的一系列网络服务接口，也有大量已经开发完成的工具供我们使用，以利用起AWS庞大的存储资源，这篇文章的目录选取了其中一个用Linux命令行工具<a href="http://s3tools.org" target="_blank" rel="noopener">s3cmd</a>来管理AWS S3云存储其中的数据。</p>
+<p>s3cmd 是非常优秀的S3命令行管理工具，用python编写，支持python 2.6 &amp; 2.7 ，但是尚不支持python3，但是目前绝大多数的Linux发行版默认都是python2.x 系列。</p>
+<blockquote>
+<p>Demo CentOS 6.x</p>
+</blockquote>
+<h3 id="Install-s3cmd"><a href="#Install-s3cmd" class="headerlink" title="Install s3cmd"></a><strong>Install s3cmd</strong></h3><h5 id="1-无论是Denbian系还是Rehat系列，软件仓库内已经加入了s3cmd："><a href="#1-无论是Denbian系还是Rehat系列，软件仓库内已经加入了s3cmd：" class="headerlink" title="1. 无论是Denbian系还是Rehat系列，软件仓库内已经加入了s3cmd："></a>1. 无论是Denbian系还是Rehat系列，软件仓库内已经加入了s3cmd：</h5><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 1.1 Ubuntu &amp; Debian</span></span><br><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> sudo apt-get install -y s3cmd</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 1.2 RHEL &amp; CentOS</span></span><br><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> sudo yum install s3cmd</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-如果您的系统比较特殊，软件仓库内找不到s3cmd，还有s3cmd的Github上去获取相关安装信息：链接"><a href="#2-如果您的系统比较特殊，软件仓库内找不到s3cmd，还有s3cmd的Github上去获取相关安装信息：链接" class="headerlink" title="2. 如果您的系统比较特殊，软件仓库内找不到s3cmd，还有s3cmd的Github上去获取相关安装信息：链接"></a>2. 如果您的系统比较特殊，软件仓库内找不到s3cmd，还有s3cmd的Github上去获取相关安装信息：<a href="https://github.com/s3tools/s3cmd" target="_blank" rel="noopener">链接</a></h5><h3 id="Configure-s3cmd"><a href="#Configure-s3cmd" class="headerlink" title="Configure s3cmd"></a><strong>Configure s3cmd</strong></h3><h5 id="1-第一次运行s3cmd-需要首先预配置相关s3信息"><a href="#1-第一次运行s3cmd-需要首先预配置相关s3信息" class="headerlink" title="1. 第一次运行s3cmd 需要首先预配置相关s3信息:"></a>1. 第一次运行s3cmd 需要首先预配置相关s3信息:</h5><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> s3cmd --configure</span></span><br></pre></td></tr></table></figure>
+<p>它会问你一系列问题：</p>
+<ul>
+<li>AWS S3 中IAM账户的Access Key以及Secret Key (建议单独创建IAM)</li>
+<li>对AWS S3双向传输的加密密码 （自行设定不要忘记）</li>
+<li>为加密数据设定GPG程序的路径（默认即可）</li>
+<li>是否使用https协议 （默认即可）</li>
+<li>如果不是https协议，需要设定名字和端口<br>配置完成之后，配置信息以普通文本保存在~/.s3cfg<h5 id="2-China-与Global-的区别"><a href="#2-China-与Global-的区别" class="headerlink" title="2. China 与Global 的区别"></a>2. China 与Global 的区别</h5>笔者在第一次运行时，始终无法添加成功，报错信息如下：<figure class="highlight subunit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">ERROR: Test</span> failed: 403 (InvalidAccessKeyId): The AWS Accecc Key Id you provided does not exist in our records.</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>起初以为是Access Key 不对，在经过多次测试之后，才发现问题，这是因为s3cmd 内置s3的Domain为Global的信息，而中国与Global是独立存在的所以查找不到我们的Access Key。所以，如果你使用的Global AWS那么上面一步应该已经配置好了你的s3cmd，如果你是AWS China的用户，那么你要做以下操作。</p>
+<ul>
+<li>在Retry configuration? [Y/n]选择“n”</li>
+<li>Save settings? [y/N] 选择“y”</li>
+<li>保存设置之后，编辑配置文件（~/.s3cfg ) 修改其中的如下字段，并将其中%(bucket)s用您实际的某一个存储桶名字代替掉<figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">bucket_location</span> = %(location)</span><br><span class="line"><span class="hljs-attr">host_base</span> = s3.cn-north-<span class="hljs-number">1</span>.amazonaws.com.cn</span><br><span class="line"><span class="hljs-attr">host_bucket</span> = %(bucket)s.s3.cn-north-<span class="hljs-number">1</span>.amazonaws.com.cn</span><br><span class="line"><span class="hljs-attr">website_endpoint</span> = http://%(bucket)s.s3-website-%(location)s.amazonaws.com.cn/</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>例如，你的存储桶的名字为s3chinatest: 地域为北京。<br><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bucket_location = cn-north-<span class="hljs-number">1</span></span><br><span class="line">host_base = s3<span class="hljs-selector-class">.cn-north-1</span><span class="hljs-selector-class">.amazonaws</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.cn</span></span><br><span class="line">host_bucket = s3chinatest<span class="hljs-selector-class">.s3</span><span class="hljs-selector-class">.cn-north-1</span><span class="hljs-selector-class">.amazonaws</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.cn</span></span><br><span class="line">website_endpoint = http:<span class="hljs-comment">//s3chinatest.s3-website.amazonaws.com.cn/</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="3-保存配置文件，然后用命令测试一下，确认s3cmd可以正常工作。"><a href="#3-保存配置文件，然后用命令测试一下，确认s3cmd可以正常工作。" class="headerlink" title="3. 保存配置文件，然后用命令测试一下，确认s3cmd可以正常工作。"></a>3. 保存配置文件，然后用命令测试一下，确认s3cmd可以正常工作。</h5><figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ s3cmd ls</span><br><span class="line"><span class="hljs-number">2016</span><span class="hljs-number">-11</span><span class="hljs-number">-18</span> <span class="hljs-number">22</span>:<span class="hljs-number">30</span> <span class="hljs-string">s3:</span><span class="hljs-comment">//s3chinatest</span></span><br><span class="line"><span class="hljs-number">2016</span><span class="hljs-number">-10</span><span class="hljs-number">-29</span> <span class="hljs-number">00</span>:<span class="hljs-number">14</span> <span class="hljs-string">s3:</span><span class="hljs-comment">//bucket2</span></span><br></pre></td></tr></table></figure>
+<h3 id="s3cmd-的基本使用"><a href="#s3cmd-的基本使用" class="headerlink" title="s3cmd 的基本使用"></a><strong>s3cmd 的基本使用</strong></h3><h5 id="1-查看当前账户下所有现有的桶-bucket-："><a href="#1-查看当前账户下所有现有的桶-bucket-：" class="headerlink" title="1. 查看当前账户下所有现有的桶(bucket)："></a>1. 查看当前账户下所有现有的桶(bucket)：</h5><figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ s3cmd ls</span><br><span class="line"><span class="hljs-number">2016</span><span class="hljs-number">-11</span><span class="hljs-number">-18</span> <span class="hljs-number">22</span>:<span class="hljs-number">30</span> <span class="hljs-string">s3:</span><span class="hljs-comment">//s3chinatest</span></span><br><span class="line"><span class="hljs-number">2016</span><span class="hljs-number">-10</span><span class="hljs-number">-29</span> <span class="hljs-number">00</span>:<span class="hljs-number">14</span> <span class="hljs-string">s3:</span><span class="hljs-comment">//bucket2</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-创建新的bucket："><a href="#2-创建新的bucket：" class="headerlink" title="2. 创建新的bucket："></a>2. 创建新的bucket：</h5><figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ s3cmd mb <span class="hljs-string">s3:</span><span class="hljs-comment">//s3chinatest2</span></span><br><span class="line"></span><br><span class="line">Bucket ’<span class="hljs-string">s3:</span><span class="hljs-comment">//s3chinatest2/’ created</span></span><br></pre></td></tr></table></figure>
+<h5 id="3-上传文件到bucket"><a href="#3-上传文件到bucket" class="headerlink" title="3. 上传文件到bucket:"></a>3. 上传文件到bucket:</h5><figure class="highlight clean hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ s3cmd put file1.txt file2.txt file3.txt s3:<span class="hljs-comment">//s3chinatest2</span></span><br><span class="line">upload: <span class="hljs-string">'file1.txt'</span> -&gt; <span class="hljs-string">'s3://s3chinatest2/file1.txt'</span>  [<span class="hljs-number">1</span> <span class="hljs-keyword">of</span> <span class="hljs-number">3</span>]</span><br><span class="line"> <span class="hljs-number">2432</span> <span class="hljs-keyword">of</span> <span class="hljs-number">2432</span>   <span class="hljs-number">100</span>% <span class="hljs-keyword">in</span>    <span class="hljs-number">0</span>s    <span class="hljs-number">43.27</span> kB/s  done</span><br><span class="line">upload: <span class="hljs-string">'file2.txt'</span> -&gt; <span class="hljs-string">'s3://s3chinatest2/file2.txt'</span>  [<span class="hljs-number">2</span> <span class="hljs-keyword">of</span> <span class="hljs-number">3</span>]</span><br><span class="line"> <span class="hljs-number">2432</span> <span class="hljs-keyword">of</span> <span class="hljs-number">2432</span>   <span class="hljs-number">100</span>% <span class="hljs-keyword">in</span>    <span class="hljs-number">0</span>s    <span class="hljs-number">59.83</span> kB/s  done</span><br><span class="line">upload: <span class="hljs-string">'file3.txt'</span> -&gt; <span class="hljs-string">'s3://s3chinatest2/file3.txt'</span>  [<span class="hljs-number">3</span> <span class="hljs-keyword">of</span> <span class="hljs-number">3</span>]</span><br><span class="line"> <span class="hljs-number">2432</span> <span class="hljs-keyword">of</span> <span class="hljs-number">2432</span>   <span class="hljs-number">100</span>% <span class="hljs-keyword">in</span>    <span class="hljs-number">0</span>s    <span class="hljs-number">58.93</span> kB/s  done</span><br><span class="line"></span><br><span class="line"> $ s3cmd ls s3:<span class="hljs-comment">//s3chinatest2</span></span><br><span class="line"> <span class="hljs-number">2016</span><span class="hljs-number">-11</span><span class="hljs-number">-18</span> <span class="hljs-number">15</span>:<span class="hljs-number">11</span>      <span class="hljs-number">2432</span>   s3:<span class="hljs-comment">//s3chinatest2/file1.txt</span></span><br><span class="line"><span class="hljs-number">2016</span><span class="hljs-number">-11</span><span class="hljs-number">-18</span> <span class="hljs-number">15</span>:<span class="hljs-number">11</span>      <span class="hljs-number">2432</span>   s3:<span class="hljs-comment">//s3chinatest2/file2.txt</span></span><br><span class="line"><span class="hljs-number">2016</span><span class="hljs-number">-11</span><span class="hljs-number">-18</span> <span class="hljs-number">15</span>:<span class="hljs-number">11</span>      <span class="hljs-number">2432</span>   s3:<span class="hljs-comment">//s3chinatest2/file3.txt</span></span><br></pre></td></tr></table></figure>
+<p>上传的文件默认访问权限为私有(private)，只能用户自己可以访问，使用正确的访问和安全密码即可。<br><br>如果要上传公开访问权限的文件，需要添加 –acl-public 参数.<br><figure class="highlight clean hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ s3cmd put  --acl-public file4.txt s3:<span class="hljs-comment">//s3chinatest2</span></span><br><span class="line">upload: <span class="hljs-string">'file4.txt'</span> -&gt; <span class="hljs-string">'s3://s3chinatest2/file1.txt'</span>  [<span class="hljs-number">1</span> <span class="hljs-keyword">of</span> <span class="hljs-number">1</span>]</span><br><span class="line"> <span class="hljs-number">2432</span> <span class="hljs-keyword">of</span> <span class="hljs-number">2432</span>   <span class="hljs-number">100</span>% <span class="hljs-keyword">in</span>    <span class="hljs-number">0</span>s    <span class="hljs-number">43.27</span> kB/s  done</span><br></pre></td></tr></table></figure></p>
+<h5 id="4-下载bucket内的文件"><a href="#4-下载bucket内的文件" class="headerlink" title="4. 下载bucket内的文件:"></a>4. 下载bucket内的文件:</h5><figure class="highlight clean hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ s3cmd get s3:<span class="hljs-comment">//s3chinatest2/file1.txt</span></span><br><span class="line">download: <span class="hljs-string">'s3://s3chinatest2/file1.txt'</span> -&gt; <span class="hljs-string">'./file1.txt'</span>  [<span class="hljs-number">1</span> <span class="hljs-keyword">of</span> <span class="hljs-number">1</span>]</span><br><span class="line"> <span class="hljs-number">2432</span> <span class="hljs-keyword">of</span> <span class="hljs-number">2432</span>   <span class="hljs-number">100</span>% <span class="hljs-keyword">in</span>    <span class="hljs-number">0</span>s    <span class="hljs-number">27.65</span> kB/s  done</span><br><span class="line"></span><br><span class="line"> # 支持 <span class="hljs-string">" * "</span>匹配任意字符</span><br><span class="line"> $ s3cmd get s3:<span class="hljs-comment">//s3chinatest2/file*.txt</span></span><br><span class="line">download: <span class="hljs-string">'s3://s3chinatest2/file1.txt'</span> -&gt; <span class="hljs-string">'./file1.txt'</span>  [<span class="hljs-number">1</span> <span class="hljs-keyword">of</span> <span class="hljs-number">3</span>]</span><br><span class="line"> <span class="hljs-number">2432</span> <span class="hljs-keyword">of</span> <span class="hljs-number">2432</span>   <span class="hljs-number">100</span>% <span class="hljs-keyword">in</span>    <span class="hljs-number">0</span>s    <span class="hljs-number">48.11</span> kB/s  done</span><br><span class="line">download: <span class="hljs-string">'s3://s3chinatest2/file2.txt'</span> -&gt; <span class="hljs-string">'./file2.txt'</span>  [<span class="hljs-number">2</span> <span class="hljs-keyword">of</span> <span class="hljs-number">3</span>]</span><br><span class="line"> <span class="hljs-number">2432</span> <span class="hljs-keyword">of</span> <span class="hljs-number">2432</span>   <span class="hljs-number">100</span>% <span class="hljs-keyword">in</span>    <span class="hljs-number">0</span>s    <span class="hljs-number">84.76</span> kB/s  done</span><br><span class="line">download: <span class="hljs-string">'s3://s3chinatest2/file3.txt'</span> -&gt; <span class="hljs-string">'./file3.txt'</span>  [<span class="hljs-number">3</span> <span class="hljs-keyword">of</span> <span class="hljs-number">3</span>]</span><br><span class="line"> <span class="hljs-number">2432</span> <span class="hljs-keyword">of</span> <span class="hljs-number">2432</span>   <span class="hljs-number">100</span>% <span class="hljs-keyword">in</span>    <span class="hljs-number">0</span>s    <span class="hljs-number">75.28</span> kB/s  done</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意若当前目录有相同文件时，可以使用–skip-existing 参数跳过这些文件。</p>
+<h5 id="5-删除bucket内的文件"><a href="#5-删除bucket内的文件" class="headerlink" title="5. 删除bucket内的文件:"></a>5. 删除bucket内的文件:</h5><figure class="highlight arduino hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta"># del 与 rm 都可以使用.</span></span><br><span class="line">$ s3cmd del s3:<span class="hljs-comment">//s3chinatest2/file1.txt</span></span><br><span class="line"><span class="hljs-keyword">delete</span>: <span class="hljs-string">'s3://s3chinatest2/file1.txt'</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="6-获取当前bucket-信息-："><a href="#6-获取当前bucket-信息-：" class="headerlink" title="6. 获取当前bucket 信息 ："></a>6. 获取当前bucket 信息 ：</h5><figure class="highlight yaml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># bucket的存储位置及访问权限设置</span></span><br><span class="line"><span class="hljs-string">s3cmd</span> <span class="hljs-string">info</span> <span class="hljs-attr">s3://s3chinatest2</span></span><br><span class="line"><span class="hljs-attr">s3:</span><span class="hljs-string">//s3chinatest2/</span> <span class="hljs-string">(bucket):</span></span><br><span class="line"><span class="hljs-attr">   Location:</span>  <span class="hljs-string">cn-north-1</span></span><br><span class="line"><span class="hljs-attr">   Payer:</span>     <span class="hljs-string">BucketOwner</span></span><br><span class="line">   <span class="hljs-string">Expiration</span> <span class="hljs-attr">Rule:</span> <span class="hljs-string">none</span></span><br><span class="line"><span class="hljs-attr">   policy:</span>    <span class="hljs-string">none</span></span><br><span class="line"><span class="hljs-attr">   cors:</span>      <span class="hljs-string">none</span></span><br><span class="line"><span class="hljs-attr">   ACL:</span>       <span class="hljs-number">2</span><span class="hljs-attr">fe63da8137b85d9868d240869945287b285a58b5d7e07e21ac813b486dcabea:</span> <span class="hljs-string">FULL_CONTROL</span></span><br></pre></td></tr></table></figure>
+<h5 id="7-上传文件到bucket时加密"><a href="#7-上传文件到bucket时加密" class="headerlink" title="7. 上传文件到bucket时加密"></a>7. 上传文件到bucket时加密</h5><p>当用s3cmd下载一个加密过的文件时，它会自动检测加密并在下载过程解密，因此下载和访问加密文件时，就像通常所做的一样：<br><figure class="highlight clean hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ s3cmd -e put t_result.java s3:<span class="hljs-comment">//s3chinatest2</span></span><br><span class="line">upload: <span class="hljs-string">'/tmp/tmpfile-S9lUXERAEUdnNaz5zHba'</span> -&gt; <span class="hljs-string">'s3://s3chinatest2/t_result.java'</span>  [<span class="hljs-number">1</span> <span class="hljs-keyword">of</span> <span class="hljs-number">1</span>]</span><br><span class="line"> <span class="hljs-number">3355</span> <span class="hljs-keyword">of</span> <span class="hljs-number">3355</span>   <span class="hljs-number">100</span>% <span class="hljs-keyword">in</span>    <span class="hljs-number">0</span>s    <span class="hljs-number">39.25</span> kB/s  done</span><br></pre></td></tr></table></figure></p>
+<h5 id="8-查看bucket使用情况"><a href="#8-查看bucket使用情况" class="headerlink" title="8. 查看bucket使用情况"></a>8. 查看bucket使用情况</h5><figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ s3cmd du <span class="hljs-string">s3:</span><span class="hljs-comment">//s3chinatest2</span></span><br><span class="line"><span class="hljs-number">8219</span>     <span class="hljs-number">3</span> objects <span class="hljs-string">s3:</span><span class="hljs-comment">//s3chinatest2/</span></span><br></pre></td></tr></table></figure>
+<h5 id="9-删除一个bucket"><a href="#9-删除一个bucket" class="headerlink" title="9. 删除一个bucket"></a>9. 删除一个bucket</h5><figure class="highlight gauss hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ s3cmd rb s3:<span class="hljs-comment">//s3chinatest2</span></span><br><span class="line"><span class="hljs-built_in">ERROR</span>: S3 <span class="hljs-built_in">error</span>: <span class="hljs-number">409</span> (BucketNotEmpty): The bucket you tried to <span class="hljs-keyword">delete</span> is <span class="hljs-keyword">not</span> empty</span><br><span class="line"><span class="hljs-meta"># 默认不能删除非空的bucket，所以要先清空存储桶内数据</span></span><br><span class="line"></span><br><span class="line">$ s3cmd rm s3:<span class="hljs-comment">//s3chinatest2/*</span></span><br><span class="line"><span class="hljs-keyword">delete</span>: 's3:<span class="hljs-comment">//s3chinatest2/file2.txt'</span></span><br><span class="line"><span class="hljs-keyword">delete</span>: 's3:<span class="hljs-comment">//s3chinatest2/file3.txt'</span></span><br><span class="line"><span class="hljs-keyword">delete</span>: 's3:<span class="hljs-comment">//s3chinatest2/t_result.java'</span></span><br><span class="line"></span><br><span class="line">$ s3cmd rb s3:<span class="hljs-comment">//s3chinatest2</span></span><br><span class="line">Bucket 's3:<span class="hljs-comment">//s3chinatest2/' removed</span></span><br></pre></td></tr></table></figure>
+<h3 id="Other"><a href="#Other" class="headerlink" title="Other"></a><em>Other</em></h3><ol>
+<li>关于s3cmd 还有非常多的功能，这里只是列举简单的一部分，有兴趣的同学，可以使用man s3cmd 查看详细的帮助文档.</li>
+<li>s3cmd 适用的场景主要利用脚本做cron任务，例如定时备份，然后推送到s3，降低成本，持久保存.</li>
+<li>Windows平台也支持s3cmd哦，有兴趣的同学可以去研究下。</li>
+</ol>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2016-11-28T18:19:38.000Z">2016-11-29</time>
                 
                 <div class="level-item">
@@ -266,68 +347,15 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-11-23T08:24:40.000Z">2016-11-23</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/CentOS/">CentOS</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 minutes read (About 682 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/11/23/denyhosts-linux/">Denyhosts增加服务器SSH黑名单机制</a>
-            
-        </h1>
-        <div class="content">
-            <h5 id="查看当前服务器失败登录的统计："><a href="#查看当前服务器失败登录的统计：" class="headerlink" title="查看当前服务器失败登录的统计："></a>查看当前服务器失败登录的统计：</h5><figure class="highlight stata hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">cat</span> /<span class="hljs-keyword">var</span>/<span class="hljs-keyword">log</span>/secure | awk '/Failed/&#123;<span class="hljs-keyword">print</span> $(NF-3)&#125;' | <span class="hljs-keyword">sort</span> | uniq -c | <span class="hljs-keyword">sort</span> -<span class="hljs-keyword">n</span> |  awk '&#123;<span class="hljs-keyword">print</span> <span class="hljs-variable">$2</span><span class="hljs-string">" = "</span><span class="hljs-variable">$1&#125;</span>'</span><br></pre></td></tr></table></figure>
-<h5 id="Install-denyhosts"><a href="#Install-denyhosts" class="headerlink" title="Install denyhosts"></a>Install denyhosts</h5><figure class="highlight cmake hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 需要预先安装epel源</span></span><br><span class="line">sudo yum <span class="hljs-keyword">install</span> -y epel-release</span><br><span class="line">sudo yum <span class="hljs-keyword">install</span> -y denyhosts</span><br></pre></td></tr></table></figure>
-<h5 id="配置文件解析"><a href="#配置文件解析" class="headerlink" title="配置文件解析"></a>配置文件解析</h5><p>默认配置文件/etc/denyhosts。<br><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 查看的sshd日志文件</span></span><br><span class="line"><span class="hljs-attr">SECURE_LOG</span> = /var/log/secure</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 将阻止IP写入的配置文件</span></span><br><span class="line"><span class="hljs-attr">HOSTS_DENY</span> = /etc/hosts.deny</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 过多久之后清除，其中w代表周，d代表天，h代表小时，s代表秒，m代表分钟。</span></span><br><span class="line"><span class="hljs-attr">PURGE_DENY</span> = <span class="hljs-number">4</span>h</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 阻止的服务名称</span></span><br><span class="line"><span class="hljs-attr">BLOCK_SERVICE</span>  = sshd</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 允许无效用户（在/etc/passwd未列出）登录失败次数,允许无效用户登录失败的次数.</span></span><br><span class="line"><span class="hljs-attr">DENY_THRESHOLD_INVALID</span> = <span class="hljs-number">1</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 允许普通用户登录失败的次数</span></span><br><span class="line"><span class="hljs-attr">DENY_THRESHOLD_VALID</span> = <span class="hljs-number">5</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 允许root登录失败的次数</span></span><br><span class="line"><span class="hljs-attr">DENY_THRESHOLD_ROOT</span> = <span class="hljs-number">2</span></span><br><span class="line"><span class="hljs-attr">DENY_THRESHOLD_RESTRICTED</span> = <span class="hljs-number">1</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 设定 deny host 写入到该资料夹</span></span><br><span class="line"><span class="hljs-attr">WORK_DIR</span> = /var/lib/denyhosts</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 将deny的host或ip纪录到Work_dir中</span></span><br><span class="line"><span class="hljs-attr">SUSPICIOUS_LOGIN_REPORT_ALLOWED_HOSTS</span>=<span class="hljs-literal">YES</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 是否做域名反解</span></span><br><span class="line"><span class="hljs-attr">HOSTNAME_LOOKUP</span>=<span class="hljs-literal">YES</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 将DenyHOts启动的pid纪录到LOCK_FILE中，已确保服务正确启动，防止同时启动多个服务。</span></span><br><span class="line"><span class="hljs-attr">LOCK_FILE</span> = /var/lock/subsys/denyhosts</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 设置管理员邮件地址</span></span><br><span class="line"><span class="hljs-attr">ADMIN_EMAIL</span> = luchuanjia@msn.com</span><br><span class="line"><span class="hljs-attr">SMTP_HOST</span> = localhost</span><br><span class="line"><span class="hljs-attr">SMTP_PORT</span> = <span class="hljs-number">25</span></span><br><span class="line"><span class="hljs-attr">SMTP_FROM</span> = DenyHosts &lt;nobody@localhost&gt;</span><br><span class="line"><span class="hljs-attr">SMTP_SUBJECT</span> = DenyHosts Report from $[HOSTNAME]</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 有效用户登录失败计数归零的时间</span></span><br><span class="line"><span class="hljs-attr">AGE_RESET_VALID</span>=<span class="hljs-number">1</span>d</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># root用户登录失败计数归零的时间</span></span><br><span class="line"><span class="hljs-attr">AGE_RESET_ROOT</span>=<span class="hljs-number">25</span>d</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 用户的失败登录计数重置为0的时间(/usr/share/denyhosts/data/restricted-usernames)</span></span><br><span class="line"><span class="hljs-attr">AGE_RESET_RESTRICTED</span>=<span class="hljs-number">25</span>d</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 无效用户登录失败计数归零的时间</span></span><br><span class="line"><span class="hljs-attr">AGE_RESET_INVALID</span>=<span class="hljs-number">10</span>d</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># denyhosts的日志文件位置</span></span><br><span class="line"><span class="hljs-attr">DAEMON_LOG</span> = /var/log/denyhosts</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># denyhosts的轮询时间</span></span><br><span class="line"><span class="hljs-attr">DAEMON_SLEEP</span> = <span class="hljs-number">30</span>s</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 该项与PURGE_DENY 设置一样，也是清除hosts.deny中 ssh用户的时间</span></span><br><span class="line"><span class="hljs-attr">DAEMON_PURGE</span> = <span class="hljs-number">1</span>h</span><br></pre></td></tr></table></figure></p>
-<h5 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h5><ol>
-<li>如果想删除一个已经禁止的主机IP，并加入到允许主机例表，只在 /etc/hosts.deny 删除是没用的,还需要以下：<figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/var/<span class="hljs-class"><span class="hljs-keyword">lib</span>/<span class="hljs-title">denyhosts</span> 目录，进入以下操作：</span></span><br><span class="line"><span class="hljs-comment"># 停止denyhosts服务</span></span><br><span class="line">sudo service denyhosts stop</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 进入denyhosts的目录</span></span><br><span class="line">cd /var/<span class="hljs-class"><span class="hljs-keyword">lib</span>/<span class="hljs-title">denyhosts</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 查看哪些文件添加了ssh限制,将IP_addr替换成你的IP</span></span><br><span class="line">sudo grep IP_addr /usr/share/denyhosts/data/*</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 然后一个个删除文件中你想取消的主机IP所在的行:</span></span><br><span class="line">/usr/share/denyhosts/data/hosts</span><br><span class="line">/usr/share/denyhosts/data/hosts-restricted</span><br><span class="line">/usr/share/denyhosts/data/hosts-root</span><br><span class="line">/usr/share/denyhosts/data/hosts-valid</span><br><span class="line">/usr/share/denyhosts/data/users-hosts</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 添加你想允许的主机IP地址到allowed-hosts:</span></span><br><span class="line">sudo echo IP_addr &gt;&gt;<span class="hljs-regexp">/usr/share</span><span class="hljs-regexp">/denyhosts/data</span><span class="hljs-regexp">/allowed-hostsps</span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp"># 启动 DenyHosts服务：</span></span><br><span class="line"><span class="hljs-regexp"> service denyhosts start</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h5 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h5><ul>
-<li>尽量是用key验证登录服务器</li>
-<li>尽量从固定IP点登录服务器，然后将该地址加入白名单</li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/page/12/">Previous</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/12/">前</a>
         </div>
         <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/page/14/">Next</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/14/">次</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
             
@@ -384,17 +412,17 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        投稿
                     </p>
                     <p class="title has-text-weight-normal">
-                        92
+                        93
                     </p>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        カテゴリ
                     </p>
                     <p class="title has-text-weight-normal">
                         24
@@ -404,7 +432,7 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        タグ
                     </p>
                     <p class="title has-text-weight-normal">
                         37
@@ -414,7 +442,7 @@ var _hmt = _hmt || [];
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/SAMZONG" target="_blank">
-                Follow</a>
+                フォローする</a>
         </div>
         
         
@@ -463,7 +491,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Links
+            リンク
         </h3>
         <ul class="menu-list">
         
@@ -501,7 +529,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                カテゴリ
             </h3>
             <ul class="menu-list">
             <li>
@@ -590,7 +618,7 @@ var _hmt = _hmt || [];
                 <span class="level-item">Mac</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/MongoDB/">
@@ -706,9 +734,9 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            タグクラウド
         </h3>
-        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
+        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 18.33px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
     </div>
 </div>
 
@@ -720,8 +748,27 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            最近の記事
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-23T16:32:13.000Z">2020-11-24</time></div>
+                    <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="has-link-black-ter is-size-6">Check You Favorites App is readyOnapplesilicon</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mac/">Mac</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -799,25 +846,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
-                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -826,9 +854,20 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            アーカイブ
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/07/">
@@ -1081,7 +1120,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                タグ
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1207,7 +1246,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Mac/">
                         <span class="tag">Mac</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1364,8 +1403,27 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            最近の記事
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-23T16:32:13.000Z">2020-11-24</time></div>
+                    <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="has-link-black-ter is-size-6">Check You Favorites App is readyOnapplesilicon</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mac/">Mac</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1443,25 +1501,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
-                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1470,9 +1509,20 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            アーカイブ
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/07/">
@@ -1725,7 +1775,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                タグ
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1851,7 +1901,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Mac/">
                         <span class="tag">Mac</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2163,10 +2213,10 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
+                POSTS: '投稿',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
+                CATEGORIES: 'カテゴリ',
+                TAGS: 'タグ',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',

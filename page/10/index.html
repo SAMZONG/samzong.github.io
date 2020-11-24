@@ -165,6 +165,58 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-02-19T01:56:42.000Z">2017-02-19</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/CentOS/">CentOS</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 330 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/02/19/howto-automatic-updates-centos-rhel-using-yum/">HowTo Automatic Updates CENTOS/RHEL Using YUM</a>
+            
+        </h1>
+        <div class="content">
+            <p>大家若工作遇到需要管理的Linux集群机器较多时，同时我们知道系统的安全更新补丁维护这些非常重要，无论你在安装时优化维护做的再好，随着时间的推移，如果不去更新的话，系统早晚都会不安全，所以定期更新我们的系统补丁是一个运维人员的基本工作内容</p>
+<h3 id="Install-yum-cron"><a href="#Install-yum-cron" class="headerlink" title="Install yum-cron"></a>Install yum-cron</h3><figure class="highlight cmake hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum <span class="hljs-keyword">install</span> -y yum-cron</span><br></pre></td></tr></table></figure>
+<p>因为我的服务器系统多为CentOS 6，6的配置文件在<code>/etc/sysconfig/yum-cron</code>，你可以用以下命令查看配置文件位置：</p>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rpm -ql yum-cron</span><br><span class="line"><span class="hljs-regexp">/etc/</span>cron.daily/<span class="hljs-number">0</span>yum.cron</span><br><span class="line"><span class="hljs-regexp">/etc/</span>rc.d<span class="hljs-regexp">/init.d/</span>yum-cron</span><br><span class="line"><span class="hljs-regexp">/etc/</span>sysconfig/yum-cron</span><br><span class="line"><span class="hljs-regexp">/etc/</span>yum/yum-daily.yum</span><br><span class="line"><span class="hljs-regexp">/etc/</span>yum/yum-weekly.yum</span><br><span class="line"><span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/doc/</span>yum-cron<span class="hljs-number">-3.2</span><span class="hljs-number">.29</span></span><br><span class="line"><span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/doc/</span>yum-cron<span class="hljs-number">-3.2</span><span class="hljs-number">.29</span>/COPYING</span><br><span class="line"><span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/man/</span>man8/yum-cron<span class="hljs-number">.8</span>.gz</span><br></pre></td></tr></table></figure>
+<h3 id="Configure-“-etc-sysconfig-yum-cron”"><a href="#Configure-“-etc-sysconfig-yum-cron”" class="headerlink" title="Configure “/etc/sysconfig/yum-cron”"></a>Configure “/etc/sysconfig/yum-cron”</h3><p>yum-cron的默认设置是会在每天自动检查和安装系统更新包，在安装完成后有些配置需要注意下：</p>
+<h5 id="1-对于不需要更新的可以忽略掉"><a href="#1-对于不需要更新的可以忽略掉" class="headerlink" title="1. 对于不需要更新的可以忽略掉"></a>1. 对于不需要更新的可以忽略掉</h5><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">YUM_PARAMETER</span>=<span class="hljs-string">"--exclude='kernel*' --exclude='php*'"</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-设置管理员邮箱"><a href="#2-设置管理员邮箱" class="headerlink" title="2. 设置管理员邮箱"></a>2. 设置管理员邮箱</h5><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">MAILTO</span>=<span class="hljs-string">"luchuanjia@msn.com"</span></span><br></pre></td></tr></table></figure>
+<h5 id="3-不自动安装，仅检查，通知管理邮箱"><a href="#3-不自动安装，仅检查，通知管理邮箱" class="headerlink" title="3. 不自动安装，仅检查，通知管理邮箱"></a>3. 不自动安装，仅检查，通知管理邮箱</h5><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">CHECK_ONLY</span>=<span class="hljs-literal">yes</span></span><br></pre></td></tr></table></figure>
+<h5 id="4-不自动安装，仅下载"><a href="#4-不自动安装，仅下载" class="headerlink" title="4. 不自动安装，仅下载"></a>4. 不自动安装，仅下载</h5><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">DOWNLOAD_ONLY</span>=<span class="hljs-literal">yes</span></span><br></pre></td></tr></table></figure>
+<h3 id="Automatic-Starting-yum-cron"><a href="#Automatic-Starting-yum-cron" class="headerlink" title="Automatic Starting yum-cron"></a>Automatic Starting yum-cron</h3><figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig yum-cron <span class="hljs-keyword">on</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-02-09T10:29:50.000Z">2017-02-09</time>
                 
                 <div class="level-item">
@@ -302,71 +354,15 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-01-15T00:12:55.000Z">2017-01-15</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 minutes read (About 393 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/01/15/sdertfvdsrt/">每日备份MySQL单表数据</a>
-            
-        </h1>
-        <div class="content">
-            <p>最近愈近年底，客户业务涉及对账操作，所以同事提出需求需要单独备份某张表数据，并且每日备份；思考之后解决办法如下：</p>
-<ol>
-<li>mysqldump导出单张表的表结构及数据</li>
-<li>新增数据库，专做临时每日数据备份库</li>
-<li>导入该表数据到新增数据库内</li>
-<li>重命名导入的表名（预防计划任务下次导入时数据覆盖）</li>
-<li>编写脚本，添加Linux计划任务</li>
-</ol>
-<h4 id="1-mysqldump导出但张表的表结构及数据"><a href="#1-mysqldump导出但张表的表结构及数据" class="headerlink" title="1. mysqldump导出但张表的表结构及数据"></a>1. mysqldump导出但张表的表结构及数据</h4><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -h dbServer -PdbServerPort -u db_user -<span class="hljs-selector-tag">p</span> -d dbName tbName &gt; tbName.sql</span><br></pre></td></tr></table></figure>
-<h4 id="2-新增数据库，专做临时每日数据备份库"><a href="#2-新增数据库，专做临时每日数据备份库" class="headerlink" title="2. 新增数据库，专做临时每日数据备份库"></a>2. 新增数据库，专做临时每日数据备份库</h4><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> loginTo your DBserver</span></span><br><span class="line"><span class="hljs-meta">mysql&gt;</span><span class="hljs-bash"> create database bakdbName character <span class="hljs-built_in">set</span> utf8;</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-导入该表数据到新增数据库内"><a href="#3-导入该表数据到新增数据库内" class="headerlink" title="3. 导入该表数据到新增数据库内"></a>3. 导入该表数据到新增数据库内</h4><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -h dbServer -P dbServerPort -u db_user -<span class="hljs-selector-tag">p</span> bakdbName &lt; tbName.sql</span><br></pre></td></tr></table></figure>
-<h4 id="4-重命名导入的表名"><a href="#4-重命名导入的表名" class="headerlink" title="4 . 重命名导入的表名"></a>4 . 重命名导入的表名</h4><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u db_user -p -e "<span class="hljs-keyword">rename</span> <span class="hljs-keyword">table</span> bakdbName.tbName <span class="hljs-keyword">to</span> bakdbName.tbName_$<span class="hljs-built_in">DATE</span><span class="hljs-string">"</span></span><br></pre></td></tr></table></figure>
-<h4 id="5-编写脚本"><a href="#5-编写脚本" class="headerlink" title="5. 编写脚本"></a>5. 编写脚本</h4><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">[root@testServer01 ~]# cat /usr/local/bin/bakTable.sh</span><br><span class="line"><span class="hljs-comment">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#Create by SAMZONG</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-attribute">DATE</span>=`date +%Y%m%d`</span><br><span class="line"><span class="hljs-attribute">TMPDIR</span>=/tmp/baksql</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># modify your DB configure</span></span><br><span class="line"><span class="hljs-attribute">DBSERVER1</span>=localhost</span><br><span class="line"><span class="hljs-attribute">DBSERVER1_PORT</span>=3306</span><br><span class="line"><span class="hljs-attribute">DBSERVER1_USER</span>=root</span><br><span class="line"><span class="hljs-attribute">DBSERVER1_PASSWORD</span>=password</span><br><span class="line"><span class="hljs-attribute">MASTER_DBNAME</span>=zabbix</span><br><span class="line"><span class="hljs-attribute">MASTER_TBNAME</span>=users</span><br><span class="line"></span><br><span class="line"><span class="hljs-attribute">DBSERVER2</span>=localhost</span><br><span class="line"><span class="hljs-attribute">DBSERVER2_PORT</span>=3306</span><br><span class="line"><span class="hljs-attribute">DBSERVER2_USER</span>=root</span><br><span class="line"><span class="hljs-attribute">DBSERVER2_PASSWORD</span>=password</span><br><span class="line"><span class="hljs-attribute">BAKDBNAME</span>=z3</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># creat tmp folder</span></span><br><span class="line"><span class="hljs-keyword">if</span> [ ! -d <span class="hljs-variable">$TMPDIR</span> ]; then</span><br><span class="line">	mkdir <span class="hljs-variable">$TMPDIR</span></span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># dump tbName</span></span><br><span class="line">mysqldump -h <span class="hljs-variable">$DBSERVER1</span> -P <span class="hljs-variable">$DBSERVER1_PORT</span> -u <span class="hljs-variable">$DBSERVER1_USER</span> -p<span class="hljs-string">"<span class="hljs-variable">$DBSERVER1_PASSWORD</span>"</span> -d <span class="hljs-variable">$MASTER_DBNAME</span>  <span class="hljs-variable">$MASTER_TBNAME</span> &gt; <span class="hljs-variable">$TMPDIR</span>/<span class="hljs-variable">$MASTER_TBNAME</span>.sql</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># insert tbNAME to bakdbName</span></span><br><span class="line"><span class="hljs-keyword">if</span> [ $? -eq 0  ]; then</span><br><span class="line">	mysql -h <span class="hljs-variable">$DBSERVER2</span> -P <span class="hljs-variable">$DBSERVER2_PORT</span> -u <span class="hljs-variable">$DBSERVER2_USER</span> -p<span class="hljs-string">"<span class="hljs-variable">$DBSERVER2_PASSWORD</span>"</span> <span class="hljs-variable">$BAKDBNAME</span> &lt; <span class="hljs-variable">$TMPDIR</span>/<span class="hljs-variable">$MASTER_TBNAME</span>.sql</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">if</span> [ $? -eq 0 ]; then</span><br><span class="line">		# rename tbName</span><br><span class="line">		mysql -h <span class="hljs-variable">$DBSERVER2</span> -P <span class="hljs-variable">$DBSERVER2_PORT</span> -u <span class="hljs-variable">$DBSERVER2_USER</span> -p<span class="hljs-string">"<span class="hljs-variable">$DBSERVER2_PASSWORD</span>"</span> -e <span class="hljs-string">"rename table "</span><span class="hljs-variable">$BAKDBNAME</span><span class="hljs-string">"."</span><span class="hljs-variable">$MASTER_TBNAME</span><span class="hljs-string">" to "</span><span class="hljs-variable">$BAKDBNAME</span><span class="hljs-string">"."</span><span class="hljs-variable">$MASTER_TBNAME</span><span class="hljs-string">"_"</span><span class="hljs-variable">$DATE</span><span class="hljs-string">";"</span></span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<h4 id="6-添加到Linux计划任务"><a href="#6-添加到Linux计划任务" class="headerlink" title="6. 添加到Linux计划任务"></a>6. 添加到Linux计划任务</h4><figure class="highlight basic hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-symbol">00 </span><span class="hljs-number">00</span> * * * /<span class="hljs-keyword">usr</span>/local/bin/bakTable.sh</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/page/9/">Previous</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/9/">前</a>
         </div>
         <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/page/11/">Next</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/11/">次</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
             
@@ -423,17 +419,17 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        投稿
                     </p>
                     <p class="title has-text-weight-normal">
-                        92
+                        93
                     </p>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        カテゴリ
                     </p>
                     <p class="title has-text-weight-normal">
                         24
@@ -443,7 +439,7 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        タグ
                     </p>
                     <p class="title has-text-weight-normal">
                         37
@@ -453,7 +449,7 @@ var _hmt = _hmt || [];
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/SAMZONG" target="_blank">
-                Follow</a>
+                フォローする</a>
         </div>
         
         
@@ -502,7 +498,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Links
+            リンク
         </h3>
         <ul class="menu-list">
         
@@ -540,7 +536,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                カテゴリ
             </h3>
             <ul class="menu-list">
             <li>
@@ -629,7 +625,7 @@ var _hmt = _hmt || [];
                 <span class="level-item">Mac</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/MongoDB/">
@@ -745,9 +741,9 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            タグクラウド
         </h3>
-        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
+        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 18.33px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
     </div>
 </div>
 
@@ -759,8 +755,27 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            最近の記事
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-23T16:32:13.000Z">2020-11-24</time></div>
+                    <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="has-link-black-ter is-size-6">Check You Favorites App is readyOnapplesilicon</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mac/">Mac</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -838,25 +853,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
-                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -865,9 +861,20 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            アーカイブ
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/07/">
@@ -1120,7 +1127,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                タグ
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1246,7 +1253,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Mac/">
                         <span class="tag">Mac</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1403,8 +1410,27 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            最近の記事
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-23T16:32:13.000Z">2020-11-24</time></div>
+                    <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="has-link-black-ter is-size-6">Check You Favorites App is readyOnapplesilicon</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mac/">Mac</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1482,25 +1508,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
-                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1509,9 +1516,20 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            アーカイブ
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/07/">
@@ -1764,7 +1782,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                タグ
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1890,7 +1908,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Mac/">
                         <span class="tag">Mac</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2202,10 +2220,10 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
+                POSTS: '投稿',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
+                CATEGORIES: 'カテゴリ',
+                TAGS: 'タグ',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',

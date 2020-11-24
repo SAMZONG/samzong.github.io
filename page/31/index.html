@@ -165,6 +165,84 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-03-22T07:16:26.000Z">2016-03-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 minutes read (About 888 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/03/22/mysql-slow-query/">MySQL(2) 开启慢日志优化</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="工欲善其事，必先利其器-–-mysql开启慢日志优化"><a href="#工欲善其事，必先利其器-–-mysql开启慢日志优化" class="headerlink" title="工欲善其事，必先利其器 – mysql开启慢日志优化"></a>工欲善其事，必先利其器 – mysql开启慢日志优化</h1><h3 id="慢查询日志"><a href="#慢查询日志" class="headerlink" title="慢查询日志"></a>慢查询日志</h3><p>顾名思义就是记录查询比较慢得日志。</p>
+<h3 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h3><ul>
+<li>mysql-server 5.6</li>
+<li>CentOS 6.5</li>
+<li>VMware Fushion 8 pro</li>
+</ul>
+<p>首先，第一部查看是否已经开启慢查询日志：</p>
+<figure class="highlight asciidoc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like <span class="hljs-emphasis">'%slow%'</span>;</span><br><span class="line"><span class="hljs-code">+---------------------+</span>---------------------------------+</span><br><span class="line">| Variable<span class="hljs-emphasis">_name       | Value                           |</span></span><br><span class="line"><span class="hljs-emphasis">+---------------------+---------------------------------+</span></span><br><span class="line"><span class="hljs-emphasis">| log_</span>slow<span class="hljs-emphasis">_queries    | OFF                             |</span></span><br><span class="line"><span class="hljs-emphasis">| slow_</span>launch<span class="hljs-emphasis">_time    | 2                               |</span></span><br><span class="line"><span class="hljs-emphasis">| slow_</span>query<span class="hljs-emphasis">_log      | OFF                             |</span></span><br><span class="line"><span class="hljs-emphasis">| slow_</span>query<span class="hljs-emphasis">_log_</span>file | /var/run/mysqld/mysqld-slow.log |</span><br><span class="line"><span class="hljs-code">+---------------------+</span>---------------------------------+</span><br><span class="line">4 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
+<p>打开慢查询日志。修改MySQL的配置文件my.cnf一般是在/etc目录下面，加上下面三行配置后重启MySQL。</p>
+<figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">slow_query_log</span> = <span class="hljs-literal">ON</span></span><br><span class="line"><span class="hljs-attr">slow_launch_time</span> = <span class="hljs-number">2</span></span><br><span class="line"><span class="hljs-attr">slow_query_log_file</span> = /usr/local/mysql/data/slow_query.log</span><br></pre></td></tr></table></figure>
+<p>slow_launch_time只能精确到秒，如果需要更精确可以使用一些第三方的工具比如后面介绍的pt-query-digest</p>
+<figure class="highlight asciidoc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like <span class="hljs-emphasis">'%slow%'</span>;</span><br><span class="line"><span class="hljs-code">+---------------------------+</span>--------------------------------------+</span><br><span class="line">| Variable<span class="hljs-emphasis">_name             | Value                                |</span></span><br><span class="line"><span class="hljs-emphasis">+---------------------------+--------------------------------------+</span></span><br><span class="line"><span class="hljs-emphasis">| log_</span>slow<span class="hljs-emphasis">_admin_</span>statements | OFF                                  |</span><br><span class="line">| log<span class="hljs-emphasis">_slow_</span>slave<span class="hljs-emphasis">_statements | OFF                                  |</span></span><br><span class="line"><span class="hljs-emphasis">| slow_</span>launch<span class="hljs-emphasis">_time          | 2                                    |</span></span><br><span class="line"><span class="hljs-emphasis">| slow_</span>query<span class="hljs-emphasis">_log            | ON                                   |</span></span><br><span class="line"><span class="hljs-emphasis">| slow_</span>query<span class="hljs-emphasis">_log_</span>file       | /usr/local/mysql/data/slow<span class="hljs-emphasis">_query.log |</span></span><br><span class="line"><span class="hljs-emphasis">+---------------------------+--------------------------------------+</span></span><br><span class="line"><span class="hljs-emphasis">5 rows in set (0.00 sec)</span></span><br><span class="line"><span class="hljs-emphasis"></span></span><br><span class="line"><span class="hljs-emphasis">mysql&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Tips: 我这里用的MySQL版本是5.6，不同版本的MySQL开启慢查询的配置是不同的，比如5.6之前的某些版本是long_query_time, long_query_time和log-slow-queries。可以先在终端执行show variables like ‘%slow%’;查看下当前版本具体配置是什么。</p>
+</blockquote>
+<p>也可以在终端中通过设置全局变量来打开慢查询日志：</p>
+<figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-tag">set</span> @@<span class="hljs-keyword">global</span>.<span class="hljs-keyword">slow_query_log</span> = ON;</span><br></pre></td></tr></table></figure>
+<h3 id="保持慢查询日志到表中"><a href="#保持慢查询日志到表中" class="headerlink" title="保持慢查询日志到表中"></a>保持慢查询日志到表中</h3><p>MySQL支持将慢查询日志保存到mysql.slow_log这张表中。通过@@global.log_output可以设置默认为TABLE，FILE和TABLE只能同时使用一个。</p>
+<figure class="highlight asciidoc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select @@global.log<span class="hljs-emphasis">_output;</span></span><br><span class="line"><span class="hljs-emphasis">+---------------------+</span></span><br><span class="line"><span class="hljs-emphasis">| @@global.log_</span>output |</span><br><span class="line"><span class="hljs-code">+---------------------+</span></span><br><span class="line">| FILE                |</span><br><span class="line"><span class="hljs-code">+---------------------+</span></span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-builtin-name">set</span> @@global.<span class="hljs-attribute">log_output</span>=<span class="hljs-string">'TABLE'</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight n1ql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show <span class="hljs-keyword">create</span> table mysql.slow_log;</span><br><span class="line">+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line">| Table    | <span class="hljs-keyword">Create</span> Table                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |</span><br><span class="line">+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line">| slow_log | <span class="hljs-keyword">CREATE</span> TABLE <span class="hljs-symbol">`slow_log`</span> (</span><br><span class="line">  <span class="hljs-symbol">`start_time`</span> timestamp <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> DEFAULT CURRENT_TIMESTAMP <span class="hljs-keyword">ON</span> <span class="hljs-keyword">UPDATE</span> CURRENT_TIMESTAMP,</span><br><span class="line">  <span class="hljs-symbol">`user_host`</span> mediumtext <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,</span><br><span class="line">  <span class="hljs-symbol">`query_time`</span> time <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,</span><br><span class="line">  <span class="hljs-symbol">`lock_time`</span> time <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,</span><br><span class="line">  <span class="hljs-symbol">`rows_sent`</span> int(<span class="hljs-number">11</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,</span><br><span class="line">  <span class="hljs-symbol">`rows_examined`</span> int(<span class="hljs-number">11</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,</span><br><span class="line">  <span class="hljs-symbol">`db`</span> varchar(<span class="hljs-number">512</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,</span><br><span class="line">  <span class="hljs-symbol">`last_insert_id`</span> int(<span class="hljs-number">11</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,</span><br><span class="line">  <span class="hljs-symbol">`insert_id`</span> int(<span class="hljs-number">11</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,</span><br><span class="line">  <span class="hljs-symbol">`server_id`</span> int(<span class="hljs-number">10</span>) unsigned <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,</span><br><span class="line">  <span class="hljs-symbol">`sql_text`</span> mediumtext <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,</span><br><span class="line">  <span class="hljs-symbol">`thread_id`</span> bigint(<span class="hljs-number">21</span>) unsigned <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span></span><br><span class="line">) ENGINE=CSV DEFAULT CHARSET=utf8 COMMENT=<span class="hljs-string">'Slow log'</span> |</span><br><span class="line">+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="hljs-number">1</span> row <span class="hljs-keyword">in</span> <span class="hljs-keyword">set</span> (<span class="hljs-number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
+<p>我们可以用下列语句用来模仿慢查询；</p>
+<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">select</span> <span class="hljs-keyword">sleep</span>(<span class="hljs-number">10</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight jboss-cli hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from mysql.slow_Log</span><br><span class="line">    -&gt; ;</span><br><span class="line">ERROR 1146 <span class="hljs-params">(42S02)</span>: Table 'mysql.slow_Log' doesn't exist</span><br><span class="line">mysql&gt; select *  from mysql.slow_log;</span><br><span class="line">+<span class="hljs-params">---------------------</span>+<span class="hljs-params">---------------------------</span>+<span class="hljs-params">------------</span>+<span class="hljs-params">-----------</span>+<span class="hljs-params">-----------</span>+<span class="hljs-params">---------------</span>+<span class="hljs-params">----</span>+<span class="hljs-params">----------------</span>+<span class="hljs-params">-----------</span>+<span class="hljs-params">-----------</span>+<span class="hljs-params">------------------</span>+<span class="hljs-params">-----------</span>+</span><br><span class="line">| start_time          | user_host                 | query_time | lock_time | rows_sent | rows_examined | db | last_insert_id | insert_id | server_id | sql_text         | thread_id |</span><br><span class="line">+<span class="hljs-params">---------------------</span>+<span class="hljs-params">---------------------------</span>+<span class="hljs-params">------------</span>+<span class="hljs-params">-----------</span>+<span class="hljs-params">-----------</span>+<span class="hljs-params">---------------</span>+<span class="hljs-params">----</span>+<span class="hljs-params">----------------</span>+<span class="hljs-params">-----------</span>+<span class="hljs-params">-----------</span>+<span class="hljs-params">------------------</span>+<span class="hljs-params">-----------</span>+</span><br><span class="line">| 2016-03-21 23<span class="hljs-function">:07</span><span class="hljs-function">:15</span> | root[root] @ localhost [] | 00<span class="hljs-function">:00</span><span class="hljs-function">:10</span>   | 00<span class="hljs-function">:00</span><span class="hljs-function">:00</span>  |         1 |             0 |    |              0 |         0 |         0 | select sleep<span class="hljs-params">(10)</span> |         2 |</span><br><span class="line">+<span class="hljs-params">---------------------</span>+<span class="hljs-params">---------------------------</span>+<span class="hljs-params">------------</span>+<span class="hljs-params">-----------</span>+<span class="hljs-params">-----------</span>+<span class="hljs-params">---------------</span>+<span class="hljs-params">----</span>+<span class="hljs-params">----------------</span>+<span class="hljs-params">-----------</span>+<span class="hljs-params">-----------</span>+<span class="hljs-params">------------------</span>+<span class="hljs-params">-----------</span>+</span><br><span class="line">1 row in <span class="hljs-keyword">set</span> <span class="hljs-params">(0.01 sec)</span></span><br><span class="line"></span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="慢查询日志分析"><a href="#慢查询日志分析" class="headerlink" title="慢查询日志分析"></a>慢查询日志分析</h3><ol>
+<li>可以使用MySQL自带的mysqldumpslow工具。使用很简单，可以跟-help来查看具体的用法。</li>
+</ol>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> -s：排序方式。c , t , l , r 表示记录次数、时间、查询时间的多少、返回的记录数排序；</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> ac , at , al , ar 表示相应的倒叙； <span class="hljs-comment"># -t：返回前面多少条的数据；</span></span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> -g：包含什么，大小写不敏感的； mysqldumpslow -s r -t 10 /slowquery.log</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">slow记录最多的10个语句 mysqldumpslow -s t -t 10 -g <span class="hljs-string">"left join"</span> /slowquery.log</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">按照时间排序前10中含有<span class="hljs-string">"left join"</span>的</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>可以导到mysql.slow_query表中，然后通过sql语句进行分析。</li>
+<li>使用第三方工具，下面会有介绍。</li>
+</ol>
+<h3 id="pt-query-digest"><a href="#pt-query-digest" class="headerlink" title="pt-query-digest"></a>pt-query-digest</h3><p>pt-query-digest可以从普通MySQL日志，慢查询日志以及二进制日志中分析查询，甚至可以从SHOW PROCESSLIST和MySQL协议的tcpdump中进行分析，如果没有指定文件，它从标准输入流（STDIN）中读取数据。<br>最简单地用法如下：</p>
+<figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-tag">pt-query-digest</span> <span class="hljs-selector-tag">slow</span><span class="hljs-selector-class">.logs</span></span><br></pre></td></tr></table></figure>
+<p>输出信息大致如下:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2016-03-18T21:54:23.000Z">2016-03-19</time>
                 
                 
@@ -351,10 +429,10 @@ var _hmt = _hmt || [];
 <div class="card card-transparent">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/page/30/">Previous</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/30/">前</a>
         </div>
         <div class="pagination-next is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/page/32/">Next</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/32/">次</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
             
@@ -405,17 +483,17 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        投稿
                     </p>
                     <p class="title has-text-weight-normal">
-                        92
+                        93
                     </p>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        カテゴリ
                     </p>
                     <p class="title has-text-weight-normal">
                         24
@@ -425,7 +503,7 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        タグ
                     </p>
                     <p class="title has-text-weight-normal">
                         37
@@ -435,7 +513,7 @@ var _hmt = _hmt || [];
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/SAMZONG" target="_blank">
-                Follow</a>
+                フォローする</a>
         </div>
         
         
@@ -484,7 +562,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Links
+            リンク
         </h3>
         <ul class="menu-list">
         
@@ -522,7 +600,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                カテゴリ
             </h3>
             <ul class="menu-list">
             <li>
@@ -611,7 +689,7 @@ var _hmt = _hmt || [];
                 <span class="level-item">Mac</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/MongoDB/">
@@ -727,9 +805,9 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            タグクラウド
         </h3>
-        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
+        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 18.33px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
     </div>
 </div>
 
@@ -741,8 +819,27 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            最近の記事
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-23T16:32:13.000Z">2020-11-24</time></div>
+                    <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="has-link-black-ter is-size-6">Check You Favorites App is readyOnapplesilicon</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mac/">Mac</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -820,25 +917,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
-                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -847,9 +925,20 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            アーカイブ
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/07/">
@@ -1102,7 +1191,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                タグ
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1228,7 +1317,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Mac/">
                         <span class="tag">Mac</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1385,8 +1474,27 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            最近の記事
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-23T16:32:13.000Z">2020-11-24</time></div>
+                    <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="has-link-black-ter is-size-6">Check You Favorites App is readyOnapplesilicon</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mac/">Mac</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1464,25 +1572,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
-                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1491,9 +1580,20 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            アーカイブ
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/07/">
@@ -1746,7 +1846,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                タグ
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1872,7 +1972,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Mac/">
                         <span class="tag">Mac</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2184,10 +2284,10 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
+                POSTS: '投稿',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
+                CATEGORIES: 'カテゴリ',
+                TAGS: 'タグ',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',

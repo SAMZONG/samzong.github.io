@@ -165,6 +165,101 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-09-22T07:20:12.000Z">2016-09-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    11 minutes read (About 1713 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/09/22/how-to-use-pt-query-digest/">HowTo Use pt-query-digest</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h3><p>索引可以我们更快速的执行查询，但是肯定存在不合理的索引，如果想找到那些索引不是很合适的查询，并在它们成为问题前进行优化，则可以使用pt-query-digest的查询审查“review”功能，分析其EXPLAIN出来的执行计划。</p>
+<p>pt-query-digest是用于分析mysql慢查询的一个工具，它可以分析binlog、General log、slowlog，也可以通过SHOWPROCESSLIST或者通过tcpdump抓取的MySQL协议数据来进行分析。可以把分析结果输出到文件中，分析过程是先对查询语句的条件进行参数化，然后对参数化以后的查询进行分组统计，统计出各查询的执行时间、次数、占比等，可以借助分析结果找出问题进行优化。</p>
+<h3 id="2-Install-Percona-Toolkit-amp-pt-query-digest"><a href="#2-Install-Percona-Toolkit-amp-pt-query-digest" class="headerlink" title="2. Install Percona Toolkit &amp; pt-query-digest"></a>2. Install Percona Toolkit &amp; pt-query-digest</h3><p>percona-toolkit是一组高级命令行工具的集合，用来执行各种通过手工执行非常复杂和麻烦的mysql和系统任务。这些任务包括：</p>
+<ul>
+<li>检查master和slave数据的一致性</li>
+<li>有效地对记录进行归档</li>
+<li>查找重复的索引</li>
+<li>对服务器信息进行汇总</li>
+<li>分析来自日志和tcpdump的查询</li>
+<li>当系统出问题的时候收集重要的系统信息</li>
+</ul>
+<figure class="highlight vim hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">[root@ultrera ~]# wget percona.<span class="hljs-keyword">com</span>/<span class="hljs-built_in">get</span>/percona-toolkit.tar.gz</span><br><span class="line">--<span class="hljs-number">2016</span>-<span class="hljs-number">09</span>-<span class="hljs-number">22</span> <span class="hljs-number">09</span>:<span class="hljs-number">17</span>:<span class="hljs-number">00</span>--  http://percona.<span class="hljs-keyword">com</span>/<span class="hljs-built_in">get</span>/percona-toolkit.tar.gz</span><br><span class="line">Resolving percona.<span class="hljs-keyword">com</span>... <span class="hljs-number">74.121</span>.<span class="hljs-number">199.234</span>, <span class="hljs-number">74.121</span>.<span class="hljs-number">199.234</span></span><br><span class="line">Connecting <span class="hljs-keyword">to</span> percona.<span class="hljs-keyword">com</span>|<span class="hljs-number">74.121</span>.<span class="hljs-number">199.234</span>|:<span class="hljs-number">80</span>... connected.</span><br><span class="line">HTTP request sent, awaiting response... <span class="hljs-number">301</span> Moved Permanently</span><br><span class="line">Location: http<span class="hljs-variable">s:</span>//www.percona.<span class="hljs-keyword">com</span>/<span class="hljs-built_in">get</span>/percona-toolkit.tar.gz [following]</span><br><span class="line">--<span class="hljs-number">2016</span>-<span class="hljs-number">09</span>-<span class="hljs-number">22</span> <span class="hljs-number">09</span>:<span class="hljs-number">17</span>:<span class="hljs-number">02</span>--  http<span class="hljs-variable">s:</span>//www.percona.<span class="hljs-keyword">com</span>/<span class="hljs-built_in">get</span>/percona-toolkit.tar.gz</span><br><span class="line">Resolving www.percona.<span class="hljs-keyword">com</span>... <span class="hljs-number">74.121</span>.<span class="hljs-number">199.234</span>, <span class="hljs-number">74.121</span>.<span class="hljs-number">199.234</span></span><br><span class="line">Connecting <span class="hljs-keyword">to</span> www.percona.<span class="hljs-keyword">com</span>|<span class="hljs-number">74.121</span>.<span class="hljs-number">199.234</span>|:<span class="hljs-number">443</span>... connected.</span><br><span class="line">HTTP request sent, awaiting response... <span class="hljs-number">302</span> Found</span><br><span class="line">Location: http<span class="hljs-variable">s:</span>//www.percona.<span class="hljs-keyword">com</span>/downloads/percona-toolkit/<span class="hljs-number">2.2</span>.<span class="hljs-number">19</span>/tarball/percona-toolkit-<span class="hljs-number">2.2</span>.<span class="hljs-number">19</span>.tar.gz [following]</span><br><span class="line">--<span class="hljs-number">2016</span>-<span class="hljs-number">09</span>-<span class="hljs-number">22</span> <span class="hljs-number">09</span>:<span class="hljs-number">17</span>:<span class="hljs-number">03</span>--  http<span class="hljs-variable">s:</span>//www.percona.<span class="hljs-keyword">com</span>/downloads/percona-toolkit/<span class="hljs-number">2.2</span>.<span class="hljs-number">19</span>/tarball/percona-toolkit-<span class="hljs-number">2.2</span>.<span class="hljs-number">19</span>.tar.gz</span><br><span class="line">Reusing existing connection <span class="hljs-keyword">to</span> www.percona.<span class="hljs-keyword">com</span>:<span class="hljs-number">443</span>.</span><br><span class="line">HTTP request sent, awaiting response... <span class="hljs-number">200</span> OK</span><br><span class="line">Length: <span class="hljs-number">1425623</span> (<span class="hljs-number">1.4</span>M) [application/<span class="hljs-keyword">x</span>-gzip]</span><br><span class="line">Saving <span class="hljs-keyword">to</span>: “percona-toolkit.tar.gz”</span><br><span class="line"></span><br><span class="line"><span class="hljs-number">100</span>%[=======================&gt;] <span class="hljs-number">1</span>,<span class="hljs-number">425</span>,<span class="hljs-number">623</span>    <span class="hljs-number">766</span>K/s   in <span class="hljs-number">1.8</span>s</span><br><span class="line"></span><br><span class="line"><span class="hljs-number">2016</span>-<span class="hljs-number">09</span>-<span class="hljs-number">22</span> <span class="hljs-number">09</span>:<span class="hljs-number">17</span>:<span class="hljs-number">05</span> (<span class="hljs-number">766</span> KB/s) - “percona-toolkit.tar.gz” saved [<span class="hljs-number">1425623</span>/<span class="hljs-number">1425623</span>]</span><br><span class="line"></span><br><span class="line">[root@ultrera ~]# tar xf percona-toolkit.tar.gz</span><br><span class="line">[root@ultrera ~]# <span class="hljs-keyword">ls</span></span><br><span class="line">percona-toolkit-<span class="hljs-number">2.2</span>.<span class="hljs-number">19</span>  percona-toolkit.tar.gz</span><br><span class="line">[root@ultrera ~]# <span class="hljs-keyword">cd</span> percona-toolkit-<span class="hljs-number">2.2</span>.<span class="hljs-number">19</span></span><br><span class="line">[root@ultrera percona-toolkit-<span class="hljs-number">2.2</span>.<span class="hljs-number">19</span>]# <span class="hljs-keyword">perl</span> Makefile.PL</span><br><span class="line">Warnin<span class="hljs-variable">g:</span> prerequisite DBD::mysql <span class="hljs-number">3</span> not found.</span><br><span class="line">Writing Makefile <span class="hljs-keyword">for</span> percona-toolkit</span><br><span class="line">[root@ultrera percona-toolkit-<span class="hljs-number">2.2</span>.<span class="hljs-number">19</span>]# <span class="hljs-keyword">make</span></span><br><span class="line"><span class="hljs-keyword">cp</span> bin/<span class="hljs-keyword">pt</span>-mysql-summary blib/script/<span class="hljs-keyword">pt</span>-mysql-summary</span><br><span class="line">....</span><br><span class="line">Manifying blib/man1/<span class="hljs-keyword">pt</span>-<span class="hljs-built_in">index</span>-usage.<span class="hljs-number">1</span><span class="hljs-keyword">p</span></span><br><span class="line">Manifying blib/man1/<span class="hljs-keyword">pt</span>-duplicate-key-checker.<span class="hljs-number">1</span><span class="hljs-keyword">p</span></span><br><span class="line">Manifying blib/man1/<span class="hljs-keyword">pt</span>-config-diff.<span class="hljs-number">1</span><span class="hljs-keyword">p</span></span><br><span class="line">Manifying blib/man1/<span class="hljs-keyword">pt</span>-stalk.<span class="hljs-number">1</span><span class="hljs-keyword">p</span></span><br><span class="line">[root@ultrera percona-toolkit-<span class="hljs-number">2.2</span>.<span class="hljs-number">19</span>]# <span class="hljs-keyword">make</span> install</span><br><span class="line">Installing /usr/local/share/man/man1/<span class="hljs-keyword">pt</span>-query-digest.<span class="hljs-number">1</span><span class="hljs-keyword">p</span></span><br><span class="line">...</span><br><span class="line">Installing /usr/local/bin/<span class="hljs-keyword">pt</span>-query-digest</span><br><span class="line">...</span><br><span class="line">Appending installation info <span class="hljs-keyword">to</span> /usr/lib64/perl5/perllocal.pod</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>运行工具可能会遇到下面的错误: Can’t locate Time/HiRes.pm in @INC</p>
+</blockquote>
+<figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta"># 解决办法：</span></span><br><span class="line">[root<span class="hljs-symbol">@ultrera</span> ~]<span class="hljs-meta"># yum install -y perl-Time-HiRes</span></span><br><span class="line">[root<span class="hljs-symbol">@ultrera</span> ~]<span class="hljs-meta"># pt-query-digest --version</span></span><br><span class="line">pt-query-digest <span class="hljs-number">2.2</span><span class="hljs-number">.19</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-开启-mysql慢日志"><a href="#3-开启-mysql慢日志" class="headerlink" title="3. 开启 mysql慢日志"></a>3. 开启 mysql慢日志</h3><h5 id="a-查看当前‘slow-query-log’-状态："><a href="#a-查看当前‘slow-query-log’-状态：" class="headerlink" title="a. 查看当前‘slow_query_log’ 状态："></a>a. 查看当前‘slow_query_log’ 状态：</h5><figure class="highlight asciidoc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like <span class="hljs-emphasis">'%query%'</span>;</span><br><span class="line"><span class="hljs-code">+------------------------------+</span>---------------------------------+</span><br><span class="line">| Variable<span class="hljs-emphasis">_name                | Value                           |</span></span><br><span class="line"><span class="hljs-emphasis">+------------------------------+---------------------------------+</span></span><br><span class="line"><span class="hljs-emphasis">| binlog_</span>rows<span class="hljs-emphasis">_query_</span>log<span class="hljs-emphasis">_events | OFF                             |</span></span><br><span class="line"><span class="hljs-emphasis">| ft_</span>query<span class="hljs-emphasis">_expansion_</span>limit     | 20                              |</span><br><span class="line">| have<span class="hljs-emphasis">_query_</span>cache             | YES                             |</span><br><span class="line">| long<span class="hljs-emphasis">_query_</span>time              | 10.000000                       |</span><br><span class="line">| query<span class="hljs-emphasis">_alloc_</span>block<span class="hljs-emphasis">_size       | 8192                            |</span></span><br><span class="line"><span class="hljs-emphasis">| query_</span>cache<span class="hljs-emphasis">_limit            | 1048576                         |</span></span><br><span class="line"><span class="hljs-emphasis">| query_</span>cache<span class="hljs-emphasis">_min_</span>res<span class="hljs-emphasis">_unit     | 4096                            |</span></span><br><span class="line"><span class="hljs-emphasis">| query_</span>cache<span class="hljs-emphasis">_size             | 1048576                         |</span></span><br><span class="line"><span class="hljs-emphasis">| query_</span>cache<span class="hljs-emphasis">_type             | OFF                             |</span></span><br><span class="line"><span class="hljs-emphasis">| query_</span>cache<span class="hljs-emphasis">_wlock_</span>invalidate | OFF                             |</span><br><span class="line">| query<span class="hljs-emphasis">_prealloc_</span>size          | 8192                            |</span><br><span class="line">| slow<span class="hljs-emphasis">_query_</span>log               | OFF                             |</span><br><span class="line">| slow<span class="hljs-emphasis">_query_</span>log<span class="hljs-emphasis">_file          | /var/lib/mysql/ultrera-slow.log |</span></span><br><span class="line"><span class="hljs-emphasis">+------------------------------+---------------------------------+</span></span><br><span class="line"><span class="hljs-emphasis">13 rows in set (0.00 sec)</span></span><br><span class="line"><span class="hljs-emphasis"></span></span><br><span class="line"><span class="hljs-emphasis">mysql&gt; show variables like 'log_</span>queries<span class="hljs-emphasis">_not_</span>using<span class="hljs-emphasis">_indexes';</span></span><br><span class="line"><span class="hljs-emphasis">+-------------------------------+-------+</span></span><br><span class="line"><span class="hljs-emphasis">| Variable_</span>name                 | Value |</span><br><span class="line"><span class="hljs-code">+-------------------------------+</span>-------+</span><br><span class="line">| log<span class="hljs-emphasis">_queries_</span>not<span class="hljs-emphasis">_using_</span>indexes | OFF   |</span><br><span class="line"><span class="hljs-code">+-------------------------------+</span>-------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h5 id="b-启动slow-log-配置"><a href="#b-启动slow-log-配置" class="headerlink" title="b. 启动slow_log, 配置"></a>b. 启动slow_log, 配置</h5><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 设定记录大于2s的sql</span></span><br><span class="line"><span class="hljs-meta">mysql&gt;</span><span class="hljs-bash"> <span class="hljs-built_in">set</span> global long_query_time=2;</span></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 设定<span class="hljs-built_in">log</span>存放路径</span></span><br><span class="line"><span class="hljs-meta">mysql&gt;</span><span class="hljs-bash"> <span class="hljs-built_in">set</span> global slow_query_log_file=<span class="hljs-string">'/tmp/ultraera-slow.log'</span>;</span></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 启用慢日志</span></span><br><span class="line"><span class="hljs-meta">mysql&gt;</span><span class="hljs-bash"> <span class="hljs-built_in">set</span> global slow_query_log=ON;</span></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 同时记录没有使用索引的sql</span></span><br><span class="line"><span class="hljs-meta">mysql&gt;</span><span class="hljs-bash"> <span class="hljs-built_in">set</span> global log_queries_not_using_indexes=on;</span></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>等待一段时间，slow.log 增大的非常快，实际生产中，注意不要被slow.log将磁盘撑满，影响到正常生产使用。</p>
+</blockquote>
+<h3 id="4-分析"><a href="#4-分析" class="headerlink" title="4. 分析"></a>4. 分析</h3><p>pt-query-digest可以从普通MySQL日志，慢查询日志以及二进制日志中分析查询，甚至可以从SHOW PROCESSLIST和MySQL协议的tcpdump中进行分析，如果没有指定文件，它从标准输入流（STDIN）中读取数据。</p>
+<h5 id="a-简单使用方法："><a href="#a-简单使用方法：" class="headerlink" title="a. 简单使用方法："></a>a. 简单使用方法：</h5><figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-tag">pt-query-digest</span> <span class="hljs-selector-tag">slow</span><span class="hljs-selector-class">.logs</span></span><br></pre></td></tr></table></figure>
+<p>输出信息如下：</p>
+<div align="left"><br><img src="http://images.cnitblog.com/blog/288950/201312/14135450-6f7a732598054f7aa311e95cbd4df3b1.png" alt><br></div>
+
+<p><ul></ul></p>
+<ol>
+<li>Overall这个部分是一个大致的概要信息(类似loadrunner给出的概要信息)，通过它可以对当前MySQL的查询性能做一个初步的评估，比如各个指标的最大值(max)，平均值(min)，95%分布值，中位数(median)，标准偏差(stddev)<br></li><li>查询的执行时间（Exec time）</li><br><li>锁占用的时间（Lock time）</li><br><li>MySQL执行器需要检查的行数（Rows examine）</li><br><li>最后返回给客户端的行数（Rows sent）</li><br><li>查询的大小。</li><br><ul>
+<li>Profile<br></li><li>Rank ： 整个分析中该“语句”的排名，一般也就是性能最慢的</li><br><li>Query ID ：每个查询都有一个</li><br><li>Response time ： “语句”的响应时间以及整体占比情况。</li><br><li>Calls ：“语句”的执行次数</li><br><li>R/Call ：每次执行的平均响应时间。 </li><br><li>V/M</li><br></ul><h5 id="详细信息"><a href="#详细信息" class="headerlink" title="详细信息"></a>详细信息</h5><p>列出上面Profile中每个Query ID的详细信息</p>
+
+
+</ol>
+<h5 id="b-从tcpdump包中分析：通过tcpdump命令抓取一定时间网络数据包，然后进行分析："><a href="#b-从tcpdump包中分析：通过tcpdump命令抓取一定时间网络数据包，然后进行分析：" class="headerlink" title="b. 从tcpdump包中分析：通过tcpdump命令抓取一定时间网络数据包，然后进行分析："></a>b. 从tcpdump包中分析：通过tcpdump命令抓取一定时间网络数据包，然后进行分析：</h5><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pt-query-digest --type tcpdump mysql<span class="hljs-selector-class">.tcp</span><span class="hljs-selector-class">.txt</span></span><br></pre></td></tr></table></figure>
+<h5 id="c-pt-query-digest-还支持很对其他的数据包分析形势，但是我们主要使用的还是针对慢日志进行分析"><a href="#c-pt-query-digest-还支持很对其他的数据包分析形势，但是我们主要使用的还是针对慢日志进行分析" class="headerlink" title="c. pt-query-digest 还支持很对其他的数据包分析形势，但是我们主要使用的还是针对慢日志进行分析"></a>c. pt-query-digest 还支持很对其他的数据包分析形势，但是我们主要使用的还是针对慢日志进行分析</h5><blockquote>
+<p>更多的帮助文档，请查看官方文档：<a href="http://www.percona.com/doc/percona-toolkit/2.2/pt-query-digest.html" target="_blank" rel="noopener">http://www.percona.com/doc/percona-toolkit/2.2/pt-query-digest.html</a></p>
+</blockquote>
+<h3 id="5-使用Anemometer将pt-query-digest的MySQL慢查询可视化"><a href="#5-使用Anemometer将pt-query-digest的MySQL慢查询可视化" class="headerlink" title="5. 使用Anemometer将pt-query-digest的MySQL慢查询可视化"></a>5. 使用Anemometer将pt-query-digest的MySQL慢查询可视化</h3><ul>
+<li>需要安装php 5.3 and over</li>
+<li>需要预先配置mysql数据库</li>
+<li>需要预先安装好pt-query-digest</li>
+</ul>
+<h5 id="5-1-安装"><a href="#5-1-安装" class="headerlink" title="5.1 安装"></a>5.1 安装</h5><figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="hljs-symbol">@ultrera</span> ~]<span class="hljs-meta"># git clone https://github.com/box/Anemometer.git anemometer</span></span><br><span class="line"></span><br><span class="line">[root<span class="hljs-symbol">@ultrera</span> ~]<span class="hljs-meta"># mv anemometer /var/www/html</span></span><br><span class="line">[root<span class="hljs-symbol">@ultrera</span> ~]<span class="hljs-meta"># cd /var/www/html/anemometer/</span></span><br><span class="line">[root<span class="hljs-symbol">@ultrera</span> anemometer]<span class="hljs-meta"># mysql -h localhost -u root -p &lt; mysql56-install.sql</span></span><br><span class="line">[root<span class="hljs-symbol">@ultrera</span> anemometer]<span class="hljs-meta"># mysql -h localhost -u root -p -e <span class="hljs-string">"grant all privileges on slow_query_log.* to 'anemometer'@'%' identified by 'anemometer';"</span></span></span><br></pre></td></tr></table></figure>
+<h5 id="5-2-配置"><a href="#5-2-配置" class="headerlink" title="5.2 配置"></a>5.2 配置</h5><figure class="highlight cs hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[<span class="hljs-meta">root@ultrera anemometer</span>]<span class="hljs-meta"># cp conf/sample.config.inc.php conf/config.inc.php</span></span><br><span class="line">[<span class="hljs-meta">root@ultrera anemometer</span>]<span class="hljs-meta"># vim conf/config.inc.php</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 48,49 and <span class="hljs-meta-keyword">line</span> 284,285</span></span><br><span class="line">设置数据库的用户名和密码;</span><br><span class="line"></span><br><span class="line">[<span class="hljs-meta">root@ultrera anemometer</span>]<span class="hljs-meta"># vim conf/config.inc.php</span></span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 7,8</span></span><br><span class="line">设置数据库的用户名和密码;</span><br></pre></td></tr></table></figure>
+<h5 id="5-3-导入"><a href="#5-3-导入" class="headerlink" title="5.3 导入"></a>5.3 导入</h5><p>将pt-query-digest 的分析结果到anemometer；</p>
+<blockquote>
+<p>pt-query-digest version &lt; 2.2</p>
+</blockquote>
+<figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ pt-query-digest <span class="hljs-attribute">--user</span>=anemometer <span class="hljs-attribute">--password</span>=superSecurePass \</span><br><span class="line">                  --review <span class="hljs-attribute">h</span>=db.example.com,D=slow_query_log,t=global_query_review \</span><br><span class="line">                  --review-history <span class="hljs-attribute">h</span>=db.example.com,D=slow_query_log,t=global_query_review_history \</span><br><span class="line">                  --no-report <span class="hljs-attribute">--limit</span>=0% \</span><br><span class="line">                  <span class="hljs-attribute">--filter</span>=<span class="hljs-string">" \$event-&gt;&#123;Bytes&#125; = length(\$event-&gt;&#123;arg&#125;) and \$event-&gt;&#123;hostname&#125;=\"<span class="hljs-variable">$HOSTNAME</span>\""</span> \</span><br><span class="line">                  /var/lib/mysql/db.example.com-slow.log</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>pt-query-digest version &gt;= 2.2</p>
+</blockquote>
+<figure class="highlight stata hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pt-<span class="hljs-keyword">query</span>-digest --user=anemometer --password=superSecurePass \</span><br><span class="line">                  --review <span class="hljs-keyword">h</span>=<span class="hljs-keyword">db</span>.example.com,<span class="hljs-keyword">D</span>=slow_query_log,t=global_query_review \</span><br><span class="line">                  --history <span class="hljs-keyword">h</span>=<span class="hljs-keyword">db</span>.example.com,<span class="hljs-keyword">D</span>=slow_query_log,t=global_query_review_history \</span><br><span class="line">                  --<span class="hljs-keyword">no</span>-<span class="hljs-keyword">report</span> --limit=0% \</span><br><span class="line">                  --filter=<span class="hljs-string">" \$event-&gt;&#123;Bytes&#125; = length(\$event-&gt;&#123;arg&#125;) and \$event-&gt;&#123;hostname&#125;=\"</span><span class="hljs-variable">$HOSTNAME</span>\<span class="hljs-string">""</span> \</span><br><span class="line">                  /<span class="hljs-keyword">var</span>/lib/mysql/<span class="hljs-keyword">db</span>.example.com-slow.<span class="hljs-built_in">log</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Pipeline process 11 (aggregate fingerprint) caused <span class="hljs-keyword">an</span> <span class="hljs-keyword">error</span>: Argument <span class="hljs-string">"57A"</span> isn't numeric <span class="hljs-keyword">in</span> numeric gt (&gt;) at (eval 40) <span class="hljs-keyword">line</span> 6, &lt;&gt; <span class="hljs-keyword">line</span> 27.</span><br><span class="line">Pipeline process 11 (aggregate fingerprint) caused <span class="hljs-keyword">an</span> <span class="hljs-keyword">error</span>: Argument <span class="hljs-string">"57B"</span> isn't numeric <span class="hljs-keyword">in</span> numeric gt (&gt;) at (eval 40) <span class="hljs-keyword">line</span> 6, &lt;&gt; <span class="hljs-keyword">line</span> 28.</span><br><span class="line">Pipeline process 11 (aggregate fingerprint) caused <span class="hljs-keyword">an</span> <span class="hljs-keyword">error</span>: Argument <span class="hljs-string">"57C"</span> isn't numeric <span class="hljs-keyword">in</span> numeric gt (&gt;) at (eval 40) <span class="hljs-keyword">line</span> 6, &lt;&gt; <span class="hljs-keyword">line</span> 29.</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2016-09-19T02:25:53.000Z">2016-09-19</time>
                 
                 <div class="level-item">
@@ -260,95 +355,15 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-08-04T05:14:15.000Z">2016-08-04</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    9 minutes read (About 1397 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/08/04/how-to-setup-mariadb-galera-cluster-10-on-centos-6/">HowTo Setup MariaDB Galera Cluster 10 On CentOS 6.x</a>
-            
-        </h1>
-        <div class="content">
-            <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MariaDB Galera Cluster 是一套在MySQL InnoDB存储引擎上面实现multi-master及数据实时同步的系统架构，业务层面无需做读写分离工作，数据库读写压力都能按照既定的规则分发到 各个节点上去。在数据方面完全兼容 MariaDB 和 MySQL。使用MariaDB Galera的解决方案，可以方便快速的搭建出高可用的数据库Cluster，不是主备模式，而是双活模式，也就是说，没有主节点和备份节点，每个节点都可以看做是主节点，都可以进行读写，由Galera来实现底层的数据同步。<br></p>
-
-<ul>
-<li>真正的多主架构，任何节点都可以进行读写</li>
-<li>同步复制，各节点间无延迟且节点宕机不会导致数据丢失</li>
-<li>紧密耦合，所有节点均保持相同状态</li>
-<li>自动节点配置，无需手工备份当前数据库并拷贝至新节点</li>
-</ul>
-<h4 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h4><ul>
-<li>Cluster node4 IP address 172.16.102.168</li>
-<li>Cluster node5 IP address 172.16.102.165</li>
-<li>Cluster node6 IP address 172.16.102.164</li>
-<li>setenforce 0；sed -i ‘s/SELINUX=enforcing/SELINUX=disabled/‘ /etc/selinux/config</li>
-<li>/etc/init.d/iptables stop;chkconfig iptables off</li>
-</ul>
-<blockquote>
-<p>使用vmware 测试需注意:克隆机器需要删除 <code>/etc/udev/rules.d/70-persistent-net.rules</code> 以及<code>/etc/sysconfig/network-scripts/ifcfg-eth0</code>中的网卡mac地址选项，不然网卡起不来</p>
-</blockquote>
-<h4 id="环境检测"><a href="#环境检测" class="headerlink" title="环境检测"></a>环境检测</h4><ul>
-<li>检查iptables状态：/etc/init.d/iptables status;chkconfig –list | grep iptables</li>
-<li>检查selinux状态：getenforce</li>
-<li>检查openssh-client包是否安装：系统中是否有ssh命令</li>
-<li>检查是否系统中含有mysql相关的包：rpm -qa | grep mysql，有的话都需要卸载掉</li>
-<li>检查网络是否通畅：ping www.baidu.com</li>
-</ul>
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><h5 id="1-在所有节点编辑-etc-hosts"><a href="#1-在所有节点编辑-etc-hosts" class="headerlink" title="1. 在所有节点编辑/etc/hosts"></a>1. 在所有节点编辑/etc/hosts</h5><figure class="highlight x86asm hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@node4 ~]# vi /etc/hosts</span><br><span class="line"></span><br><span class="line"><span class="hljs-number">127.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.1</span>   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::<span class="hljs-number">1</span>         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line"></span><br><span class="line"># <span class="hljs-keyword">add</span> follows</span><br><span class="line"><span class="hljs-number">172.16</span><span class="hljs-meta">.102</span><span class="hljs-meta">.164</span> node6</span><br><span class="line"><span class="hljs-number">172.16</span><span class="hljs-meta">.102</span><span class="hljs-meta">.165</span> node5</span><br><span class="line"><span class="hljs-number">172.16</span><span class="hljs-meta">.102</span><span class="hljs-meta">.168</span> node4</span><br><span class="line"></span><br><span class="line">[root@node4 ~]#</span><br><span class="line"></span><br><span class="line"># 依次在node5和node6上编辑/etc/hosts</span><br></pre></td></tr></table></figure>
-<h5 id="2-在所有node上安装-MariaDB-Galera"><a href="#2-在所有node上安装-MariaDB-Galera" class="headerlink" title="2. 在所有node上安装 MariaDB Galera"></a>2. 在所有node上安装 MariaDB Galera</h5><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-section">[root@node4 ~]</span><span class="hljs-comment"># vi /etc/yum.repos.d/mariadb.repo</span></span><br><span class="line"> <span class="hljs-comment"># MariaDB 10.0 CentOS repository list</span></span><br><span class="line"><span class="hljs-comment"># http://mariadb.org/mariadb/repositories/</span></span><br><span class="line"><span class="hljs-section">[mariadb]</span></span><br><span class="line"><span class="hljs-attr">name</span> = MariaDB</span><br><span class="line"><span class="hljs-attr">baseurl</span> = http://yum.mariadb.org/<span class="hljs-number">10.0</span>/centos6-amd64</span><br><span class="line"><span class="hljs-attr">gpgkey</span>=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB</span><br><span class="line"><span class="hljs-attr">gpgcheck</span>=<span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">enabled</span>=<span class="hljs-number">0</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[root@node4 ~]</span><span class="hljs-comment"># yum --enablerepo=mariadb -y install MariaDB-Galera-server</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 依次在node5和node6上安装 MariaDB-Galera-server</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><i>注意安装完成之后，不要启动mysql</i></p>
-</blockquote>
-<h5 id="3-在其中一个节点上编辑-etc-my-cnf-d-server-cnf配置文件"><a href="#3-在其中一个节点上编辑-etc-my-cnf-d-server-cnf配置文件" class="headerlink" title="3. 在其中一个节点上编辑/etc/my.cnf.d/server.cnf配置文件"></a>3. 在其中一个节点上编辑/etc/my.cnf.d/server.cnf配置文件</h5><figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@node4 ~]<span class="hljs-comment"># vi /etc/my.cnf.d/server.cnf</span></span><br><span class="line"><span class="hljs-comment"># 19 行，取消下面的注释，并修改为需求</span></span><br><span class="line">[galera]</span><br><span class="line">wsrep_provider=/usr/lib64/galera/libgalera_smm.so</span><br><span class="line"><span class="hljs-comment"># 指定节点地址，这里也可以使用ip,如果没做安装1，可以直接把cluster的ip写在这里。</span></span><br><span class="line">wsrep_cluster_address=<span class="hljs-string">"gcomm://node4,node5,node6"</span></span><br><span class="line">binlog_format=row</span><br><span class="line">default_storage_engine=InnoDB</span><br><span class="line">innodb_autoinc_lock_mode=2</span><br><span class="line">bind-address=0.0.0.0</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># add follows</span></span><br><span class="line"><span class="hljs-comment"># cluster name</span></span><br><span class="line">wsrep_cluster_name=<span class="hljs-string">"Visionet_MariaDB_Cluster"</span></span><br><span class="line"><span class="hljs-comment"># replication provider</span></span><br><span class="line">wsrep_sst_method=rsync</span><br><span class="line"><span class="hljs-comment"># own IP address</span></span><br><span class="line">wsrep_node_address=<span class="hljs-string">"172.16.102.168"</span></span><br><span class="line">wsrep_node_name=<span class="hljs-string">"node4"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 启动数据库</span></span><br><span class="line">[root@node4 ~]<span class="hljs-comment"># /etc/rc.d/init.d/mysql bootstrap</span></span><br><span class="line">Starting MySQL. SUCCESS!</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 初始化你的数据库</span></span><br><span class="line">[root@node4 ~]<span class="hljs-comment"># mysql_secure_installation</span></span><br></pre></td></tr></table></figure>
-<h5 id="4-在其它节点上编辑-etc-my-cnf-d-server-cnf配置文件"><a href="#4-在其它节点上编辑-etc-my-cnf-d-server-cnf配置文件" class="headerlink" title="4. 在其它节点上编辑/etc/my.cnf.d/server.cnf配置文件"></a>4. 在其它节点上编辑/etc/my.cnf.d/server.cnf配置文件</h5><h5 id="node5"><a href="#node5" class="headerlink" title="node5"></a>node5</h5><figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@node5 ~]<span class="hljs-comment"># vi /etc/my.cnf.d/server.cnf</span></span><br><span class="line"><span class="hljs-comment"># 19 行，取消下面的注释，并修改为需求</span></span><br><span class="line">[galera]</span><br><span class="line">wsrep_provider=/usr/lib64/galera/libgalera_smm.so</span><br><span class="line"><span class="hljs-comment"># 指定节点地址，这里也可以使用ip,如果没做安装1，可以直接把cluster的ip写在这里。</span></span><br><span class="line">wsrep_cluster_address=<span class="hljs-string">"gcomm://node4,node5,node6"</span></span><br><span class="line">binlog_format=row</span><br><span class="line">default_storage_engine=InnoDB</span><br><span class="line">innodb_autoinc_lock_mode=2</span><br><span class="line">bind-address=0.0.0.0</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># add follows</span></span><br><span class="line"><span class="hljs-comment"># cluster name</span></span><br><span class="line">wsrep_cluster_name=<span class="hljs-string">"Visionet_MariaDB_Cluster"</span></span><br><span class="line"><span class="hljs-comment"># replication provider</span></span><br><span class="line">wsrep_sst_method=rsync</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 以下内容注意，注意应设置为当前服务器信息</span></span><br><span class="line">wsrep_node_address=<span class="hljs-string">"172.16.102.165"</span></span><br><span class="line">wsrep_node_name=<span class="hljs-string">"node5"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 启动数据库</span></span><br><span class="line">[root@node5 ~]<span class="hljs-comment"># /etc/rc.d/init.d/mysql start</span></span><br><span class="line">Starting MySQL...SST in progress, setting sleep higher. SUCCESS!</span><br></pre></td></tr></table></figure>
-<h5 id="node6"><a href="#node6" class="headerlink" title="node6"></a>node6</h5><figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@node6 ~]<span class="hljs-comment"># vi /etc/my.cnf.d/server.cnf</span></span><br><span class="line"><span class="hljs-comment"># 19 行，取消下面的注释，并修改为需求</span></span><br><span class="line">[galera]</span><br><span class="line">wsrep_provider=/usr/lib64/galera/libgalera_smm.so</span><br><span class="line"><span class="hljs-comment"># 指定节点地址，这里也可以使用ip,如果没做安装1，可以直接把cluster的ip写在这里。</span></span><br><span class="line">wsrep_cluster_address=<span class="hljs-string">"gcomm://node4,node5,node6"</span></span><br><span class="line">binlog_format=row</span><br><span class="line">default_storage_engine=InnoDB</span><br><span class="line">innodb_autoinc_lock_mode=2</span><br><span class="line">bind-address=0.0.0.0</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># add follows</span></span><br><span class="line"><span class="hljs-comment"># cluster name</span></span><br><span class="line">wsrep_cluster_name=<span class="hljs-string">"Visionet_MariaDB_Cluster"</span></span><br><span class="line"><span class="hljs-comment"># replication provider</span></span><br><span class="line">wsrep_sst_method=rsync</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 以下内容注意，注意应设置为当前服务器信息</span></span><br><span class="line">wsrep_node_address=<span class="hljs-string">"172.16.102.164"</span></span><br><span class="line">wsrep_node_name=<span class="hljs-string">"node6"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 启动数据库</span></span><br><span class="line">[root@node6 ~]<span class="hljs-comment"># /etc/rc.d/init.d/mysql start</span></span><br><span class="line">Starting MySQL...SST in progress, setting sleep higher. SUCCESS!</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意：只需要初始化第一个节点服务器的数据库，其他数据的配置文件会自动同步，所以你给node4设置的root可以在node5和node6直接使用，当然这是安装正确的前提。</p>
-</blockquote>
-<h4 id="登陆各个节点数据库检查配置是否成功"><a href="#登陆各个节点数据库检查配置是否成功" class="headerlink" title="登陆各个节点数据库检查配置是否成功"></a>登陆各个节点数据库检查配置是否成功</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server.cnf的配置如果没有问题，那么wsrep_local_state_comment的状态应该是Synced。<br><figure class="highlight asciidoc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@node4 ~]# mysql -u root -p</span><br><span class="line">Enter password:</span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 15</span><br><span class="line">Server version: 10.0.26-MariaDB-wsrep MariaDB Server, wsrep<span class="hljs-emphasis">_25.13.raf7f02e</span></span><br><span class="line"><span class="hljs-emphasis"></span></span><br><span class="line"><span class="hljs-emphasis">Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.</span></span><br><span class="line"><span class="hljs-emphasis"></span></span><br><span class="line"><span class="hljs-emphasis">Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.</span></span><br><span class="line"><span class="hljs-emphasis"></span></span><br><span class="line"><span class="hljs-emphasis">MariaDB [(none)]&gt; show status like 'wsrep_</span>local<span class="hljs-emphasis">_state_</span>comment';</span><br><span class="line"><span class="hljs-code">+---------------------------+</span>--------+</span><br><span class="line">| Variable<span class="hljs-emphasis">_name             | Value  |</span></span><br><span class="line"><span class="hljs-emphasis">+---------------------------+--------+</span></span><br><span class="line"><span class="hljs-emphasis">| wsrep_</span>local<span class="hljs-emphasis">_state_</span>comment | Synced |</span><br><span class="line"><span class="hljs-code">+---------------------------+</span>--------+</span><br><span class="line">1 row in set (0.01 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt;</span><br></pre></td></tr></table></figure></p>
-<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MariaDB Galera没有主节点和备份节点，配置成功之后，可以在任何一个node节点上操作会自动同步到其他节点，任何一个节点宕机不会影响其他节点的数据和稳定性，配置HAProxy设置VIP的方式来实现负载均衡，提高服务的高可用性，另外，当宕机节点上线之后，事务会自动同步不丢失。</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/page/15/">Previous</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/15/">前</a>
         </div>
         <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/page/17/">Next</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/17/">次</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
             
@@ -405,17 +420,17 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        投稿
                     </p>
                     <p class="title has-text-weight-normal">
-                        92
+                        93
                     </p>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        カテゴリ
                     </p>
                     <p class="title has-text-weight-normal">
                         24
@@ -425,7 +440,7 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        タグ
                     </p>
                     <p class="title has-text-weight-normal">
                         37
@@ -435,7 +450,7 @@ var _hmt = _hmt || [];
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/SAMZONG" target="_blank">
-                Follow</a>
+                フォローする</a>
         </div>
         
         
@@ -484,7 +499,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Links
+            リンク
         </h3>
         <ul class="menu-list">
         
@@ -522,7 +537,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                カテゴリ
             </h3>
             <ul class="menu-list">
             <li>
@@ -611,7 +626,7 @@ var _hmt = _hmt || [];
                 <span class="level-item">Mac</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/MongoDB/">
@@ -727,9 +742,9 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            タグクラウド
         </h3>
-        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
+        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 18.33px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
     </div>
 </div>
 
@@ -741,8 +756,27 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            最近の記事
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-23T16:32:13.000Z">2020-11-24</time></div>
+                    <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="has-link-black-ter is-size-6">Check You Favorites App is readyOnapplesilicon</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mac/">Mac</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -820,25 +854,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
-                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -847,9 +862,20 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            アーカイブ
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/07/">
@@ -1102,7 +1128,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                タグ
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1228,7 +1254,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Mac/">
                         <span class="tag">Mac</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1385,8 +1411,27 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            最近の記事
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-23T16:32:13.000Z">2020-11-24</time></div>
+                    <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="has-link-black-ter is-size-6">Check You Favorites App is readyOnapplesilicon</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mac/">Mac</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1464,25 +1509,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
-                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1491,9 +1517,20 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            アーカイブ
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/07/">
@@ -1746,7 +1783,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                タグ
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1872,7 +1909,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Mac/">
                         <span class="tag">Mac</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2184,10 +2221,10 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
+                POSTS: '投稿',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
+                CATEGORIES: 'カテゴリ',
+                TAGS: 'タグ',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',

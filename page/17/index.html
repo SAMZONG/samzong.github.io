@@ -165,6 +165,86 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-08-04T05:14:15.000Z">2016-08-04</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 minutes read (About 1397 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/08/04/how-to-setup-mariadb-galera-cluster-10-on-centos-6/">HowTo Setup MariaDB Galera Cluster 10 On CentOS 6.x</a>
+            
+        </h1>
+        <div class="content">
+            <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MariaDB Galera Cluster 是一套在MySQL InnoDB存储引擎上面实现multi-master及数据实时同步的系统架构，业务层面无需做读写分离工作，数据库读写压力都能按照既定的规则分发到 各个节点上去。在数据方面完全兼容 MariaDB 和 MySQL。使用MariaDB Galera的解决方案，可以方便快速的搭建出高可用的数据库Cluster，不是主备模式，而是双活模式，也就是说，没有主节点和备份节点，每个节点都可以看做是主节点，都可以进行读写，由Galera来实现底层的数据同步。<br></p>
+
+<ul>
+<li>真正的多主架构，任何节点都可以进行读写</li>
+<li>同步复制，各节点间无延迟且节点宕机不会导致数据丢失</li>
+<li>紧密耦合，所有节点均保持相同状态</li>
+<li>自动节点配置，无需手工备份当前数据库并拷贝至新节点</li>
+</ul>
+<h4 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h4><ul>
+<li>Cluster node4 IP address 172.16.102.168</li>
+<li>Cluster node5 IP address 172.16.102.165</li>
+<li>Cluster node6 IP address 172.16.102.164</li>
+<li>setenforce 0；sed -i ‘s/SELINUX=enforcing/SELINUX=disabled/‘ /etc/selinux/config</li>
+<li>/etc/init.d/iptables stop;chkconfig iptables off</li>
+</ul>
+<blockquote>
+<p>使用vmware 测试需注意:克隆机器需要删除 <code>/etc/udev/rules.d/70-persistent-net.rules</code> 以及<code>/etc/sysconfig/network-scripts/ifcfg-eth0</code>中的网卡mac地址选项，不然网卡起不来</p>
+</blockquote>
+<h4 id="环境检测"><a href="#环境检测" class="headerlink" title="环境检测"></a>环境检测</h4><ul>
+<li>检查iptables状态：/etc/init.d/iptables status;chkconfig –list | grep iptables</li>
+<li>检查selinux状态：getenforce</li>
+<li>检查openssh-client包是否安装：系统中是否有ssh命令</li>
+<li>检查是否系统中含有mysql相关的包：rpm -qa | grep mysql，有的话都需要卸载掉</li>
+<li>检查网络是否通畅：ping www.baidu.com</li>
+</ul>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><h5 id="1-在所有节点编辑-etc-hosts"><a href="#1-在所有节点编辑-etc-hosts" class="headerlink" title="1. 在所有节点编辑/etc/hosts"></a>1. 在所有节点编辑/etc/hosts</h5><figure class="highlight x86asm hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@node4 ~]# vi /etc/hosts</span><br><span class="line"></span><br><span class="line"><span class="hljs-number">127.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.1</span>   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::<span class="hljs-number">1</span>         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line"></span><br><span class="line"># <span class="hljs-keyword">add</span> follows</span><br><span class="line"><span class="hljs-number">172.16</span><span class="hljs-meta">.102</span><span class="hljs-meta">.164</span> node6</span><br><span class="line"><span class="hljs-number">172.16</span><span class="hljs-meta">.102</span><span class="hljs-meta">.165</span> node5</span><br><span class="line"><span class="hljs-number">172.16</span><span class="hljs-meta">.102</span><span class="hljs-meta">.168</span> node4</span><br><span class="line"></span><br><span class="line">[root@node4 ~]#</span><br><span class="line"></span><br><span class="line"># 依次在node5和node6上编辑/etc/hosts</span><br></pre></td></tr></table></figure>
+<h5 id="2-在所有node上安装-MariaDB-Galera"><a href="#2-在所有node上安装-MariaDB-Galera" class="headerlink" title="2. 在所有node上安装 MariaDB Galera"></a>2. 在所有node上安装 MariaDB Galera</h5><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-section">[root@node4 ~]</span><span class="hljs-comment"># vi /etc/yum.repos.d/mariadb.repo</span></span><br><span class="line"> <span class="hljs-comment"># MariaDB 10.0 CentOS repository list</span></span><br><span class="line"><span class="hljs-comment"># http://mariadb.org/mariadb/repositories/</span></span><br><span class="line"><span class="hljs-section">[mariadb]</span></span><br><span class="line"><span class="hljs-attr">name</span> = MariaDB</span><br><span class="line"><span class="hljs-attr">baseurl</span> = http://yum.mariadb.org/<span class="hljs-number">10.0</span>/centos6-amd64</span><br><span class="line"><span class="hljs-attr">gpgkey</span>=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB</span><br><span class="line"><span class="hljs-attr">gpgcheck</span>=<span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-attr">enabled</span>=<span class="hljs-number">0</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[root@node4 ~]</span><span class="hljs-comment"># yum --enablerepo=mariadb -y install MariaDB-Galera-server</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 依次在node5和node6上安装 MariaDB-Galera-server</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><i>注意安装完成之后，不要启动mysql</i></p>
+</blockquote>
+<h5 id="3-在其中一个节点上编辑-etc-my-cnf-d-server-cnf配置文件"><a href="#3-在其中一个节点上编辑-etc-my-cnf-d-server-cnf配置文件" class="headerlink" title="3. 在其中一个节点上编辑/etc/my.cnf.d/server.cnf配置文件"></a>3. 在其中一个节点上编辑/etc/my.cnf.d/server.cnf配置文件</h5><figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@node4 ~]<span class="hljs-comment"># vi /etc/my.cnf.d/server.cnf</span></span><br><span class="line"><span class="hljs-comment"># 19 行，取消下面的注释，并修改为需求</span></span><br><span class="line">[galera]</span><br><span class="line">wsrep_provider=/usr/lib64/galera/libgalera_smm.so</span><br><span class="line"><span class="hljs-comment"># 指定节点地址，这里也可以使用ip,如果没做安装1，可以直接把cluster的ip写在这里。</span></span><br><span class="line">wsrep_cluster_address=<span class="hljs-string">"gcomm://node4,node5,node6"</span></span><br><span class="line">binlog_format=row</span><br><span class="line">default_storage_engine=InnoDB</span><br><span class="line">innodb_autoinc_lock_mode=2</span><br><span class="line">bind-address=0.0.0.0</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># add follows</span></span><br><span class="line"><span class="hljs-comment"># cluster name</span></span><br><span class="line">wsrep_cluster_name=<span class="hljs-string">"Visionet_MariaDB_Cluster"</span></span><br><span class="line"><span class="hljs-comment"># replication provider</span></span><br><span class="line">wsrep_sst_method=rsync</span><br><span class="line"><span class="hljs-comment"># own IP address</span></span><br><span class="line">wsrep_node_address=<span class="hljs-string">"172.16.102.168"</span></span><br><span class="line">wsrep_node_name=<span class="hljs-string">"node4"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 启动数据库</span></span><br><span class="line">[root@node4 ~]<span class="hljs-comment"># /etc/rc.d/init.d/mysql bootstrap</span></span><br><span class="line">Starting MySQL. SUCCESS!</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 初始化你的数据库</span></span><br><span class="line">[root@node4 ~]<span class="hljs-comment"># mysql_secure_installation</span></span><br></pre></td></tr></table></figure>
+<h5 id="4-在其它节点上编辑-etc-my-cnf-d-server-cnf配置文件"><a href="#4-在其它节点上编辑-etc-my-cnf-d-server-cnf配置文件" class="headerlink" title="4. 在其它节点上编辑/etc/my.cnf.d/server.cnf配置文件"></a>4. 在其它节点上编辑/etc/my.cnf.d/server.cnf配置文件</h5><h5 id="node5"><a href="#node5" class="headerlink" title="node5"></a>node5</h5><figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@node5 ~]<span class="hljs-comment"># vi /etc/my.cnf.d/server.cnf</span></span><br><span class="line"><span class="hljs-comment"># 19 行，取消下面的注释，并修改为需求</span></span><br><span class="line">[galera]</span><br><span class="line">wsrep_provider=/usr/lib64/galera/libgalera_smm.so</span><br><span class="line"><span class="hljs-comment"># 指定节点地址，这里也可以使用ip,如果没做安装1，可以直接把cluster的ip写在这里。</span></span><br><span class="line">wsrep_cluster_address=<span class="hljs-string">"gcomm://node4,node5,node6"</span></span><br><span class="line">binlog_format=row</span><br><span class="line">default_storage_engine=InnoDB</span><br><span class="line">innodb_autoinc_lock_mode=2</span><br><span class="line">bind-address=0.0.0.0</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># add follows</span></span><br><span class="line"><span class="hljs-comment"># cluster name</span></span><br><span class="line">wsrep_cluster_name=<span class="hljs-string">"Visionet_MariaDB_Cluster"</span></span><br><span class="line"><span class="hljs-comment"># replication provider</span></span><br><span class="line">wsrep_sst_method=rsync</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 以下内容注意，注意应设置为当前服务器信息</span></span><br><span class="line">wsrep_node_address=<span class="hljs-string">"172.16.102.165"</span></span><br><span class="line">wsrep_node_name=<span class="hljs-string">"node5"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 启动数据库</span></span><br><span class="line">[root@node5 ~]<span class="hljs-comment"># /etc/rc.d/init.d/mysql start</span></span><br><span class="line">Starting MySQL...SST in progress, setting sleep higher. SUCCESS!</span><br></pre></td></tr></table></figure>
+<h5 id="node6"><a href="#node6" class="headerlink" title="node6"></a>node6</h5><figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@node6 ~]<span class="hljs-comment"># vi /etc/my.cnf.d/server.cnf</span></span><br><span class="line"><span class="hljs-comment"># 19 行，取消下面的注释，并修改为需求</span></span><br><span class="line">[galera]</span><br><span class="line">wsrep_provider=/usr/lib64/galera/libgalera_smm.so</span><br><span class="line"><span class="hljs-comment"># 指定节点地址，这里也可以使用ip,如果没做安装1，可以直接把cluster的ip写在这里。</span></span><br><span class="line">wsrep_cluster_address=<span class="hljs-string">"gcomm://node4,node5,node6"</span></span><br><span class="line">binlog_format=row</span><br><span class="line">default_storage_engine=InnoDB</span><br><span class="line">innodb_autoinc_lock_mode=2</span><br><span class="line">bind-address=0.0.0.0</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># add follows</span></span><br><span class="line"><span class="hljs-comment"># cluster name</span></span><br><span class="line">wsrep_cluster_name=<span class="hljs-string">"Visionet_MariaDB_Cluster"</span></span><br><span class="line"><span class="hljs-comment"># replication provider</span></span><br><span class="line">wsrep_sst_method=rsync</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 以下内容注意，注意应设置为当前服务器信息</span></span><br><span class="line">wsrep_node_address=<span class="hljs-string">"172.16.102.164"</span></span><br><span class="line">wsrep_node_name=<span class="hljs-string">"node6"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 启动数据库</span></span><br><span class="line">[root@node6 ~]<span class="hljs-comment"># /etc/rc.d/init.d/mysql start</span></span><br><span class="line">Starting MySQL...SST in progress, setting sleep higher. SUCCESS!</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：只需要初始化第一个节点服务器的数据库，其他数据的配置文件会自动同步，所以你给node4设置的root可以在node5和node6直接使用，当然这是安装正确的前提。</p>
+</blockquote>
+<h4 id="登陆各个节点数据库检查配置是否成功"><a href="#登陆各个节点数据库检查配置是否成功" class="headerlink" title="登陆各个节点数据库检查配置是否成功"></a>登陆各个节点数据库检查配置是否成功</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server.cnf的配置如果没有问题，那么wsrep_local_state_comment的状态应该是Synced。<br><figure class="highlight asciidoc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@node4 ~]# mysql -u root -p</span><br><span class="line">Enter password:</span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 15</span><br><span class="line">Server version: 10.0.26-MariaDB-wsrep MariaDB Server, wsrep<span class="hljs-emphasis">_25.13.raf7f02e</span></span><br><span class="line"><span class="hljs-emphasis"></span></span><br><span class="line"><span class="hljs-emphasis">Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.</span></span><br><span class="line"><span class="hljs-emphasis"></span></span><br><span class="line"><span class="hljs-emphasis">Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.</span></span><br><span class="line"><span class="hljs-emphasis"></span></span><br><span class="line"><span class="hljs-emphasis">MariaDB [(none)]&gt; show status like 'wsrep_</span>local<span class="hljs-emphasis">_state_</span>comment';</span><br><span class="line"><span class="hljs-code">+---------------------------+</span>--------+</span><br><span class="line">| Variable<span class="hljs-emphasis">_name             | Value  |</span></span><br><span class="line"><span class="hljs-emphasis">+---------------------------+--------+</span></span><br><span class="line"><span class="hljs-emphasis">| wsrep_</span>local<span class="hljs-emphasis">_state_</span>comment | Synced |</span><br><span class="line"><span class="hljs-code">+---------------------------+</span>--------+</span><br><span class="line">1 row in set (0.01 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MariaDB Galera没有主节点和备份节点，配置成功之后，可以在任何一个node节点上操作会自动同步到其他节点，任何一个节点宕机不会影响其他节点的数据和稳定性，配置HAProxy设置VIP的方式来实现负载均衡，提高服务的高可用性，另外，当宕机节点上线之后，事务会自动同步不丢失。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2016-08-02T08:04:48.000Z">2016-08-02</time>
                 
                 <div class="level-item">
@@ -260,66 +340,15 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-07-31T16:12:29.000Z">2016-08-01</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Ghost/">Ghost</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a minute read (About 166 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/08/01/insert-music/">在网页中插入歌曲</a>
-            
-        </h1>
-        <div class="content">
-            <p>纠正下，在下面博文中的错误，关于单曲不能生成外链的问题，现已经纠正。</p>
-<p>我试过百度音乐、QQ音乐、虾米音乐和网易云音乐，目前只有网易云音乐有此功能，先在网易云音乐选择歌曲即可：</p>
-<h4 id="分享单曲"><a href="#分享单曲" class="headerlink" title="分享单曲"></a>分享单曲</h4><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=101906&auto=1&height=66"></iframe>
-
-
-<h4 id="分享专辑，歌单"><a href="#分享专辑，歌单" class="headerlink" title="分享专辑，歌单"></a>分享专辑，歌单</h4><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="450" src="//music.163.com/outchain/player?type=0&id=26096079&auto=1&height=430"></iframe>
-
-<p><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>选定歌单之后，在歌单页面有个生成外链播放器的按钮</strong></p>
-<div align="center"><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/07/1-6UcK4gXBrACw.jpg"><br></div><br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>然后，根据页面提示信息，生成你要的html代码，并嵌入到你的页面之中。</strong><br><div align="center"><br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016/07/2-6UcK4gXBrACw.jpg"><br></div>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/page/16/">Previous</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/16/">前</a>
         </div>
         <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/page/18/">Next</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/18/">次</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
             
@@ -376,17 +405,17 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        投稿
                     </p>
                     <p class="title has-text-weight-normal">
-                        92
+                        93
                     </p>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        カテゴリ
                     </p>
                     <p class="title has-text-weight-normal">
                         24
@@ -396,7 +425,7 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        タグ
                     </p>
                     <p class="title has-text-weight-normal">
                         37
@@ -406,7 +435,7 @@ var _hmt = _hmt || [];
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/SAMZONG" target="_blank">
-                Follow</a>
+                フォローする</a>
         </div>
         
         
@@ -455,7 +484,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Links
+            リンク
         </h3>
         <ul class="menu-list">
         
@@ -493,7 +522,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                カテゴリ
             </h3>
             <ul class="menu-list">
             <li>
@@ -582,7 +611,7 @@ var _hmt = _hmt || [];
                 <span class="level-item">Mac</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/MongoDB/">
@@ -698,9 +727,9 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            タグクラウド
         </h3>
-        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
+        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 18.33px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
     </div>
 </div>
 
@@ -712,8 +741,27 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            最近の記事
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-23T16:32:13.000Z">2020-11-24</time></div>
+                    <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="has-link-black-ter is-size-6">Check You Favorites App is readyOnapplesilicon</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mac/">Mac</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -791,25 +839,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
-                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -818,9 +847,20 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            アーカイブ
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/07/">
@@ -1073,7 +1113,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                タグ
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1199,7 +1239,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Mac/">
                         <span class="tag">Mac</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1356,8 +1396,27 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            最近の記事
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-23T16:32:13.000Z">2020-11-24</time></div>
+                    <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="has-link-black-ter is-size-6">Check You Favorites App is readyOnapplesilicon</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mac/">Mac</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1435,25 +1494,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
-                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1462,9 +1502,20 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            アーカイブ
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/07/">
@@ -1717,7 +1768,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                タグ
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1843,7 +1894,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Mac/">
                         <span class="tag">Mac</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2155,10 +2206,10 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
+                POSTS: '投稿',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
+                CATEGORIES: 'カテゴリ',
+                TAGS: 'タグ',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',

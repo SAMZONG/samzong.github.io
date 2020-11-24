@@ -165,6 +165,70 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-11-17T06:03:23.000Z">2017-11-17</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/iOS/">iOS</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 minutes read (About 1086 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/11/17/iphone-ipad-install-oldversion-apps/">iPhone/iPad 不越狱安装旧版程序</a>
+            
+        </h1>
+        <div class="content">
+            <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>软件版本迭代是会带来新的功能和 BUG 修复，为给用户带来更好的使用体验，我也是乐于尝鲜的性格，所以在软件推出发布新版本时都会及时更新，但用户体验其实是一个玄学的话题，有时并不能给你带来更好的体验，在 iOS 上，由于苹果商店严格的管理机制导致我们在升级后，想要回退到之前版本变得十分困难。</p>
+<p>虾米音乐升级到 6.0 版本之后，改变很大，作为一位老虾米非常不适应，所以就瞄准了 6.0 之前的最后一个版本：5.9.4。</p>
+<p>解决办法是在 iTunes 下载程序时，使用抓包工具对与苹果应用商店服务器之间的请求进行分析，通过修改下载请求中程序版本识别序列号来下载旧版本。</p>
+<h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><p>网上较多的解决办法是使用 Fiddler+iTunes 是在 Windows 平台，因为我只有 Mac ，所以用Charles 代替 Fiddler，这里需要注意的是iTunes的版本，在笔者写这篇教程的前一天 iTunes 更新到12.7，在 12.7 中有一个很大的变化移除了 App store ，所以请使用低于 12.7 版本的 iTunes 。</p>
+<h5 id="Charles-安装"><a href="#Charles-安装" class="headerlink" title="Charles 安装"></a>Charles 安装</h5><p>对于 Charles 版本并没有特殊要求，我这边是通过brew安装，你也可以到 Charles 官网下载安装， Charles 是需要付费的软件，但是有30天免费使用期限，如果你有长期使用打算，建议购买正版授权。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/x4dkc.jpg" alt></p>
+<h5 id="Charles-SSL证书导入系统"><a href="#Charles-SSL证书导入系统" class="headerlink" title="Charles SSL证书导入系统"></a>Charles SSL证书导入系统</h5><p>从 Charles 中导出证书文件</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/v815e.jpg" alt></p>
+<p>在 KeyChain Access 中导入证书</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/883p7.jpg" alt></p>
+<p>选中导入的证书，然后右键选择 ‘Get Info’ ，设置证书信任状态</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/xoalz.jpg" alt></p>
+<h4 id="“虾米音乐”-的三次下载"><a href="#“虾米音乐”-的三次下载" class="headerlink" title="“虾米音乐” 的三次下载"></a>“虾米音乐” 的三次下载</h4><h5 id="第一次下载"><a href="#第一次下载" class="headerlink" title="第一次下载"></a>第一次下载</h5><p>打开 Charles ，开启监听，然后使用搜索虾米音乐，点击 Downloads 按钮。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/6dt52.jpg" alt></p>
+<p>点击下载后，在 Charles 会出现监听到信息，找到一条 ‘p[xx]-buy.itunes.apple.com’ ，其中 xx 是一个随机的数字，选中它，然后右键菜单栏中勾选 ‘Enable SSL Proxying’ 和 ‘Breakpoints’ 。设置完成后，在 iTunes 下载中，清理下载记录。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/ea85i.jpg" alt></p>
+<h5 id="第二次下载"><a href="#第二次下载" class="headerlink" title="第二次下载"></a>第二次下载</h5><p>重新搜索虾米音乐，并点击下载按钮，这时 Charles 会弹出窗口，然后在弹出窗口的右下三个按钮中选择 ‘Execute’ ，这一步是我们请求服务器，紧接着出现的就是服务器给我们的响应，然后选择 ‘Edit Response’ - ‘XML Text’ ，然后向下滚动找到下图中的部分，这里是所有虾米音乐的版本的序列数字，但是这里没有办法直接看到版本号，越大的数字版本号越新。这里可以通过在手机 App store 中查看软件的版本记录，找到大概要回退多少个版本，然后数字从大到小找个半个序列数字记录下来，然后在下面三个按钮中选择 ‘Abort’ ，这时 iTunes 会弹出一个报错窗口，关掉即可。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/27nit.jpg" alt></p>
+<h5 id="第三次下载"><a href="#第三次下载" class="headerlink" title="第三次下载"></a>第三次下载</h5><p>再次重新搜索虾米音乐，并点击下载，在这次Charles弹出窗口中我们需要直接修改 ‘Edit Requset’ - ‘XML Text’ ，将如下图中的 ‘appExtVrsid’ 对应的值修改为，我们上一步中记录的序列数字，然后就一直在每次弹出选择时，选择 ‘Execute’ ，直到下载完成记录。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/h7zzu.jpg" alt></p>
+<h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><p>下载完成后，你的 iTunes App Library 中已经有了一个虾米音乐，连接上你的手机，将其安装到手机上即可，下图是我安装后的版本截图。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/ppy2m.jpg" alt></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time>
                 
                 <div class="level-item">
@@ -327,117 +391,15 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-10-19T08:47:44.000Z">2017-10-19</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Git/">Git</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    16 minutes read (About 2358 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/10/19/tortoisegit-for-windows/">HowTo-use-TortoiseGit-for-Windows</a>
-            
-        </h1>
-        <div class="content">
-            <p>Git是目前最先进的版本控制系统，越来越多的业务场景都在使用Git，风靡全球的Github更是让Git版本控制系统名声大震，但是GitHub旨在建立一个开源的生态环境，所以不适合企业内部的管理系统，在之前的文章中，我也讲到了如何搭建GitLab，可以在企业内部自建一套功能完善的Git版本控制系统。</p>
-<p>GitLab是一个非常成熟的服务端应用，但是作为一名开发人员，我们在使用GitLab与其他人员协同版本时，需要有一个工作对我们的每次修改更新以及推送，这也是版本控制工具的真正精髓；在不同的平台有着很多丰富的应用软件，所以挑选一款适合自己的Git GUI工具很重要。</p>
-<p>目前在众多Git Client之中做的比较好的是SourceTree，并且同时支持Mac和Windows双平台，但是有一个问题，当我们在初次安装时需要验证Atlassian账号，但是Atlassian的注册页面用了requirejs，而且是用了Google的CDN服务，所以必须翻墙，这对很多中国用户的使用造成了不变；所以，今天我在这里推荐一个在Windows平台下同样可以作为Git图形化客户端工具的：<a href="https://tortoisegit.org/" target="_blank" rel="noopener">TortoiseGit</a></p>
-<p>TortoiseGit 是 TortoiseSVN 的 Git 版本，TortoiseGit用于迁移 TortoiseSVN 到 TortoiseGit，解决了在Windows平台之上没有合适Git图形化客户端的问题，TortoiseGit不仅免费，而且同样支持丰富的语言包，但是需要独立下载语言包安装，默认只有英文，注意语言包与程序版本一定要匹配。</p>
-<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p>TortoiseGit的官方下载地址是这里：<a href="https://tortoisegit.org/download/" target="_blank" rel="noopener">https://tortoisegit.org/download/</a> ，下载时请注意与你系统的兼容性。</p>
-<blockquote>
-<p>注意TortoiseGit 1.8.16之后的版本不在支持Windows XP 和 Server 2003</p>
-</blockquote>
-<p>因为TortoiseGit官网不在国内，所以在访问下载时速度非常的慢，我将目前的稳定版本2.4上传到我的百度云盘，但是以后我可能不能及时更新，所以如果你对版本要求不是很高，可以点击下面链接下载。</p>
-<p>链接: <a href="https://pan.baidu.com/s/1eScNjA6" target="_blank" rel="noopener">https://pan.baidu.com/s/1eScNjA6</a> 密码: 31hu</p>
-<blockquote>
-<p>如链接失效，您可以通过本页面右下角展开通过邮箱，与我取得联系。</p>
-</blockquote>
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><h5 id="Git-for-Windows"><a href="#Git-for-Windows" class="headerlink" title="Git for Windows"></a>Git for Windows</h5><p>首先，我们需要安装Git在你的电脑上，这保证你的TortoiseGit运行时所需要的依赖环境。</p>
-<p>下载地址：<a href="https://git-for-windows.github.io/" target="_blank" rel="noopener">https://git-for-windows.github.io/</a></p>
-<p>同样，因为某些网络的原因，导致我们在下载时也会很慢，所以我也将目前最新2.13版本上传到了我的百度云盘：</p>
-<p>链接: <a href="https://pan.baidu.com/s/1c12ZvRq" target="_blank" rel="noopener">https://pan.baidu.com/s/1c12ZvRq</a> 密码: 43yt</p>
-<p>安装过程，这里不在展示，通常情况下，你只需要一路点击Next即可，但是如果你想要修改一些设置，例如默认的安装位置，那么你需要注意下，在TortoiseGit初次启动时，你需要手动设置Git.exe的位置。</p>
-<h5 id="TortoiseGit"><a href="#TortoiseGit" class="headerlink" title="TortoiseGit"></a>TortoiseGit</h5><p>我的测试系统是Windows 7 旗舰版 64位，并且支持TortoiseGit最新的版本。</p>
-<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/q39b4.jpg" alt></p>
-<p>请依次安装上图中两个软件，注意LanguagePack应该在主程序之后安装，同样，你也只需要一路点击Next即可。</p>
-<p>在你安装完成之后，在该目录的空白区域，单击鼠标右键，你应该会看到新增了TortoiseGit的选项，我们选择”TortoiseGit”>“Settings”来初始化我们设置。</p>
-<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/educ5.jpg" alt></p>
-<h5 id="修改程序语言为中文"><a href="#修改程序语言为中文" class="headerlink" title="修改程序语言为中文"></a>修改程序语言为中文</h5><p>如果英文你的使用不会有影响，你可以略过这一步骤，同样你也不需要下载上面的LanguagePack包。</p>
-<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/afmvd.jpg" alt></p>
-<p>好了，按照如上图中操作，你应该已经修改了程序语言为中文，再次到空白区域单击测试就可以看到了。</p>
-<h4 id="使用TortoiseGit克隆你的项目"><a href="#使用TortoiseGit克隆你的项目" class="headerlink" title="使用TortoiseGit克隆你的项目"></a>使用TortoiseGit克隆你的项目</h4><p>在我们安装了好TortoiseGit和Git的基本基础环境之后，我们需要使用TortoiseGit克隆项目，这里我们是在GitHub创建了一个测试项目，你可以直接使用你的项目地址即可。</p>
-<h5 id="测试项目"><a href="#测试项目" class="headerlink" title="测试项目"></a>测试项目</h5><p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/ot84j.jpg" alt></p>
-<p>GitHub和GitLab都提供了通过使用HTTPS和SSH的方式，这两种方式有些不同，我会在下面分开讲述如何使用。</p>
-<h5 id="SSH验证方式"><a href="#SSH验证方式" class="headerlink" title="SSH验证方式"></a>SSH验证方式</h5><p>如果采用SSH验证方式，那么你需要生成一对公钥和私钥，并且将公钥上传到你的GitLab或GitHub上，然后在克隆你的项目时，使用匹配的私钥即可。</p>
-<p>那在Windows如何上生成私钥呢？其实我们在安装TortoiseGit时已经默认安装PuTTYgen工具，我们可以利用它来创建秘钥。</p>
-<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/dh1fb.jpg" alt></p>
-<p>打开PuTTYgen，点击generate即可创建密钥，PuTTYgen其实是按照鼠标运行的轨迹来计算的，所以在点击后，我们不停的使用鼠标移动，等待进度条完成就可以了。</p>
-<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/2uyf3.jpg" alt></p>
-<p>当创建完成之后，你可以看到以下以下内容，注意不要关闭，我们要点击<code>Save public key</code>和<code>Save private key</code>，并将上public key传到你的GitHub或GitLab账户之中。</p>
-<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/stgw9.jpg" alt></p>
-<blockquote>
-<p>注意，我在图中隐去了其他SSH keys信息，我建议你在做类似分享时也注意隐去你的重要信息</p>
-</blockquote>
-<p>好了，接下来，我们就要开克隆我们的项目了，在你想要存放项目的目录内，鼠标右键选择”Git克隆“，然后输入你的项目URL，并且加载我们刚刚生产私钥文件。</p>
-<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/y7dsh.jpg" alt></p>
-<p>注意，在你确认都没问题的情况下，点击确认，然后你就会看到如下页面，如果这个过程中出现问题，请注意检查项目URL和私钥文件是否正确。</p>
-<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/bltrs.jpg" alt></p>
-<p>到这里，我们SSH验证仓库的方式就全好，接下来我们就可以使用开始进行我们的工作，但在首次提交我们的项目时，需要设置用户名和密码，这是为了方便验证我们的身份。</p>
-<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/07sxd.jpg" alt></p>
-<p>点击”是“，在弹出的窗口中设定用户名和邮箱，保存即可。</p>
-<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/wid9v.jpg" alt></p>
-<h5 id="HTTPS-or-HTTP"><a href="#HTTPS-or-HTTP" class="headerlink" title="HTTPS or HTTP"></a>HTTPS or HTTP</h5><p>在使用GitLab为公司内部仓库时，可以不开通HTTPS验证，HTTP也不会影响我们的验证方式，但是从安全的角度上来说，强烈建议启用HTTPS，HTTPS加密传输可以给我们的代码和用户信息的安全提供更好的保护。</p>
-<p>如果使用HTTPS or HTTP的方式，我们不需要增加任何密钥文件或怎样，只需要使用我们现有的GitHub或GitLab账号即可；在你想要存放项目的目录内，鼠标右键选择”Git克隆“，在弹出的窗口中，注意项目URL要是用HTTPS，并且去掉勾选加载密钥选项。</p>
-<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/givvr.jpg" alt></p>
-<p><strong>如果你的项目在GitLab上</strong>，并且这个项目是一个私有项目，那么这里就会要求你输入你的GitLab用户名和密码，输入正确的用户和密码就可以成功克隆了。</p>
-<p>但是，由于我的测试项目在GitHub上，GitHub上的项目默认都是公开项目，所以在这一步骤不会询问我的用户名和密码，只有在我需要将本地更新推送到GitHub时才会验证；所以接下来我在项目目录下新增文件newfile2.txt，</p>
-<blockquote>
-<p>注意，Git不同SVN，Git的提交不会将更新推送到远端服务器，所以我们在提交成功之后，再去手动推送</p>
-</blockquote>
-<p>右键选择Git提交，会弹出提交页面，我们需要这里，输入提交说明信息，和需要提交的文件。</p>
-<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/ata4r.jpg" alt></p>
-<p>点击”提交之后“，我们会看成功提交的窗口，然后在窗口选择点击推送；</p>
-<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/q4cq7.jpg" alt></p>
-<p>当我们点击推送之后，会要求输入对应的GitHub用户名和密码：</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/">Previous</a>
+            <a class="is-flex-grow has-text-black-ter" href="/">前</a>
         </div>
         <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/page/3/">Next</a>
+            <a class="is-flex-grow has-text-black-ter" href="/page/3/">次</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
             
@@ -490,17 +452,17 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        投稿
                     </p>
                     <p class="title has-text-weight-normal">
-                        92
+                        93
                     </p>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        カテゴリ
                     </p>
                     <p class="title has-text-weight-normal">
                         24
@@ -510,7 +472,7 @@ var _hmt = _hmt || [];
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        タグ
                     </p>
                     <p class="title has-text-weight-normal">
                         37
@@ -520,7 +482,7 @@ var _hmt = _hmt || [];
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/SAMZONG" target="_blank">
-                Follow</a>
+                フォローする</a>
         </div>
         
         
@@ -569,7 +531,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Links
+            リンク
         </h3>
         <ul class="menu-list">
         
@@ -607,7 +569,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                カテゴリ
             </h3>
             <ul class="menu-list">
             <li>
@@ -696,7 +658,7 @@ var _hmt = _hmt || [];
                 <span class="level-item">Mac</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/MongoDB/">
@@ -812,9 +774,9 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            タグクラウド
         </h3>
-        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
+        <a href="/tags/CentOS-6-Linux-CentOS/" style="font-size: 10px;"> - CentOS 6 - Linux - CentOS</a> <a href="/tags/OpenStack/" style="font-size: 10px;"> - OpenStack</a> <a href="/tags/AliCloud/" style="font-size: 10px;">AliCloud</a> <a href="/tags/Azure/" style="font-size: 15px;">Azure</a> <a href="/tags/CentOS/" style="font-size: 18.33px;">CentOS</a> <a href="/tags/CloudStack/" style="font-size: 10px;">CloudStack</a> <a href="/tags/DenyHosts/" style="font-size: 10px;">DenyHosts</a> <a href="/tags/Docker/" style="font-size: 13.33px;">Docker</a> <a href="/tags/Fabric/" style="font-size: 10px;">Fabric</a> <a href="/tags/Ghost/" style="font-size: 13.33px;">Ghost</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/KVM/" style="font-size: 10px;">KVM</a> <a href="/tags/LNMP/" style="font-size: 10px;">LNMP</a> <a href="/tags/LVM/" style="font-size: 10px;">LVM</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 18.33px;">Mac</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NextCloud/" style="font-size: 10px;">NextCloud</a> <a href="/tags/Openfire/" style="font-size: 10px;">Openfire</a> <a href="/tags/Piwik/" style="font-size: 11.67px;">Piwik</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Python3/" style="font-size: 10px;">Python3</a> <a href="/tags/Redmine/" style="font-size: 11.67px;">Redmine</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/Shadowsocks/" style="font-size: 11.67px;">Shadowsocks</a> <a href="/tags/Shell-Scripts/" style="font-size: 11.67px;">Shell-Scripts</a> <a href="/tags/Tomcat/" style="font-size: 16.67px;">Tomcat</a> <a href="/tags/Yum/" style="font-size: 13.33px;">Yum</a> <a href="/tags/Zabbix/" style="font-size: 11.67px;">Zabbix</a> <a href="/tags/Zoomdata/" style="font-size: 10px;">Zoomdata</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/魔方/" style="font-size: 10px;">魔方</a>
     </div>
 </div>
 
@@ -826,8 +788,27 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            最近の記事
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-23T16:32:13.000Z">2020-11-24</time></div>
+                    <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="has-link-black-ter is-size-6">Check You Favorites App is readyOnapplesilicon</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mac/">Mac</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -905,25 +886,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
-                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -932,9 +894,20 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            アーカイブ
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/07/">
@@ -1187,7 +1160,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                タグ
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1313,7 +1286,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Mac/">
                         <span class="tag">Mac</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1470,8 +1443,27 @@ var _hmt = _hmt || [];
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            最近の記事
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-23T16:32:13.000Z">2020-11-24</time></div>
+                    <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="has-link-black-ter is-size-6">Check You Favorites App is readyOnapplesilicon</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mac/">Mac</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1549,25 +1541,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/15/howto-user-ssr-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="HowTo Use SSR Service on Mac">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-15T09:48:31.000Z">2017-11-15</time></div>
-                    <a href="/2017/11/15/howto-user-ssr-on-mac/" class="has-link-black-ter is-size-6">HowTo Use SSR Service on Mac</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1576,9 +1549,20 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            アーカイブ
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/07/">
@@ -1831,7 +1815,7 @@ var _hmt = _hmt || [];
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                タグ
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1957,7 +1941,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Mac/">
                         <span class="tag">Mac</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2269,10 +2253,10 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
+                POSTS: '投稿',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
+                CATEGORIES: 'カテゴリ',
+                TAGS: 'タグ',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',
