@@ -165,6 +165,95 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-03-26T21:55:28.000Z">2016-03-27</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/MongoDB/">MongoDB</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    8 minutes read (About 1163 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/03/27/mongodb01/">HowTo Install MongoDB  on CentOS 6.x</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="1-Overiew"><a href="#1-Overiew" class="headerlink" title="1. Overiew"></a>1. Overiew</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在CentOS Linux 中安装软件的方式有很多种，我会在后续的文章中整理给大家，我比较喜欢的方式是尽量用Yum 安装，不用自己动手去解决软件包之间的依赖关系，“能Yum 就Yum ，不能Yum 想着法Yum 。”  – 这是我遵循的真理；今天给大家整理的就是如何使用Yum 来安装Mongodb ，在本文中会给出在32位与64位系统的区别，以及Mongodb 的版本，本文适用于CentOS 6/7 的Linux发行版本，所以同样适用于红帽体系的OS，如 RedHat Enterprise Linux 6/7 、 Fedora 。</p>
+<h2 id="2-Packages"><a href="#2-Packages" class="headerlink" title="2. Packages"></a>2. Packages</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业内常用的Mongodb 的Yum 仓库有Mongodb-org 与 Mongodb-10gen ,这里提供的Mongodb-org 的repository 仓库，支持以下软件包列表：</p>
+<ul>
+<li><p>2.1 mongodb-org</p>
+<p>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个是源数据包，主要是用来组织自动安装下面的4个软件包.</p>
+</li>
+<li><p>2.2 mongodb-org-sever</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这个Mongodb Server端，包含了相关的配置和初始化脚本。</p>
+</li>
+<li><p>2.3 mongodb-org-mongos</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这个是Mongodb的守护进程。</p>
+</li>
+<li><p>2.4 mongodb-org-shell</p>
+<p>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个是mongodb 的shell环境。</p>
+</li>
+<li><p>2.5 mongodb-org-tools</p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这个包里包含了下列mongodb 的工具：mongoimport bsondump, mongodump, mongoexport, mongofiles, mongooplog, mongoperf, mongorestore, mongostat, and mongotop 。</p>
+</li>
+</ul>
+<h2 id="3-添加相对应版本的Mongodb-repo-file"><a href="#3-添加相对应版本的Mongodb-repo-file" class="headerlink" title="3. 添加相对应版本的Mongodb repo file."></a>3. 添加相对应版本的Mongodb repo file.</h2><h3 id="3-1-Mongodb-2-6-OS-x64"><a href="#3-1-Mongodb-2-6-OS-x64" class="headerlink" title="3.1 Mongodb 2.6 + OS x64"></a>3.1 Mongodb 2.6 + OS x64</h3><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-section">[root@vm02 ~]</span><span class="hljs-comment"># vim /etc/yum.repos.d/mongodb-org-2.6.repo</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[mongodb-org-2.6]</span></span><br><span class="line"><span class="hljs-attr">name</span>=MongoDB <span class="hljs-number">2.6</span> Repository</span><br><span class="line"><span class="hljs-attr">baseurl</span>=http://downloads-distro.mongodb.org/repo/redhat/os/x<span class="hljs-number">86_64</span>/</span><br><span class="line"><span class="hljs-attr">gpgcheck</span>=<span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-attr">enabled</span>=<span class="hljs-number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-2-Mongodb-2-6-OS-i686"><a href="#3-2-Mongodb-2-6-OS-i686" class="headerlink" title="3.2 Mongodb 2.6 + OS i686"></a>3.2 Mongodb 2.6 + OS i686</h3><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-section">[root@vm02 ~]</span><span class="hljs-comment"># vim /etc/yum.repos.d/mongodb-org-2.6.repo</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[mongodb-org-2.6]</span></span><br><span class="line"><span class="hljs-attr">name</span>=MongoDB <span class="hljs-number">2.6</span> Repository</span><br><span class="line"><span class="hljs-attr">baseurl</span>=http://downloads-distro.mongodb.org/repo/redhat/os/i686/</span><br><span class="line"><span class="hljs-attr">gpgcheck</span>=<span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-attr">enabled</span>=<span class="hljs-number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-3-Mongodb-3-2-OS-x64"><a href="#3-3-Mongodb-3-2-OS-x64" class="headerlink" title="3.3 Mongodb 3.2  + OS x64"></a>3.3 Mongodb 3.2  + OS x64</h3><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-section">[root@vm02 ~]</span><span class="hljs-comment"># vim /etc/yum.repos.d/mongodb-org-3.2.repo</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[mongodb-org-3.2]</span></span><br><span class="line"><span class="hljs-attr">name</span>=MongoDB Repository</span><br><span class="line"><span class="hljs-attr">baseurl</span>=https://repo.mongodb.org/yum/redhat/<span class="hljs-variable">$releasever</span>/mongodb-org/<span class="hljs-number">3.2</span>/x<span class="hljs-number">86_64</span>/</span><br><span class="line"><span class="hljs-attr">gpgcheck</span>=<span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-attr">enabled</span>=<span class="hljs-number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-4-Mongodb-3-2-OS-i686"><a href="#3-4-Mongodb-3-2-OS-i686" class="headerlink" title="3.4 Mongodb 3.2  + OS i686"></a>3.4 Mongodb 3.2  + OS i686</h3><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-section">[root@vm02 ~]</span><span class="hljs-comment"># vim /etc/yum.repos.d/mongodb-org-3.2.repo</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[mongodb-org-3.2]</span></span><br><span class="line"><span class="hljs-attr">name</span>=MongoDB Repository</span><br><span class="line"><span class="hljs-attr">baseurl</span>=https://repo.mongodb.org/yum/redhat/<span class="hljs-variable">$releasever</span>/mongodb-org/<span class="hljs-number">3.2</span>/i686/</span><br><span class="line"><span class="hljs-attr">gpgcheck</span>=<span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-attr">enabled</span>=<span class="hljs-number">1</span></span><br></pre></td></tr></table></figure>
+<h2 id="4-Install-MongoDB"><a href="#4-Install-MongoDB" class="headerlink" title="4. Install MongoDB"></a>4. Install MongoDB</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装最新版本的 Mongodb ，安装都方式一样，请注意安装相对应的源保证正确安装Mongodb，请使用如下命令：</p>
+<figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="hljs-symbol">@vm02</span> ~]<span class="hljs-meta"># yum clean all</span></span><br><span class="line">[root<span class="hljs-symbol">@vm02</span> ~]<span class="hljs-meta"># yum makecache</span></span><br><span class="line">[root<span class="hljs-symbol">@vm02</span> ~]<span class="hljs-meta"># yum install mongodb-org</span></span><br></pre></td></tr></table></figure>
+<h2 id="5-Run-MongoDB"><a href="#5-Run-MongoDB" class="headerlink" title="5. Run MongoDB"></a>5. Run MongoDB</h2><h3 id="5-1-配置SELinux"><a href="#5-1-配置SELinux" class="headerlink" title="5.1 配置SELinux"></a>5.1 配置SELinux</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELinux 默认为开启状态，会导致我们的Mongodb 无法使用，解决方式有两种：</p>
+<ol>
+<li><a href="http://blog.ultraera.org/centos6-x-base-settings/" target="_blank" rel="noopener">关闭SELinux</a></li>
+<li>添加Mongodb 通过SELinux 设定，指令如下：</li>
+</ol>
+<figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">semanage<span class="hljs-built_in"> port </span>-a -t mongod_port_t -p tcp 27017</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Tips: 在CentOS 7 ，SELinux 会限定你去修改Mongodb的data目录及lib目录。</p>
+</blockquote>
+<h3 id="5-2-Start-MongoDB"><a href="#5-2-Start-MongoDB" class="headerlink" title="5.2 Start MongoDB"></a>5.2 Start MongoDB</h3><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@vm02 ~]# sudo<span class="hljs-built_in"> service </span>mongod start</span><br><span class="line">Starting mongod:                                           [  OK  ]</span><br><span class="line">[root@vm02 ~]#</span><br></pre></td></tr></table></figure>
+<h3 id="5-3-检查MongoDB日志文件验证服务正常启动，-var-log-mongodb-mongodb-log"><a href="#5-3-检查MongoDB日志文件验证服务正常启动，-var-log-mongodb-mongodb-log" class="headerlink" title="5.3 检查MongoDB日志文件验证服务正常启动， /var/log/mongodb/mongodb.log"></a>5.3 检查MongoDB日志文件验证服务正常启动， /var/log/mongodb/mongodb.log</h3><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@vm02 ~]# cat /var/log/mongodb/mongod.log  # 看到如下内容表示mongodb启动成功了。</span><br><span class="line">2016-03-24T04:09:28.582+0800 I<span class="hljs-built_in"> NETWORK </span> [initandlisten] waiting <span class="hljs-keyword">for</span> connections on<span class="hljs-built_in"> port </span>27017</span><br></pre></td></tr></table></figure>
+<h3 id="5-4-设置MongoDB-开机自启动"><a href="#5-4-设置MongoDB-开机自启动" class="headerlink" title="5.4 设置MongoDB 开机自启动"></a>5.4 设置MongoDB 开机自启动</h3><figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="hljs-symbol">@vm02</span> ~]<span class="hljs-meta"># chkconfig mongod on</span></span><br></pre></td></tr></table></figure>
+<h3 id="5-5-设置MongoDB-允许其他服务器访问"><a href="#5-5-设置MongoDB-允许其他服务器访问" class="headerlink" title="5.5 设置MongoDB 允许其他服务器访问"></a>5.5 设置MongoDB 允许其他服务器访问</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;默认情况下，mongodb 只监听 127.0.0.1 ，但是实际生产环境中可能需要其他服务器访问，所以这里添加监听其他网络端口，修改mongodb的配置文件：/etc/mongodb.conf</p>
+<figure class="highlight cs hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[<span class="hljs-meta">root@vm02 ~</span>]<span class="hljs-meta"># vim /etc/mongodb.conf</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 29 增加一行：</span></span><br><span class="line">    bindIp: <span class="hljs-number">172.16</span><span class="hljs-number">.102</span><span class="hljs-number">.129</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># 注意不要把1270.0.1 去除，这会导致本地无法使用MongoDB .</span></span><br></pre></td></tr></table></figure>
+<h2 id="6-Use-MongoDB"><a href="#6-Use-MongoDB" class="headerlink" title="6. Use MongoDB"></a>6. Use MongoDB</h2><h3 id="6-1-检查mongodb-状态"><a href="#6-1-检查mongodb-状态" class="headerlink" title="6.1 检查mongodb 状态"></a>6.1 检查mongodb 状态</h3><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@vm02 ~]#<span class="hljs-built_in"> service </span>mongod status</span><br><span class="line">mongod (pid 6502) is running<span class="hljs-built_in">..</span>.</span><br><span class="line">[root@vm02 ~]#</span><br></pre></td></tr></table></figure>
+<h3 id="6-2-mongodb-自带检测工具"><a href="#6-2-mongodb-自带检测工具" class="headerlink" title="6.2 mongodb 自带检测工具"></a>6.2 mongodb 自带检测工具</h3><figure class="highlight gherkin hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="hljs-meta">@vm02</span> ~]<span class="hljs-comment"># mongostat</span></span><br><span class="line">insert query update delete getmore command % dirty % used flushes  vsize   res qr|<span class="hljs-string">qw ar</span>|<span class="hljs-string">aw netIn netOut conn                      time</span></span><br><span class="line"><span class="hljs-string">    *0    *0     *0     *0       0     1</span>|<span class="hljs-string">0     0.0    0.0       0 388.0M 68.0M   0</span>|<span class="hljs-string">0   0</span>|<span class="hljs-string">0   79b    18k    1 2016-03-24T04:25:09+08:00</span></span><br><span class="line"><span class="hljs-string">    *0    *0     *0     *0       0     1</span>|<span class="hljs-string">0     0.0    0.0       0 388.0M 68.0M   0</span>|<span class="hljs-string">0   0</span>|<span class="hljs-string">0   79b    18k    1 2016-03-24T04:25:10+08:00</span></span><br><span class="line"><span class="hljs-string">    *0    *0     *0     *0       0     1</span>|<span class="hljs-string">0     0.0    0.0       0 388.0M 68.0M   0</span>|<span class="hljs-string">0   0</span>|<span class="hljs-string">0   79b    18k    1 2016-03-24T04:25:11+08:00</span></span><br></pre></td></tr></table></figure>
+<h3 id="6-3-进入mongodb-命令行模式"><a href="#6-3-进入mongodb-命令行模式" class="headerlink" title="6.3 进入mongodb 命令行模式"></a>6.3 进入mongodb 命令行模式</h3><figure class="highlight subunit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@vm02 ~]# mongo</span><br><span class="line">MongoDB shell version: 3.2.4</span><br><span class="line">connecting to: test</span><br><span class="line">Server has startup warnings:</span><br><span class="line">2016<span class="hljs-string">-03</span><span class="hljs-string">-24</span>T04:09:28.577<span class="hljs-string">+0800</span> I CONTROL  [initandlisten]</span><br><span class="line">2016<span class="hljs-string">-03</span><span class="hljs-string">-24</span>T04:09:28.577<span class="hljs-string">+0800</span> I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/enabled is 'always'.</span><br><span class="line">2016<span class="hljs-string">-03</span><span class="hljs-string">-24</span>T04:09:28.577<span class="hljs-string">+0800</span> I CONTROL  [initandlisten] **        We suggest setting it to 'never'</span><br><span class="line">2016<span class="hljs-string">-03</span><span class="hljs-string">-24</span>T04:09:28.577<span class="hljs-string">+0800</span> I CONTROL  [initandlisten]</span><br><span class="line">2016<span class="hljs-string">-03</span><span class="hljs-string">-24</span>T04:09:28.577<span class="hljs-string">+0800</span> I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/defrag is 'always'.</span><br><span class="line">2016<span class="hljs-string">-03</span><span class="hljs-string">-24</span>T04:09:28.577<span class="hljs-string">+0800</span> I CONTROL  [initandlisten] **        We suggest setting it to 'never'</span><br><span class="line">2016<span class="hljs-string">-03</span><span class="hljs-string">-24</span>T04:09:28.577<span class="hljs-string">+0800</span> I CONTROL  [initandlisten]</span><br><span class="line">2016<span class="hljs-string">-03</span><span class="hljs-string">-24</span>T04:09:28.577<span class="hljs-string">+0800</span> I CONTROL  [initandlisten] ** WARNING: soft rlimits too low. rlimits set to 1024 processes, 64000 files. Number of processes should be at least 32000 : 0.5 times number of files.</span><br><span class="line">2016<span class="hljs-string">-03</span><span class="hljs-string">-24</span>T04:09:28.577<span class="hljs-string">+0800</span> I CONTROL  [initandlisten]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="7-Uninstall-MongoDB"><a href="#7-Uninstall-MongoDB" class="headerlink" title="7. Uninstall MongoDB"></a>7. Uninstall MongoDB</h2><h3 id="7-1-关闭mongodb"><a href="#7-1-关闭mongodb" class="headerlink" title="7.1 关闭mongodb"></a>7.1 关闭mongodb</h3><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@vm02 ~]#<span class="hljs-built_in"> service </span>mongod stop</span><br></pre></td></tr></table></figure>
+<h3 id="7-2-卸载mongodb-软件包"><a href="#7-2-卸载mongodb-软件包" class="headerlink" title="7.2 卸载mongodb 软件包"></a>7.2 卸载mongodb 软件包</h3><figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="hljs-symbol">@vm02</span> ~]<span class="hljs-meta"># yum erase $(rpm -qa | grep mongodb-org)</span></span><br></pre></td></tr></table></figure>
+<h3 id="7-3-删除mongodb文件：数据库文件和日志文件"><a href="#7-3-删除mongodb文件：数据库文件和日志文件" class="headerlink" title="7.3 删除mongodb文件：数据库文件和日志文件"></a>7.3 删除mongodb文件：数据库文件和日志文件</h3><figure class="highlight stata hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@vm02 ~]# <span class="hljs-keyword">rm</span> -rf /<span class="hljs-keyword">var</span>/<span class="hljs-keyword">log</span>/mongodb</span><br><span class="line">[root@vm02 ~]# <span class="hljs-keyword">rm</span> -rf /<span class="hljs-keyword">var</span>/lib/mongo</span><br></pre></td></tr></table></figure>
+<h2 id="8-FAQ"><a href="#8-FAQ" class="headerlink" title="8. FAQ"></a>8. FAQ</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Q : Mongodb 占用99%CPU并且查询速度很慢?</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A : 数据库需要首先建立索引，类似图书的目录文件，否则当你在数据库内查找数据的时候，就类似于在整本字典一页页翻查一个字如此。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2016-03-24T06:55:03.000Z">2016-03-24</time>
                 
                 <div class="level-item">
@@ -292,49 +381,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-03-23T04:05:16.000Z">2016-03-23</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    20 minutes read (About 2957 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/03/23/linux-bi-shi-shi-ti/">Linux 笔试试题</a>
-            
-        </h1>
-        <div class="content">
-            <figure class="highlight stata hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br></pre></td><td class="code"><pre><span class="line">一. 选择题 （1题1分）</span><br><span class="line">1. 当登录Linux时，一个具有唯一进程ID号的<span class="hljs-keyword">shell</span>将被调用，这个ID是什么(   )</span><br><span class="line">A. NID　　B. PID　　C. UID　　<span class="hljs-keyword">D</span>. CID</span><br><span class="line">答案:B</span><br><span class="line">2. 用vi打开一个文件，如何用字母<span class="hljs-string">"new"</span>来代替字母<span class="hljs-string">"old"</span> (   )</span><br><span class="line">A. :s/old/new/<span class="hljs-keyword">g</span>　　　B. :s/old/new　　C. :1,<span class="hljs-variable">$s</span>/old/new/<span class="hljs-keyword">g</span>　　　<span class="hljs-keyword">D</span>. :r/old/new</span><br><span class="line">答案:A</span><br><span class="line">3. 请选择对标准的变量PS2正确的描述(   )</span><br><span class="line">A. 是一个主<span class="hljs-keyword">shell</span>提示符变量　　　　B. 是一个一般的<span class="hljs-keyword">shell</span>提示符变量</span><br><span class="line">C. 是第二主<span class="hljs-keyword">shell</span>提示符变量　　   <span class="hljs-keyword">D</span>. 是一个连续提示符变量</span><br><span class="line">答案:B</span><br><span class="line">4. 哪一个命令能用来查找文件TESTFILE中只包含四个字符的行?(   )</span><br><span class="line">A. grep '^????$' TESTFILE　　　　B. grep '????' TESTFILE</span><br><span class="line">C. grep '^....$' TESTFILE　　　　　<span class="hljs-keyword">D</span>. grep '....' TESTFILE</span><br><span class="line">答案:C</span><br><span class="line">5. 一个bash <span class="hljs-keyword">shell</span>脚本的第一行是什么(   )</span><br><span class="line">A. #!/bin/bash　　B. #/bin/bash　　C. #/bin/csh　　　<span class="hljs-keyword">D</span>. /bin/bash</span><br><span class="line">答案:A</span><br><span class="line">6. 用标准的输出重定向(&gt;)像<span class="hljs-string">"&gt; file01"</span>能使文件file01的数据（   ）</span><br><span class="line">A. 被移动　　B. 被复制　　C. 被打印　　　<span class="hljs-keyword">D</span>. 被覆盖</span><br><span class="line">答案:<span class="hljs-built_in">D</span></span><br><span class="line">7. 下面哪个命令是用来定义<span class="hljs-keyword">shell</span>的全局变量(    )</span><br><span class="line">A. exportfs　　B. alias　　C. exports　　<span class="hljs-keyword">D</span>. export</span><br><span class="line">答案:<span class="hljs-built_in">D</span></span><br><span class="line">8. 如果想加载一个/dev/sdb1的windows95分区到/mnt/win95目录，需要运行哪个命令(   )</span><br><span class="line">A. mount -t hpfs /dev/sdb1 /mnt/win95</span><br><span class="line">B. mount -t hpfs /mnt/win95 /dev/sdb1</span><br><span class="line">C. mount -t vfat /dev/sdb1 /mnt/win95</span><br><span class="line"><span class="hljs-keyword">D</span>. mount -t vfat /mnt/win95 /dev/sdb1</span><br><span class="line">答案:C</span><br><span class="line">9. 哪个文件存放用户密码信息(   )</span><br><span class="line">A. /<span class="hljs-keyword">boot</span>/passwd　　　B. /etc/shadow　　　C. /<span class="hljs-keyword">var</span>/passwd　　<span class="hljs-keyword">D</span>. /dev/passwd</span><br><span class="line">答案:B</span><br><span class="line">10. 假定kernel支持vfat分区，下面哪一个操作是将/dev/sda1，一个window98分区加载到/<span class="hljs-keyword">win</span>目录(   )</span><br><span class="line">A. mount -s <span class="hljs-keyword">win</span> /dev'sda1 /<span class="hljs-keyword">win</span></span><br><span class="line">B. mount -fs=msdos /dev/sda1 /<span class="hljs-keyword">win</span></span><br><span class="line">C. mount -t vfat /dev/sda1 /<span class="hljs-keyword">win</span></span><br><span class="line"><span class="hljs-keyword">D</span>. mount -t windows /<span class="hljs-keyword">win</span> /dev/sda1</span><br><span class="line">答案:C</span><br><span class="line">11. 默认情况下管理员创建了一个用户，就会在(   )目录下创建一个用户主目录。</span><br><span class="line">A. /usr　　B. /home　　　C. /root　　<span class="hljs-keyword">D</span>. /etc</span><br><span class="line">答案:B</span><br><span class="line">12. 如果要列出一个目录下的所有文件需要使用命令行(    )。</span><br><span class="line">A. <span class="hljs-keyword">ls</span> –<span class="hljs-keyword">l</span>　　B. <span class="hljs-keyword">ls</span>　　　C. <span class="hljs-keyword">ls</span> –a　　　<span class="hljs-keyword">D</span>. <span class="hljs-keyword">ls</span> -<span class="hljs-built_in">d</span></span><br><span class="line">答案:C</span><br><span class="line">13. 利用哪个工具可以设置用户在文件系统中的空间大小(   )。</span><br><span class="line">A. turboservice　　B. turbofscfg　　C. turbonetcfg　　　<span class="hljs-keyword">D</span>. turboxcfg</span><br><span class="line">答案:B</span><br><span class="line">14. 哪个命令可以将普通用户转换成超级用户(   )</span><br><span class="line">A. super　　B. passwd　　C. tar　　　<span class="hljs-keyword">D</span>. <span class="hljs-keyword">su</span></span><br><span class="line">答案:<span class="hljs-built_in">D</span></span><br><span class="line">15. 哪个命令用来显示/home及其子目录下文件名(   )</span><br><span class="line">A. <span class="hljs-keyword">ls</span> -R /home　　B. <span class="hljs-keyword">ls</span> -<span class="hljs-keyword">d</span> /home　　C. <span class="hljs-keyword">ls</span> -a /home　　　　<span class="hljs-keyword">D</span>. <span class="hljs-keyword">ls</span> -<span class="hljs-keyword">l</span> /home</span><br><span class="line">答案:A</span><br><span class="line">16. 在vi模式下，哪个命令用来删除光标处的字符(    )</span><br><span class="line">A. xd　　　B. x　　　C. dd　　　<span class="hljs-keyword">D</span>. <span class="hljs-built_in">d</span></span><br><span class="line">答案:B　　dd删除一行,x删除当前字符</span><br><span class="line">17. 在一行内运行多个命令需要用什么字符隔开(   )</span><br><span class="line">A. @　　B. $　　　C. ;　　<span class="hljs-keyword">D</span>. *</span><br><span class="line">答案:C</span><br><span class="line">18. 确定myfile的文件类型的命令是(   )</span><br><span class="line">A. whatis myfile</span><br><span class="line">B. <span class="hljs-keyword">file</span> myfile</span><br><span class="line">C. <span class="hljs-keyword">type</span> myfile</span><br><span class="line"><span class="hljs-keyword">D</span>. <span class="hljs-keyword">type</span> -q myfile</span><br><span class="line">答案:B</span><br><span class="line">19. 哪些命令组合起来能统计多少用户登录系统(    )</span><br><span class="line">A. who | wc –w　　　B. who | wc –<span class="hljs-keyword">l</span>　　　C. who | wc –c　　　<span class="hljs-keyword">D</span>. who | wc</span><br><span class="line">答案:BD</span><br><span class="line">20. 用 <span class="hljs-string">"rm -i"</span>,系统会提示什么来让你确认(   )</span><br><span class="line">A. 命令行的每个选项　　B. 是否真的删除　　C. 是否有写的权限　　　<span class="hljs-keyword">D</span>. 文件的位置</span><br><span class="line">答案:B</span><br><span class="line">21. Linux启动的第一个进程init启动的第一个脚本程序是(   )。</span><br><span class="line">A. /etc/rc.<span class="hljs-keyword">d</span>/init.<span class="hljs-keyword">d</span>　　　B. /etc/rc.<span class="hljs-keyword">d</span>/rc.sysinit　　C. /etc/rc.<span class="hljs-keyword">d</span>/rc5.<span class="hljs-keyword">d</span>　　<span class="hljs-keyword">D</span>. /etc/rc.<span class="hljs-keyword">d</span>/rc3.<span class="hljs-built_in">d</span></span><br><span class="line">答案:B</span><br><span class="line">22. 按下(   )键能终止当前运行的命令</span><br><span class="line">A. Ctrl-C　　　B. Ctrl-F　　　C. Ctrl-B　　　<span class="hljs-keyword">D</span>. Ctrl-<span class="hljs-built_in">D</span></span><br><span class="line">答案:a</span><br><span class="line">23. 用来分离目录名和文件名的字符是(   )</span><br><span class="line">A. dash (-)　　B. slash (/)　　C. period (.)　　　<span class="hljs-keyword">D</span>. asterisk（*）</span><br><span class="line">答案:B</span><br><span class="line">24. 系统的配置文件在(  )目录下</span><br><span class="line">A. /home　　　B. /dev　　C. /etc　　　<span class="hljs-keyword">D</span>. /usr</span><br><span class="line">答案:C</span><br><span class="line">25. 显示用户的主目录的命令是什么?(   )</span><br><span class="line">A. echo <span class="hljs-variable">$HOME</span>　　B. echo <span class="hljs-variable">$USERDIR</span>　　　C. echo <span class="hljs-variable">$ENV</span>　　<span class="hljs-keyword">D</span>. echo <span class="hljs-variable">$ECHO</span></span><br><span class="line">答案:A</span><br><span class="line">26. 在vi编辑器里，哪个命令能将光标移到第200行(    )</span><br><span class="line">A. g200　　B. G200　　C. :200　　　<span class="hljs-keyword">D</span>. 200g</span><br><span class="line">答案:C</span><br><span class="line">:200可以，200G也可以</span><br><span class="line">27. 用<span class="hljs-string">"useradd jerry"</span>命令添加一个用户，这个用户的主目录是什么?(   )</span><br><span class="line">A. /etc/jerry　　　B. /<span class="hljs-keyword">var</span>/jerry　　C. /home/jerry　　　<span class="hljs-keyword">D</span>. /bin/jerry</span><br><span class="line">答案:C</span><br><span class="line">28. 哪一个命令能用来删除当前目录及其子目录下名为'core'的文件(   )</span><br><span class="line">A. find . -name core -exec <span class="hljs-keyword">rm</span> &#123;&#125; \ ;</span><br><span class="line">B. find . -name core -exec <span class="hljs-keyword">rm</span> ;</span><br><span class="line">C. find . -name core -exec <span class="hljs-keyword">rm</span> &#123;&#125; ;</span><br><span class="line"><span class="hljs-keyword">D</span>. find . -name core -exec <span class="hljs-keyword">rm</span> &#123;&#125; -;</span><br><span class="line">答案:A</span><br><span class="line">29. 以下哪条命令在创建一个xp用户的时候将用户加入到root组中(  )</span><br><span class="line">A. useradd -<span class="hljs-keyword">g</span> xp root　　B. useradd -r root xp　　C. useradd -<span class="hljs-keyword">g</span> root xp　　　<span class="hljs-keyword">D</span>. useradd root xp</span><br><span class="line">答案:C</span><br><span class="line">30. 不改变运行级别而重新读入inittab文件的命令是(    )。</span><br><span class="line">A. init s　　B. init q　　C. init S　　　<span class="hljs-keyword">D</span>. init <span class="hljs-built_in">Q</span></span><br><span class="line">答案:B</span><br><span class="line">31. 以下哪个命令可以终止一个用户的所有进程(   )</span><br><span class="line">A. skillall　　　B. skill　　C. kill　　　<span class="hljs-keyword">D</span>. killall</span><br><span class="line">答案:<span class="hljs-built_in">D</span></span><br><span class="line">32. 通过修改哪个文件可以在创建用户的时候改变用　户主目录的路径(   )</span><br><span class="line">A. /etc/default/passwd　　　B. /etc/default/useradd　　C. /etc/profile　　<span class="hljs-keyword">D</span>. /etc/fstab</span><br><span class="line">答案:B</span><br><span class="line">33. 以只读方式打开一个文件并进入vi编辑器的命令是(   )</span><br><span class="line">A. <span class="hljs-keyword">view</span> -r filename　　　B. <span class="hljs-keyword">view</span> filename　　　C. vi filename　　　<span class="hljs-keyword">D</span>. vi -r filename</span><br><span class="line">答案:B</span><br><span class="line">34. 以下哪个命令是将缓存中的内容粘贴到光标之前(   )</span><br><span class="line">A. a　　　B. i　　　C. P　　　<span class="hljs-keyword">D</span>. p</span><br><span class="line">答案:C</span><br><span class="line">35. 以下哪条vi命令能将文档5-20行间出现的abc替换成为cba (   )</span><br><span class="line">A. :1,<span class="hljs-variable">$s</span>/abc/cba/<span class="hljs-keyword">g</span>　　　B. :5,20/abc/cba/<span class="hljs-keyword">g</span>　　C. :5-20s/abc/cba/<span class="hljs-keyword">g</span>　　　<span class="hljs-keyword">D</span>. :5,20s/abc/cba/<span class="hljs-keyword">g</span></span><br><span class="line">答案:<span class="hljs-built_in">D</span></span><br><span class="line">. 在vi中通过哪条命令可以将ps命令执行的结果插入到文档中(   )</span><br><span class="line">A. :r!ps　　　B. :!ps　　　C. :!rps　　　　<span class="hljs-keyword">D</span>. :w!ps</span><br><span class="line">答案:A</span><br><span class="line">36. 以下哪个vi命令可以在当前位置插入/etc/passwd文本文件(   )</span><br><span class="line">A. :r /etc/passwd　　　B. :i /etc/passwd　　C. :w /etc/passwd　　　<span class="hljs-keyword">D</span>. :s /etc/passwd</span><br><span class="line">答案:A</span><br><span class="line">37. vi中复制整行的命令是(   )</span><br><span class="line">A. y1　　　B. yy　　　C. ss　　　<span class="hljs-keyword">D</span>. dd</span><br><span class="line">答案:B</span><br><span class="line">38. 以下哪个vi命令可以给文档的每行加上一个编号(    )</span><br><span class="line">A. :<span class="hljs-keyword">e</span> number　　　B. :<span class="hljs-keyword">set</span> number　　C. :r!date 　　　　<span class="hljs-keyword">D</span>. :200g</span><br><span class="line">答案:B</span><br><span class="line">38. 以下哪些文件只有根用户才能读写(   )</span><br><span class="line">A. /etc/bashrc　　　B. /etc/profile　　　C. /etc/shadow　　　　<span class="hljs-keyword">D</span>. /etc/passwd</span><br><span class="line">答案:BC</span><br><span class="line">39. 使用groupdel删除一个组的时候，命令执行失败，原因可能是(   )</span><br><span class="line">A. 该组是系统组　　　B. 该组是空的　　　C. 该组中成员非空　　　<span class="hljs-keyword">D</span>. 该组不存在</span><br><span class="line">答案:<span class="hljs-keyword">CD</span></span><br><span class="line">40. Linux中文件名构成的规则比较灵活表现在(   )</span><br><span class="line">A. 文件名长度多达256个字符　　　　　B. 可以使用除了/符号外的所有ASCII字符</span><br><span class="line">C. 不区分大小写　　　　　　　　　　　　<span class="hljs-keyword">D</span>. 无扩展名限制</span><br><span class="line">答案:ABD</span><br><span class="line">41. 对用户的口令进行加解锁的命令是passwd,参数选项是(   )</span><br><span class="line">A. –<span class="hljs-keyword">l</span>　　B. –<span class="hljs-keyword">L</span>　　C. –<span class="hljs-keyword">u</span>　　　<span class="hljs-keyword">D</span>. -<span class="hljs-keyword">U</span></span><br><span class="line">答案:<span class="hljs-keyword">AC</span></span><br><span class="line">42. 如果你对文件和目录的权限不确定，则不能用(   )命令来检测权限</span><br><span class="line">A. ps　　　B. ck　　　　C. <span class="hljs-keyword">ls</span> –<span class="hljs-keyword">l</span>　　　<span class="hljs-keyword">D</span>. chown</span><br><span class="line">答案:ABD</span><br><span class="line">43. 选择对/proc文件系统不正确的描述(    )</span><br><span class="line">A. 通常情况下，不提供中断、IO端口、CPU等信息　　　B. /proc文件系统可以提供系统核心的许多参数</span><br><span class="line">C. /proc是一个虚拟的文件系统　　　　　　　　　　　　<span class="hljs-keyword">D</span>. 可以得到系统中运行的进程的一些信息</span><br><span class="line">答案:A</span><br><span class="line">44. 以下哪些符号可以用来连接多条命令(   )</span><br><span class="line">A. ||　　　　B. &amp;&amp;　　　C. ;　　　<span class="hljs-keyword">D</span>. |</span><br><span class="line">答案:ABCD</span><br><span class="line">45. 在<span class="hljs-keyword">shell</span>中，下面哪些字符串当作普通字符串时候需要使用<span class="hljs-string">"\"</span>来转义(   )</span><br><span class="line">A. 分号(;)　　　B. 双引号(")　　C. 单引号(')　　　<span class="hljs-keyword">D</span>. 反斜杆(\)</span><br><span class="line">答案:BCD</span><br><span class="line">46. Linux中提供了几个重要的工具用来改变服务和进程的运行状态和运行级别以及初始化进程，它们是(   )。</span><br><span class="line">A. chkconfig　　B. service　　C. turboservice　　　<span class="hljs-keyword">D</span>. ksysv</span><br><span class="line">答案:ABCD</span><br><span class="line">47. 在/etc/rc.<span class="hljs-keyword">d</span>/init.<span class="hljs-keyword">d</span>目录下的所有脚本至少支持两个运行参数,它们是(    )。</span><br><span class="line">A. start　　　B. restart　　　　C. stop　　　<span class="hljs-keyword">D</span>. reload</span><br><span class="line">答案:<span class="hljs-keyword">AC</span></span><br><span class="line">48. Linux一般被称为是稳定的服务器系统，它的安全性表现在(   )</span><br><span class="line">A. 网络防火墙　　B. 用户管理策略　C. 系统、目录、文件的权限控制　<span class="hljs-keyword">D</span>. 封闭源码便于及时修正漏洞等</span><br><span class="line">答案:ABC</span><br><span class="line">49. 在vi中下列哪些命令不能用来在光标前插入文本(   )</span><br><span class="line">A. p [text]　　B. i [text]　　C. o [text]　　　<span class="hljs-keyword">D</span>. a [text]</span><br><span class="line">答案:ACD</span><br><span class="line">50. 在本地的文件系统中下列哪些linux路径结构是无效的(   )</span><br><span class="line">A. \usr/zhang/memo　　　B. /usr/zhang/memo　　　C. <span class="hljs-comment">//usr\zhang/memo　　　D. \usr\zhang\memo</span></span><br><span class="line">答案:ACD</span><br><span class="line"></span><br><span class="line">二、简答题 （1题3分）</span><br><span class="line"></span><br><span class="line">1.常见的Linux发行版本都有什么？你最擅长哪一个？它的官网网站是什么？说明你擅长哪一块？</span><br><span class="line"></span><br><span class="line">2.Linux开机启动流程详细步骤是什么？系统安装完，忘记密码如何破解？</span><br><span class="line"></span><br><span class="line">4.某一天突然发现Linux系统文件只读，该怎么办呢？完整操作步骤。</span><br><span class="line"></span><br><span class="line">5.安装一台系统使用DVD光盘安装，如何安装50台Linux系统如何安装呢？思考一下。</span><br><span class="line"></span><br><span class="line">6.用虚拟机安装了一台Linux系统，突然想克隆一台服务器，克隆后发现无法上网，如何解决？</span><br><span class="line"></span><br><span class="line">7.Linux网卡配置文件路径是什么？要使服务器上外网，必须满足的条件有哪些？需要配置什么？</span><br><span class="line"></span><br><span class="line">8.一般可以使用什么软件远程linux服务器？通过什么上传文件和下载文件？</span><br><span class="line"></span><br><span class="line">9./mnt目录主要用于什么？/root目录跟root用户有什么关系？/根目录与/<span class="hljs-keyword">boot</span>目录有什么联系？</span><br><span class="line"></span><br><span class="line">10.某一天误操作，执行了<span class="hljs-keyword">rm</span>  -rf  * ，会有哪些情况发生？请举例。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">三、 公有云题目 （1题5分）</span><br><span class="line">1. 请解释上云的好处是什么？传统业务类型与公有云也为类型有什么区别？请举例说明。</span><br><span class="line"></span><br><span class="line">2. 列出你用过的阿里云\AWS\Azure服务？并讲述他们的作用？</span><br><span class="line"></span><br><span class="line">3. 请列出你觉得阿里云\AWS\Azure目前的特色和不成熟的地方是那些？你觉得应该如何改正。</span><br><span class="line"></span><br><span class="line">4. 请用阿里云\AWS\Azure设计一个视频网站的架构图并进行解释说明。</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -356,6 +402,8 @@ var _hmt = _hmt || [];
             <li><a class="pagination-link is-current" href="/page/30/">30</a></li>
             
             <li><a class="pagination-link has-text-black-ter" href="/page/31/">31</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/32/">32</a></li>
             
         </ul>
     </nav>
@@ -399,7 +447,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        93
+                        94
                     </p>
                 </div>
             </div>
@@ -737,6 +785,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -811,25 +878,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -841,6 +889,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -1392,6 +1451,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -1466,25 +1544,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1496,6 +1555,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -2043,7 +2113,7 @@ var _hmt = _hmt || [];
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2020 SAMZONG&nbsp;
+                &copy; 2021 SAMZONG&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>

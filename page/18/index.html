@@ -165,6 +165,55 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-08-02T07:44:20.000Z">2016-08-02</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Docker/">Docker</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 minutes read (About 1382 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/08/02/docker01/">HowTo Use Docker create a Tomcat Project</a>
+            
+        </h1>
+        <div class="content">
+            <h4 id="1-安装CentOS-7-x"><a href="#1-安装CentOS-7-x" class="headerlink" title="1. 安装CentOS 7.x"></a><strong>1. 安装CentOS 7.x</strong></h4><pre><code>略。
+</code></pre><h4 id="2-安装docker"><a href="#2-安装docker" class="headerlink" title="2. 安装docker"></a><strong>2. 安装docker</strong></h4><p>详见： <a href="http://samzong.me/2016/07/07/how-to-install-docker-on-centos-6-x-2/">How to Install Docker on CentOS 6.x</a></p>
+<h4 id="3-基础docker命令"><a href="#3-基础docker命令" class="headerlink" title="3. 基础docker命令"></a><strong>3. 基础docker命令</strong></h4><figure class="highlight vim hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">＃ 获取centos6 docker镜像</span><br><span class="line">[root@docker ~]# docker pull centos6</span><br><span class="line">Using default <span class="hljs-keyword">ta</span><span class="hljs-variable">g:</span> latest</span><br><span class="line">lates<span class="hljs-variable">t:</span> Pulling from library/cento<span class="hljs-variable">s:centos6</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-number">43</span>db9dbdcb30: Downloading <span class="hljs-number">41.14</span> MB/<span class="hljs-number">49.33</span> MB</span><br><span class="line"><span class="hljs-number">43</span>db9dbdcb30: Pull <span class="hljs-built_in">complete</span></span><br><span class="line"><span class="hljs-number">2</span>dc64e8f8d4f: Pull <span class="hljs-built_in">complete</span></span><br><span class="line"><span class="hljs-number">670</span>a583e1b50: Pull <span class="hljs-built_in">complete</span></span><br><span class="line"><span class="hljs-number">183</span>b0bfcd10e: Pull <span class="hljs-built_in">complete</span></span><br><span class="line">Diges<span class="hljs-variable">t:</span> <span class="hljs-built_in">sha256</span>:c6674c44c6439673bf56536c1a15916639c47ea04c3d6296c5df938add67b54b</span><br><span class="line">Statu<span class="hljs-variable">s:</span> Downloaded newer image <span class="hljs-keyword">for</span> centso:centos6</span><br><span class="line"></span><br><span class="line">＃ 查看当前服务器上的docker镜像</span><br><span class="line">[root@docker ~]# docker images</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">centos6-visionet    latest              aeed37612ecb        <span class="hljs-number">6</span> hours ago         <span class="hljs-number">1.916</span> GB</span><br><span class="line">centos              centos6             a3c09d36ab4a        <span class="hljs-number">2</span> days ago          <span class="hljs-number">194.6</span> MB</span><br><span class="line">registry            latest              c6c14b3960bd        <span class="hljs-number">3</span> days ago          <span class="hljs-number">33.28</span> MB</span><br><span class="line">＃ 查找docker镜像</span><br><span class="line">[root@docker ~]# docker <span class="hljs-built_in">search</span> cento<span class="hljs-variable">s:centos6</span></span><br><span class="line">NAME                                     DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</span><br><span class="line">imagine10255/centos6-lnmp-php56          centos6-lnmp-php56                              <span class="hljs-number">10</span>                   [OK]</span><br><span class="line">lemonbar/centos6-ssh                     Installed openssh-server <span class="hljs-keyword">on</span> centos6, defau...   <span class="hljs-number">7</span>                    [OK]</span><br><span class="line">sergeyzh/centos6-nginx                                                                   <span class="hljs-number">2</span>                    [OK]</span><br><span class="line">guyton/centos6                           From official centos6 container with full ...   <span class="hljs-number">2</span>                    [OK]</span><br><span class="line">paijp/centos6-apache-php-sqlite2         php5.<span class="hljs-number">3.3</span> with sqlite2 <span class="hljs-built_in">and</span> apache <span class="hljs-keyword">on</span> CentOS...   <span class="hljs-number">1</span>                    [OK]</span><br><span class="line">edrans/centos6                                                                           <span class="hljs-number">1</span>                    [OK]</span><br><span class="line">mohri1219/centos6.<span class="hljs-number">7</span>-ruby2.<span class="hljs-number">2.2</span>-mysql5.<span class="hljs-number">6</span>   centos6.<span class="hljs-number">7</span>-ruby2.<span class="hljs-number">2.2</span>-mysql5.<span class="hljs-number">6</span>                    <span class="hljs-number">1</span>                    [OK]</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">＃ 删除 centos6 docker镜像</span><br><span class="line">[root@docker ~]# docker rmi IMAGES_NAME</span><br><span class="line">[root@docker ~]# docker rmi cento<span class="hljs-variable">s:centos6</span></span><br><span class="line"># 报错无法删除</span><br><span class="line">Error response from daemon: conflic<span class="hljs-variable">t:</span> unable <span class="hljs-keyword">to</span> <span class="hljs-built_in">remove</span> repository reference <span class="hljs-string">"centos"</span> (must force) - container <span class="hljs-number">705</span>a30cbc002 <span class="hljs-keyword">is</span> using its referenced image <span class="hljs-number">42118</span>e3df429</span><br><span class="line"># 这是因为之间的运行的进程没有清楚导致该images正在使用中，使用一下命令查看占有的进程</span><br><span class="line">[root@docker ~]# docker <span class="hljs-keyword">ps</span> -<span class="hljs-keyword">a</span> ＃ 查看所有的docker进程</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND               CREATED             STATUS                     PORTS               NAMES</span><br><span class="line"><span class="hljs-number">705</span>a30cbc002        cento<span class="hljs-variable">s:centos6</span>              <span class="hljs-string">"/bin/bash"</span>           <span class="hljs-number">6</span> minutes ago       Exited (<span class="hljs-number">0</span>) <span class="hljs-number">6</span> minutes ago                       centos6</span><br><span class="line">[root@docker ~]# docker rm <span class="hljs-number">705</span>a30cbc002</span><br><span class="line"><span class="hljs-number">705</span>a30cbc002</span><br><span class="line">[root@docker ~]# docker rmi cento<span class="hljs-variable">s:centos6</span></span><br><span class="line">Untagged: cento<span class="hljs-variable">s:centos6</span></span><br><span class="line">Deleted: <span class="hljs-built_in">sha256</span>:<span class="hljs-number">42118</span>e3df429f09ca581a9deb3df274601930e428e452f7e4e9f1833c56a100a</span><br><span class="line">Deleted: <span class="hljs-built_in">sha256</span>:d72d0199021776e77ac14a764a3decd156e9f6f18b37e25b867b0f1ca42fb3d9</span><br><span class="line">Deleted: <span class="hljs-built_in">sha256</span>:fb178c6cea1453d089ce033b96eba0efdb42274138e042517ea2d5ea7bb51665</span><br><span class="line">Deleted: <span class="hljs-built_in">sha256</span>:<span class="hljs-number">8945</span>af30572845a904adce2aeaf73402c842d86e99e8f10688b25cb27834110b</span><br><span class="line">Deleted: <span class="hljs-built_in">sha256</span>:ea9f151abb7e06353e73172dad421235611d4f6d0560ec95db26e0dc240642c1</span><br></pre></td></tr></table></figure>
+<h4 id="4-运行一个docker镜像"><a href="#4-运行一个docker镜像" class="headerlink" title="4. 运行一个docker镜像"></a><strong>4. 运行一个docker镜像</strong></h4><h4 id="进入交互式程序"><a href="#进入交互式程序" class="headerlink" title="进入交互式程序"></a>进入交互式程序</h4><figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="hljs-variable">@docker</span> ~]<span class="hljs-comment"># docker run  -it centos:centos6 /bin/bash</span></span><br><span class="line">[root<span class="hljs-variable">@c1d190f95562</span> /]<span class="hljs-comment"># cat /etc/redhat-release</span></span><br><span class="line">CentOS release <span class="hljs-number">6.8</span> (Final)</span><br><span class="line"><span class="hljs-comment"># Install openssh-server and httpd</span></span><br><span class="line">root<span class="hljs-variable">@d8c122dbe09d</span><span class="hljs-symbol">:/</span><span class="hljs-comment"># yum install -y openssh-sever httpd</span></span><br><span class="line">root<span class="hljs-variable">@d8c122dbe09d</span><span class="hljs-symbol">:/</span><span class="hljs-comment"># exit</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 注意当你执行exit，从容器之中退出时，容器也会随着关闭，这时如果还继续执行上条命令</span></span><br><span class="line"><span class="hljs-comment"># 你会发现之前所有的操作都被还原，因为相对于docker，又是新开了一个进程</span></span><br><span class="line"><span class="hljs-comment"># 在exit退出之后，使用一下命令查看上次提交，然后commit修改，便可保存之前的修改</span></span><br><span class="line"></span><br><span class="line">[root<span class="hljs-variable">@docker</span> ~]<span class="hljs-comment"># docker ps -l</span></span><br><span class="line">[root<span class="hljs-variable">@docker</span> ~]<span class="hljs-comment"># docker commit c1d190f95562 centos:centos6-httpd</span></span><br><span class="line"><span class="hljs-symbol">sha256:</span><span class="hljs-number">77</span>eb12e36c7bbe9ef874555b1873019022b5258740aa731627e2cd6fa749c325</span><br><span class="line">[root<span class="hljs-variable">@docker</span> ~]<span class="hljs-comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">centos              centos6-httpd       <span class="hljs-number">77</span>eb12e36c7b        <span class="hljs-number">3</span> seconds ago       <span class="hljs-number">290.3</span> MB</span><br><span class="line">centos6-visionet    latest              aeed37612ecb        <span class="hljs-number">6</span> hours ago         <span class="hljs-number">1.916</span> GB</span><br><span class="line">centos              centos6             a3c09d36ab4a        <span class="hljs-number">2</span> days ago          <span class="hljs-number">194.6</span> MB</span><br><span class="line">registry            latest              c6c14b3960bd        <span class="hljs-number">3</span> days ago          <span class="hljs-number">33.28</span> MB</span><br></pre></td></tr></table></figure>
+<h4 id="5-编辑Dockerfile"><a href="#5-编辑Dockerfile" class="headerlink" title="5. 编辑Dockerfile"></a><strong>5. 编辑Dockerfile</strong></h4><figure class="highlight dockerfile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># dockfile的第一行一定是FROM，指定了父镜像</span></span><br><span class="line"><span class="hljs-keyword">FROM</span> centos:centos6</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># RUN 指的是运行的命令</span></span><br><span class="line"><span class="hljs-keyword">RUN</span><span class="hljs-bash"> yum install -y epel-release</span></span><br><span class="line"><span class="hljs-bash">RUN yum install -y bash-completion</span></span><br><span class="line"><span class="hljs-bash">RUN yum install -y openssh-server openssh-client sudo</span></span><br><span class="line"><span class="hljs-bash">RUN sed -i <span class="hljs-string">'s/UsePAM yes/UsePAM no/g'</span> /etc/ssh/sshd_config</span></span><br><span class="line"><span class="hljs-bash">RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span></span><br><span class="line"><span class="hljs-bash"></span></span><br><span class="line"><span class="hljs-bash"><span class="hljs-comment"># 增加一个用户，并赋予sudo权限</span></span></span><br><span class="line"><span class="hljs-bash">RUN useradd visionet</span></span><br><span class="line"><span class="hljs-bash">RUN <span class="hljs-built_in">echo</span> <span class="hljs-string">"visionet:visionet"</span> | chpasswd</span></span><br><span class="line"><span class="hljs-bash">RUN <span class="hljs-built_in">echo</span> <span class="hljs-string">"visionet   ALL=(ALL)       ALL"</span> &gt;&gt; /etc/sudoers</span></span><br><span class="line"><span class="hljs-bash"></span></span><br><span class="line"><span class="hljs-bash">＃ 注意，如果没有执行一下两个命令，sshd是无法远程登陆的</span></span><br><span class="line"><span class="hljs-bash">RUN ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key</span></span><br><span class="line"><span class="hljs-bash">RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key</span></span><br><span class="line"><span class="hljs-bash"></span></span><br><span class="line"><span class="hljs-bash">＃ EXPOSE 22， 将22端口暴露出来，方便ssh远程连接</span></span><br><span class="line"><span class="hljs-bash">RUN mkdir /var/run/sshd</span></span><br><span class="line"><span class="hljs-bash">EXPOSE 22</span></span><br><span class="line"><span class="hljs-bash">＃ CMD 为系统内部执行命令</span></span><br><span class="line"><span class="hljs-bash">CMD [<span class="hljs-string">"/usr/sbin/sshd"</span>, <span class="hljs-string">"-D"</span>]</span></span><br></pre></td></tr></table></figure>
+<h4 id="6-生成自定义docker镜像"><a href="#6-生成自定义docker镜像" class="headerlink" title="6. 生成自定义docker镜像"></a><strong>6. 生成自定义docker镜像</strong></h4><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> build 编译镜像</span></span><br><span class="line">[root@docker ~]# docker build -f dockerfile3 -t centos:centos6-ssh .</span><br><span class="line">Sending build context to Docker daemon 44.54 kB</span><br><span class="line">Step 1 : FROM centos:centos6</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> a3c09d36ab4a</span></span><br><span class="line">Step 2 : RUN yum install -y epel-release</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> 04d81f280a63</span></span><br><span class="line">Step 3 : RUN yum install -y bash-completion</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> 5ca26894dc9d</span></span><br><span class="line">Step 4 : RUN yum install -y openssh-server openssh-client sudo</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> 42278450311e</span></span><br><span class="line">Step 5 : RUN sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> db35bef562a2</span></span><br><span class="line">Step 6 : RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> dc9f2b82e198</span></span><br><span class="line">Step 7 : RUN useradd visionet</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> 06c574a51755</span></span><br><span class="line">Step 8 : RUN echo "visionet:visionet" | chpasswd</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> 03412f053d04</span></span><br><span class="line">Step 9 : RUN echo "visionet   ALL=(ALL)       ALL" &gt;&gt; /etc/sudoers</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> bf8476812a62</span></span><br><span class="line">Step 10 : RUN ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> 2314cce75171</span></span><br><span class="line">Step 11 : RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> 99304cd9ac15</span></span><br><span class="line">Step 12 : RUN mkdir /var/run/sshd</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> f87283751553</span></span><br><span class="line">Step 13 : EXPOSE 22</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> 56c41202dcb9</span></span><br><span class="line">Step 14 : CMD /usr/sbin/sshd -D</span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> Using cache</span></span><br><span class="line"><span class="hljs-meta"> ---&gt;</span><span class="hljs-bash"> d6dccb483fa6</span></span><br><span class="line">Successfully built d6dccb483fa6</span><br><span class="line">[root@docker ~]# docker images</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">centos              centos6-ssh         d6dccb483fa6        2 minutes ago         363 MB</span><br><span class="line">centos              centos6-httpd       77eb12e36c7b        6 minutes ago       290.3 MB</span><br><span class="line">centos6-visionet    latest              aeed37612ecb        6 hours ago         1.916 GB</span><br><span class="line">centos              centos6             a3c09d36ab4a        2 days ago          194.6 MB</span><br><span class="line">registry            latest              c6c14b3960bd        3 days ago          33.28 MB</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 后台运行docker容器，并指定nat端口转发</span></span><br><span class="line">[root@docker ~]# docker run -d -p 2222:22 -P --name=sshd centos:centos6-ssh</span><br><span class="line">b4211f7a304d9e34b72b510230be2c7a76b276886b488f08f3e12896a4d3c172</span><br></pre></td></tr></table></figure>
+<h4 id="7-ssh登陆到docker容器内，部署项目环境"><a href="#7-ssh登陆到docker容器内，部署项目环境" class="headerlink" title="7. ssh登陆到docker容器内，部署项目环境"></a><strong>7. ssh登陆到docker容器内，部署项目环境</strong></h4><figure class="highlight gherkin hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># inspect 查看docker 容器IP地址</span></span><br><span class="line">[root<span class="hljs-meta">@docker</span> ~]<span class="hljs-comment"># docker inspect sshd | grep IPAddress</span></span><br><span class="line">[root<span class="hljs-meta">@docker</span> ~]<span class="hljs-comment"># ssh visionet@172.17.0.2</span></span><br><span class="line">visionet<span class="hljs-meta">@172.17.0.2's</span> password:</span><br><span class="line">[visionet<span class="hljs-meta">@b4211f7a304d</span> ~]$</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Install mysql</span></span><br><span class="line"><span class="hljs-comment"># Install tomcat server</span></span><br><span class="line"></span><br><span class="line">[visionet<span class="hljs-meta">@b4211f7a304d</span> ~]$ exit</span><br><span class="line">[root<span class="hljs-meta">@docker</span> ~]<span class="hljs-comment"># docker stop sshd</span></span><br><span class="line">sshd</span><br><span class="line">[root<span class="hljs-meta">@docker</span> ~]<span class="hljs-comment"># docker ps -l</span></span><br><span class="line">CONTAINER ID        IMAGE                COMMAND               CREATED             STATUS                       PORTS               NAMES</span><br><span class="line">b4211f7a304d        centos:centos6-ssh   <span class="hljs-string">"/usr/sbin/sshd -D"</span>   6 minutes ago       Exited (255) 3 seconds ago                       sshd</span><br><span class="line">[root<span class="hljs-meta">@docker</span> ~]<span class="hljs-comment"># docker commit b4211f7a304d centos:centos6-tomcat</span></span><br><span class="line">sha256:b4f114d5484822d9a3ddf1100b76b460985ba5e5d31e936570e8d7dbd8df282c</span><br><span class="line">[root<span class="hljs-meta">@docker</span> ~]<span class="hljs-comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">centos              centos6-tomcat      b4f114d54848        4 seconds ago       363.1 MB</span><br><span class="line">centos              centos6-httpd       77eb12e36c7b        15 minutes ago      290.3 MB</span><br><span class="line">centos6-visionet    latest              aeed37612ecb        7 hours ago         1.916 GB</span><br><span class="line">centos              centos6-ssh         d6dccb483fa6        9 hours ago         363 MB</span><br><span class="line">centos              centos6             a3c09d36ab4a        2 days ago          194.6 MB</span><br><span class="line">registry            latest              c6c14b3960bd        3 days ago          33.28 MB</span><br></pre></td></tr></table></figure>
+<h4 id="8-推送centos-centos6-tomcat到私有docker仓库"><a href="#8-推送centos-centos6-tomcat到私有docker仓库" class="headerlink" title="8. 推送centos:centos6-tomcat到私有docker仓库"></a><strong>8. 推送centos:centos6-tomcat到私有docker仓库</strong></h4>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2016-07-31T16:12:29.000Z">2016-08-01</time>
                 
                 <div class="level-item">
@@ -274,65 +323,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-07-27T09:34:01.000Z">2016-07-27</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/KVM/">KVM</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 minutes read (About 557 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/07/27/install-kvm-web-manage-server-webvirtmgr/">HowTo Install KVM Manage Server : webvirtmgr</a>
-            
-        </h1>
-        <div class="content">
-            <p>生产环境的KVM宿主机越来越多，需要对宿主机的状态进行调控。这里用webvirtmgr进行管理。图形化的WEB，让人能更方便的查看kvm 宿主机的情况和操作.</p>
-<p><strong><em><a href="https://github.com/retspen/webvirtmgr" target="_blank" rel="noopener">GitHub Project.</a></em></strong></p>
-<h3 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h3><h4 id="安装支持的软件源"><a href="#安装支持的软件源" class="headerlink" title="安装支持的软件源"></a>安装支持的软件源</h4><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> -y epel-<span class="hljs-keyword">release</span></span><br></pre></td></tr></table></figure>
-<h4 id="安装相关软件"><a href="#安装相关软件" class="headerlink" title="安装相关软件"></a>安装相关软件</h4><figure class="highlight mel hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install git <span class="hljs-keyword">python</span>-pip libvirt-<span class="hljs-keyword">python</span> libxml2-<span class="hljs-keyword">python</span> <span class="hljs-keyword">python</span>-websockify supervisor nginx</span><br></pre></td></tr></table></figure>
-<h4 id="从git-hub中下载相关的webvirtmgr代码"><a href="#从git-hub中下载相关的webvirtmgr代码" class="headerlink" title="从git-hub中下载相关的webvirtmgr代码"></a>从git-hub中下载相关的webvirtmgr代码</h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/src/</span></span><br><span class="line">git clone git:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/retspen/</span>webvirtmgr.git</span><br></pre></td></tr></table></figure>
-<h4 id="安装webvirtmgr"><a href="#安装webvirtmgr" class="headerlink" title="安装webvirtmgr"></a>安装webvirtmgr</h4><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">cd</span> webvirtmgr/</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
-<h4 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h4><figure class="highlight cmake hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="hljs-keyword">install</span> python-sqlite2</span><br></pre></td></tr></table></figure>
-<h4 id="对django进行环境配置"><a href="#对django进行环境配置" class="headerlink" title="对django进行环境配置"></a>对django进行环境配置</h4><figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">./manage.py syncdb</span><br><span class="line"></span><br><span class="line">You just installed Django<span class="hljs-string">'s auth system, which means you don'</span>t have any superusers <span class="hljs-keyword">defined</span>.</span><br><span class="line">Would you like to create one now? (yes/no): yes</span><br><span class="line">Username (leave blank to <span class="hljs-keyword">use</span> <span class="hljs-string">'root'</span>): admin</span><br><span class="line">Email <span class="hljs-symbol">address:</span> luchuanjia<span class="hljs-variable">@msn</span>.com</span><br><span class="line"><span class="hljs-symbol">Password:</span>*********</span><br><span class="line">Password (again)<span class="hljs-symbol">:*********</span></span><br><span class="line"></span><br><span class="line">./manage.py collectstatic <span class="hljs-comment">#生成配置文件</span></span><br><span class="line">./manage.py createsuperuser <span class="hljs-comment">#添加管理员账号</span></span><br></pre></td></tr></table></figure>
-<h4 id="拷贝web到-相关目录"><a href="#拷贝web到-相关目录" class="headerlink" title="拷贝web到 相关目录"></a>拷贝web到 相关目录</h4><figure class="highlight stata hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">cd</span> ..</span><br><span class="line"><span class="hljs-keyword">rm</span> -rf /<span class="hljs-keyword">var</span>/www</span><br><span class="line"><span class="hljs-keyword">mkdir</span> -pv /<span class="hljs-keyword">var</span>/www</span><br><span class="line">cp -Rv webvirtmgr /<span class="hljs-keyword">var</span>/www/webvirtmgr</span><br></pre></td></tr></table></figure>
-<h4 id="设置ssh"><a href="#设置ssh" class="headerlink" title="设置ssh"></a>设置ssh</h4><figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-tag">ssh-keygen</span></span><br><span class="line"><span class="hljs-selector-tag">ssh-copy-id</span> 192<span class="hljs-selector-class">.168</span><span class="hljs-selector-class">.2</span><span class="hljs-selector-class">.32</span></span><br><span class="line"><span class="hljs-selector-tag">ssh</span> 192<span class="hljs-selector-class">.168</span><span class="hljs-selector-class">.2</span><span class="hljs-selector-class">.32</span> <span class="hljs-selector-tag">-L</span> <span class="hljs-selector-tag">localhost</span><span class="hljs-selector-pseudo">:8000</span><span class="hljs-selector-pseudo">:localhost</span><span class="hljs-selector-pseudo">:8000</span> <span class="hljs-selector-tag">-L</span> <span class="hljs-selector-tag">localhost</span><span class="hljs-selector-pseudo">:6080</span><span class="hljs-selector-pseudo">:localhost</span><span class="hljs-selector-pseudo">:6080</span></span><br></pre></td></tr></table></figure>
-<h4 id="编辑nginx配置文件"><a href="#编辑nginx配置文件" class="headerlink" title="编辑nginx配置文件"></a>编辑nginx配置文件</h4><figure class="highlight nginx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attribute">mv</span> /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak</span><br><span class="line">vim /etc/nginx/conf.d/webvirtmgr.conf  <span class="hljs-comment">#添加下面内容到文件中</span></span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span> default_server;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-attribute">server_name</span> <span class="hljs-variable">$hostname</span>;</span><br><span class="line">    <span class="hljs-comment">#access_log /var/log/nginx/webvirtmgr_access_log;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-attribute">location</span> /static/ &#123;</span><br><span class="line">        <span class="hljs-attribute">root</span> /var/www/webvirtmgr/webvirtmgr; <span class="hljs-comment"># or /srv instead of /var</span></span><br><span class="line">        <span class="hljs-attribute">expires</span> max;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-attribute">location</span> / &#123;</span><br><span class="line">        <span class="hljs-attribute">proxy_pass</span> http://127.0.0.1:8000;</span><br><span class="line">        <span class="hljs-attribute">proxy_set_header</span> X-Real-IP <span class="hljs-variable">$remote_addr</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_set_header</span> X-Forwarded-for <span class="hljs-variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_set_header</span> Host <span class="hljs-variable">$host</span>:<span class="hljs-variable">$server_port</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_set_header</span> X-Forwarded-Proto <span class="hljs-variable">$remote_addr</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_connect_timeout</span> <span class="hljs-number">600</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_read_timeout</span> <span class="hljs-number">600</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_send_timeout</span> <span class="hljs-number">600</span>;</span><br><span class="line">        <span class="hljs-attribute">client_max_body_size</span> <span class="hljs-number">1024M</span>; <span class="hljs-comment"># Set higher depending on your needs</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="启动nginx"><a href="#启动nginx" class="headerlink" title="启动nginx"></a>启动nginx</h4><figure class="highlight crmsh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service nginx <span class="hljs-literal">start</span></span><br></pre></td></tr></table></figure>
-<h4 id="修改防火墙规则-如果关闭selinux，此步可省略"><a href="#修改防火墙规则-如果关闭selinux，此步可省略" class="headerlink" title="修改防火墙规则 ( 如果关闭selinux，此步可省略)"></a>修改防火墙规则 ( 如果关闭selinux，此步可省略)</h4><figure class="highlight jboss-cli hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">/usr/sbin/setsebool</span> httpd_can_network_<span class="hljs-keyword">connect</span> <span class="hljs-literal">true</span></span><br></pre></td></tr></table></figure>
-<h4 id="设置-supervisor"><a href="#设置-supervisor" class="headerlink" title="设置 supervisor"></a>设置 supervisor</h4><figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">chown -R nginx:nginx /var/www/webvirtmgr</span><br><span class="line">vim /etc/supervisord.conf <span class="hljs-comment">#在文件末尾添加</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[program:webvirtmgr]</span></span><br><span class="line">command=/usr/bin/python /var/www/webvirtmgr/manage.py run_gunicorn -c /var/www/webvirtmgr/conf/gunicorn.conf.py</span><br><span class="line">directory=/var/www/webvirtmgr</span><br><span class="line">autostart=true</span><br><span class="line">autorestart=true</span><br><span class="line">logfile=/var/log/supervisor/webvirtmgr.log</span><br><span class="line">log_stderr=true</span><br><span class="line">user=nginx</span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[program:webvirtmgr-console]</span></span><br><span class="line">command=/usr/bin/python /var/www/webvirtmgr/console/webvirtmgr-console</span><br><span class="line">directory=/var/www/webvirtmgr</span><br><span class="line">autostart=true</span><br><span class="line">autorestart=true</span><br><span class="line">stdout_logfile=/var/log/supervisor/webvirtmgr-console.log</span><br><span class="line">redirect_stderr=true</span><br><span class="line">user=nginx</span><br><span class="line"></span><br><span class="line">修改/var/www/webvirtmgr/conf/gunicorn.conf.py</span><br><span class="line">bind = <span class="hljs-string">"0:8000"</span></span><br></pre></td></tr></table></figure>
-<h4 id="设置开机启动"><a href="#设置开机启动" class="headerlink" title="设置开机启动"></a>设置开机启动</h4><figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">chkconfig supervisord <span class="hljs-keyword">on</span></span><br><span class="line">chkconfig nginx <span class="hljs-keyword">on</span></span><br><span class="line">vim /etc/rc.<span class="hljs-keyword">local</span></span><br><span class="line">      /usr/sbin/setsebool httpd_can_network_connect <span class="hljs-literal">true</span></span><br></pre></td></tr></table></figure>
-<h4 id="启动进程"><a href="#启动进程" class="headerlink" title="启动进程"></a>启动进程</h4><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service nginx start</span><br><span class="line">service supervisord start</span><br></pre></td></tr></table></figure>
-<h4 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="hljs-regexp">//</span><span class="hljs-variable">$server_ip</span><span class="hljs-regexp">/login/</span></span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -357,7 +347,7 @@ var _hmt = _hmt || [];
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/31/">31</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/32/">32</a></li>
             
         </ul>
     </nav>
@@ -401,7 +391,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        93
+                        94
                     </p>
                 </div>
             </div>
@@ -739,6 +729,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -813,25 +822,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -843,6 +833,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -1394,6 +1395,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -1468,25 +1488,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1498,6 +1499,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -2045,7 +2057,7 @@ var _hmt = _hmt || [];
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2020 SAMZONG&nbsp;
+                &copy; 2021 SAMZONG&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>

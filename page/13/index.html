@@ -165,6 +165,65 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-12-03T10:41:13.000Z">2016-12-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Tomcat/">Tomcat</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 minutes read (About 548 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/12/03/tomcat-keytool-https/">Tomcat(2) 利用JDK自身keytool实现HTTPS</a>
+            
+        </h1>
+        <div class="content">
+            <p>因为一个偶然机会，想把自己的webserver通过https加密访问，这里就采用JDK自带的keytool工具实现，tomcat官方也推荐这种方式，英文好的同学走这里：<a href="https://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html" target="_blank" rel="noopener">官方配置</a></p>
+<blockquote>
+<p>demo: CentOS 6.6 &amp; Tomcat 7 &amp; JDK 1.7</p>
+</blockquote>
+<h4 id="1-生成-keystore"><a href="#1-生成-keystore" class="headerlink" title="1. 生成 keystore"></a>1. 生成 keystore</h4><figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@test conf]<span class="hljs-comment"># keytool -genkey -v -alias tomcat -keyalg RSA -keystore mykeystore</span></span><br><span class="line">Enter keystore password:              <span class="hljs-comment">#设置密码</span></span><br><span class="line">Re-enter new password:                <span class="hljs-comment">#重复一次</span></span><br><span class="line">What <span class="hljs-keyword">is</span> your <span class="hljs-keyword">first</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">last</span> <span class="hljs-built_in">name</span>?</span><br><span class="line">  [Unknown]:  Alex Lu                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">of</span> your organizational unit?</span><br><span class="line">  [Unknown]:  visionet                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">of</span> your organization?</span><br><span class="line">  [Unknown]:  visionet                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">of</span> your City <span class="hljs-keyword">or</span> Locality?</span><br><span class="line">  [Unknown]:  SH                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">of</span> your State <span class="hljs-keyword">or</span> Province?</span><br><span class="line">  [Unknown]:  SH                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> two-letter country code <span class="hljs-keyword">for</span> this unit?</span><br><span class="line">  [Unknown]:  ZH                <span class="hljs-comment">#随便填</span></span><br><span class="line">Is CN=Alex Lu, OU=visionet, O=visionet, L=SH, ST=SH, C=ZH correct?</span><br><span class="line">  [no]:  Y                    <span class="hljs-comment">#这里要Y，确认前面信息。</span></span><br><span class="line"></span><br><span class="line">Generating <span class="hljs-number">2</span>,<span class="hljs-number">048</span> bit RSA key pair <span class="hljs-keyword">and</span> self-signed certificate (SHA256withRSA) <span class="hljs-keyword">with</span> a validity <span class="hljs-keyword">of</span> <span class="hljs-number">90</span> days</span><br><span class="line">    <span class="hljs-keyword">for</span>: CN=Alex Lu, OU=visionet, O=visionet, L=SH, ST=SH, C=ZH</span><br><span class="line">Enter key password <span class="hljs-keyword">for</span> &lt;tomcat&gt;</span><br><span class="line">    (RETURN <span class="hljs-keyword">if</span> same <span class="hljs-keyword">as</span> keystore password):        <span class="hljs-comment">#默认回车即可，不需要设置太多密码</span></span><br><span class="line">[Storing mykeystore]</span><br><span class="line">[root@test conf]<span class="hljs-comment"># ls</span></span><br><span class="line">Catalina  catalina.policy  catalina.properties  context.xml  logging.properties  mykeystore  server.xml  tomcat-users.xml  web.xml</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> 注意：-keystore是用来指定keystore保存位置，如果不加参数默认保存的当前用户家目录为~/.keystore<br>       -validity 可以用来指定证书有效期，单位为天，缺省值为90天。</p>
+</blockquote>
+<h4 id="2-备份-tomcatdir-conf-server-xml"><a href="#2-备份-tomcatdir-conf-server-xml" class="headerlink" title="2. 备份$tomcatdir/conf/server.xml"></a>2. 备份$tomcatdir/conf/server.xml</h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp <span class="hljs-variable">$tomcatdir</span><span class="hljs-regexp">/conf/</span>server.xml <span class="hljs-variable">$tomcatdir</span><span class="hljs-regexp">/conf/</span>server.xml</span><br></pre></td></tr></table></figure>
+<h4 id="3-修改server-xml"><a href="#3-修改server-xml" class="headerlink" title="3. 修改server.xml"></a>3. 修改server.xml</h4><h6 id="a-注释以下：（tomcat注释用：-lt-XXXX-）-如何也想保留http访问，可以不注释"><a href="#a-注释以下：（tomcat注释用：-lt-XXXX-）-如何也想保留http访问，可以不注释" class="headerlink" title="a. 注释以下：（tomcat注释用：&lt;!-- XXXX --> ）,如何也想保留http访问，可以不注释"></a>a. 注释以下：（tomcat注释用：&lt;!-- XXXX --> ）,如何也想保留http访问，可以不注释</h6><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">&lt;!--</span></span><br><span class="line"><span class="hljs-comment">&lt;Connector executor="tomcatThreadPool"</span></span><br><span class="line"><span class="hljs-comment">                port="80" protocol="HTTP/1.1"</span></span><br><span class="line"><span class="hljs-comment">                connectionTimeout="20000"</span></span><br><span class="line"><span class="hljs-comment">                redirectPort="8443" /&gt;</span></span><br><span class="line"><span class="hljs-comment">--&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="b-取消下面注释"><a href="#b-取消下面注释" class="headerlink" title="b. 取消下面注释"></a>b. 取消下面注释</h6><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector <span class="hljs-attribute">port</span>=<span class="hljs-string">"443"</span> <span class="hljs-attribute">protocol</span>=<span class="hljs-string">"HTTP/1.1"</span> <span class="hljs-attribute">SSLEnabled</span>=<span class="hljs-string">"true"</span></span><br><span class="line">                <span class="hljs-attribute">maxThreads</span>=<span class="hljs-string">"150"</span> <span class="hljs-attribute">scheme</span>=<span class="hljs-string">"https"</span> <span class="hljs-attribute">secure</span>=<span class="hljs-string">"true"</span></span><br><span class="line">                <span class="hljs-attribute">clientAuth</span>=<span class="hljs-string">"false"</span> <span class="hljs-attribute">sslProtocol</span>=<span class="hljs-string">"TLS"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<h6 id="c-增加keystoreFile和keystorePass"><a href="#c-增加keystoreFile和keystorePass" class="headerlink" title="c. 增加keystoreFile和keystorePass"></a>c. 增加keystoreFile和keystorePass</h6><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector <span class="hljs-attribute">port</span>=<span class="hljs-string">"443"</span> <span class="hljs-attribute">protocol</span>=<span class="hljs-string">"HTTP/1.1"</span> <span class="hljs-attribute">SSLEnabled</span>=<span class="hljs-string">"true"</span></span><br><span class="line">               <span class="hljs-attribute">maxThreads</span>=<span class="hljs-string">"150"</span> <span class="hljs-attribute">scheme</span>=<span class="hljs-string">"https"</span> <span class="hljs-attribute">secure</span>=<span class="hljs-string">"true"</span></span><br><span class="line">               <span class="hljs-attribute">clientAuth</span>=<span class="hljs-string">"false"</span> <span class="hljs-attribute">sslProtocol</span>=<span class="hljs-string">"TLS"</span></span><br><span class="line">               <span class="hljs-attribute">keystoreFile</span>=<span class="hljs-string">"conf/mykeystore"</span> <span class="hljs-attribute">keystorePass</span>=<span class="hljs-string">"123456"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>keystoreFile=跟keystore文件位置<br>keystorePass=跟当时keytool命令执行时输入的密码</p>
+</blockquote>
+<h4 id="4-重启tomcat"><a href="#4-重启tomcat" class="headerlink" title="4. 重启tomcat"></a>4. 重启tomcat</h4><figure class="highlight x86asm hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@<span class="hljs-keyword">test</span> conf]# ../bin/catalina.sh stop &amp;&amp; ../bin/catalina.sh start</span><br><span class="line">Using CATALINA_BASE:   /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span></span><br><span class="line">Using CATALINA_HOME:   /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span></span><br><span class="line">Using CATALINA_TMPDIR: /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span>/temp</span><br><span class="line">Using JRE_HOME:        /home/pms/jdk1<span class="hljs-meta">.7</span><span class="hljs-meta">.0_65</span></span><br><span class="line">Using CLASSPATH:       /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span>/bin/bootstrap.jar</span><br><span class="line">Using CATALINA_BASE:   /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span></span><br><span class="line">Using CATALINA_HOME:   /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span></span><br><span class="line">Using CATALINA_TMPDIR: /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span>/temp</span><br><span class="line">Using JRE_HOME:        /home/pms/jdk1<span class="hljs-meta">.7</span><span class="hljs-meta">.0_65</span></span><br><span class="line">Using CLASSPATH:       /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span>/bin/bootstrap.jar</span><br><span class="line">[root@<span class="hljs-keyword">test</span> conf]# netstat -ntlup | grep -e <span class="hljs-string">"80\|443"</span></span><br><span class="line">tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:<span class="hljs-number">80</span>         <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:*          LISTEN      <span class="hljs-number">21960</span>/java</span><br><span class="line">tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:<span class="hljs-number">443</span>        <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:*          LISTEN      <span class="hljs-number">21960</span>/java</span><br><span class="line">tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">127.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.1</span>:<span class="hljs-number">8005</span>     <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:*          LISTEN      <span class="hljs-number">21960</span>/java</span><br><span class="line">tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:<span class="hljs-number">8009</span>       <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:*          LISTEN      <span class="hljs-number">21960</span>/java</span><br><span class="line">[root@<span class="hljs-keyword">test</span> conf]#</span><br></pre></td></tr></table></figure>
+<p>OK !</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2016-11-30T15:45:54.000Z">2016-11-30</time>
                 
                 
@@ -292,61 +351,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-11-28T02:33:09.000Z">2016-11-28</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/CentOS/">CentOS</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 minutes read (About 996 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/11/28/centos6-6-yum-install-lamp/">HowTo Install LNMP on CentOS 6.x</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>egrep -v “^ <em>#|^ </em>$”     去除所有以#号开头的文件</p>
-</blockquote>
-<h4 id="Demo-system"><a href="#Demo-system" class="headerlink" title="Demo system"></a>Demo system</h4><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[Alex@Test01 ~]$ uname -a</span><br><span class="line">Linux Test01 2.6.32-504.el6.x86_64 #1 SMP Wed Oct 15 04:27:16 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux</span><br><span class="line">[Alex@Test01 ~]$<span class="hljs-built_in"> ip </span>addr | grep eth0</span><br><span class="line">2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000</span><br><span class="line">    inet 10.0.2.128/24 brd 10.0.2.255 scope global eth0</span><br></pre></td></tr></table></figure>
-<h4 id="Install-httpd"><a href="#Install-httpd" class="headerlink" title="Install httpd"></a>Install httpd</h4><figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Alex<span class="hljs-variable">@Test01</span> yum.repos.d]<span class="hljs-variable">$ </span>sudo yum install -y httpd</span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> ~]<span class="hljs-variable">$ </span>rpm -qa | grep httpd</span><br><span class="line">httpd-<span class="hljs-number">2.2</span>.<span class="hljs-number">15</span>-<span class="hljs-number">39</span>.el6.centos.x86_64</span><br><span class="line">httpd-tools-<span class="hljs-number">2.2</span>.<span class="hljs-number">15</span>-<span class="hljs-number">39</span>.el6.centos.x86_64</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># remove welcome page</span></span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> yum.repos.d]<span class="hljs-variable">$ </span>sudo rm -f /etc/httpd/conf.d/welcome.conf</span><br><span class="line"><span class="hljs-comment"># remove default error page</span></span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> yum.repos.d]<span class="hljs-variable">$ </span>sudo rm -f /var/www/error/noindex.html</span><br></pre></td></tr></table></figure>
-<h4 id="Configure-httpd-Replace-the-server-name-to-you-own-one"><a href="#Configure-httpd-Replace-the-server-name-to-you-own-one" class="headerlink" title="Configure httpd . Replace the server name to you own one."></a>Configure httpd . Replace the server name to you own one.</h4><figure class="highlight cs hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[<span class="hljs-meta">Alex@Test01 ~</span>]<span class="hljs-meta"># sudo vi /etc/httpd/conf/httpd.conf</span></span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 44: change</span></span><br><span class="line"> ServerTokens Prod</span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 76: change to ON</span></span><br><span class="line"> KeepAlive On</span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 262: Admin's address</span></span><br><span class="line"> ServerAdmin luchuanjia@msn.com</span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 338: change</span></span><br><span class="line"> AllowOverride All</span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 276: change to your server's name</span></span><br><span class="line"> ServerName www.ultraera.org:<span class="hljs-number">80</span></span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 402: add file name that it can access only with directory's name</span></span><br><span class="line"> DirectoryIndex index.html index.htm</span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 536: change</span></span><br><span class="line"> ServerSignature Off</span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 759: comment out</span></span><br><span class="line"><span class="hljs-meta"># AddDefaultCharset UTF-8</span></span><br><span class="line">[<span class="hljs-meta">Alex@Test01 ~</span>]<span class="hljs-meta"># sudo /etc/init.d/httpd start</span></span><br><span class="line"> Starting httpd:[  OK  ]</span><br><span class="line">[<span class="hljs-meta">Alex@Test01 ~</span>]<span class="hljs-meta"># sudo chkconfig httpd on     # set httpd start with system.</span></span><br></pre></td></tr></table></figure>
-<h4 id="create-a-HTML-test-page"><a href="#create-a-HTML-test-page" class="headerlink" title="create a HTML test page"></a>create a HTML test page</h4><figure class="highlight livescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[Alex@Test01 ~]<span class="hljs-comment"># sudo vi /var/www/html/index.html</span></span><br><span class="line"><span class="hljs-literal">it</span><span class="hljs-string">'s ok.</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://s3.51cto.com/wyfs02/M00/70/DE/wKioL1XAUfuQoFfwAACC5LJWQgg039.jpg" alt></p>
-<h4 id="Install-PHP"><a href="#Install-PHP" class="headerlink" title="Install PHP."></a>Install PHP.</h4><figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[Alex<span class="hljs-variable">@Test01</span> ~]<span class="hljs-variable">$ </span>sudo yum install -y php php-mbstring php-pear</span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> ~]<span class="hljs-variable">$ </span>rpm -qa | grep php</span><br><span class="line">php-common-<span class="hljs-number">5.3</span>.<span class="hljs-number">3</span>-<span class="hljs-number">46</span>.el6_6.x86_64</span><br><span class="line">php-<span class="hljs-number">5.3</span>.<span class="hljs-number">3</span>-<span class="hljs-number">46</span>.el6_6.x86_64</span><br><span class="line">php-mbstring-<span class="hljs-number">5.3</span>.<span class="hljs-number">3</span>-<span class="hljs-number">46</span>.el6_6.x86_64</span><br><span class="line">php-cli-<span class="hljs-number">5.3</span>.<span class="hljs-number">3</span>-<span class="hljs-number">46</span>.el6_6.x86_64</span><br><span class="line">php-pear-<span class="hljs-number">1.9</span>.<span class="hljs-number">4</span>-<span class="hljs-number">4</span>.el6.noarch</span><br><span class="line"></span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> ~]<span class="hljs-variable">$ </span>sudo vi /etc/httpd/conf/httpd.conf</span><br><span class="line"><span class="hljs-comment"># line 402 add file name that it can access only with directory's name</span></span><br><span class="line">  DirectoryIndex index.html index.htm index.php</span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> ~]<span class="hljs-variable">$ </span>sudo vi /etc/php.ini</span><br><span class="line"><span class="hljs-comment"># line 946 set your timezone</span></span><br><span class="line">date.timezone = <span class="hljs-string">"Asia/Shanghai"</span></span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> ~]<span class="hljs-variable">$ </span>sudo /etc/init.d/httpd restart</span><br><span class="line"> Stopping <span class="hljs-symbol">httpd:</span>[  OK  ]</span><br><span class="line"> Starting <span class="hljs-symbol">httpd:</span>[  OK  ]</span><br></pre></td></tr></table></figure>
-<h4 id="create-a-php-test-page"><a href="#create-a-php-test-page" class="headerlink" title="create a php test page."></a>create a php test page.</h4><figure class="highlight ruby hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[Alex@Test01 ~]<span class="hljs-comment"># sudo vi /var/www/html/index.php</span></span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">    phpinfo();</span><br><span class="line"><span class="hljs-meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://s3.51cto.com/wyfs02/M02/70/DE/wKioL1XAUguwJCl2AARE16t4hyw682.jpg" alt></p>
-<h4 id="Install-MySQL"><a href="#Install-MySQL" class="headerlink" title="Install MySQL"></a>Install MySQL</h4><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">[Alex@Test01 ~]$ sudo -y <span class="hljs-keyword">install</span> mysql-<span class="hljs-keyword">server</span></span><br><span class="line">[Alex@Test01 ~]$ rpm -qa | grep mysql-<span class="hljs-keyword">server</span></span><br><span class="line">mysql-<span class="hljs-keyword">server</span><span class="hljs-number">-5.1</span><span class="hljs-number">.73</span><span class="hljs-number">-5.</span>el6_6.x86_64</span><br><span class="line"></span><br><span class="line">[Alex@Test01 ~]$ sudo vi /etc/my.cnf</span><br><span class="line">[mysqld]</span><br><span class="line">datadir=/<span class="hljs-keyword">var</span>/lib/mysql</span><br><span class="line">socket=/<span class="hljs-keyword">var</span>/lib/mysql/mysql.sock</span><br><span class="line"><span class="hljs-keyword">user</span>=mysql</span><br><span class="line"># Disabling symbolic-links <span class="hljs-keyword">is</span> recommended <span class="hljs-keyword">to</span> prevent assorted <span class="hljs-keyword">security</span> risks</span><br><span class="line">symbolic-links=<span class="hljs-number">0</span></span><br><span class="line"># <span class="hljs-keyword">add</span></span><br><span class="line"><span class="hljs-built_in">character</span>-<span class="hljs-keyword">set</span>-<span class="hljs-keyword">server</span>=utf8</span><br><span class="line"></span><br><span class="line">[Alex@Test01 ~]$ sudo /etc/rc.d/init.d/mysqld <span class="hljs-keyword">start</span></span><br><span class="line"></span><br><span class="line">Initializing MySQL <span class="hljs-keyword">database</span>:  <span class="hljs-keyword">WARNING</span>: The host <span class="hljs-string">'www.ultraera.org'</span> could <span class="hljs-keyword">not</span> be looked up <span class="hljs-keyword">with</span> resolveip.</span><br><span class="line">This probably means that your libc libraries <span class="hljs-keyword">are</span> <span class="hljs-keyword">not</span> <span class="hljs-number">100</span> % compatible</span><br><span class="line"><span class="hljs-keyword">with</span> this <span class="hljs-built_in">binary</span> MySQL version. The MySQL daemon, mysqld, should <span class="hljs-keyword">work</span></span><br><span class="line">normally <span class="hljs-keyword">with</span> the <span class="hljs-keyword">exception</span> that host <span class="hljs-keyword">name</span> resolving will <span class="hljs-keyword">not</span> work.</span><br><span class="line">This means that you should <span class="hljs-keyword">use</span> IP addresses instead <span class="hljs-keyword">of</span> hostnames</span><br><span class="line"><span class="hljs-keyword">when</span> specifying MySQL <span class="hljs-keyword">privileges</span> !</span><br><span class="line">Installing MySQL <span class="hljs-keyword">system</span> tables...</span><br><span class="line">OK</span><br><span class="line">Filling <span class="hljs-keyword">help</span> tables...</span><br><span class="line">OK</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">You can <span class="hljs-keyword">test</span> the MySQL daemon <span class="hljs-keyword">with</span> mysql-<span class="hljs-keyword">test</span>-run.pl</span><br><span class="line">cd /usr/mysql-<span class="hljs-keyword">test</span> ; perl mysql-test-run.pl</span><br><span class="line"></span><br><span class="line">Please report any problems with the /usr/bin/mysqlbug script!</span><br><span class="line"></span><br><span class="line">                                              [  OK  ]</span><br><span class="line">Starting mysqld:                      [  OK  ]</span><br><span class="line">[Alex@Test01 ~]$ sudo chkconfig mysqld on</span><br></pre></td></tr></table></figure>
-<h4 id="Initial-settings-for-MySQL"><a href="#Initial-settings-for-MySQL" class="headerlink" title="Initial settings for MySQL"></a>Initial settings for MySQL</h4><figure class="highlight vbnet hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]<span class="hljs-meta">#mysql_secure_installation</span></span><br><span class="line">NOTE: RUNNING ALL PARTS <span class="hljs-keyword">OF</span> THIS SCRIPT <span class="hljs-keyword">IS</span> RECOMMENDED <span class="hljs-keyword">FOR</span> ALL MySQL</span><br><span class="line">      SERVERS <span class="hljs-keyword">IN</span> PRODUCTION USE!  PLEASE READ <span class="hljs-keyword">EACH</span> <span class="hljs-keyword">STEP</span> CAREFULLY!</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">In</span> <span class="hljs-keyword">order</span> <span class="hljs-keyword">to</span> log <span class="hljs-keyword">into</span> MySQL <span class="hljs-keyword">to</span> secure it, we<span class="hljs-comment">'ll need the current</span></span><br><span class="line">password <span class="hljs-keyword">for</span> the root user.  <span class="hljs-keyword">If</span> you<span class="hljs-comment">'ve just installed MySQL, and</span></span><br><span class="line">you haven<span class="hljs-comment">'t set the root password yet, the password will be blank,</span></span><br><span class="line">so you should just press enter here.</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># Enter</span></span><br><span class="line"> Enter current password <span class="hljs-keyword">for</span> root (enter <span class="hljs-keyword">for</span> none):</span><br><span class="line">OK, successfully used password, moving <span class="hljs-keyword">on</span>...</span><br><span class="line"></span><br><span class="line">Setting the root password ensures that nobody can log <span class="hljs-keyword">into</span> the MySQL</span><br><span class="line">root user without the proper authorisation.</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># set root password</span></span><br><span class="line"> <span class="hljs-keyword">Set</span> root password? [Y/n]y</span><br><span class="line"> <span class="hljs-keyword">New</span> password:    <span class="hljs-meta"># input any password</span></span><br><span class="line"> Re-enter <span class="hljs-keyword">new</span> password:</span><br><span class="line">Password updated successfully!</span><br><span class="line">Reloading privilege tables..</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">By</span> <span class="hljs-keyword">default</span>, a MySQL installation has an anonymous user, allowing anyone</span><br><span class="line"><span class="hljs-keyword">to</span> log <span class="hljs-keyword">into</span> MySQL without having <span class="hljs-keyword">to</span> have a user account created <span class="hljs-keyword">for</span></span><br><span class="line">them.  This <span class="hljs-keyword">is</span> intended only <span class="hljs-keyword">for</span> testing, <span class="hljs-keyword">and</span> <span class="hljs-keyword">to</span> make the installation</span><br><span class="line">go a bit smoother.  You should remove them before moving <span class="hljs-keyword">into</span> a</span><br><span class="line">production environment.</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># remove anonymous users</span></span><br><span class="line"> Remove anonymous users? [Y/n]y</span><br><span class="line"></span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Normally, root should only be allowed <span class="hljs-keyword">to</span> connect <span class="hljs-keyword">from</span> <span class="hljs-comment">'localhost'.  This</span></span><br><span class="line">ensures that someone cannot guess at the root password <span class="hljs-keyword">from</span> the network.</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># disallow root login remotely</span></span><br><span class="line"> Disallow root login remotely? [Y/n]y</span><br><span class="line"></span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">By</span> <span class="hljs-keyword">default</span>, MySQL comes <span class="hljs-keyword">with</span> a database named <span class="hljs-comment">'test' that anyone can</span></span><br><span class="line">access.  This <span class="hljs-keyword">is</span> also intended only <span class="hljs-keyword">for</span> testing, <span class="hljs-keyword">and</span> should be removed</span><br><span class="line">before moving <span class="hljs-keyword">into</span> a production environment.</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># remove test database</span></span><br><span class="line"> Remove test database <span class="hljs-keyword">and</span> access <span class="hljs-keyword">to</span> it? [Y/n]y</span><br><span class="line"></span><br><span class="line"> - Dropping test database...</span><br><span class="line"> ... Success!</span><br><span class="line"> - Removing privileges <span class="hljs-keyword">on</span> test database...</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Reloading the privilege tables will ensure that all changes made so far</span><br><span class="line">will <span class="hljs-keyword">take</span> effect immediately.</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># reload privilege tables</span></span><br><span class="line"> Reload privilege tables now? [Y/n]y</span><br><span class="line"></span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Cleaning up...</span><br><span class="line"></span><br><span class="line">All done!  <span class="hljs-keyword">If</span> you<span class="hljs-comment">'ve completed all of the above steps, your MySQL</span></span><br><span class="line">installation should now be secure.</span><br><span class="line"></span><br><span class="line">Thanks <span class="hljs-keyword">for</span> <span class="hljs-keyword">using</span> MySQL!</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># try to connect with root</span></span><br><span class="line"> [root@www ~]<span class="hljs-meta">#mysql -u root -p</span></span><br><span class="line"> Enter password:<span class="hljs-meta"># MySQL root password</span></span><br><span class="line">Welcome <span class="hljs-keyword">to</span> the MySQL monitor.  Commands <span class="hljs-keyword">end</span> <span class="hljs-keyword">with</span> ; <span class="hljs-keyword">or</span> \g.</span><br><span class="line">Your MySQL connection id <span class="hljs-keyword">is</span> <span class="hljs-number">10</span></span><br><span class="line">Server version: <span class="hljs-number">5.1</span><span class="hljs-number">.73</span> Source distribution</span><br><span class="line"></span><br><span class="line">Copyright (c) <span class="hljs-number">2000</span>, <span class="hljs-number">2013</span>, Oracle <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle <span class="hljs-keyword">is</span> a registered trademark <span class="hljs-keyword">of</span> Oracle Corporation <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> its</span><br><span class="line">affiliates. Other names may be trademarks <span class="hljs-keyword">of</span> their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type <span class="hljs-comment">'help;' or '\h' for help. Type '\c' to clear the current input statement.</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># display user list</span></span><br><span class="line"> mysql&gt;<span class="hljs-keyword">select</span> user,host,password <span class="hljs-keyword">from</span> mysql.user;</span><br><span class="line">+------+-----------+-------------------------------------------+</span><br><span class="line">| user | host      | password                                  |</span><br><span class="line">+------+-----------+-------------------------------------------+</span><br><span class="line">| root | localhost | ***************************************** |</span><br><span class="line">| root | <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> | ***************************************** |</span><br><span class="line">+------+-----------+-------------------------------------------+</span><br><span class="line"><span class="hljs-number">2</span> rows <span class="hljs-keyword">in</span> <span class="hljs-keyword">set</span> (<span class="hljs-number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># display database list</span></span><br><span class="line"> mysql&gt;show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">+--------------------+</span><br><span class="line"><span class="hljs-number">2</span> rows <span class="hljs-keyword">in</span> <span class="hljs-keyword">set</span> (<span class="hljs-number">0.00</span> sec)</span><br><span class="line">mysql&gt;<span class="hljs-keyword">exit</span></span><br><span class="line">Bye</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -371,7 +375,7 @@ var _hmt = _hmt || [];
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/31/">31</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/32/">32</a></li>
             
         </ul>
     </nav>
@@ -415,7 +419,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        93
+                        94
                     </p>
                 </div>
             </div>
@@ -753,6 +757,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -827,25 +850,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -857,6 +861,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -1408,6 +1423,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -1482,25 +1516,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1512,6 +1527,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -2059,7 +2085,7 @@ var _hmt = _hmt || [];
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2020 SAMZONG&nbsp;
+                &copy; 2021 SAMZONG&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>

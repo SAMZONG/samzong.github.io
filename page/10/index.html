@@ -165,6 +165,59 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-02-20T06:39:15.000Z">2017-02-20</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Ghost/">Ghost</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a minute read (About 165 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/02/20/howto-upgrade-your-ghost-version/">HowTo Upgrade Your Ghost Version</a>
+            
+        </h1>
+        <div class="content">
+            <p><br></p>
+<h4 id="1-下载最新版的Ghost"><a href="#1-下载最新版的Ghost" class="headerlink" title="1. 下载最新版的Ghost"></a>1. 下载最新版的Ghost</h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -LOk https:<span class="hljs-regexp">//g</span>host.org<span class="hljs-regexp">/zip/g</span>host-latest.zip</span><br></pre></td></tr></table></figure>
+<h4 id="2-创建临时目录，并解压ghost-latest-zip到此"><a href="#2-创建临时目录，并解压ghost-latest-zip到此" class="headerlink" title="2. 创建临时目录，并解压ghost-latest.zip到此"></a>2. 创建临时目录，并解压ghost-latest.zip到此</h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir <span class="hljs-regexp">/usr/g</span>host-tmp</span><br><span class="line">unzip ghost-latest.zip -d <span class="hljs-regexp">/usr/g</span>host-tmp</span><br></pre></td></tr></table></figure>
+<h4 id="3-进入到原ghost目录，删除core"><a href="#3-进入到原ghost目录，删除core" class="headerlink" title="3. 进入到原ghost目录，删除core"></a>3. 进入到原ghost目录，删除core</h4><figure class="highlight jboss-cli hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">cd</span>  <span class="hljs-string">/usr/ghost</span></span><br><span class="line">rm -rf core</span><br></pre></td></tr></table></figure>
+<h4 id="4-进入到新版本的ghost临时目录"><a href="#4-进入到新版本的ghost临时目录" class="headerlink" title="4.进入到新版本的ghost临时目录"></a>4.进入到新版本的ghost临时目录</h4><figure class="highlight jboss-cli hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">cd</span> <span class="hljs-string">/usr/ghost-tmp</span></span><br></pre></td></tr></table></figure>
+<h4 id="5-拷贝所需文件到ghost升级目录"><a href="#5-拷贝所需文件到ghost升级目录" class="headerlink" title="5. 拷贝所需文件到ghost升级目录"></a>5. 拷贝所需文件到ghost升级目录</h4><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp -R core /usr/ghost</span><br><span class="line">cp index<span class="hljs-selector-class">.js</span> *<span class="hljs-selector-class">.json</span> /usr/ghost</span><br></pre></td></tr></table></figure>
+<h4 id="6-可选-升级casper，ghost默认主题"><a href="#6-可选-升级casper，ghost默认主题" class="headerlink" title="6. (可选)升级casper，ghost默认主题"></a>6. (可选)升级casper，ghost默认主题</h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -R content<span class="hljs-regexp">/themes/</span>casper <span class="hljs-regexp">/usr/g</span>host<span class="hljs-regexp">/content/</span>themes<span class="hljs-regexp">/</span></span><br></pre></td></tr></table></figure>
+<h4 id="7-切换回到ghost安装目录"><a href="#7-切换回到ghost安装目录" class="headerlink" title="7. 切换回到ghost安装目录"></a>7. 切换回到ghost安装目录</h4><figure class="highlight jboss-cli hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">cd</span> <span class="hljs-string">/usr/ghost</span></span><br></pre></td></tr></table></figure>
+<h4 id="8-修改文件目录所有者和所属组为ghost"><a href="#8-修改文件目录所有者和所属组为ghost" class="headerlink" title="8. 修改文件目录所有者和所属组为ghost"></a>8. 修改文件目录所有者和所属组为ghost</h4><figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-tag">chown</span> <span class="hljs-selector-tag">-R</span> <span class="hljs-selector-tag">ghost</span><span class="hljs-selector-pseudo">:ghost</span> .<span class="hljs-comment">/*</span></span><br></pre></td></tr></table></figure>
+<h4 id="9-重新安装环境"><a href="#9-重新安装环境" class="headerlink" title="9. 重新安装环境"></a>9. 重新安装环境</h4><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="hljs-keyword">install</span> <span class="hljs-comment">--production</span></span><br></pre></td></tr></table></figure>
+<h4 id="10-重启Ghost"><a href="#10-重启Ghost" class="headerlink" title="10. 重启Ghost"></a>10. 重启Ghost</h4><figure class="highlight gcode hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p<span class="hljs-name">m2</span> restart ghost</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-02-19T01:56:42.000Z">2017-02-19</time>
                 
                 <div class="level-item">
@@ -282,78 +335,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-01-18T15:28:44.000Z">2017-01-18</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Zabbix/">Zabbix</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    11 minutes read (About 1593 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/01/18/zabbix01-monitor-tomcat-head-memory-jmx/">HowTo Monitor Tomcat Head-Memory for Zabbix</a>
-            
-        </h1>
-        <div class="content">
-            <p>最近项目上由于BUG问题导致Tomcat程序在运行过程中经常内存泄漏,而本身监控系统之中没有更好的检测到Tomcat堆空间(Head Memory)的使用情况导致报警频发，这篇文章主要讲述，如何在Zabbix之中调用jmx监控服务器上Tomcat堆空间的使用情况并增加对应报警功能。</p>
-<blockquote>
-<p>测试环境: <br><br>CentOS 6.8 <br><br>Zabbix 2.4 <br><br>Tomcat 7.0 <br></p>
-</blockquote>
-<p>实验前提默认是各位已经安装Zabbix Server服务器，并且至少有一台Zabbix agent服务器正常监控。关于如何搭建Zabbix监控集群，会有专门文章描述。</p>
-<h4 id="zabbix-java-gateway的工作机制"><a href="#zabbix-java-gateway的工作机制" class="headerlink" title="zabbix-java-gateway的工作机制"></a>zabbix-java-gateway的工作机制</h4><ul>
-<li>首先我们需要配置我们的Tomcat服务启用监控服务，这个是默认不启用的</li>
-<li>之后需要在Zabbix的管理页面添加对应Tomcat服务器的jmx监控接口</li>
-<li>最后zabbix端会自动获取zabbix-java-gateway的数据并根据相应模板进行展<br>示</li>
-<li>工作流: [Zabbix-Server]–&gt;(port:10053 on zabbix server)–&gt; [zabbix-java-gateway] –(port:12345 on tomcatserver)–&gt; [JMX enabled]</li>
-</ul>
-<h4 id="1-Install-zabbix-java-gateway-on-Zabbix-Server"><a href="#1-Install-zabbix-java-gateway-on-Zabbix-Server" class="headerlink" title="1. Install zabbix-java-gateway on Zabbix Server"></a>1. Install zabbix-java-gateway on Zabbix Server</h4><p>因为我的zabbix是使用zabbix 2.4官方源安装，所以只需要用yum在安装即可:<br><figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="hljs-symbol">@6</span> ~]<span class="hljs-meta"># sudo  yum install -y zabbix-java-gateway</span></span><br></pre></td></tr></table></figure></p>
-<p>如果你没有官方源可能先安装该源，注意我的服务器zabbix版本是2.4 如果你是不同的版本，请到[<a href="http://repo.zabbix.com/zabbix/" target="_blank" rel="noopener">这里</a>]查找对应版本。<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 查看zabbix server版本</span></span><br><span class="line">[root@6 ~]# zabbix_server --version</span><br><span class="line">Zabbix<span class="hljs-built_in"> server </span>v2.4.8 (revision 59539) (20 April 2016)</span><br><span class="line">Compilation time: May  4 2016 01:32:12</span><br></pre></td></tr></table></figure></p>
-<p>在使用yum安装zabbix-java-gateway源时,会自动关联安装openjdk，尽管这段程序没多大影响，如果你想保证系统JAVA环境不受到改变的话，可以在/etc/profile文件最后，增加如下内容:<br><figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># add follows to the end</span></span><br><span class="line">export JAVA_HOME=<span class="hljs-regexp">/usr/java</span><span class="hljs-regexp">/default</span></span><br><span class="line"><span class="hljs-regexp">export PATH=$PATH:$JAVA_HOME/bin</span></span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/jre/<span class="hljs-class"><span class="hljs-keyword">lib</span>:$<span class="hljs-title">JAVA_HOME</span>/<span class="hljs-title">lib</span>:$<span class="hljs-title">JAVA_HOME</span>/<span class="hljs-title">lib</span>/<span class="hljs-title">tools</span>.<span class="hljs-title">jar</span></span></span><br></pre></td></tr></table></figure></p>
-<h4 id="2-Confiure-Tomcat-host-with-enable-jmx"><a href="#2-Confiure-Tomcat-host-with-enable-jmx" class="headerlink" title="2. Confiure Tomcat host with enable jmx"></a>2. Confiure Tomcat host with enable jmx</h4><p>首先在$tomcatdir/bin/catalina.sh文件开头处增加如下：<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">CATALINA_OPTS=<span class="hljs-string">"-Dcom.sun.management.jmxremote \</span></span><br><span class="line"><span class="hljs-string">-Dcom.sun.management.jmxremote.authenticate=false \</span></span><br><span class="line"><span class="hljs-string">-Dcom.sun.management.jmxremote.ssl=false \</span></span><br><span class="line"><span class="hljs-string">-Dcom.sun.management.jmxremote.port=12345"</span></span><br></pre></td></tr></table></figure></p>
-<p>然后,启动Tomcat，你会发现多了一个12345端口，这就是jmx的监听端口，请保证zabbix-java-gateway可以访问到这台服务器。<br><figure class="highlight jboss-cli hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@6 ~]<span class="hljs-comment"># /tomcat7/bin/startup.sh</span></span><br><span class="line">Starting Tomcat7:</span><br><span class="line">Using CATALINA_BASE:   <span class="hljs-string">/tomcat7</span></span><br><span class="line">Using CATALINA_HOME:   <span class="hljs-string">/tomcat7</span></span><br><span class="line">Using CATALINA_TMPDIR: <span class="hljs-string">/tomcat7/temp</span></span><br><span class="line">Using JRE_HOME:        <span class="hljs-string">/usr</span></span><br><span class="line">Using CLASSPATH:       <span class="hljs-string">/tomcat7/bin/bootstrap.jar</span>:<span class="hljs-string">/tomcat7/bin/tomcat-juli.jar</span></span><br><span class="line">Tomcat started.</span><br><span class="line"></span><br><span class="line">[root@6 ~]<span class="hljs-comment"># netstat -ntlp | grep 12345</span></span><br><span class="line">tcp  0      0 ::<span class="hljs-function">:12345</span>   :::*     LISTEN      8793/java</span><br><span class="line">[root@6 ~]<span class="hljs-comment">#</span></span><br></pre></td></tr></table></figure></p>
-<p><hr></p>
-<h4 id="fix-1-zabbix-agent与server存在复杂网络环境"><a href="#fix-1-zabbix-agent与server存在复杂网络环境" class="headerlink" title="==fix 1 == : zabbix agent与server存在复杂网络环境"></a>==<em>fix 1</em> == : zabbix agent与server存在复杂网络环境</h4><p>这里疏忽了1个问题，如果您的zabbix server与agent端之间有防火墙规则，而按照我上面的所述只是增加了12345这个端口，那么很可能，您在/var/log/zabbix/zabbix_java_gateway.log 中会看到“No route to host”的报错，这是因为JMX不光开启了12345端口，还开启了另外两个随机端口，而在获取监控数据时会使用到其中一个，这就导致了无法通过固定的防火墙规则来开放该端口。其实有另外一个替代方式来使该监听端口固定下来——使用Tomcat提供的额外组件 catalina-jmx-remote.jar，这个组件是需要另外下载的：</p>
-<figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 查看当前Tomcat版本.</span></span><br><span class="line">[root@<span class="hljs-number">6</span> bin]<span class="hljs-comment"># ./catalina.sh version</span></span><br><span class="line">Using <span class="hljs-symbol">CATALINA_BASE:</span>   /tomcat7</span><br><span class="line">Using <span class="hljs-symbol">CATALINA_HOME:</span>   /tomcat7</span><br><span class="line">Using <span class="hljs-symbol">CATALINA_TMPDIR:</span> /tomcat7/temp</span><br><span class="line">Using <span class="hljs-symbol">JRE_HOME:</span>        /usr</span><br><span class="line">Using <span class="hljs-symbol">CLASSPATH:</span>       /tomcat7/bin/bootstrap.<span class="hljs-symbol">jar:</span>/tomcat7/bin/tomcat-juli.jar</span><br><span class="line">Server <span class="hljs-symbol">version:</span> Apache Tomcat/<span class="hljs-number">7.0</span>.<span class="hljs-number">64</span></span><br><span class="line">Server <span class="hljs-symbol">built:</span>   Aug <span class="hljs-number">19</span> <span class="hljs-number">2015</span> <span class="hljs-number">17</span>:<span class="hljs-number">18</span>:<span class="hljs-number">06</span> UTC</span><br><span class="line">Server <span class="hljs-symbol">number:</span>  <span class="hljs-number">7.0</span>.<span class="hljs-number">64.0</span></span><br><span class="line">OS <span class="hljs-symbol">Name:</span>        Linux</span><br><span class="line">OS <span class="hljs-symbol">Version:</span>     <span class="hljs-number">2.6</span>.<span class="hljs-number">32</span>-<span class="hljs-number">642.11</span>.<span class="hljs-number">1</span>.el6.x86_64</span><br><span class="line"><span class="hljs-symbol">Architecture:</span>   amd64</span><br><span class="line">JVM <span class="hljs-symbol">Version:</span>    <span class="hljs-number">1.8</span>.<span class="hljs-number">0_111</span>-b15</span><br><span class="line">JVM <span class="hljs-symbol">Vendor:</span>     Oracle Corporation</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 下载 catalina-jmx-remote.jar # 请注意下载版本不要高于当前tomcat版本.</span></span><br><span class="line">wget <span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/mirror.bit.edu.cn/apache</span><span class="hljs-regexp">/tomcat/tomcat</span>-<span class="hljs-number">7</span>/v7.<span class="hljs-number">0.57</span>/bin/extras/catalina-jmx-remote.jar -O <span class="hljs-class"><span class="hljs-keyword">lib</span>/<span class="hljs-title">catalina</span>-<span class="hljs-title">jmx</span>-<span class="hljs-title">remote</span>.<span class="hljs-title">jar</span></span></span><br></pre></td></tr></table></figure>
-<p>增加如下内容，在conf/server.xml中：<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Listener <span class="hljs-attribute">className</span>=<span class="hljs-string">"org.apache.catalina.mbeans.JmxRemoteLifecycleListener"</span></span><br><span class="line">          <span class="hljs-attribute">rmiRegistryPortPlatform</span>=<span class="hljs-string">"12345"</span> <span class="hljs-attribute">rmiServerPortPlatform</span>=<span class="hljs-string">"12346"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
-<p>因为我们已经在conf/server.xml定义了rmiRegistryPortPlatform，所以要将bin/catalina.sh中CATALINA_OPTS的com.sun.management.jmxremote.port去掉，否则会因为jmxremote.port配置有优先级更高而导致配置失效。<br><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">CATALINA_OPTS</span>=<span class="hljs-string">"-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"</span></span><br></pre></td></tr></table></figure></p>
-<p>完成之后，重启tomcat这时会发现jmx默认端口已经固定为12345何12346，而server依然可以正常获取监控数据.</p>
-<p><hr></p>
-<h4 id="3-Configure-Zabbix-Server"><a href="#3-Configure-Zabbix-Server" class="headerlink" title="3. Configure Zabbix Server"></a>3. Configure Zabbix Server</h4><p>首先需要修改zabbix_server.conf启用zabbix-java-gateway，让zabbix可以检测到服务,修改如下:<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">### Option: JavaGateway</span></span><br><span class="line"> #      <span class="hljs-built_in"> IP address </span>(<span class="hljs-keyword">or</span> hostname) of Zabbix Java gateway.</span><br><span class="line"> #       Only required <span class="hljs-keyword">if</span> Java pollers are started.</span><br><span class="line"> #</span><br><span class="line"> # Mandatory: <span class="hljs-literal">no</span></span><br><span class="line"> # Default:</span><br><span class="line"><span class="hljs-attribute">JavaGateway</span>=10.211.55.4 # 设置为你的zabbixsever IP</span><br><span class="line"></span><br><span class="line"> ### Option: JavaGatewayPort</span><br><span class="line"> #      <span class="hljs-built_in"> Port </span>that Zabbix Java gateway listens on.</span><br><span class="line"> #</span><br><span class="line"> # Mandatory: <span class="hljs-literal">no</span></span><br><span class="line"> # Range: 1024-32767</span><br><span class="line"> # Default:</span><br><span class="line"> <span class="hljs-attribute">JavaGatewayPort</span>=10053 # 设置服务端监听接口</span><br><span class="line"></span><br><span class="line"> ### Option: StartJavaPollers</span><br><span class="line"> #       Number of pre-forked instances of Java pollers.</span><br><span class="line"> #</span><br><span class="line"> # Mandatory: <span class="hljs-literal">no</span></span><br><span class="line"> # Range: 0-1000</span><br><span class="line"> # Default:</span><br><span class="line"> <span class="hljs-attribute">StartJavaPollers</span>=5 # 设置多线程启动</span><br></pre></td></tr></table></figure></p>
-<p>然后修改zabbix_java_gateway.conf 配置如下:<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"><span class="hljs-comment">## Option: zabbix.listenIP</span></span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash">       IP address to listen on.</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"></span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Mandatory: no</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Default:</span></span><br><span class="line"> LISTEN_IP="10.211.55.4" # 配置监听IP</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"><span class="hljs-comment">## Option: zabbix.listenPort</span></span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash">       Port to listen on.</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"></span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Mandatory: no</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Range: 1024-32767</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Default:</span></span><br><span class="line"> LISTEN_PORT=10053 # 配置监听端口</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"><span class="hljs-comment">## Option: zabbix.pidFile</span></span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash">       Name of PID file.</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash">       If omitted, Zabbix Java Gateway is started as a console application.</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"></span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Mandatory: no</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Default:</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> PID_FILE=</span></span><br><span class="line"></span><br><span class="line"> PID_FILE="/var/run/zabbix/zabbix_java.pid"</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"><span class="hljs-comment">## Option: zabbix.startPollers</span></span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash">       Number of worker threads to start.</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"></span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Mandatory: no</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Range: 1-1000</span></span><br><span class="line"><span class="hljs-meta"> #</span><span class="hljs-bash"> Default:</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 不能大于zabbix_server.conf的值，否则可能导致当连接Java gateway时没有多余的线程进行处理</span></span><br><span class="line"> START_POLLERS=5</span><br></pre></td></tr></table></figure></p>
-<p>最后启动启动zabbix-java-gateway，并重启zabbix-server<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@6 ~]#<span class="hljs-built_in"> service </span>zabbix-java-gateway start</span><br><span class="line">Starting zabbix java gateway:              [  OK  ]</span><br><span class="line">[root@6 ~]#<span class="hljs-built_in"> service </span>zabbix-server restart</span><br><span class="line">Stopping zabbix server:              [  OK  ]</span><br><span class="line">Starting zabbix server:              [  OK  ]</span><br></pre></td></tr></table></figure></p>
-<p>我在尝试重启发现一问题，zabbix-java-gateway通过service命令管理stop不能删除pid文件导致服务无法启动，如果你也碰到，解决办法如下:<br><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@6 zabbix]# vim /etc/rc.d/init.d/zabbix-java-gateway</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> line 97, 注释修改为如下：</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">       <span class="hljs-built_in">kill</span> `cat <span class="hljs-variable">$PID_FILE</span>` &amp;&amp; rm <span class="hljs-variable">$PID_FILE</span></span></span><br><span class="line">        rm -f $PID_FILE</span><br></pre></td></tr></table></figure></p>
-<h4 id="4-Adding-jmx-host-on-Zabbix-Web-consloe"><a href="#4-Adding-jmx-host-on-Zabbix-Web-consloe" class="headerlink" title="4. Adding jmx host on Zabbix Web consloe"></a>4. Adding jmx host on Zabbix Web consloe</h4><p>首先，上传Template Tomcat Head Memory模板，这个我做了一个简单的模板，只针对了堆内存空间的监控，并针对使用率超过60%以及80%，不同的警报。需要的同学可以直接从我这里下载，然后在Configuration-Templates导入到zabbix模板库内。<br><br>下载请点击:<a href="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/12/zbx_template_app_tomcat_head_memory.xml" target="_blank" rel="noopener">Template App Tomcat Head Memory</a></p>
-<p>然后，增加服务器的jmx监控<br><br><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/12/zabbix-jmx-settings.png" alt><br><br><br>关联模板<br><br><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/12/zabbix-host-select-template.png" alt></p>
-<h4 id="5-View-the-Head-Memory-Monitoring"><a href="#5-View-the-Head-Memory-Monitoring" class="headerlink" title="5. View the Head Memory Monitoring."></a>5. View the Head Memory Monitoring.</h4><p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/12/zabbix-view-monitor.png" alt></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -378,7 +359,7 @@ var _hmt = _hmt || [];
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/31/">31</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/32/">32</a></li>
             
         </ul>
     </nav>
@@ -422,7 +403,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        93
+                        94
                     </p>
                 </div>
             </div>
@@ -760,6 +741,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -834,25 +834,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -864,6 +845,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -1415,6 +1407,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -1489,25 +1500,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1519,6 +1511,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -2066,7 +2069,7 @@ var _hmt = _hmt || [];
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2020 SAMZONG&nbsp;
+                &copy; 2021 SAMZONG&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>

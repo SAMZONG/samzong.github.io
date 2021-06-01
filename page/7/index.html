@@ -165,6 +165,101 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-05-15T03:05:23.000Z">2017-05-15</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Windows/">Windows</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 minutes read (About 1387 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/05/15/fix-Wannacry/">Wannacry蠕虫病毒事件及修复方案</a>
+            
+        </h1>
+        <div class="content">
+            <p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/3d0jo.png" alt></p>
+<h3 id="事件背景"><a href="#事件背景" class="headerlink" title="事件背景"></a>事件背景</h3><p>5月12日晚， WannaCry 蠕虫病毒在全球大肆爆发。据BBC、CNN等媒体报道，恶意攻击者利用 NSA（美国国家安全局）泄露的 Windows 0day 利用工具对99个国家实施了超过75000次攻击，主要影响SMB和RDP服务，主要影响了137、138、139、445端口。</p>
+<p>目前已知已知的Windows版本包括但不限于一下都受影响：</p>
+<ul>
+<li>Windows NT</li>
+<li>Windows 2000</li>
+<li>Windows XP</li>
+<li>Windows 2003</li>
+<li>Windows Vista</li>
+<li>Windows 7</li>
+<li>Windows 8</li>
+<li>Windows 10</li>
+<li>Windows 2008</li>
+<li>Windows 2008 R2</li>
+<li>Windows Server 2012 SP0</li>
+</ul>
+<p>勒索者源头来自暗网，攻击具备兼容性、多语言支持，多个行业受到影响，国内高校网络系统沦为感染重灾区。据有关机构统计，目前国内每天有数万台机器遭到该蠕虫病毒袭击，国内的ATM机、火车站、自助终端、邮政、医院、政府办事终端、视频监控都可能遭受攻击。据报道，今日全国多地的中石油加油站无法进行网络支付，只能进行现金支付。中石油有关负责人表示，怀疑受到病毒攻击，具体情况还在核查。而截至目前，一些公安系统已经遭到入侵。</p>
+<p>如果你也遇到了这样的问题，请不要担心，我在下面给出了如何修复这个漏洞的建议。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/9y7cc.jpg" alt></p>
+<h3 id="什么是比特币蠕虫病毒？"><a href="#什么是比特币蠕虫病毒？" class="headerlink" title="什么是比特币蠕虫病毒？"></a>什么是比特币蠕虫病毒？</h3><p>这次攻击的始作俑者是一款名为“WannaCry”（中文名：想哭）的勒索病毒，带有加密功能，它利用 Windows 在 445 端口的安全漏洞潜入电脑并对多种文件类型加密并添加后缀(.onion)使用户无法打开，用户电脑存在文档被加密的情况，攻击者称需支付比特币解锁。(比特币是一种全球通用的互联网加密货币)</p>
+<h3 id="漏洞验证"><a href="#漏洞验证" class="headerlink" title="漏洞验证"></a>漏洞验证</h3><ol>
+<li><p>使用<code>Win</code>+<code>R</code>按键打开运行窗口，输入cmd，进入命令行工具，然后输入<code>netstat -an</code> 查看是否开放了对应的端口。</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/3m1jm.png" alt></p>
+<p>上图中的服务器就是开放了445端口，这有很大的风险可能会WannaCry 蠕虫病毒被攻击到，所以我们应该关掉对应端口，并修复漏洞。</p>
+<h3 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h3><ol>
+<li>目前微软已发布补丁MS17-010修复了“永恒之蓝”攻击的系统漏洞，请尽快为电脑安装此补丁，网址为<a href="https://laod.cn/go.php?url=https://technet.microsoft.com/zh-cn/library/security/MS17-010" target="_blank" rel="noopener">https://technet.microsoft.com/zh-cn/library/security/MS17-010</a></li>
+<li>对于XP、2003等微软已不再提供安全更新的机器，推荐使用360“NSA武器库免疫工具”检测系统是否存在漏洞，并关闭受到漏洞影响的端口，可以避免遭到勒索软件等病毒的侵害，可以在360电脑安全管家中找到。</li>
+<li>开启系统防火墙，利用系统防火墙的“高级设置”阻止外部对 445 端口进的访问（存在一定影响，该操作会影响使用 445 端口的服务）。</li>
+</ol>
+</li>
+</ol>
+<h3 id="修复脚本"><a href="#修复脚本" class="headerlink" title="修复脚本"></a>修复脚本</h3><p>如果以上方式都不能修复漏洞，大家可以使用我以下的批处理脚本文件来尝试关闭端口及服务，批处理禁用该漏洞可能利用到的端口，全版本通用，右键管理员启动即可，注意这需要打开Windows的防火墙。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">net stop SCardSvr</span><br><span class="line">net stop SCPolicySvc</span><br><span class="line">sc config SCardSvr start=disabled</span><br><span class="line">sc config SCPolicySvc start=disabled</span><br><span class="line">net start MpsSvc</span><br><span class="line">sc config MpsSvc start=auto</span><br><span class="line">netsh advfirewall <span class="hljs-built_in">set</span> allprofiles state on</span><br><span class="line">netsh advfirewall firewall add rule name=<span class="hljs-string">"deny udp 137"</span> dir=<span class="hljs-keyword">in</span> protocol=udp localport=137 action=block</span><br><span class="line">netsh advfirewall firewall add rule name=<span class="hljs-string">"deny tcp 137"</span> dir=<span class="hljs-keyword">in</span> protocol=tcp localport=137 action=block</span><br><span class="line">netsh advfirewall firewall add rule name=<span class="hljs-string">"deny udp 138"</span> dir=<span class="hljs-keyword">in</span> protocol=udp localport=138 action=block</span><br><span class="line">netsh advfirewall firewall add rule name=<span class="hljs-string">"deny tcp 138"</span> dir=<span class="hljs-keyword">in</span> protocol=tcp localport=138 action=block</span><br><span class="line">netsh advfirewall firewall add rule name=<span class="hljs-string">"deny udp 139"</span> dir=<span class="hljs-keyword">in</span> protocol=udp localport=139 action=block</span><br><span class="line">netsh advfirewall firewall add rule name=<span class="hljs-string">"deny tcp 139"</span> dir=<span class="hljs-keyword">in</span> protocol=tcp localport=139 action=block</span><br><span class="line">netsh advfirewall firewall add rule name=<span class="hljs-string">"deny udp 445"</span> dir=<span class="hljs-keyword">in</span> protocol=udp localport=445 action=block</span><br><span class="line">netsh advfirewall firewall add rule name=<span class="hljs-string">"deny tcp 445"</span> dir=<span class="hljs-keyword">in</span> protocol=tcp localport=445 action=block</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>我已经将脚本上传到百度云盘中，大家可以自行下载运行，注意解压缩Zip包之后的fix_WannaCry.bat</p>
+<p>下载链接：<a href="https://pan.baidu.com/s/1gfceNRH" target="_blank" rel="noopener">https://pan.baidu.com/s/1gfceNRH</a></p>
+<h3 id="添加防火规则"><a href="#添加防火规则" class="headerlink" title="添加防火规则"></a>添加防火规则</h3><ol>
+<li><p>打开控制面板中的Windows防火墙，并保证防火墙处于启用状态；</p>
+</li>
+<li><p>打开防火墙的高级设置；</p>
+</li>
+<li><p>在“入站规则”中新建一条规则，本地端口号选择445，操作选择阻止连接。</p>
+<p><img src="https://pic3.zhimg.com/v2-85f14330cdba1fbf89369b26b9e48f52_b.png" alt></p>
+<p><img src="https://pic2.zhimg.com/v2-1bbe08395ec8ef8d0e2028cbccb01055_b.png" alt></p>
+</li>
+</ol>
+<h3 id="手动导入安全策略"><a href="#手动导入安全策略" class="headerlink" title="手动导入安全策略"></a>手动导入安全策略</h3><p>下载策略文件</p>
+<p><a href="https://share.weiyun.com/15b7bbd3f86c493a66721dd948a81c54" target="_blank" rel="noopener">https://share.weiyun.com/15b7bbd3f86c493a66721dd948a81c54</a></p>
+<p>打开控制面板–管理工具-本地安全策略–IP安全策略 –&gt;所有任务–&gt;导入策略：</p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/hj9f4.jpg" alt></p>
+<p>或者，通过<code>Win</code>+<code>R</code>，输入<code>gpedit.msc</code></p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/9vsqx.jpg" alt></p>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/blog/tosjk.jpg" alt></p>
+<p><img src="/Users/Alex/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/573578678/QQ/Temp.db/539E3FA1-2A85-4B41-95BC-C32B82A5DA0D.png" alt="539E3FA1-2A85-4B41-95BC-C32B82A5DA0D"></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-04-18T09:48:57.000Z">2017-04-18</time>
                 
                 <div class="level-item">
@@ -313,53 +408,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-04-05T07:21:03.000Z">2017-04-05</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Tomcat/">Tomcat</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 minutes read (About 275 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/04/05/howto-set-tomcat-7-automatic-startup-with-centos-7/">HowTo set Tomcat 7 automatic startup with CentOS 7</a>
-            
-        </h1>
-        <div class="content">
-            <p>因CentOS7与6在系统上，变化较大，所以在之前的文章中讲到的使用Tomcat7开机自启动的方式在CentOS7是是无法使用的，所以这篇文章的目的是如何在CentOS7上将Tomcat7设置为开机自启动。</p>
-<h4 id="安装JAVA环境"><a href="#安装JAVA环境" class="headerlink" title="安装JAVA环境"></a>安装JAVA环境</h4><figure class="highlight clean hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[root@<span class="hljs-number">7</span> ~]# curl -LO -H <span class="hljs-string">"Cookie: oraclelicense=accept-securebackup-cookie"</span> \</span><br><span class="line"><span class="hljs-string">"http://download.oracle.com/otn-pub/java/jdk/7u75-b13/jdk-7u75-linux-x64.rpm"</span></span><br><span class="line"></span><br><span class="line">[root@<span class="hljs-number">7</span> ~]# rpm -Uvh jdk<span class="hljs-number">-7</span>u75-linux-x64.rpm</span><br><span class="line">Preparing...                ########################################### [<span class="hljs-number">100</span>%]</span><br><span class="line">   <span class="hljs-number">1</span>:jdk                    ########################################### [<span class="hljs-number">100</span>%]</span><br><span class="line">Unpacking JAR files...</span><br><span class="line">        rt.jar...</span><br><span class="line">        jsse.jar...</span><br><span class="line">        charsets.jar...</span><br><span class="line">        tools.jar...</span><br><span class="line">        localedata.jar...</span><br><span class="line">        jfxrt.jar...</span><br><span class="line"></span><br><span class="line">[root@<span class="hljs-number">7</span> ~]# vi /etc/profile</span><br><span class="line"># add follows to the end</span><br><span class="line"><span class="hljs-keyword">export</span> JAVA_HOME=/usr/java/default</span><br><span class="line"><span class="hljs-keyword">export</span> PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line"><span class="hljs-keyword">export</span> CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar</span><br><span class="line">[root@<span class="hljs-number">7</span> ~]# source /etc/profile</span><br></pre></td></tr></table></figure>
-<h4 id="安装Tomcat7"><a href="#安装Tomcat7" class="headerlink" title="安装Tomcat7"></a>安装Tomcat7</h4><figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[root<span class="hljs-symbol">@7</span> ~]<span class="hljs-meta"># wget http://ftp.riken.jp/net/apache/tomcat/tomcat-7/v7.0.77/bin/apache-tomcat-7.0.77.tar.gz</span></span><br><span class="line">[root<span class="hljs-symbol">@7</span> ~]<span class="hljs-meta"># tar zxvf apache-tomcat-7.0.77.tar.gz</span></span><br><span class="line">[root<span class="hljs-symbol">@7</span> ~]<span class="hljs-meta"># mv apache-tomcat-7.0.77 /usr/tomcat7</span></span><br><span class="line">[root<span class="hljs-symbol">@7</span> ~]<span class="hljs-meta"># useradd -M -d /usr/tomcat7 tomcat7</span></span><br><span class="line">[root<span class="hljs-symbol">@7</span> ~]<span class="hljs-meta"># chown -R tomcat7. /usr/tomcat7</span></span><br></pre></td></tr></table></figure>
-<h4 id="创建开机自启动脚本"><a href="#创建开机自启动脚本" class="headerlink" title="创建开机自启动脚本"></a>创建开机自启动脚本</h4><figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-section">[root@7 ~]</span><span class="hljs-comment"># cat /usr/lib/systemd/system/tomcat7.service</span></span><br><span class="line"><span class="hljs-comment"># create new</span></span><br><span class="line"><span class="hljs-section"> [Unit]</span></span><br><span class="line"><span class="hljs-attr">Description</span>=Apache Tomcat <span class="hljs-number">7</span></span><br><span class="line"><span class="hljs-attr">After</span>=network.target</span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[Service]</span></span><br><span class="line"><span class="hljs-attr">Type</span>=<span class="hljs-literal">on</span>eshot</span><br><span class="line"><span class="hljs-attr">ExecStart</span>=/usr/tomcat7/bin/startup.sh</span><br><span class="line"><span class="hljs-attr">ExecStop</span>=/usr/tomcat7/bin/shutdown.sh</span><br><span class="line"><span class="hljs-attr">RemainAfterExit</span>=<span class="hljs-literal">yes</span></span><br><span class="line"><span class="hljs-attr">User</span>=tomcat7</span><br><span class="line"><span class="hljs-attr">Group</span>=tomcat7</span><br><span class="line"></span><br><span class="line"><span class="hljs-section">[Install]</span></span><br><span class="line"><span class="hljs-attr">WantedBy</span>=multi-user.target</span><br></pre></td></tr></table></figure>
-<h4 id="启动Tomcat7"><a href="#启动Tomcat7" class="headerlink" title="启动Tomcat7"></a>启动Tomcat7</h4><figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="hljs-symbol">@7</span> ~]<span class="hljs-meta"># systemctl start tomcat7.service</span></span><br><span class="line">[root<span class="hljs-symbol">@7</span> ~]<span class="hljs-meta"># systemctl enable tomcat7.service</span></span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -384,7 +432,7 @@ var _hmt = _hmt || [];
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/31/">31</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/32/">32</a></li>
             
         </ul>
     </nav>
@@ -428,7 +476,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        93
+                        94
                     </p>
                 </div>
             </div>
@@ -766,6 +814,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -840,25 +907,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -870,6 +918,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -1421,6 +1480,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -1495,25 +1573,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1525,6 +1584,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -2072,7 +2142,7 @@ var _hmt = _hmt || [];
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2020 SAMZONG&nbsp;
+                &copy; 2021 SAMZONG&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>

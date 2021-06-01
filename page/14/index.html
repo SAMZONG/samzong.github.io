@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html  lang="zh">
-<head>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
 <title>SAMZONG</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
@@ -104,7 +104,7 @@ var _hmt = _hmt || [];
 
 
 <link rel="stylesheet" href="/css/style.css">
-<meta name="referrer" content="no-referrer" />
+<meta name="referrer" content="no-referrer">
 
 </head>
 <body class="is-3-column">
@@ -121,20 +121,15 @@ var _hmt = _hmt || [];
             
             <div class="navbar-start">
                 
-                <a class="navbar-item"
-                href="/">Home</a>
+                <a class="navbar-item" href="/">Home</a>
                 
-                <a class="navbar-item"
-                href="/archives">Archives</a>
+                <a class="navbar-item" href="/archives">Archives</a>
                 
-                <a class="navbar-item"
-                href="/categories">Categories</a>
+                <a class="navbar-item" href="/categories">Categories</a>
                 
-                <a class="navbar-item"
-                href="/tags">Tags</a>
+                <a class="navbar-item" href="/tags">Tags</a>
                 
-                <a class="navbar-item"
-                href="/about">About</a>
+                <a class="navbar-item" href="/about">About</a>
                 
             </div>
             
@@ -164,6 +159,61 @@ var _hmt = _hmt || [];
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-11-28T02:33:09.000Z">2016-11-28</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/CentOS/">CentOS</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 minutes read (About 996 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/11/28/centos6-6-yum-install-lamp/">HowTo Install LNMP on CentOS 6.x</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>egrep -v “^ <em>#|^ </em>$”     去除所有以#号开头的文件</p>
+</blockquote>
+<h4 id="Demo-system"><a href="#Demo-system" class="headerlink" title="Demo system"></a>Demo system</h4><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[Alex@Test01 ~]$ uname -a</span><br><span class="line">Linux Test01 2.6.32-504.el6.x86_64 #1 SMP Wed Oct 15 04:27:16 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux</span><br><span class="line">[Alex@Test01 ~]$<span class="hljs-built_in"> ip </span>addr | grep eth0</span><br><span class="line">2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000</span><br><span class="line">    inet 10.0.2.128/24 brd 10.0.2.255 scope global eth0</span><br></pre></td></tr></table></figure>
+<h4 id="Install-httpd"><a href="#Install-httpd" class="headerlink" title="Install httpd"></a>Install httpd</h4><figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Alex<span class="hljs-variable">@Test01</span> yum.repos.d]<span class="hljs-variable">$ </span>sudo yum install -y httpd</span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> ~]<span class="hljs-variable">$ </span>rpm -qa | grep httpd</span><br><span class="line">httpd-<span class="hljs-number">2.2</span>.<span class="hljs-number">15</span>-<span class="hljs-number">39</span>.el6.centos.x86_64</span><br><span class="line">httpd-tools-<span class="hljs-number">2.2</span>.<span class="hljs-number">15</span>-<span class="hljs-number">39</span>.el6.centos.x86_64</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># remove welcome page</span></span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> yum.repos.d]<span class="hljs-variable">$ </span>sudo rm -f /etc/httpd/conf.d/welcome.conf</span><br><span class="line"><span class="hljs-comment"># remove default error page</span></span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> yum.repos.d]<span class="hljs-variable">$ </span>sudo rm -f /var/www/error/noindex.html</span><br></pre></td></tr></table></figure>
+<h4 id="Configure-httpd-Replace-the-server-name-to-you-own-one"><a href="#Configure-httpd-Replace-the-server-name-to-you-own-one" class="headerlink" title="Configure httpd . Replace the server name to you own one."></a>Configure httpd . Replace the server name to you own one.</h4><figure class="highlight cs hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[<span class="hljs-meta">Alex@Test01 ~</span>]<span class="hljs-meta"># sudo vi /etc/httpd/conf/httpd.conf</span></span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 44: change</span></span><br><span class="line"> ServerTokens Prod</span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 76: change to ON</span></span><br><span class="line"> KeepAlive On</span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 262: Admin's address</span></span><br><span class="line"> ServerAdmin luchuanjia@msn.com</span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 338: change</span></span><br><span class="line"> AllowOverride All</span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 276: change to your server's name</span></span><br><span class="line"> ServerName www.ultraera.org:<span class="hljs-number">80</span></span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 402: add file name that it can access only with directory's name</span></span><br><span class="line"> DirectoryIndex index.html index.htm</span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 536: change</span></span><br><span class="line"> ServerSignature Off</span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">line</span> 759: comment out</span></span><br><span class="line"><span class="hljs-meta"># AddDefaultCharset UTF-8</span></span><br><span class="line">[<span class="hljs-meta">Alex@Test01 ~</span>]<span class="hljs-meta"># sudo /etc/init.d/httpd start</span></span><br><span class="line"> Starting httpd:[  OK  ]</span><br><span class="line">[<span class="hljs-meta">Alex@Test01 ~</span>]<span class="hljs-meta"># sudo chkconfig httpd on     # set httpd start with system.</span></span><br></pre></td></tr></table></figure>
+<h4 id="create-a-HTML-test-page"><a href="#create-a-HTML-test-page" class="headerlink" title="create a HTML test page"></a>create a HTML test page</h4><figure class="highlight livescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[Alex@Test01 ~]<span class="hljs-comment"># sudo vi /var/www/html/index.html</span></span><br><span class="line"><span class="hljs-literal">it</span><span class="hljs-string">'s ok.</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://s3.51cto.com/wyfs02/M00/70/DE/wKioL1XAUfuQoFfwAACC5LJWQgg039.jpg" alt></p>
+<h4 id="Install-PHP"><a href="#Install-PHP" class="headerlink" title="Install PHP."></a>Install PHP.</h4><figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[Alex<span class="hljs-variable">@Test01</span> ~]<span class="hljs-variable">$ </span>sudo yum install -y php php-mbstring php-pear</span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> ~]<span class="hljs-variable">$ </span>rpm -qa | grep php</span><br><span class="line">php-common-<span class="hljs-number">5.3</span>.<span class="hljs-number">3</span>-<span class="hljs-number">46</span>.el6_6.x86_64</span><br><span class="line">php-<span class="hljs-number">5.3</span>.<span class="hljs-number">3</span>-<span class="hljs-number">46</span>.el6_6.x86_64</span><br><span class="line">php-mbstring-<span class="hljs-number">5.3</span>.<span class="hljs-number">3</span>-<span class="hljs-number">46</span>.el6_6.x86_64</span><br><span class="line">php-cli-<span class="hljs-number">5.3</span>.<span class="hljs-number">3</span>-<span class="hljs-number">46</span>.el6_6.x86_64</span><br><span class="line">php-pear-<span class="hljs-number">1.9</span>.<span class="hljs-number">4</span>-<span class="hljs-number">4</span>.el6.noarch</span><br><span class="line"></span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> ~]<span class="hljs-variable">$ </span>sudo vi /etc/httpd/conf/httpd.conf</span><br><span class="line"><span class="hljs-comment"># line 402 add file name that it can access only with directory's name</span></span><br><span class="line">  DirectoryIndex index.html index.htm index.php</span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> ~]<span class="hljs-variable">$ </span>sudo vi /etc/php.ini</span><br><span class="line"><span class="hljs-comment"># line 946 set your timezone</span></span><br><span class="line">date.timezone = <span class="hljs-string">"Asia/Shanghai"</span></span><br><span class="line">[Alex<span class="hljs-variable">@Test01</span> ~]<span class="hljs-variable">$ </span>sudo /etc/init.d/httpd restart</span><br><span class="line"> Stopping <span class="hljs-symbol">httpd:</span>[  OK  ]</span><br><span class="line"> Starting <span class="hljs-symbol">httpd:</span>[  OK  ]</span><br></pre></td></tr></table></figure>
+<h4 id="create-a-php-test-page"><a href="#create-a-php-test-page" class="headerlink" title="create a php test page."></a>create a php test page.</h4><figure class="highlight ruby hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[Alex@Test01 ~]<span class="hljs-comment"># sudo vi /var/www/html/index.php</span></span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">    phpinfo();</span><br><span class="line"><span class="hljs-meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://s3.51cto.com/wyfs02/M02/70/DE/wKioL1XAUguwJCl2AARE16t4hyw682.jpg" alt></p>
+<h4 id="Install-MySQL"><a href="#Install-MySQL" class="headerlink" title="Install MySQL"></a>Install MySQL</h4><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">[Alex@Test01 ~]$ sudo -y <span class="hljs-keyword">install</span> mysql-<span class="hljs-keyword">server</span></span><br><span class="line">[Alex@Test01 ~]$ rpm -qa | grep mysql-<span class="hljs-keyword">server</span></span><br><span class="line">mysql-<span class="hljs-keyword">server</span><span class="hljs-number">-5.1</span><span class="hljs-number">.73</span><span class="hljs-number">-5.</span>el6_6.x86_64</span><br><span class="line"></span><br><span class="line">[Alex@Test01 ~]$ sudo vi /etc/my.cnf</span><br><span class="line">[mysqld]</span><br><span class="line">datadir=/<span class="hljs-keyword">var</span>/lib/mysql</span><br><span class="line">socket=/<span class="hljs-keyword">var</span>/lib/mysql/mysql.sock</span><br><span class="line"><span class="hljs-keyword">user</span>=mysql</span><br><span class="line"># Disabling symbolic-links <span class="hljs-keyword">is</span> recommended <span class="hljs-keyword">to</span> prevent assorted <span class="hljs-keyword">security</span> risks</span><br><span class="line">symbolic-links=<span class="hljs-number">0</span></span><br><span class="line"># <span class="hljs-keyword">add</span></span><br><span class="line"><span class="hljs-built_in">character</span>-<span class="hljs-keyword">set</span>-<span class="hljs-keyword">server</span>=utf8</span><br><span class="line"></span><br><span class="line">[Alex@Test01 ~]$ sudo /etc/rc.d/init.d/mysqld <span class="hljs-keyword">start</span></span><br><span class="line"></span><br><span class="line">Initializing MySQL <span class="hljs-keyword">database</span>:  <span class="hljs-keyword">WARNING</span>: The host <span class="hljs-string">'www.ultraera.org'</span> could <span class="hljs-keyword">not</span> be looked up <span class="hljs-keyword">with</span> resolveip.</span><br><span class="line">This probably means that your libc libraries <span class="hljs-keyword">are</span> <span class="hljs-keyword">not</span> <span class="hljs-number">100</span> % compatible</span><br><span class="line"><span class="hljs-keyword">with</span> this <span class="hljs-built_in">binary</span> MySQL version. The MySQL daemon, mysqld, should <span class="hljs-keyword">work</span></span><br><span class="line">normally <span class="hljs-keyword">with</span> the <span class="hljs-keyword">exception</span> that host <span class="hljs-keyword">name</span> resolving will <span class="hljs-keyword">not</span> work.</span><br><span class="line">This means that you should <span class="hljs-keyword">use</span> IP addresses instead <span class="hljs-keyword">of</span> hostnames</span><br><span class="line"><span class="hljs-keyword">when</span> specifying MySQL <span class="hljs-keyword">privileges</span> !</span><br><span class="line">Installing MySQL <span class="hljs-keyword">system</span> tables...</span><br><span class="line">OK</span><br><span class="line">Filling <span class="hljs-keyword">help</span> tables...</span><br><span class="line">OK</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">You can <span class="hljs-keyword">test</span> the MySQL daemon <span class="hljs-keyword">with</span> mysql-<span class="hljs-keyword">test</span>-run.pl</span><br><span class="line">cd /usr/mysql-<span class="hljs-keyword">test</span> ; perl mysql-test-run.pl</span><br><span class="line"></span><br><span class="line">Please report any problems with the /usr/bin/mysqlbug script!</span><br><span class="line"></span><br><span class="line">                                              [  OK  ]</span><br><span class="line">Starting mysqld:                      [  OK  ]</span><br><span class="line">[Alex@Test01 ~]$ sudo chkconfig mysqld on</span><br></pre></td></tr></table></figure>
+<h4 id="Initial-settings-for-MySQL"><a href="#Initial-settings-for-MySQL" class="headerlink" title="Initial settings for MySQL"></a>Initial settings for MySQL</h4><figure class="highlight vbnet hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]<span class="hljs-meta">#mysql_secure_installation</span></span><br><span class="line">NOTE: RUNNING ALL PARTS <span class="hljs-keyword">OF</span> THIS SCRIPT <span class="hljs-keyword">IS</span> RECOMMENDED <span class="hljs-keyword">FOR</span> ALL MySQL</span><br><span class="line">      SERVERS <span class="hljs-keyword">IN</span> PRODUCTION USE!  PLEASE READ <span class="hljs-keyword">EACH</span> <span class="hljs-keyword">STEP</span> CAREFULLY!</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">In</span> <span class="hljs-keyword">order</span> <span class="hljs-keyword">to</span> log <span class="hljs-keyword">into</span> MySQL <span class="hljs-keyword">to</span> secure it, we<span class="hljs-comment">'ll need the current</span></span><br><span class="line">password <span class="hljs-keyword">for</span> the root user.  <span class="hljs-keyword">If</span> you<span class="hljs-comment">'ve just installed MySQL, and</span></span><br><span class="line">you haven<span class="hljs-comment">'t set the root password yet, the password will be blank,</span></span><br><span class="line">so you should just press enter here.</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># Enter</span></span><br><span class="line"> Enter current password <span class="hljs-keyword">for</span> root (enter <span class="hljs-keyword">for</span> none):</span><br><span class="line">OK, successfully used password, moving <span class="hljs-keyword">on</span>...</span><br><span class="line"></span><br><span class="line">Setting the root password ensures that nobody can log <span class="hljs-keyword">into</span> the MySQL</span><br><span class="line">root user without the proper authorisation.</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># set root password</span></span><br><span class="line"> <span class="hljs-keyword">Set</span> root password? [Y/n]y</span><br><span class="line"> <span class="hljs-keyword">New</span> password:    <span class="hljs-meta"># input any password</span></span><br><span class="line"> Re-enter <span class="hljs-keyword">new</span> password:</span><br><span class="line">Password updated successfully!</span><br><span class="line">Reloading privilege tables..</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">By</span> <span class="hljs-keyword">default</span>, a MySQL installation has an anonymous user, allowing anyone</span><br><span class="line"><span class="hljs-keyword">to</span> log <span class="hljs-keyword">into</span> MySQL without having <span class="hljs-keyword">to</span> have a user account created <span class="hljs-keyword">for</span></span><br><span class="line">them.  This <span class="hljs-keyword">is</span> intended only <span class="hljs-keyword">for</span> testing, <span class="hljs-keyword">and</span> <span class="hljs-keyword">to</span> make the installation</span><br><span class="line">go a bit smoother.  You should remove them before moving <span class="hljs-keyword">into</span> a</span><br><span class="line">production environment.</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># remove anonymous users</span></span><br><span class="line"> Remove anonymous users? [Y/n]y</span><br><span class="line"></span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Normally, root should only be allowed <span class="hljs-keyword">to</span> connect <span class="hljs-keyword">from</span> <span class="hljs-comment">'localhost'.  This</span></span><br><span class="line">ensures that someone cannot guess at the root password <span class="hljs-keyword">from</span> the network.</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># disallow root login remotely</span></span><br><span class="line"> Disallow root login remotely? [Y/n]y</span><br><span class="line"></span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">By</span> <span class="hljs-keyword">default</span>, MySQL comes <span class="hljs-keyword">with</span> a database named <span class="hljs-comment">'test' that anyone can</span></span><br><span class="line">access.  This <span class="hljs-keyword">is</span> also intended only <span class="hljs-keyword">for</span> testing, <span class="hljs-keyword">and</span> should be removed</span><br><span class="line">before moving <span class="hljs-keyword">into</span> a production environment.</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># remove test database</span></span><br><span class="line"> Remove test database <span class="hljs-keyword">and</span> access <span class="hljs-keyword">to</span> it? [Y/n]y</span><br><span class="line"></span><br><span class="line"> - Dropping test database...</span><br><span class="line"> ... Success!</span><br><span class="line"> - Removing privileges <span class="hljs-keyword">on</span> test database...</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Reloading the privilege tables will ensure that all changes made so far</span><br><span class="line">will <span class="hljs-keyword">take</span> effect immediately.</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># reload privilege tables</span></span><br><span class="line"> Reload privilege tables now? [Y/n]y</span><br><span class="line"></span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Cleaning up...</span><br><span class="line"></span><br><span class="line">All done!  <span class="hljs-keyword">If</span> you<span class="hljs-comment">'ve completed all of the above steps, your MySQL</span></span><br><span class="line">installation should now be secure.</span><br><span class="line"></span><br><span class="line">Thanks <span class="hljs-keyword">for</span> <span class="hljs-keyword">using</span> MySQL!</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># try to connect with root</span></span><br><span class="line"> [root@www ~]<span class="hljs-meta">#mysql -u root -p</span></span><br><span class="line"> Enter password:<span class="hljs-meta"># MySQL root password</span></span><br><span class="line">Welcome <span class="hljs-keyword">to</span> the MySQL monitor.  Commands <span class="hljs-keyword">end</span> <span class="hljs-keyword">with</span> ; <span class="hljs-keyword">or</span> \g.</span><br><span class="line">Your MySQL connection id <span class="hljs-keyword">is</span> <span class="hljs-number">10</span></span><br><span class="line">Server version: <span class="hljs-number">5.1</span><span class="hljs-number">.73</span> Source distribution</span><br><span class="line"></span><br><span class="line">Copyright (c) <span class="hljs-number">2000</span>, <span class="hljs-number">2013</span>, Oracle <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle <span class="hljs-keyword">is</span> a registered trademark <span class="hljs-keyword">of</span> Oracle Corporation <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> its</span><br><span class="line">affiliates. Other names may be trademarks <span class="hljs-keyword">of</span> their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type <span class="hljs-comment">'help;' or '\h' for help. Type '\c' to clear the current input statement.</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># display user list</span></span><br><span class="line"> mysql&gt;<span class="hljs-keyword">select</span> user,host,password <span class="hljs-keyword">from</span> mysql.user;</span><br><span class="line">+------+-----------+-------------------------------------------+</span><br><span class="line">| user | host      | password                                  |</span><br><span class="line">+------+-----------+-------------------------------------------+</span><br><span class="line">| root | localhost | ***************************************** |</span><br><span class="line">| root | <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> | ***************************************** |</span><br><span class="line">+------+-----------+-------------------------------------------+</span><br><span class="line"><span class="hljs-number">2</span> rows <span class="hljs-keyword">in</span> <span class="hljs-keyword">set</span> (<span class="hljs-number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta"># display database list</span></span><br><span class="line"> mysql&gt;show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">+--------------------+</span><br><span class="line"><span class="hljs-number">2</span> rows <span class="hljs-keyword">in</span> <span class="hljs-keyword">set</span> (<span class="hljs-number">0.00</span> sec)</span><br><span class="line">mysql&gt;<span class="hljs-keyword">exit</span></span><br><span class="line">Bye</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
     <div class="card">
     
     <div class="card-content article ">
@@ -260,50 +310,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-11-10T16:32:13.000Z">2016-11-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    22 minutes read (About 3299 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/11/11/python-lesson-1/">Python(1) 基础</a>
-            
-        </h1>
-        <div class="content">
-            <p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;<br>&lt;!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” “<a href="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;" target="_blank" rel="noopener">http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</a></p>
-<html><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="exporter-version" content="Evernote Mac 6.10 (454269)"><meta name="author" content="Alex LU"><meta name="created" content="2016-09-29 02:27:16 +0000"><meta name="source" content="desktop.mac"><meta name="updated" content="2016-09-29 06:27:40 +0000"><title>Python学习笔记(1) –Python基础</title></head><body><br><ol><br><li>输出： print<br><ol><br><li>python2：print ‘Hello Python’</li><br><li>python3: print(‘Hello Python’)</li><br><li>python(‘10+20=‘,10+20)</li><br></ol><br></li><br><li>输入：<br><ol><br><li>python2：raw<em>input()</em></li><br><li>python3: input()</li><br></ol><br></li><br><li>python的语法比较简单，采用缩进的方式：</li><br></ol><br><div style="-en-codeblock: true; box-sizing: border-box; padding: 8px; font-family: Monaco, Menlo, Consolas, &quot;Courier New&quot;, monospace; font-size: 12px; color: rgb(51, 51, 51); border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(251, 250, 248); border: 1px solid rgba(0, 0, 0, 0.14902); background-position: initial initial; background-repeat: initial initial;"><br><div>a = 100</div><br><div>if a &gt;= 0:</div><br><div>     print(a)</div><br><div>else:</div><br><div>     print(-a)</div><br><div><br></div><br><div>&amp; diff &amp;</div><br><div>a = 100</div><br><div>if a &gt;=0:</div><br><div>print(a)</div><br><div>else:</div><br><div>print(-a)</div><br></div><br><ol start="4"><br><li># 开头为注释；: 结尾，缩进的语句视为代码块；Python大小写是敏感的，约定俗成：4个空格的缩进，可以吧tab设置为4个空格。</li><br><li>Python 的数据类型<br><ol><br><li>整数：python可以处理任意大小的整数</li><br><li>浮点数：也就是小数，之所以称之为浮点数，因为按照科学计数法表示时，一个浮点数的小数点位置是可变的</li><br><li>字符串：字符串是以’’和”” 包括起来的任意文本，例如’abc’,”xyz”；如果字符内部同时包含’和”，可以使用\转义字符来标识。<br><ol><br><li>如果字符串内部有很多换行，用\n不好阅读，python支持使用’’’…’’’ 的格式表示多行‘</li><br><li>r’…’  python可以使用r’’表示’’以内的字符不转义;多行: r’’’…’’’</li><br></ol><br></li><br><li>布尔值：布尔值和布尔代数表示的完全一致，一个布尔值只有True和False，python支持直接使用True和False表示布尔值，注意大小写，另外最好不要生命变量时使用True等，布尔值，经常用于在条件判断之中。<br><ol><br><li>and : 与运算，所有运算结果都是True，and的结果才是True</li><br><li>or：或运算，只有1个运算结果为True，or的结果就是True</li><br><li>not：他是一个单目运算符，取相反的值</li><br></ol><br></li><br><li>空值：python里的一个特殊值，用None表示，注意None不能理解为0，因为0是有意义的，而None是一个特殊的空值</li><br></ol><br></li><br><li>python的变量<br><ol><br><li>命名规则：必须是大小写英文，数字和的组合，且不能用数字开头；</li><br><li>赋值符号：’=’；等于的符号是’==’</li><br><li>动态语言：变量本身类型不固定的语言称之为动态语言，反之是静态语言，静态语言在定义变量时必须制定变量的数据类型，如果赋值的时候类型不匹配，就会报错；</li><br><li>变量在计算机内存中的表示：a=1,指的是python在内存中创建了整数1，然后在内存创建了变量a，并把它指向了整数1</li><br></ol><br></li><br><li>python的常量<br><ol><br><li>定义：常量就是不能改变的变量，在python中，通常使用全部大写的变量名表示常量</li><br><li>整数的除法是精确的，因为除法计算结果是浮点数，例如 9/3 结果为3.0 ; 另外一种除法是’//‘ 地板除，两个整数的除法任然是整数；余数运算’%’</li><br></ol><br></li><br><li>字符编码：字符串是一种数据类型，但是字符串还涉及到一个编码问题，Python3的字符串是支持多语言的<br><ol><br><li>ord(‘’)函数 获取字符的整数表示；</li><br><li>chr(‘’)函数 把编码转换成对应的字符；</li><br><li>python的字符串类型是str，在内存中以Unicode表示，一个字符对应若干字节，但是如果要在网络传输或者保存到磁盘，就要把str转化为单位的bytes；<br><ol><br><li>python对于bytes的数据类型用带b前缀的单引号或双引号表示：</li><br><li>另外，Unicode表示的str可用encode()函数，指定编码为bytes。 ‘ABC’ .encode(‘utf-8’)</li><br><li>decode() 可以吧bytes转变为str。b’ABC’ .decode(‘ascii’)</li><br><li>要计算str包含了多少个字符使用 len()函数： len(‘hello’) ,结果为5</li><br></ol><br></li><br><li style="-en-codeblock: true; box-sizing: border-box; padding: 8px; font-family: Monaco, Menlo, Consolas, &quot;Courier New&quot;, monospace; font-size: 12px; color: rgb(51, 51, 51); border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; background-color: rgb(251, 250, 248); border: 1px solid rgba(0, 0, 0, 0.14902); background-position: initial initial; background-repeat: initial initial;">#!/usr/bin/env python3<br><br># -<em>- coding: utf-8 -</em>-</li><br></ol><br></li><br><li>格式化： 如何处理格式化输出字符串，在python中使用的格式化方式和C语言是一致的，用’%’实现：<br><ol><br><li>%d 表示整数</li><br><li>%f 表示浮点数</li><br><li>%s 表示字符串，如果不确定用什么，用%s，它会把任何数据类型转换为字符串</li><br><li>%x 表示十六进制整数</li><br><li>%% 表示一个普通的%</li><br></ol><br></li><br><li>数据类型list和tuple<br><ol><br><li>list是python内置的一种数据类型：列表，list是一个有序的集合，可以随时添加和删除其中元素。<br><ol><br><li>classmates = [‘Michael’,’Bob’,’Tracy’]， 可以用len()函数获取这个list的元素的个数</li><br><li>可以用索引来访问list中的每一个位置的元素，记住索引的第一个位置是0：</li><br><li>当索引超出范围的时候，python会报出IndexError错误，记得最后一个索引是len(classmates) -1</li><br><li>如果直接取出最后一个索引可用classmates[-1],以此类推</li><br></ol><br></li><br><li>list是一个可变的有序列表，所以可以去追加，插入指定位置，删除，替换等操作，支持不同数据类型，支持嵌套list<br><ol><br><li>追加: classmates.append(‘Adam’)</li><br><li>插入指定位置: classmates.insert(2,’Jack’)</li><br><li>删除list末尾的元素： classmates.pop()</li><br><li>删除指定位置的元素: classmates.pop(1)</li><br><li>替换元素：classmates[1]=‘Sarch’ ， 直接给相应位置的元素重新赋值即可</li><br><li>list的元素支持不同的数据类型, L = [‘abc’,23,23.4]</li><br><li>list的元素支持嵌套另外一个list： s = [‘abc’,123,[‘XYZ’,2.34]]，注意这个时候len(s)的元素是3个</li><br><li>list也可以没有元素，就是一个空的list，它的长度为0</li><br></ol><br></li><br><li>tuple：元组，也是一种有序列表，但是tuple一旦初始化就不能修改，他没有append()也没有insert()，这样的方法，其他获取元素的方式和list一样，也不能赋值成为另外的元素：<br><ol><br><li>classmates = (‘Michael’,’Bob’,’Tracy’) 注意list用的是’[]’，而tuple用的是’()’</li><br><li>tuple 有个问题，当你定义1个元素的时候，tuple的()和数学公式中的小括号混淆 ，因此python规定，这种情况下面，当定义只有1个tuple时必须增加一个逗号’,’来消除歧义。</li><br><li>tuple的元素也可以为list或者tuple，tuple的元素不会改变，但是list是一个可以改变的有序数列，所以当tuple中包含list时，这个tuple是’可变的’</li><br></ol><br></li><br><li>取出特定元素： L[[‘Apple’,’Google’,’Microsoft’],[‘Java’,’Python’,’C’]] ; L[1][1] = ‘Python’</li><br></ol><br></li><br><li>条件判断<br><ol><br><li>if：根据python的缩进规则，如果if语句的判断是True，就会执行下面的语句，否则什么都不做</li><br><li>else：也可以个if添加else，意思就是，如果if的判断是false，不要执行if的内容，执行else的内容</li><br><li>elif：如果要嵌套多级判断条件的话，使用elif，elif 是else if的缩写</li><br><li>if语句执行有个特点，它是自上而下的判断，如果某个判断的结果是True，那么执行该判断对应的语句，就会忽略掉剩下的所有elif和else，if判断条件还可以简写: if x: 只要x是非零数值、非空字符串、非空list等，就判断为True，</li><br></ol><br></li><br><li>iput(): 需要注意的地方，默认input的返回类型是str，由于str不能直接整数比较，所以在碰到明明输入200，但是不能和201对比时，记住先要把str转化为整数，python提供了int()函数, 转化数据类型为int类型，但是如果输入’abc’则会得到1个ValueError的错误</li><br><li>循环<br><ol><br><li>for…in ： 依次把list或者tuple的每个元素迭代出来，for x in … ：循环就是把每个元素带入变量x，然后执行缩进的语句：</li><br><li>range()函数：用来生成一个整数序列，再通过list()函数转换为list，例如range(5)生成：0,1,2,3,4<br><ol><br><li>list(range(5)) = [0,1,2,3,4]</li><br><li>计算1+…+100的结果： for x in range(101): sum = sum +x</li><br></ol><br></li><br><li>while 循环： 只要条件满足，就不断循环，条件不足时退出循环：<br><ol><br><li>计算100以内所有奇数之和： sum = 0,n = 99, while n &gt; 0: sum =sum +n; n = n-2</li><br></ol><br></li><br><li>break: 在循环中，break语句可以提前退出循环，当程序执行满足break条件的时候，就会退出循环</li><br><li>continue: 在循环过程中，也可以通过continue语句，跳过当前的这次循环。</li><br><li>注意：循环是让计算机做重复任务的有效方法，break语句可以在循环过程总直接退出循环，continue语句可以提前结束本轮循环，并直接进入下一轮循环，这两个语句通常必须配合if语句使用，但是尽量不要滥用这两个语句，因为当break和continue使用过多会导致代码执行逻辑分支过多，容易出错。</li><br></ol><br></li><br><li>dict和set<br><ol><br><li>dict： python内置了字典：dict的支持，全称：dictionary，在其他语言中也称之为map，使用键值存储，具有极快的查找速度。</li><br><li>对比list处理方式：会过滤整个list的元素，这导致list越长，耗时越长；dict实现时，只需要创建key-values对应表，直接根据名字查找，无论这个表有多大，查找速度都不会变慢，但是内存消耗会大，典型用性能(内存空间)换时间。</li><br><li>dict的初始化: d {‘Michael’:95,’Bob’:75,’Tracy’:85}  # 注意dict使用的是大括号’{}‘</li><br><li>dict的数据插入： d [‘Adam’] = 67 </li><br><li>由于dict是根据key检索，所以key是固定的，一个key只能对应1个value,所以当对1个key多次放入value时，后面的值会把前面的值冲掉： （类似变量）</li><br><li>但是如果查询的key不存在,dict会报错，KeyError，可以用in 判断key是否存在: ‘key’ in d  : True/False</li><br><li>通过dict的get方法，如果key不存在，可以返回None，或者自己指定的值，d.get(‘Key’) , d.get(‘key’,-1)</li><br><li>d.pop(‘key’): 删除1个key，注意当key被删除是，相应的value也会被删除。</li><br><li>另外注意：dict内部存放的顺序和key放入的顺序是没有关系的：</li><br><li>dict应在需要高速查找的地方，正确使用dict非常重要，要牢记1点，dict的key必须是不可变的对象，因为dict是根据key来计算value的位置，如果每次计算相同的key得到的结果不一样，那么dict内部就完全混乱了，这个通过key计算位置的算法称之为Hash算法。</li><br><li>要保证hash的准确性，作为key的对象就不能改变，在python中，字符串·整数等都是不可变的，但是list是可以变的所以不能作为key</li><br><li>set： set和dict类似，也是一组key的集合，但是不存储value，由于key不能重复，所以，在set中，没有重复的key值。</li><br><li>要创建一个set，需要提供一个list作为输入集合。 s = set([1,2,3])   : s = {1,2,3}</li><br><li>注意set也不是有序的，而且重复在set存在的元素会被自动过滤： s = set([1,2,3,1,2,3,1,2,3])  s = {1,2,3}</li><br><li>通过s.add(key) 可以增加元素到set中，可以重复添加，但是不会有效果</li><br><li>通过s.remove(key) 可以删除元素</li><br><li>set 可以看成数学意义上的无序和无重复元素的集合，因此两个set可以做数学意义上的交集、并集能操作：<br><ol><br><li>s1 = set([1,2,3]), s2 = set([2,3,4]) ,交集： s1 &amp; s2 = {2,3} ; s1 | s2 = {1,2,3,4}</li><br></ol><br></li><br><li>set和dict的区别仅在于有没有存储对应的value，但是set和dict的原理是一样的，所以，同样不可以放置可变对象，因为无法判断两个对象是否相等，也就无法保证set内部的不会重复元素</li><br><li>不可变对象：str是不变对象，list是可变对象；对于可变对象，例如list，对list进行操作，list的内部会发生变化</li><br><li>a = ‘abc’ , a.replace(‘a’,’A’) # 这个操作是把所有小写的a替换成大写的A，但是注意a的值并没有发生改变，要牢记a是变量，’abc’才是字符对象。</li><br></ol><br></li><br></ol><br></body><br></html>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -328,7 +334,7 @@ var _hmt = _hmt || [];
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/31/">31</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/32/">32</a></li>
             
         </ul>
     </nav>
@@ -372,7 +378,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        93
+                        94
                     </p>
                 </div>
             </div>
@@ -405,36 +411,31 @@ var _hmt = _hmt || [];
         
         <div class="level is-mobile">
             
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Github" href="https://github.com/SAMZONG">
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/SAMZONG">
                 
                 <i class="fab fa-github"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Facebook" href="https://facebook.com">
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
                 
                 <i class="fab fa-facebook"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Twitter" href="https://twitter.com">
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
                 
                 <i class="fab fa-twitter"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Dribbble" href="https://dribbble.com">
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
                 
                 <i class="fab fa-dribbble"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="RSS" href="/">
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
                 
                 <i class="fas fa-rss"></i>
                 
@@ -715,6 +716,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -789,25 +809,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -819,6 +820,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -1370,6 +1382,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -1444,25 +1475,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1474,6 +1486,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -2021,9 +2044,8 @@ var _hmt = _hmt || [];
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2020 SAMZONG&nbsp;
-                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
-                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                &copy; 2021 SAMZONG&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>
             </div>
@@ -2164,7 +2186,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">

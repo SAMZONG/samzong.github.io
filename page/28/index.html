@@ -165,6 +165,53 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-04-08T21:46:04.000Z">2016-04-09</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Mac/">Mac</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a minute read (About 133 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/04/09/macxi-tong-diao-zheng-launchpadtu-biao-da-xiao/">Mac(1) 调整Launchpad图标大小</a>
+            
+        </h1>
+        <div class="content">
+            <p>很多人觉得默认Launchpad的应用程序图标很大，空间比较拥挤，不过这个其实是可以通过调整Launchpad每一行和每一列图标的数量，来调整Launchpad图标大小。</p>
+<p>默认如下图：<br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F04%2FQQ20160408-1.jpg" alt></p>
+<p>代码块：</p>
+<figure class="highlight arduino hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 调整每一行显示数量为<span class="hljs-number">8</span>个。</span><br><span class="line">➜ defaults <span class="hljs-built_in">write</span> com.apple.dock springboard-columns -<span class="hljs-keyword">int</span> <span class="hljs-number">10</span></span><br><span class="line"></span><br><span class="line">＃ 重启Launchpad</span><br><span class="line">➜ defaults <span class="hljs-built_in">write</span> com.apple.dock ResetLaunchPad -<span class="hljs-keyword">bool</span> TRUE;killall Dock</span><br></pre></td></tr></table></figure>
+<p>修改后如下：<br><img src="http://samzong.oss-cn-shenzhen.aliyuncs.com/2016%2F04%2FQQ20160408-2.jpg" alt></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2016-04-08T08:12:30.000Z">2016-04-08</time>
                 
                 <div class="level-item">
@@ -271,70 +318,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-03-29T00:22:14.000Z">2016-03-29</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    8 minutes read (About 1190 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/03/29/mysqlshu-ju-ku-ji-chu/">MySQL(4) MySQL数据库基础</a>
-            
-        </h1>
-        <div class="content">
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-<h2 id="1-测试环境"><a href="#1-测试环境" class="headerlink" title="1. 测试环境"></a>1. 测试环境</h2><ul>
-<li>MacBook Pro 15‘ i7 16GB</li>
-<li>VMware Fushion 8 Pro</li>
-<li>MySQL Version 5.1</li>
-<li>CentOS Linux 6.x</li>
-</ul>
-<h2 id="2-实验步骤"><a href="#2-实验步骤" class="headerlink" title="2. 实验步骤"></a>2. 实验步骤</h2><h3 id="2-1-安装mysql"><a href="#2-1-安装mysql" class="headerlink" title="2.1 安装mysql"></a>2.1 安装mysql</h3><figure class="highlight autoit hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="hljs-symbol">@ultraera</span>  ~]<span class="hljs-meta">#  yum  install  mysql  mysql-server  mysql-devel</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-2-启动mysql，并设置开机自启动"><a href="#2-2-启动mysql，并设置开机自启动" class="headerlink" title="2.2 启动mysql，并设置开机自启动"></a>2.2 启动mysql，并设置开机自启动</h3><figure class="highlight coffeescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@ultraera  ~]<span class="hljs-comment">#  service  mysqld  start</span></span><br><span class="line">[root@ultraera  ~]<span class="hljs-comment">#  chkconfig  mysqld  on</span></span><br><span class="line">[root@ultraera  ~]<span class="hljs-comment">#  chkconfig  --list  |  grep  mysqld</span></span><br><span class="line">mysqld	<span class="hljs-number">0</span>:<span class="hljs-literal">off</span>  <span class="hljs-number">1</span>:<span class="hljs-literal">off</span>  <span class="hljs-number">2</span>:<span class="hljs-literal">on</span>  <span class="hljs-number">3</span>:<span class="hljs-literal">on</span>  <span class="hljs-number">4</span>:<span class="hljs-literal">on</span>  <span class="hljs-number">5</span>:<span class="hljs-literal">on</span>  <span class="hljs-number">6</span>:<span class="hljs-literal">off</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-3-相关配置"><a href="#2-3-相关配置" class="headerlink" title="2.3 相关配置"></a>2.3 相关配置</h3><figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/etc/my.cnf         mysql配置文件</span><br><span class="line">/var/<span class="hljs-class"><span class="hljs-keyword">lib</span>/<span class="hljs-title">mysql</span>      <span class="hljs-title">mysql</span>数据库文件</span></span><br><span class="line"><span class="hljs-symbol">port:</span><span class="hljs-number">3306</span>           mysql默认端口</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Tips : MySQL 绝大对数语句都是以分号结尾，注意是英文模式下的分号。字符和字符串用 '' 引起；</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-4-mysql初始化及登录"><a href="#2-4-mysql初始化及登录" class="headerlink" title="2.4 mysql初始化及登录"></a>2.4 mysql初始化及登录</h3><figure class="highlight vbnet hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[root@ultraera ~]<span class="hljs-meta"># mysql_secure_installation</span></span><br><span class="line"></span><br><span class="line">NOTE: RUNNING ALL PARTS <span class="hljs-keyword">OF</span> THIS SCRIPT <span class="hljs-keyword">IS</span> RECOMMENDED <span class="hljs-keyword">FOR</span> ALL MySQL</span><br><span class="line">      SERVERS <span class="hljs-keyword">IN</span> PRODUCTION USE!  PLEASE READ <span class="hljs-keyword">EACH</span> <span class="hljs-keyword">STEP</span> CAREFULLY!</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">In</span> <span class="hljs-keyword">order</span> <span class="hljs-keyword">to</span> log <span class="hljs-keyword">into</span> MySQL <span class="hljs-keyword">to</span> secure it, we<span class="hljs-comment">'ll need the current</span></span><br><span class="line">password <span class="hljs-keyword">for</span> the root user.  <span class="hljs-keyword">If</span> you<span class="hljs-comment">'ve just installed MySQL, and</span></span><br><span class="line">you haven<span class="hljs-comment">'t set the root password yet, the password will be blank,</span></span><br><span class="line">so you should just press enter here.</span><br><span class="line"></span><br><span class="line">Enter current password <span class="hljs-keyword">for</span> root (enter <span class="hljs-keyword">for</span> none):        <span class="hljs-meta"># 首次登陆默认为空</span></span><br><span class="line"></span><br><span class="line">Setting the root password ensures that nobody can log <span class="hljs-keyword">into</span> the MySQL</span><br><span class="line">root user without the proper authorisation.</span><br><span class="line"></span><br><span class="line">You already have a root password <span class="hljs-keyword">set</span>, so you can safely answer <span class="hljs-comment">'n'.</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">Set</span> the root password? [Y/n] y            <span class="hljs-meta"># 设置root用户密码</span></span><br><span class="line"><span class="hljs-keyword">New</span> password:</span><br><span class="line">Re-enter <span class="hljs-keyword">new</span> password:</span><br><span class="line">Password updated successfully!</span><br><span class="line">Reloading privilege tables..</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">By</span> <span class="hljs-keyword">default</span>, a MySQL installation has an anonymous user, allowing anyone</span><br><span class="line"><span class="hljs-keyword">to</span> log <span class="hljs-keyword">into</span> MySQL without having <span class="hljs-keyword">to</span> have a user account created <span class="hljs-keyword">for</span></span><br><span class="line">them.  This <span class="hljs-keyword">is</span> intended only <span class="hljs-keyword">for</span> testing, <span class="hljs-keyword">and</span> <span class="hljs-keyword">to</span> make the installation</span><br><span class="line">go a bit smoother.  You should remove them before moving <span class="hljs-keyword">into</span> a</span><br><span class="line">production environment.</span><br><span class="line"></span><br><span class="line">Remove anonymous users? [Y/n] y        <span class="hljs-meta"># 删除匿名用户</span></span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Normally, root should only be allowed <span class="hljs-keyword">to</span> connect <span class="hljs-keyword">from</span> <span class="hljs-comment">'localhost'.  This</span></span><br><span class="line">ensures that someone cannot guess at the root password <span class="hljs-keyword">from</span> the network.</span><br><span class="line"></span><br><span class="line">Disallow root login remotely? [Y/n] y        <span class="hljs-meta"># 关闭root远程登陆</span></span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">By</span> <span class="hljs-keyword">default</span>, MySQL comes <span class="hljs-keyword">with</span> a database named <span class="hljs-comment">'test' that anyone can</span></span><br><span class="line">access.  This <span class="hljs-keyword">is</span> also intended only <span class="hljs-keyword">for</span> testing, <span class="hljs-keyword">and</span> should be removed</span><br><span class="line">before moving <span class="hljs-keyword">into</span> a production environment.</span><br><span class="line"></span><br><span class="line">Remove test database <span class="hljs-keyword">and</span> access <span class="hljs-keyword">to</span> it? [Y/n] y    <span class="hljs-meta"># 删除 test 数据库</span></span><br><span class="line"> - Dropping test database...</span><br><span class="line"><span class="hljs-keyword">ERROR</span> <span class="hljs-number">1008</span> (HY000) at line <span class="hljs-number">1</span>: Can<span class="hljs-comment">'t drop database 'test'; database doesn't exist</span></span><br><span class="line"> ... Failed!  <span class="hljs-keyword">Not</span> critical, keep moving...</span><br><span class="line"> - Removing privileges <span class="hljs-keyword">on</span> test database...</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Reloading the privilege tables will ensure that all changes made so far</span><br><span class="line">will <span class="hljs-keyword">take</span> effect immediately.</span><br><span class="line"></span><br><span class="line">Reload privilege tables now? [Y/n] y    <span class="hljs-meta"># 保存这些设置</span></span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">All done!  <span class="hljs-keyword">If</span> you<span class="hljs-comment">'ve completed all of the above steps, your MySQL</span></span><br><span class="line">installation should now be secure.</span><br><span class="line"></span><br><span class="line">Thanks <span class="hljs-keyword">for</span> <span class="hljs-keyword">using</span> MySQL!</span><br><span class="line"></span><br><span class="line">Cleaning up...</span><br><span class="line">[root@ultraera ~]<span class="hljs-meta">#</span></span><br><span class="line"></span><br><span class="line">[root@ultraera  ~]<span class="hljs-meta"># </span></span><br><span class="line">[root@ultraera  ~]<span class="hljs-meta"># mysql  -u  root  -p  '123456'</span></span><br><span class="line">[root@ultraera  ~]<span class="hljs-meta"># mysql  -u  root  -p  -h  localhost “-h” 指定服务器地址</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-5-创建、查看及删除当前数据库"><a href="#2-5-创建、查看及删除当前数据库" class="headerlink" title="2.5 创建、查看及删除当前数据库"></a>2.5 创建、查看及删除当前数据库</h3><figure class="highlight asciidoc hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;  CREATE  DATABASE  ultraera;</span><br><span class="line">Query  OK,  1  row  affected  (0.00  sec)</span><br><span class="line">mysql&gt;  SHOW  DATABASES;</span><br><span class="line"><span class="hljs-code">+--------------------+</span></span><br><span class="line">|  Database	|</span><br><span class="line"><span class="hljs-code">+--------------------+</span></span><br><span class="line">|  information<span class="hljs-emphasis">_schema  |</span></span><br><span class="line"><span class="hljs-emphasis">|  mysql	|</span></span><br><span class="line"><span class="hljs-emphasis">|  test	|</span></span><br><span class="line"><span class="hljs-emphasis">|  ultraera	|</span></span><br><span class="line"><span class="hljs-emphasis">+--------------------+</span></span><br><span class="line"><span class="hljs-emphasis">4  rows  in  set  (0.00  sec)</span></span><br><span class="line"><span class="hljs-emphasis">mysql&gt;  DROP  DATABASE  ultraera;</span></span><br><span class="line"><span class="hljs-emphasis">Query  OK,  0  rows  affected  (0.00  sec)</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-6-创建、查看及删除当前表格"><a href="#2-6-创建、查看及删除当前表格" class="headerlink" title="2.6 创建、查看及删除当前表格"></a>2.6 创建、查看及删除当前表格</h3><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">#创建表格之前要先选择数据库</span></span><br><span class="line">mysql&gt;  use  ultraera;</span><br><span class="line">Database  changed</span><br><span class="line">mysql&gt;  CREATE  TABLE  ultraera(	#create 创建表格，至少1列</span><br><span class="line">-&gt;  id  int  <span class="hljs-keyword">NOT</span>  <span class="hljs-literal">NULL</span>,	#<span class="hljs-keyword">NOT</span>  <span class="hljs-literal">NULL</span>	不为空,int 整型</span><br><span class="line">-&gt;  name  char(20)  <span class="hljs-keyword">NOT</span>  <span class="hljs-literal">NULL</span>,	#char() 字符型  ,()内定义字符长度</span><br><span class="line">-&gt;  age  int  <span class="hljs-keyword">NOT</span>  <span class="hljs-literal">NULL</span></span><br><span class="line">-&gt;  );</span><br><span class="line">Query  OK,  0  rows  affected  (0.01  sec)</span><br><span class="line">mysql&gt;  DESC  ultraera;</span><br><span class="line">+-------+----------+------+-----+---------+----------------+</span><br><span class="line">|  Field  | <span class="hljs-built_in"> Type	</span>|  <span class="hljs-literal">Null</span>  |  Key  | <span class="hljs-built_in"> Default </span> |  Extra	|</span><br><span class="line">+-------+----------+------+-----+---------+----------------+</span><br><span class="line">|  id	|  int(11)  |  <span class="hljs-literal">NO</span>  |	|  <span class="hljs-literal">NULL</span>	|	|</span><br><span class="line">|  name  |  char(20)  |  <span class="hljs-literal">NO</span>  |	|  <span class="hljs-literal">NULL</span>	|	|</span><br><span class="line">|  age	|  int(11)  |  <span class="hljs-literal">NO</span>  |	|  <span class="hljs-literal">NULL</span>	|	|</span><br><span class="line">+-------+----------+------+-----+---------+----------------+</span><br><span class="line">3  rows  <span class="hljs-keyword">in</span>  <span class="hljs-builtin-name">set</span>  (0.00  sec)</span><br><span class="line">mysql&gt;  DROP  TABLE  ultraera  ;</span><br><span class="line">Query  OK,  0  rows  affected  (0.00  sec)</span><br></pre></td></tr></table></figure>
-<h3 id="2-7-修改表格信息"><a href="#2-7-修改表格信息" class="headerlink" title="2.7 修改表格信息"></a>2.7 修改表格信息</h3><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">a.重命名表格</span><br><span class="line">mysql&gt;  alter  table  ultraera  rename  ultraera_org;</span><br><span class="line">b.新增列</span><br><span class="line">alter  table  ultraera  <span class="hljs-builtin-name">add</span> <span class="hljs-built_in"> address </span> varchar(200);</span><br><span class="line">c.删除列</span><br><span class="line">mysql&gt;  alter  table  ultraera  drop  column  address;</span><br><span class="line">d.修改一个列的数据类型</span><br><span class="line">mysql&gt;  alter  table  ultraera  modify  name  varchar(200);</span><br><span class="line">e.重命名一个列</span><br><span class="line">mysql&gt;  alter  table  ultraera  change  column  NAME  name  varchar(200);</span><br></pre></td></tr></table></figure>
-<h3 id="2-8-向表格中插入数据"><a href="#2-8-向表格中插入数据" class="headerlink" title="2.8 向表格中插入数据"></a>2.8 向表格中插入数据</h3><figure class="highlight n1ql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a.  全局插入</span><br><span class="line">mysql&gt;  <span class="hljs-keyword">insert</span>  <span class="hljs-keyword">into</span>  ultraera  <span class="hljs-keyword">values</span>(<span class="hljs-number">1</span>,<span class="hljs-string">'name'</span>,<span class="hljs-number">18</span>);</span><br><span class="line">b.  根据列插入</span><br><span class="line">mysql&gt;  <span class="hljs-keyword">insert</span>  <span class="hljs-keyword">into</span>  ultraera(id,name,age)  <span class="hljs-keyword">values</span>(<span class="hljs-number">2</span>,<span class="hljs-string">'john'</span>,<span class="hljs-number">19</span>);</span><br><span class="line">### 2.9 查看表格中的数据：</span><br><span class="line">mysql&gt;  <span class="hljs-keyword">select</span>  *  <span class="hljs-keyword">from</span>  ultraera;	#  *匹配所有列，也可以只查询单个列，</span><br><span class="line">mysql&gt;  <span class="hljs-keyword">select</span>  name  <span class="hljs-keyword">from</span>  ultraera;</span><br></pre></td></tr></table></figure>
-<h3 id="2-10-where运算符：条件判断查询，查询使用方法：where-列-运算符-值；"><a href="#2-10-where运算符：条件判断查询，查询使用方法：where-列-运算符-值；" class="headerlink" title="2.10 where运算符：条件判断查询，查询使用方法：where  列  运算符  值；"></a>2.10 where运算符：条件判断查询，查询使用方法：where  列  运算符  值；</h3><figure class="highlight n1ql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">where支持的运算符：=等于；&gt;大于；&lt;小于；&lt;&gt;不等于；&gt;=大于等于；&lt;=小于等于；BETWEEN在某范围之内；</span><br><span class="line">mysql&gt; <span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> ultraera <span class="hljs-keyword">where</span> id&gt;<span class="hljs-number">1</span>;</span><br><span class="line">mysql&gt; <span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> ultraera <span class="hljs-keyword">where</span> id=<span class="hljs-number">2</span>;</span><br><span class="line">mysql&gt; <span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> ultraera <span class="hljs-keyword">where</span> id&gt;=<span class="hljs-number">1</span>;</span><br><span class="line">mysql&gt; <span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> ultraera <span class="hljs-keyword">where</span> id&lt;<span class="hljs-number">1</span>;</span><br><span class="line">mysql&gt; <span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> ultraera <span class="hljs-keyword">where</span> id&lt;=<span class="hljs-number">1</span>;</span><br><span class="line">mysql&gt; <span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> ultraera <span class="hljs-keyword">where</span> id  <span class="hljs-keyword">between</span>  <span class="hljs-number">1</span>  <span class="hljs-keyword">and</span>  <span class="hljs-number">4</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="2-11-删除表格中的一条记录（同样可以匹配where运算符）"><a href="#2-11-删除表格中的一条记录（同样可以匹配where运算符）" class="headerlink" title="2.11 删除表格中的一条记录（同样可以匹配where运算符）"></a>2.11 删除表格中的一条记录（同样可以匹配where运算符）</h3><figure class="highlight n1ql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;  <span class="hljs-keyword">delete</span>  <span class="hljs-keyword">from</span>  ultraera  <span class="hljs-keyword">where</span>  id  =  <span class="hljs-number">4</span>;</span><br><span class="line">mysql&gt;  <span class="hljs-keyword">delete</span>  *  <span class="hljs-keyword">from</span>  ultraera ；	#清空一个表格的数据；</span><br></pre></td></tr></table></figure>
-<h3 id="2-12-更新表中的一个数据"><a href="#2-12-更新表中的一个数据" class="headerlink" title="2.12 更新表中的一个数据"></a>2.12 更新表中的一个数据</h3><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;  update  ultraera  <span class="hljs-builtin-name">set</span>  <span class="hljs-attribute">age</span>=30  where  <span class="hljs-attribute">id</span>=3;</span><br></pre></td></tr></table></figure>
-<h3 id="2-13-MySQL增加删除一个用户"><a href="#2-13-MySQL增加删除一个用户" class="headerlink" title="2.13 MySQL增加删除一个用户"></a>2.13 MySQL增加删除一个用户</h3><figure class="highlight crmsh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;  create  <span class="hljs-keyword">user</span>  <span class="hljs-title">user1</span>  identified  by  '<span class="hljs-number">123456</span>';	<span class="hljs-comment">#user1，密码123456，新用户没有权限，无法登录数据库</span></span><br><span class="line">mysql&gt;  drop  <span class="hljs-keyword">user</span>  <span class="hljs-title">user1</span>;	<span class="hljs-comment">#删除用户user1</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-14-给用户添加、删除权限"><a href="#2-14-给用户添加、删除权限" class="headerlink" title="2.14 给用户添加、删除权限"></a>2.14 给用户添加、删除权限</h3><figure class="highlight lasso hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;  grant  <span class="hljs-literal">all</span>  privileges  <span class="hljs-keyword">on</span>  *.*  <span class="hljs-keyword">to</span>  <span class="hljs-string">'user1'</span>@<span class="hljs-string">'localhost'</span>  identified  <span class="hljs-keyword">by</span>  <span class="hljs-string">'123456'</span>;</span><br><span class="line">mysql&gt;  revoke  <span class="hljs-literal">all</span>  privileges  from  user1;</span><br></pre></td></tr></table></figure>
-<h3 id="2-15-使用mysqldump进行数据库备份"><a href="#2-15-使用mysqldump进行数据库备份" class="headerlink" title="2.15 使用mysqldump进行数据库备份"></a>2.15 使用mysqldump进行数据库备份</h3><p>数据库重命名：mysql不能直接对数据库重命名，所以如果想要重名数据库的话，要先导出，接着创建一个新的数据库，然后将导出的sql文件再导入到新的数据库中</p>
-<figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[adam@ultraera  ~]$  mysqldump  -u  root  -<span class="hljs-selector-tag">p</span>  ultraera  &gt;  ultraera<span class="hljs-selector-class">.sql</span>     #备份</span><br><span class="line">[adam@ultraera  ~]$  mysql  -u  root  -<span class="hljs-selector-tag">p</span>  new_ultraera  &lt;  ultraera<span class="hljs-selector-class">.sql</span>     #恢复到指定数据库</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -357,9 +340,9 @@ var _hmt = _hmt || [];
             
             <li><a class="pagination-link has-text-black-ter" href="/page/29/">29</a></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/30/">30</a></li>
+            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/31/">31</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/32/">32</a></li>
             
         </ul>
     </nav>
@@ -403,7 +386,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        93
+                        94
                     </p>
                 </div>
             </div>
@@ -741,6 +724,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -815,25 +817,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -845,6 +828,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -1396,6 +1390,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -1470,25 +1483,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1500,6 +1494,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -2047,7 +2052,7 @@ var _hmt = _hmt || [];
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2020 SAMZONG&nbsp;
+                &copy; 2021 SAMZONG&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>

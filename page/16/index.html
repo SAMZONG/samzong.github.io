@@ -165,6 +165,59 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-10-19T23:25:37.000Z">2016-10-20</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/PostgreSQL/">PostgreSQL</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a minute read (About 173 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/10/20/install-and-set-up-postgresql-9-5-on-centos/">HowTo Install PostgreSQL 9.5 on CentOS 6.x</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="CentOS-6"><a href="#CentOS-6" class="headerlink" title="CentOS 6"></a>CentOS 6</h3><h5 id="1-Install-PostgreSQL-repository-and-the-PostgreSQL-server-by-running-the-following"><a href="#1-Install-PostgreSQL-repository-and-the-PostgreSQL-server-by-running-the-following" class="headerlink" title="1. Install PostgreSQL repository and the PostgreSQL server by running the following:"></a>1. Install PostgreSQL repository and the PostgreSQL server by running the following:</h5><figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/download.postgresql.org/pub</span><span class="hljs-regexp">/repos/yum</span><span class="hljs-regexp">/9.5/redhat</span><span class="hljs-regexp">/rhel-6-x86_64/pgdg</span>-centos95-<span class="hljs-number">9.5</span>-<span class="hljs-number">2</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line">sudo yum install postgresql95-serve</span><br></pre></td></tr></table></figure>
+<h5 id="2-Create-the-PostgreSQL-database-cluster"><a href="#2-Create-the-PostgreSQL-database-cluster" class="headerlink" title="2. Create the PostgreSQL database cluster."></a>2. Create the PostgreSQL database cluster.</h5><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sduo<span class="hljs-built_in"> service </span>postgresql-9.5 initdb</span><br></pre></td></tr></table></figure>
+<h5 id="3-Enable-automatic-PostgreSQL-server-startup"><a href="#3-Enable-automatic-PostgreSQL-server-startup" class="headerlink" title="3. Enable automatic PostgreSQL server startup."></a>3. Enable automatic PostgreSQL server startup.</h5><figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chkconfig postgresql<span class="hljs-number">-9.5</span> <span class="hljs-keyword">on</span></span><br></pre></td></tr></table></figure>
+<h5 id="4-Start-the-PostgreSQL-server"><a href="#4-Start-the-PostgreSQL-server" class="headerlink" title="4. Start the PostgreSQL server."></a>4. Start the PostgreSQL server.</h5><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo<span class="hljs-built_in"> service </span>postgresql-9.5 start</span><br></pre></td></tr></table></figure>
+<h3 id="CentOS-7"><a href="#CentOS-7" class="headerlink" title="CentOS 7"></a>CentOS 7</h3><h5 id="1-Install-PostgreSQL-repository-and-the-PostgreSQL-server-by-running-the-following-1"><a href="#1-Install-PostgreSQL-repository-and-the-PostgreSQL-server-by-running-the-following-1" class="headerlink" title="1. Install PostgreSQL repository and the PostgreSQL server by running the following:"></a>1. Install PostgreSQL repository and the PostgreSQL server by running the following:</h5><figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/download.postgresql.org/pub</span><span class="hljs-regexp">/repos/yum</span><span class="hljs-regexp">/9.5 /redhat</span><span class="hljs-regexp">/rhel-7-x86_64/pgdg</span>-centos95-<span class="hljs-number">9.5</span>-<span class="hljs-number">2</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line">sudo yum install postgresql95-serve</span><br></pre></td></tr></table></figure>
+<h5 id="2-Create-the-PostgreSQL-database-cluster-1"><a href="#2-Create-the-PostgreSQL-database-cluster-1" class="headerlink" title="2. Create the PostgreSQL database cluster."></a>2. Create the PostgreSQL database cluster.</h5><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="hljs-regexp">/usr/</span>pgsql-<span class="hljs-number">9.5</span><span class="hljs-regexp">/bin/</span>postgresql95-setup initdb</span><br></pre></td></tr></table></figure>
+<h5 id="3-Enable-automatic-PostgreSQL-server-startup-1"><a href="#3-Enable-automatic-PostgreSQL-server-startup-1" class="headerlink" title="3. Enable automatic PostgreSQL server startup."></a>3. Enable automatic PostgreSQL server startup.</h5><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="hljs-builtin-name">enable</span> postgresql-9.5</span><br></pre></td></tr></table></figure>
+<h5 id="4-Start-the-PostgreSQL-server-1"><a href="#4-Start-the-PostgreSQL-server-1" class="headerlink" title="4. Start the PostgreSQL server."></a>4. Start the PostgreSQL server.</h5><figure class="highlight crmsh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="hljs-literal">start</span> postgresql-<span class="hljs-number">9.5</span></span><br></pre></td></tr></table></figure>
+<h3 id="Configurations-for-CentOS"><a href="#Configurations-for-CentOS" class="headerlink" title="Configurations for CentOS"></a>Configurations for CentOS</h3><p>When installing in CentOs env. you will also need to make the following configurations.</p>
+<h5 id="1-Change-authentication-to-md5"><a href="#1-Change-authentication-to-md5" class="headerlink" title="1. Change authentication to md5."></a>1. Change authentication to md5.</h5><figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /var/<span class="hljs-class"><span class="hljs-keyword">lib</span>/<span class="hljs-title">pgsql</span>/9.5/<span class="hljs-title">data</span>/<span class="hljs-title">pg_hba</span>.<span class="hljs-title">conf</span></span></span><br></pre></td></tr></table></figure>
+<h5 id="2-Change-METHOD-to-md5"><a href="#2-Change-METHOD-to-md5" class="headerlink" title="2. Change METHOD to md5."></a>2. Change METHOD to md5.</h5><figure class="highlight apache hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># IPv4 local connections:</span></span><br><span class="line"><span class="hljs-attribute">host</span>    <span class="hljs-literal">all</span>             <span class="hljs-literal">all</span>             127.0.0.1/32            md5</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># IPv6 local connections:</span></span><br><span class="line"><span class="hljs-attribute">host</span>    <span class="hljs-literal">all</span>             <span class="hljs-literal">all</span>             ::1/128                 md5</span><br></pre></td></tr></table></figure>
+<h5 id="3-Restart-PostgreSQL"><a href="#3-Restart-PostgreSQL" class="headerlink" title="3. Restart PostgreSQL"></a>3. Restart PostgreSQL</h5>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2016-09-22T07:20:12.000Z">2016-09-22</time>
                 
                 <div class="level-item">
@@ -312,49 +365,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-08-12T22:12:43.000Z">2016-08-13</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Shell/">Shell</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 minutes read (About 455 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/08/13/use-wdlinux-install-lnmp/">Script Install LNMP</a>
-            
-        </h1>
-        <div class="content">
-            <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$1</span> == <span class="hljs-string">"uninstall"</span> ]];<span class="hljs-keyword">then</span></span><br><span class="line">	<span class="hljs-built_in">echo</span> <span class="hljs-string">"starting backup data..."</span></span><br><span class="line">	mkdir -p /www/backup</span><br><span class="line">	service mysqld stop</span><br><span class="line">	service nginxd stop</span><br><span class="line">	service httpd stop</span><br><span class="line">	service wdapache stop</span><br><span class="line">	service pureftpd stop</span><br><span class="line">	tar zcvf /www/backup/mysqldatdbk.tar.gz /www/wdlinux/mysql/var</span><br><span class="line">	tar zcvf /www/backup/ngconfbk.tar.gz /www/wdlinux/nginx/conf</span><br><span class="line">	tar zcvf /www/backup/apconfbk.tar.gz /www/wdlinux/apache/conf</span><br><span class="line">	rpm -e lanmp_wdcp --nodeps</span><br><span class="line">	rm -fr /www/wdlinux</span><br><span class="line">	<span class="hljs-built_in">echo</span></span><br><span class="line">	<span class="hljs-built_in">echo</span> <span class="hljs-string">"	lanmp,wdcp remove is OK"</span></span><br><span class="line">	<span class="hljs-built_in">echo</span></span><br><span class="line">	<span class="hljs-built_in">exit</span> 0</span><br><span class="line"><span class="hljs-keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">"Turn off selinux..."</span></span><br><span class="line">setenforce 0</span><br><span class="line">sed -i <span class="hljs-string">'s/SELINUX=enforcing/SELINUX=disabled/g'</span> /etc/selinux/config</span><br><span class="line">sed -i <span class="hljs-string">'s/^exclude=/#exclude=/g'</span> /etc/yum.conf</span><br><span class="line">yum install -y gcc gcc-c++ make autoconf libtool-ltdl-devel gd-devel freetype-devel libxml2-devel libjpeg-devel libpng-devel openssl-devel curl-devel patch libmcrypt-devel libmhash-devel ncurses-devel sudo bzip2 iptables sendmail iptables unzip</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#echo "Check the network..."</span></span><br><span class="line"><span class="hljs-comment">#ping -c 2 113.105.167.1</span></span><br><span class="line"><span class="hljs-comment">#if [[ $? != 0 ]];then</span></span><br><span class="line"><span class="hljs-comment">#	echo</span></span><br><span class="line"><span class="hljs-comment">#	echo "network err"</span></span><br><span class="line"><span class="hljs-comment">#	exit 1</span></span><br><span class="line"><span class="hljs-comment">#fi</span></span><br><span class="line">ping -c 3 dl.wdlinux.cn</span><br><span class="line"><span class="hljs-keyword">if</span> [[ $? == 2 ]];<span class="hljs-keyword">then</span></span><br><span class="line">	<span class="hljs-built_in">echo</span></span><br><span class="line">	<span class="hljs-built_in">echo</span> <span class="hljs-string">"dns error"</span></span><br><span class="line">	<span class="hljs-built_in">exit</span> 1</span><br><span class="line"><span class="hljs-keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> [[ ! -d /www/wdlinux ]];<span class="hljs-keyword">then</span></span><br><span class="line">	<span class="hljs-built_in">echo</span></span><br><span class="line">	<span class="hljs-built_in">echo</span> <span class="hljs-string">"rpm remove..."</span></span><br><span class="line">	rpm -e php --nodeps</span><br><span class="line">	rpm -e httpd --nodeps</span><br><span class="line">	rpm -e mysql-server --nodeps</span><br><span class="line">	rpm -e mysql --nodeps</span><br><span class="line"><span class="hljs-keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">echo</span> <span class="hljs-string">"yum update..."</span></span><br><span class="line">yum install -y make autoconf sudo wget libtool-ltdl-devel gd-devel freetype-devel libxml2-devel libjpeg-devel libpng-devel openssl-devel curl-devel patch libmcrypt-devel libmhash-devel ncurses-devel iptables</span><br><span class="line"></span><br><span class="line">arch=i386</span><br><span class="line">Aurl=<span class="hljs-string">"http://dl.wdlinux.cn:5180/rpms"</span></span><br><span class="line"><span class="hljs-keyword">if</span> [[ `uname -m` == <span class="hljs-string">"x86_64"</span> ]];<span class="hljs-keyword">then</span></span><br><span class="line">	arch=<span class="hljs-string">"x86_64"</span></span><br><span class="line"><span class="hljs-keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">function</span> in_finsh &#123;</span><br><span class="line">        <span class="hljs-built_in">echo</span></span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">"          configuration ,lamp or lnmp,wdcp install is finshed"</span></span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">"          visit http://ip"</span></span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">"          wdcp visit http://ip:8080"</span></span><br><span class="line">        <span class="hljs-built_in">echo</span> <span class="hljs-string">"          more infomation please visit http://www.wdlinux.cn"</span></span><br><span class="line">        <span class="hljs-built_in">echo</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">function</span> in_check &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$1</span> == 1 ]];<span class="hljs-keyword">then</span></span><br><span class="line">                <span class="hljs-built_in">echo</span></span><br><span class="line">                <span class="hljs-built_in">echo</span> <span class="hljs-string">"============  <span class="hljs-variable">$2</span> install error  ============="</span></span><br><span class="line">                <span class="hljs-built_in">echo</span></span><br><span class="line">                <span class="hljs-built_in">exit</span> 1</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">                <span class="hljs-built_in">echo</span></span><br><span class="line">                <span class="hljs-built_in">echo</span> <span class="hljs-string">"============  <span class="hljs-variable">$2</span> install OK  =============="</span></span><br><span class="line">                <span class="hljs-built_in">echo</span></span><br><span class="line">                <span class="hljs-built_in">echo</span></span><br><span class="line">        <span class="hljs-keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">grep -E <span class="hljs-string">'wdOS 1|5\.'</span> /etc/redhat-release &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">v1=$?</span><br><span class="line">grep -E <span class="hljs-string">'wdOS 2|6\.'</span> /etc/redhat-release &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">v2=$?</span><br><span class="line"><span class="hljs-keyword">if</span> [ <span class="hljs-variable">$v1</span> == 0 ];<span class="hljs-keyword">then</span></span><br><span class="line">	RF=<span class="hljs-string">"lanmp_wdcp-2-5.<span class="hljs-variable">$arch</span>.rpm"</span>;</span><br><span class="line"><span class="hljs-keyword">elif</span> [ <span class="hljs-variable">$v2</span> == 0 ];<span class="hljs-keyword">then</span></span><br><span class="line">	RF=<span class="hljs-string">"lanmp_wdcp-2-5.el6.<span class="hljs-variable">$arch</span>.rpm"</span>;</span><br><span class="line">	<span class="hljs-keyword">if</span> [ <span class="hljs-variable">$arch</span> == <span class="hljs-string">"x86_64"</span> ];<span class="hljs-keyword">then</span></span><br><span class="line">		wget -c http://dl.wdlinux.cn:5180/soft/rpmforge-release-0.5.2-2.el6.rf.x86_64.rpm</span><br><span class="line">		rpm -ivh rpmforge-release-0.5.2-2.el6.rf.x86_64.rpm</span><br><span class="line">	<span class="hljs-keyword">else</span></span><br><span class="line">		wget -c http://dl.wdlinux.cn:5180/soft/rpmforge-release-0.5.2-2.el6.rf.i686.rpm</span><br><span class="line">		rpm -ivh rpmforge-release-0.5.2-2.el6.rf.i686.rpm</span><br><span class="line">	<span class="hljs-keyword">fi</span></span><br><span class="line">	yum install -y mhash-devel libmcrypt-devel</span><br><span class="line"><span class="hljs-keyword">else</span></span><br><span class="line">	<span class="hljs-built_in">echo</span></span><br><span class="line">	<span class="hljs-built_in">echo</span> <span class="hljs-string">"The current system does not support"</span></span><br><span class="line">	<span class="hljs-built_in">echo</span></span><br><span class="line">	<span class="hljs-built_in">exit</span></span><br><span class="line"><span class="hljs-keyword">fi</span></span><br><span class="line">wget -c http://dl.wdlinux.cn:5180/rpms/<span class="hljs-variable">$RF</span></span><br><span class="line">rpm -ivh <span class="hljs-variable">$RF</span> --nodeps</span><br><span class="line">I_F=$?</span><br><span class="line"><span class="hljs-keyword">if</span> [ <span class="hljs-variable">$I_F</span> == 0 ];<span class="hljs-keyword">then</span></span><br><span class="line">	<span class="hljs-built_in">echo</span></span><br><span class="line"><span class="hljs-keyword">fi</span></span><br><span class="line">in_check <span class="hljs-variable">$I_F</span> lanmp_wdcp</span><br><span class="line"></span><br><span class="line">rm -f wdcp_v*</span><br><span class="line">wget -c http://down.wdlinux.cn/down/wdcp_v2.5.tar.gz &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">tar zxvf wdcp_v2.5.tar.gz -C / &gt; /dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">in_finsh</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -379,7 +389,7 @@ var _hmt = _hmt || [];
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/31/">31</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/32/">32</a></li>
             
         </ul>
     </nav>
@@ -423,7 +433,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        93
+                        94
                     </p>
                 </div>
             </div>
@@ -761,6 +771,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -835,25 +864,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -865,6 +875,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -1416,6 +1437,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -1490,25 +1530,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1520,6 +1541,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -2067,7 +2099,7 @@ var _hmt = _hmt || [];
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2020 SAMZONG&nbsp;
+                &copy; 2021 SAMZONG&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>

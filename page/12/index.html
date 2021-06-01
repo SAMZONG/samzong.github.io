@@ -165,6 +165,88 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-12-19T22:17:08.000Z">2016-12-20</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/AliCloud/">AliCloud</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 minutes read (About 1099 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/12/20/alicloud-oss-ecs-mount/">HowTo Mount OSS Bucket On ECS</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>From <a href="https://github.com/aliyun/ossfs" target="_blank" rel="noopener">阿里云官方Github</a></p>
+<p>Demo: CentOS 6.8 on ECS</p>
+</blockquote>
+<p>ossfs 是通过磁盘挂载的形式，将oss存储挂载到linux、类unix等操作系统，而且不仅仅可以挂载阿里云内的ECS上，理论上所有网络能到达oss的都可以挂载，但还是要以实际问题为准。</p>
+<h5 id="1-Download-amp-Install"><a href="#1-Download-amp-Install" class="headerlink" title="1.Download &amp; Install"></a>1.Download &amp; Install</h5><p><a href="https://github.com/aliyun/ossfs/releases" target="_blank" rel="noopener">官方版本发布页面</a>，请根据你的系统类型进行选择，我这演示的环境是CentOS 6.8；ossfs目前最新的版本是v1.79.9，您可以根据自己当时版本进行选择，建议选择最新版本。<br><figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 请先将包上传到服务器上</span><br><span class="line"> <span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">yum</span> <span class="hljs-selector-tag">localinstall</span> <span class="hljs-selector-tag">ossfs_1</span><span class="hljs-selector-class">.79</span><span class="hljs-selector-class">.9_centos6</span><span class="hljs-selector-class">.5_x86_64</span><span class="hljs-selector-class">.rpm</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意使用localinstall，因为在安装过程，yum 可以很好的解决依赖关系，会节省我们很多时间</p>
+</blockquote>
+<h5 id="2-OSS-amp-Bucket"><a href="#2-OSS-amp-Bucket" class="headerlink" title="2. OSS &amp; Bucket"></a>2. OSS &amp; Bucket</h5><p> 需要获取以下信息，在后面我们都会用到的：<br></p>
+<ol>
+<li>Bucket 名称<br><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/11/QQ20161111-0.jpg" alt><br><br></li>
+<li>Access Key ID</li>
+<li>Access Key Secret<br><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/11/0256A9CB-A0FA-43BC-82AF-4DE17D4852B6.png" alt></li>
+</ol>
+<p><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/11/QQ20161111-2.jpg" alt><br><br></p>
+<ol>
+<li>Location，这需要注意点，不要加上Bucket的名字，区域对应表如下，注意你的Bucket所在区域:<br><div><table><thead><tr><th style="color:green">Region中文名称</th><th style="text-align:left;color: green;">Region英文表示</th><th style="text-align:left;color: green;">外网Endpoint</th><th style="text-align:left;color: green;">ECS访问的内网Endpoint</th></tr></thead><tbody><tr><td>华东 1</td><td style="text-align:left">oss-cn-hangzhou</td><td style="text-align:left">oss-cn-hangzhou.aliyuncs.com</td><td style="text-align:left">oss-cn-hangzhou-internal.aliyuncs.com</td></tr><tr><td>华东 2</td><td style="text-align:left">oss-cn-shanghai</td><td style="text-align:left">oss-cn-shanghai.aliyuncs.com</td><td style="text-align:left">oss-cn-shanghai-internal.aliyuncs.com</td></tr><tr><td>华北 1</td><td style="text-align:left">oss-cn-qingdao</td><td style="text-align:left">oss-cn-qingdao.aliyuncs.com</td><td style="text-align:left">oss-cn-qingdao-internal.aliyuncs.com</td></tr><tr><td>华北 2</td><td style="text-align:left">oss-cn-beijing</td><td style="text-align:left">oss-cn-beijing.aliyuncs.com</td><td style="text-align:left">oss-cn-beijing-internal.aliyuncs.com</td></tr><tr><td>华南 1</td><td style="text-align:left">oss-cn-shenzhen</td><td style="text-align:left">oss-cn-shenzhen.aliyuncs.com</td><td style="text-align:left">oss-cn-shenzhen-internal.aliyuncs.com</td></tr><tr><td>香港数据中心</td><td style="text-align:left">oss-cn-hongkong</td><td style="text-align:left">oss-cn-hongkong.aliyuncs.com</td><td style="text-align:left">oss-cn-hongkong-internal.aliyuncs.com</td></tr><tr><td>美国硅谷数据中心</td><td style="text-align:left">oss-us-west-1</td><td style="text-align:left">oss-us-west-1.aliyuncs.com</td><td style="text-align:left">oss-us-west-1-internal.aliyuncs.com</td></tr><tr><td>美国弗吉尼亚数据中心</td><td style="text-align:left">oss-us-east-1</td><td style="text-align:left">oss-us-east-1.aliyuncs.com</td><td style="text-align:left">oss-us-east-1-internal.aliyuncs.com</td></tr><tr><td>亚太（新加坡）数据中心</td><td style="text-align:left">oss-ap-southeast-1</td><td style="text-align:left">oss-ap-southeast-1.aliyuncs.com</td><td style="text-align:left">oss-ap-southeast-1-internal.aliyuncs.com</td></tr><tr><td>亚太东北 1（日本）数据中心</td><td style="text-align:left">oss-ap-northeast-1</td><td style="text-align:left">oss-ap-northeast-1.aliyuncs.com</td><td style="text-align:left">oss-ap-northeast-1-internal.aliyuncs.com</td></tr></tbody></table></div><figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 设置bucket/access key/id的信息，将其存放在/etc/passwd-ossfs 文件中</span></span><br><span class="line"><span class="hljs-comment"># 注意这个文件的权限必须正确设置，建议设为640</span></span><br><span class="line">sudo echo <span class="hljs-keyword">my</span>-bucket:<span class="hljs-keyword">my</span>-access-key-<span class="hljs-built_in">id</span>:<span class="hljs-keyword">my</span>-access-key-secret &gt; /etc/passwd-ossfs</span><br><span class="line">sudo chmod <span class="hljs-number">640</span> /etc/passwd-ossfs</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><br></p>
+<h5 id="3-Mount-amp-Uasge"><a href="#3-Mount-amp-Uasge" class="headerlink" title="3. Mount &amp; Uasge"></a>3. Mount &amp; Uasge</h5><p>将oss bucket mount到指定目录:<br><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 我碰到安装后找不到ossfs命令，查看下因为ossfs没有x权限，目录路径为/usr/local/bin，如果您也碰到这个问题，可以增加x权限后再测试</span></span><br><span class="line">sudo ossfs my-bucket <span class="hljs-regexp">/mnt/</span>ossdir -ourl=http:<span class="hljs-regexp">//</span>oss-location.aliyuncs.com</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 如果使用ossfs的机器是阿里云ECS，可以使用内网域名来避免流量收费和 提高速度：</span></span><br><span class="line">sudo ossfs my-bucket <span class="hljs-regexp">/tmp/</span>ossfs -ourl=http:<span class="hljs-regexp">//</span>oss-location-internal.aliyuncs.com</span><br></pre></td></tr></table></figure></p>
+<p>磁盘空间达到上百T：<br><img src="https://samzong.oss-cn-shenzhen.aliyuncs.com/2016/11/0B78E099-5488-4839-AE48-09A074E7415D.png" alt><br><br></p>
+<p> umount：<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 注意用户身份</span></span><br><span class="line">umount /tmp/ossfs # root user</span><br><span class="line">sudo fusermount -u /tmp/ossfs # non-root user</span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h5 id="4-Debug-amp-FAQ"><a href="#4-Debug-amp-FAQ" class="headerlink" title="4. Debug &amp; FAQ"></a>4. Debug &amp; FAQ</h5><p>当遇到错误的时候，可以试着打开Debug日志信息，然后分析问题原因：<br><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 使用 -o dbglevel=debug -f -d参数打印日志信息</span></span><br><span class="line">sudo ossfs my-bucket /tmp/ossfs <span class="hljs-attribute">-ourl</span>=http://oss-location-internal.aliyuncs.com -o <span class="hljs-attribute">dbglevel</span>=debug -f -d &gt; /mnt/ossfs.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure></p>
+<p>更多的问题，请移步查看<a href="https://github.com/aliyun/ossfs/wiki/FAQ" target="_blank" rel="noopener">官方的FAQ文档</a>。</p>
+<p><br></p>
+<h5 id="5-About"><a href="#5-About" class="headerlink" title="5. About"></a>5. About</h5><p>ossfs提供的功能和性能和本地文件系统相比，具有一些局限性。具体包括：</p>
+<ul>
+<li>随机或者追加写文件会导致整个文件的重写。</li>
+<li>元数据操作，例如list directory，性能较差，因为需要远程访问oss服务器。</li>
+<li>文件/文件夹的rename操作不是原子的。</li>
+<li>多个客户端挂载同一个oss bucket时，依赖用户自行协调各个客户端的行为。例如避免多个客户端写同一个文件等等。</li>
+<li>不支持hard link。</li>
+<li>不适合用在高并发读/写的场景，这样会让系统的load升高</li>
+</ul>
+<blockquote>
+<p>另外，ossfs的稳定性很大一部分依赖于网络环境，建议的使用场景更多是作为临时数据迁移或定期备份，虽然ossfs挂载到系统中会有着几百TB的空间，但是稳定性并不高。</p>
+</blockquote>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2016-12-08T12:12:37.000Z">2016-12-08</time>
                 
                 <div class="level-item">
@@ -282,65 +364,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-12-03T10:41:13.000Z">2016-12-03</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Tomcat/">Tomcat</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 minutes read (About 548 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/12/03/tomcat-keytool-https/">Tomcat(2) 利用JDK自身keytool实现HTTPS</a>
-            
-        </h1>
-        <div class="content">
-            <p>因为一个偶然机会，想把自己的webserver通过https加密访问，这里就采用JDK自带的keytool工具实现，tomcat官方也推荐这种方式，英文好的同学走这里：<a href="https://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html" target="_blank" rel="noopener">官方配置</a></p>
-<blockquote>
-<p>demo: CentOS 6.6 &amp; Tomcat 7 &amp; JDK 1.7</p>
-</blockquote>
-<h4 id="1-生成-keystore"><a href="#1-生成-keystore" class="headerlink" title="1. 生成 keystore"></a>1. 生成 keystore</h4><figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@test conf]<span class="hljs-comment"># keytool -genkey -v -alias tomcat -keyalg RSA -keystore mykeystore</span></span><br><span class="line">Enter keystore password:              <span class="hljs-comment">#设置密码</span></span><br><span class="line">Re-enter new password:                <span class="hljs-comment">#重复一次</span></span><br><span class="line">What <span class="hljs-keyword">is</span> your <span class="hljs-keyword">first</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">last</span> <span class="hljs-built_in">name</span>?</span><br><span class="line">  [Unknown]:  Alex Lu                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">of</span> your organizational unit?</span><br><span class="line">  [Unknown]:  visionet                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">of</span> your organization?</span><br><span class="line">  [Unknown]:  visionet                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">of</span> your City <span class="hljs-keyword">or</span> Locality?</span><br><span class="line">  [Unknown]:  SH                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">of</span> your State <span class="hljs-keyword">or</span> Province?</span><br><span class="line">  [Unknown]:  SH                <span class="hljs-comment">#随便填</span></span><br><span class="line">What <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> two-letter country code <span class="hljs-keyword">for</span> this unit?</span><br><span class="line">  [Unknown]:  ZH                <span class="hljs-comment">#随便填</span></span><br><span class="line">Is CN=Alex Lu, OU=visionet, O=visionet, L=SH, ST=SH, C=ZH correct?</span><br><span class="line">  [no]:  Y                    <span class="hljs-comment">#这里要Y，确认前面信息。</span></span><br><span class="line"></span><br><span class="line">Generating <span class="hljs-number">2</span>,<span class="hljs-number">048</span> bit RSA key pair <span class="hljs-keyword">and</span> self-signed certificate (SHA256withRSA) <span class="hljs-keyword">with</span> a validity <span class="hljs-keyword">of</span> <span class="hljs-number">90</span> days</span><br><span class="line">    <span class="hljs-keyword">for</span>: CN=Alex Lu, OU=visionet, O=visionet, L=SH, ST=SH, C=ZH</span><br><span class="line">Enter key password <span class="hljs-keyword">for</span> &lt;tomcat&gt;</span><br><span class="line">    (RETURN <span class="hljs-keyword">if</span> same <span class="hljs-keyword">as</span> keystore password):        <span class="hljs-comment">#默认回车即可，不需要设置太多密码</span></span><br><span class="line">[Storing mykeystore]</span><br><span class="line">[root@test conf]<span class="hljs-comment"># ls</span></span><br><span class="line">Catalina  catalina.policy  catalina.properties  context.xml  logging.properties  mykeystore  server.xml  tomcat-users.xml  web.xml</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p> 注意：-keystore是用来指定keystore保存位置，如果不加参数默认保存的当前用户家目录为~/.keystore<br>       -validity 可以用来指定证书有效期，单位为天，缺省值为90天。</p>
-</blockquote>
-<h4 id="2-备份-tomcatdir-conf-server-xml"><a href="#2-备份-tomcatdir-conf-server-xml" class="headerlink" title="2. 备份$tomcatdir/conf/server.xml"></a>2. 备份$tomcatdir/conf/server.xml</h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp <span class="hljs-variable">$tomcatdir</span><span class="hljs-regexp">/conf/</span>server.xml <span class="hljs-variable">$tomcatdir</span><span class="hljs-regexp">/conf/</span>server.xml</span><br></pre></td></tr></table></figure>
-<h4 id="3-修改server-xml"><a href="#3-修改server-xml" class="headerlink" title="3. 修改server.xml"></a>3. 修改server.xml</h4><h6 id="a-注释以下：（tomcat注释用：-lt-XXXX-）-如何也想保留http访问，可以不注释"><a href="#a-注释以下：（tomcat注释用：-lt-XXXX-）-如何也想保留http访问，可以不注释" class="headerlink" title="a. 注释以下：（tomcat注释用：&lt;!-- XXXX --> ）,如何也想保留http访问，可以不注释"></a>a. 注释以下：（tomcat注释用：&lt;!-- XXXX --> ）,如何也想保留http访问，可以不注释</h6><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">&lt;!--</span></span><br><span class="line"><span class="hljs-comment">&lt;Connector executor="tomcatThreadPool"</span></span><br><span class="line"><span class="hljs-comment">                port="80" protocol="HTTP/1.1"</span></span><br><span class="line"><span class="hljs-comment">                connectionTimeout="20000"</span></span><br><span class="line"><span class="hljs-comment">                redirectPort="8443" /&gt;</span></span><br><span class="line"><span class="hljs-comment">--&gt;</span></span><br></pre></td></tr></table></figure>
-<h6 id="b-取消下面注释"><a href="#b-取消下面注释" class="headerlink" title="b. 取消下面注释"></a>b. 取消下面注释</h6><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector <span class="hljs-attribute">port</span>=<span class="hljs-string">"443"</span> <span class="hljs-attribute">protocol</span>=<span class="hljs-string">"HTTP/1.1"</span> <span class="hljs-attribute">SSLEnabled</span>=<span class="hljs-string">"true"</span></span><br><span class="line">                <span class="hljs-attribute">maxThreads</span>=<span class="hljs-string">"150"</span> <span class="hljs-attribute">scheme</span>=<span class="hljs-string">"https"</span> <span class="hljs-attribute">secure</span>=<span class="hljs-string">"true"</span></span><br><span class="line">                <span class="hljs-attribute">clientAuth</span>=<span class="hljs-string">"false"</span> <span class="hljs-attribute">sslProtocol</span>=<span class="hljs-string">"TLS"</span> /&gt;</span><br></pre></td></tr></table></figure>
-<h6 id="c-增加keystoreFile和keystorePass"><a href="#c-增加keystoreFile和keystorePass" class="headerlink" title="c. 增加keystoreFile和keystorePass"></a>c. 增加keystoreFile和keystorePass</h6><figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector <span class="hljs-attribute">port</span>=<span class="hljs-string">"443"</span> <span class="hljs-attribute">protocol</span>=<span class="hljs-string">"HTTP/1.1"</span> <span class="hljs-attribute">SSLEnabled</span>=<span class="hljs-string">"true"</span></span><br><span class="line">               <span class="hljs-attribute">maxThreads</span>=<span class="hljs-string">"150"</span> <span class="hljs-attribute">scheme</span>=<span class="hljs-string">"https"</span> <span class="hljs-attribute">secure</span>=<span class="hljs-string">"true"</span></span><br><span class="line">               <span class="hljs-attribute">clientAuth</span>=<span class="hljs-string">"false"</span> <span class="hljs-attribute">sslProtocol</span>=<span class="hljs-string">"TLS"</span></span><br><span class="line">               <span class="hljs-attribute">keystoreFile</span>=<span class="hljs-string">"conf/mykeystore"</span> <span class="hljs-attribute">keystorePass</span>=<span class="hljs-string">"123456"</span>/&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>keystoreFile=跟keystore文件位置<br>keystorePass=跟当时keytool命令执行时输入的密码</p>
-</blockquote>
-<h4 id="4-重启tomcat"><a href="#4-重启tomcat" class="headerlink" title="4. 重启tomcat"></a>4. 重启tomcat</h4><figure class="highlight x86asm hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@<span class="hljs-keyword">test</span> conf]# ../bin/catalina.sh stop &amp;&amp; ../bin/catalina.sh start</span><br><span class="line">Using CATALINA_BASE:   /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span></span><br><span class="line">Using CATALINA_HOME:   /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span></span><br><span class="line">Using CATALINA_TMPDIR: /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span>/temp</span><br><span class="line">Using JRE_HOME:        /home/pms/jdk1<span class="hljs-meta">.7</span><span class="hljs-meta">.0_65</span></span><br><span class="line">Using CLASSPATH:       /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span>/bin/bootstrap.jar</span><br><span class="line">Using CATALINA_BASE:   /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span></span><br><span class="line">Using CATALINA_HOME:   /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span></span><br><span class="line">Using CATALINA_TMPDIR: /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span>/temp</span><br><span class="line">Using JRE_HOME:        /home/pms/jdk1<span class="hljs-meta">.7</span><span class="hljs-meta">.0_65</span></span><br><span class="line">Using CLASSPATH:       /home/pms/apache-tomcat-<span class="hljs-number">6.0</span><span class="hljs-meta">.44</span>/bin/bootstrap.jar</span><br><span class="line">[root@<span class="hljs-keyword">test</span> conf]# netstat -ntlup | grep -e <span class="hljs-string">"80\|443"</span></span><br><span class="line">tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:<span class="hljs-number">80</span>         <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:*          LISTEN      <span class="hljs-number">21960</span>/java</span><br><span class="line">tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:<span class="hljs-number">443</span>        <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:*          LISTEN      <span class="hljs-number">21960</span>/java</span><br><span class="line">tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">127.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.1</span>:<span class="hljs-number">8005</span>     <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:*          LISTEN      <span class="hljs-number">21960</span>/java</span><br><span class="line">tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:<span class="hljs-number">8009</span>       <span class="hljs-number">0.0</span><span class="hljs-meta">.0</span><span class="hljs-meta">.0</span>:*          LISTEN      <span class="hljs-number">21960</span>/java</span><br><span class="line">[root@<span class="hljs-keyword">test</span> conf]#</span><br></pre></td></tr></table></figure>
-<p>OK !</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -365,7 +388,7 @@ var _hmt = _hmt || [];
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/31/">31</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/32/">32</a></li>
             
         </ul>
     </nav>
@@ -409,7 +432,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        93
+                        94
                     </p>
                 </div>
             </div>
@@ -747,6 +770,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -821,25 +863,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -851,6 +874,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -1402,6 +1436,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -1476,25 +1529,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1506,6 +1540,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -2053,7 +2098,7 @@ var _hmt = _hmt || [];
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2020 SAMZONG&nbsp;
+                &copy; 2021 SAMZONG&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>

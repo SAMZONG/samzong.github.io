@@ -165,6 +165,53 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-02-27T15:40:29.000Z">2017-02-27</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Mac/">Mac</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 277 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/02/27/command-disable-airport/">MacTips：使用命令关闭和启动AirPort</a>
+            
+        </h1>
+        <div class="content">
+            <p>今天在给妹妹调试新的MacBookAir 13’时遇到一个问题，无法检测到她家的WiFi，一开始怀疑是不是无线路由器长时间未重启导致，所以重启了路由器，但是问题依然没有解决，于是我们将问题转向排查设备，因我们基本正好有iPad，iPhone，MacBook这些设备，发现唯独他的这个Macbook无法识别WiFi，后来在Google的帮助下，发现多个版本的Mac OS X都出现了类似的问题，可以通过重启AirPort解决问题，但是AirPort在System Preferences找不到选项，所以需要使用命令行来重启。</p>
+<h5 id="查看网络接口"><a href="#查看网络接口" class="headerlink" title="查看网络接口"></a><strong>查看网络接口</strong></h5><figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ifconfig</span><br><span class="line"><span class="hljs-string">en0:</span> flags=<span class="hljs-number">8863</span>&lt;UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST&gt; mtu <span class="hljs-number">1500</span></span><br><span class="line">	ether <span class="hljs-number">60</span>:<span class="hljs-string">f8:</span><span class="hljs-number">1</span><span class="hljs-string">d:</span><span class="hljs-string">ad:</span><span class="hljs-number">85</span>:<span class="hljs-number">76</span></span><br><span class="line">	inet6 <span class="hljs-string">fe80:</span>:<span class="hljs-number">18</span><span class="hljs-string">a9:</span><span class="hljs-string">fa23:</span><span class="hljs-string">b02f:</span><span class="hljs-number">5</span>d8a%en0 prefixlen <span class="hljs-number">64</span> secured scopeid <span class="hljs-number">0x4</span></span><br><span class="line">	inet <span class="hljs-number">192.168</span><span class="hljs-number">.199</span><span class="hljs-number">.200</span> netmask <span class="hljs-number">0xffffff00</span> broadcast <span class="hljs-number">192.168</span><span class="hljs-number">.199</span><span class="hljs-number">.255</span></span><br><span class="line">	nd6 options=<span class="hljs-number">201</span>&lt;PERFORMNUD,DAD&gt;</span><br><span class="line"><span class="hljs-symbol">	media:</span> autoselect</span><br><span class="line"><span class="hljs-symbol">	status:</span> active</span><br></pre></td></tr></table></figure>
+<h5 id="关闭AirPort"><a href="#关闭AirPort" class="headerlink" title="关闭AirPort"></a><strong>关闭AirPort</strong></h5><p>有时候设备的名称是en0、en1这样，所以，可以用过设备名称来重启airport，例如en0<br><figure class="highlight nginx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attribute">networksetup</span> -setairportpower en0 <span class="hljs-literal">off</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a><strong>查看状态</strong></h5><figure class="highlight nginx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attribute">networksetup</span> -getairportpower en0</span><br></pre></td></tr></table></figure>
+<h5 id="关闭AirPort-1"><a href="#关闭AirPort-1" class="headerlink" title="关闭AirPort"></a><strong>关闭AirPort</strong></h5><figure class="highlight applescript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">networksetup -setairportpower en0 <span class="hljs-keyword">on</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-02-27T06:57:00.000Z">2017-02-27</time>
                 
                 <div class="level-item">
@@ -325,59 +372,6 @@ var _hmt = _hmt || [];
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-02-20T06:39:15.000Z">2017-02-20</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Ghost/">Ghost</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a minute read (About 165 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/02/20/howto-upgrade-your-ghost-version/">HowTo Upgrade Your Ghost Version</a>
-            
-        </h1>
-        <div class="content">
-            <p><br></p>
-<h4 id="1-下载最新版的Ghost"><a href="#1-下载最新版的Ghost" class="headerlink" title="1. 下载最新版的Ghost"></a>1. 下载最新版的Ghost</h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -LOk https:<span class="hljs-regexp">//g</span>host.org<span class="hljs-regexp">/zip/g</span>host-latest.zip</span><br></pre></td></tr></table></figure>
-<h4 id="2-创建临时目录，并解压ghost-latest-zip到此"><a href="#2-创建临时目录，并解压ghost-latest-zip到此" class="headerlink" title="2. 创建临时目录，并解压ghost-latest.zip到此"></a>2. 创建临时目录，并解压ghost-latest.zip到此</h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir <span class="hljs-regexp">/usr/g</span>host-tmp</span><br><span class="line">unzip ghost-latest.zip -d <span class="hljs-regexp">/usr/g</span>host-tmp</span><br></pre></td></tr></table></figure>
-<h4 id="3-进入到原ghost目录，删除core"><a href="#3-进入到原ghost目录，删除core" class="headerlink" title="3. 进入到原ghost目录，删除core"></a>3. 进入到原ghost目录，删除core</h4><figure class="highlight jboss-cli hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">cd</span>  <span class="hljs-string">/usr/ghost</span></span><br><span class="line">rm -rf core</span><br></pre></td></tr></table></figure>
-<h4 id="4-进入到新版本的ghost临时目录"><a href="#4-进入到新版本的ghost临时目录" class="headerlink" title="4.进入到新版本的ghost临时目录"></a>4.进入到新版本的ghost临时目录</h4><figure class="highlight jboss-cli hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">cd</span> <span class="hljs-string">/usr/ghost-tmp</span></span><br></pre></td></tr></table></figure>
-<h4 id="5-拷贝所需文件到ghost升级目录"><a href="#5-拷贝所需文件到ghost升级目录" class="headerlink" title="5. 拷贝所需文件到ghost升级目录"></a>5. 拷贝所需文件到ghost升级目录</h4><figure class="highlight stylus hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp -R core /usr/ghost</span><br><span class="line">cp index<span class="hljs-selector-class">.js</span> *<span class="hljs-selector-class">.json</span> /usr/ghost</span><br></pre></td></tr></table></figure>
-<h4 id="6-可选-升级casper，ghost默认主题"><a href="#6-可选-升级casper，ghost默认主题" class="headerlink" title="6. (可选)升级casper，ghost默认主题"></a>6. (可选)升级casper，ghost默认主题</h4><figure class="highlight awk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -R content<span class="hljs-regexp">/themes/</span>casper <span class="hljs-regexp">/usr/g</span>host<span class="hljs-regexp">/content/</span>themes<span class="hljs-regexp">/</span></span><br></pre></td></tr></table></figure>
-<h4 id="7-切换回到ghost安装目录"><a href="#7-切换回到ghost安装目录" class="headerlink" title="7. 切换回到ghost安装目录"></a>7. 切换回到ghost安装目录</h4><figure class="highlight jboss-cli hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">cd</span> <span class="hljs-string">/usr/ghost</span></span><br></pre></td></tr></table></figure>
-<h4 id="8-修改文件目录所有者和所属组为ghost"><a href="#8-修改文件目录所有者和所属组为ghost" class="headerlink" title="8. 修改文件目录所有者和所属组为ghost"></a>8. 修改文件目录所有者和所属组为ghost</h4><figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-tag">chown</span> <span class="hljs-selector-tag">-R</span> <span class="hljs-selector-tag">ghost</span><span class="hljs-selector-pseudo">:ghost</span> .<span class="hljs-comment">/*</span></span><br></pre></td></tr></table></figure>
-<h4 id="9-重新安装环境"><a href="#9-重新安装环境" class="headerlink" title="9. 重新安装环境"></a>9. 重新安装环境</h4><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="hljs-keyword">install</span> <span class="hljs-comment">--production</span></span><br></pre></td></tr></table></figure>
-<h4 id="10-重启Ghost"><a href="#10-重启Ghost" class="headerlink" title="10. 重启Ghost"></a>10. 重启Ghost</h4><figure class="highlight gcode hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p<span class="hljs-name">m2</span> restart ghost</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -402,7 +396,7 @@ var _hmt = _hmt || [];
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/31/">31</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/32/">32</a></li>
             
         </ul>
     </nav>
@@ -446,7 +440,7 @@ var _hmt = _hmt || [];
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        93
+                        94
                     </p>
                 </div>
             </div>
@@ -784,6 +778,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -858,25 +871,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -888,6 +882,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -1439,6 +1444,25 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2021/06/02/2021年-全新触发/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2021年 全新触发">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-01T16:54:38.000Z">2021-06-02</time></div>
+                    <a href="/2021/06/02/2021年-全新触发/" class="has-link-black-ter is-size-6">2021年 全新触发</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/Check-You-Favorites-App-Is-Ready-Apple-Silicon/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Check You Favorites App is readyOnapplesilicon">
@@ -1513,25 +1537,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在Linux终端使用SSR服务实现科学上网">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-11-17T03:54:58.000Z">2017-11-17</time></div>
-                    <a href="/2017/11/17/howto-use-ssr-on-linux-terminal/" class="has-link-black-ter is-size-6">在Linux终端使用SSR服务实现科学上网</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Shadowsocks/">Shadowsocks</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1543,6 +1548,17 @@ var _hmt = _hmt || [];
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/11/">
@@ -2090,7 +2106,7 @@ var _hmt = _hmt || [];
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2020 SAMZONG&nbsp;
+                &copy; 2021 SAMZONG&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>
