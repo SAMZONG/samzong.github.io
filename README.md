@@ -6,3 +6,4 @@
 > updated_at 2020.11.13
 
 - Be a Product Designer
+- Be a developer   which one?
